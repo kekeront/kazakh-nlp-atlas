@@ -1,0 +1,82 @@
+{
+ "research": [
+  {
+   "area": "embeddings-retrieval",
+   "findings": [
+    {
+     "claim": "The widely-cited planka 'mE5-large MRR 0.909 on KazQAD hard negatives' originates SOLELY from the HF model card Nurlykhan/kazembed-v5 (Dec 2025, 289 downloads, boilerplate residue in citation block) — a hobby artifact, not a lab release. Its entire protocol description is one line: 'Evaluated on KazQAD test set with TF-IDF hard negatives (100 candidates per query)'; the 99-negative candidate pools are not published anywhere, Hits are rounded to whole percent.",
+     "source": "huggingface.co/Nurlykhan/kazembed-v5 (model card, fetched 2026-07-03)",
+     "numbers": "mE5-large MRR 0.909 (reported); kazembed-v5 MRR 0.835; 100 candidates/query; 289 downloads",
+     "relevance": "Campaign headline target provenance — must be treated as reported/unverified until re-measured by evallab runners with a pinned, published hard-negative mining recipe.",
+     "uncertain": true
+    },
+    {
+     "claim": "Hard-negatives MRR on KazQAD is protocol-defined, not model-defined: the successor card of the same lineage (shyngys879/kazakh-e5-rag-embedding, May 2026) reports mE5-large at MRR 0.4490 under a same-named 'HardTFIDF99' protocol but 0.9189 under its easier 'KazQAD-100 local' candidate variant. Any target formulated as 'beat 0.909' is meaningless without fixing and publishing the candidate-pool construction; evallab implements full-corpus retrieval AND a pinned hard-negative recipe as the canonical protocols.",
+     "source": "huggingface.co/shyngys879/kazakh-e5-rag-embedding (model card, fetched 2026-07-03); huggingface.co/Nurlykhan/kazembed-v5",
+     "numbers": "mE5-large: 0.4490 (HardTFIDF99) vs 0.9189 (KazQAD-100 local) vs 0.909 (kazembed-v5 card); full-corpus paper baseline MRR 0.382",
+     "relevance": "Kills naive '>0.909' target formulation; the lab contract now pins targets to evallab protocols.",
+     "uncertain": false
+    },
+    {
+     "claim": "All three ISSAI feedstock datasets are GATED on HF (gated:auto — instant self-approval, but load_dataset() raises GatedRepoError and datasets-server refuses /info and /rows until 'Agree and access' is clicked per account): issai/kazqad-retrieval, issai/kazqad, issai/kazparc. Licenses: KazQAD repos cc-by-sa-4.0 (share-alike propagates to derived corpora); KazParC HF repo carries NO license tag — the GitHub badge claims CC BY 4.0 but this is unverified on HF.",
+     "source": "huggingface.co/api/datasets/issai/kazqad-retrieval, .../issai/kazparc (API responses, 2026-07-03); 403 responses verified with authenticated token",
+     "numbers": "3 gated datasets; kazqad-retrieval splits 3487/548/1929 queries; corpus file kazqad-corpus-v1.0-kk.jsonl.gz = 136.7MB gz (~815k passages per paper, exact count unverified)",
+     "relevance": "Blocks any training/eval run until one-click gate acceptance under the lab's HF account; also licensing input for model release (share-alike).",
+     "uncertain": false
+    },
+    {
+     "claim": "MTEB's existing WebFAQRetrieval kaz split is tiny (300 queries, 2,995 docs, 1 qrel/query) — usable only as a secondary eval, not a headline; PaDaS-Lab/webfaq kaz (12,510 pairs) is usable as natural training pairs but MUST be deduplicated against the WebFAQRetrieval kaz test queries (eval subset is sampled from the same crawl).",
+     "source": "huggingface.co/datasets/mteb/WebFAQRetrieval; huggingface.co/datasets/PaDaS-Lab/webfaq (2026-07-03)",
+     "numbers": "kaz eval: 300 queries / 2,995 docs / 1 qrel per query; kaz training pairs: 12,510",
+     "relevance": "Train/test contamination trap for the embedding track.",
+     "uncertain": false
+    }
+   ]
+  },
+  {
+   "area": "eval-benchmarks",
+   "findings": [
+    {
+     "claim": "KazMMLU's dev split holds only 3 exemplars per subject config, so any 'N-shot' run sourcing shots from dev is capped at 3-shot: qymyzlm's April-2026 baseline table (Qwen3-0.6B-Base 32.8% etc.) silently truncated [:5] to 3 and was mislabeled '5-shot' — relabeled to 3-shot on 2026-07-03. Additional quirks: 'Reading Literacy (High School in kaz)' has only 7 test questions; options are variable 4-5 per row (Option E may be empty), so fixed 5-choice task configs mis-score.",
+     "source": "huggingface.co/datasets/MBZUAI/KazMMLU (dataset inspection 2026-07-03); qymyzlm scripts/benchmark_baselines.py",
+     "numbers": "dev = 3 exemplars/config; 9,870 kk-language test questions; smallest config 7 test questions; 4-5 variable options",
+     "relevance": "Every published KazMMLU number of the lab must carry the true shot count; cross-paper comparisons (Sherkala 41.4%) are cross-protocol until re-run.",
+     "uncertain": false
+    },
+    {
+     "claim": "Installed lm-eval 0.4.11 ships NO tasks named kazmmlu, tumlu_mini, or kazqad (verified against the default TaskManager registry) — custom task YAMLs plus TaskManager(include_path=...) are required; qymyzlm's src/kazllm/eval plumbing referencing those names failed for every benchmark until reconciled on 2026-07-03.",
+     "source": "lm-eval 0.4.11 installed-package registry inspection, 2026-07-03",
+     "numbers": "0 matching tasks in registry; lm-eval 0.4.11",
+     "relevance": "evallab ships the canonical custom task configs; engine eval plumbing must not silently reference ghosts.",
+     "uncertain": false
+    },
+    {
+     "claim": "Qorgau's GitHub repo has NO declared license (GitHub API license: null, no LICENSE file) — default all-rights-reserved: internal evaluation only, no redistribution, no re-hosting on HF, no training on its annotations. Practical parsing notes: question files are .xlsx; the code-switched CSV column is typo'd in the actual file as 'code_swithced_version'.",
+     "source": "api.github.com/repos/mbzuai-nlp/qorgau-kaz-ru-safety (2026-07-03); arXiv 2502.13640",
+     "numbers": "license: null; 6 risk areas / 17 harm types; column name 'code_swithced_version' (sic)",
+     "relevance": "Hard usage boundary for the safety track; column typo is a live integration detail.",
+     "uncertain": false
+    }
+   ]
+  },
+  {
+   "area": "slm-architecture",
+   "findings": [
+    {
+     "claim": "CORRECTION/conflict flag: the KB node for X-EcoMLA (arXiv 2503.11132) attributes the same 6.4x KV-cache compression result to mutually exclusive configurations across its claims (kv_lora_rank=128 with r_q=1344 vs r_kv=512 with r_q=864 vs r_q=854; baseline quoted as both 52.85 and 52.77). Until the paper is re-read and one mapping confirmed, every specific config-to-ratio mapping in that node is to be treated as unverified; only the coarse claim 'X-EcoMLA reports up to 6.4x KV compression via post-hoc MLA conversion' stands.",
+     "source": "internal KB audit (professor review 2026-07-03) of node arxiv:2503.11132; arXiv 2503.11132",
+     "numbers": "conflicting: kv_lora_rank 128 vs 512; r_q 1344 vs 864 vs 854; baseline 52.85 vs 52.77",
+     "uncertain": true,
+     "relevance": "Intra-node conflict resolution debt — flag until re-derived from the paper."
+    },
+    {
+     "claim": "CORRECTION (provenance): the figure 'Gemma3-270M KazMMLU 24.4%' is the lab's OWN April-2026 measurement (RTX 2070, fp16, 3-shot, qymyzlm baseline table) — NOT a number from Google's blog or arXiv 2503.19786, to which an earlier KB claim mis-attributed it.",
+     "source": "qymyzlm README baseline table (measured April 2026); correction of mis-sourced claim in node for arXiv 2503.19786",
+     "numbers": "Gemma3-270M: 24.4% KazMMLU 3-shot (lab measurement)",
+     "uncertain": false,
+     "relevance": "Provenance hygiene: measured-by-lab numbers must never masquerade as paper numbers."
+    }
+   ]
+  }
+ ]
+}
