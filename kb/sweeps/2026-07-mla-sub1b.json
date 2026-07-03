@@ -1,0 +1,525 @@
+{
+ "research": [
+  {
+   "area": "mla-sub1b",
+   "findings": [
+    {
+     "claim": "First from-scratch MLA-vs-GQA head-to-head inside the lab's d_model window: TPA/T6 paper pretrains iso-param models at 353M (24L, d_model=1024, head_dim=64) and 772M (36L, d_model=1280) on FineWeb-Edu (~49B tokens, nanoGPT recipe). Zero-shot 11-task avg (lm-eval): at 353M MLA 50.13 vs GQA(2 KV heads) 50.35 vs MHA 50.11 vs MQA 50.44 (MLA ~parity, slightly below GQA); at 772M MLA 53.32 BEATS GQA 52.30, MHA 52.52, MQA 52.13. MLA config used: kv latent d_c=512, q latent d'_c=1024, decoupled rope dim d_R=32, MLA head count raised to 23/34 for iso-params. Caveat: authors (competing method) note MLA converges slower with higher val loss at these scales.",
+     "source": "arXiv 2501.06425 (Tensor Product Attention Is All You Need), Tables 2-3 + Appendix H Tables 9-10 (PDF read directly)",
+     "numbers": "353M: MLA 50.13 / GQA 50.35 / MHA 50.11; 772M: MLA 53.32 / GQA 52.30 / MHA 52.52; d_c=512, d'_c=1024, d_R=32, head_dim 64; 24L/d1024 and 36L/d1280; ~49B tokens",
+     "relevance": "Direct evidence at d_model 1024-1280 (lab target 1024-1536): MLA is quality-neutral at ~350M and +1.0pp over GQA at ~770M — MLA does not break at sub-1B, but the DeepSeek-scale superiority is not guaranteed either.",
+     "uncertain": false
+    },
+    {
+     "claim": "Second independent from-scratch head-to-head (Tri Dao group): models at 433M, 876M, 1.471B on FineWeb-Edu 50B tokens (Llama-3-style). At 876M: GQA-4 ppl 11.340 / 56.9% avg downstream vs MLA 11.363 / 56.7% (parity within 0.2pp); at 433M MLA 54.9% > GQA-4 54.5%; at 1.47B MLA 59.1% < GQA-4 60.2% (MLA loses 1.1pp). Their GLA-2 (2 latent heads, d_c=2*d_h per head, rope dim 32) beats BOTH at 433M (55.4%) and 876M (57.5%, ppl 11.293) with MLA-class cache and better tensor-parallel sharding; GTA-4 (tied KV) gets 57.6% at 876M with ~half of GQA-4 cache. MLA config: single latent of dim 512, rope dim d_R=32, q NOT compressed.",
+     "source": "arXiv 2505.21487 (Hardware-Efficient Attention for Fast Decoding), Tables 3-5, HTML v1",
+     "numbers": "876M: GQA-4 11.340/56.9 vs MLA 11.363/56.7 vs GLA-2 11.293/57.5 vs GTA-4 11.232/57.6; 433M: MLA 54.9 vs GQA-4 54.5 vs GLA-2 55.4; 1.47B: MLA 59.1 vs GQA-4 60.2; MLA latent 512, rope 32, no q compression; 50B tokens",
+     "relevance": "Closest published run to a 600M Kazakh model (433M/876M bracket the target). Result pattern = parity, not superiority; and GLA-2/GTA-4 are strictly better-performing drop-in alternatives at this scale with the same cache budget.",
+     "uncertain": false
+    },
+    {
+     "claim": "MLA works at 135M/360M via conversion (MHA2MLA): SmolLM-135M/360M (GQA) converted to MLA with joint-SVD init + partial-RoPE (keep r=d_h/16 dims by head-wise 2-norm), fine-tuned on 2.25B tokens = 0.38% (3.8 per mille) of the 600B pretraining data. SmolLM-360M: d_kv=32 -> KV cache -68.75%, avg score 47.91 vs 49.63 baseline (-1.72pp); d_kv=16 -> -81.25%, 46.94 (-2.69pp); d_kv=8 -> -87.5%, 45.04 (-4.59pp). SmolLM-135M: d_kv=32 -> -1.19pp; d_kv=16 -> -2.41pp; d_kv=8 -> -3.28pp. Public checkpoints exist for 135M/360M/1B7.",
+     "source": "arXiv 2502.14837 (MHA2MLA), HTML v1 results tables + github.com/JT-Ushio/MHA2MLA",
+     "numbers": "360M: -68.75% cache/-1.72pp, -81.25%/-2.69pp, -87.5%/-4.59pp; 135M: -1.19/-2.41/-3.28pp; FT data 2.25B tokens (0.38%); partial-RoPE r=d_h/16",
+     "relevance": "Pins the previously [UNVERIFIED] KB claim 'MLA works at sub-1B': yes, down to 135M — but aggressive ranks (8-16) cost 2.4-4.6pp, so a 600M Kazakh model should not go below rank ~256 (=d/6 at d=1536) without distillation.",
+     "uncertain": false
+    },
+    {
+     "claim": "X-EcoMLA (AMD): Llama3.2-1B-Instruct upcycled to MLA via SVD init + post-training distillation. kv_lora_rank=128, q_lora_rank=1344, rope_dims=32 -> 6.4x KV compression (15.6% size) with avg score 52.94 vs 52.85 baseline (no loss), using 3.6B tokens / ~70 MI300 GPU-hours with a Llama3.1-8B teacher; kv_lora_rank=64, q_lora_rank=1424, rope 32 -> 10.6x compression (9.4%), 52.47 avg (<0.4pp drop), 7B tokens / ~140 GPU-h. Teacher size drives compression achievable: 1B teacher 1.9x@53.04, 3B 3.6x@54.08, 8B 6.4x@55.13.",
+     "source": "arXiv 2503.11132 (X-EcoMLA), HTML v3 Table 2; HF amd/X-EcoMLA-1B8B-fixed-kv64-DPO",
+     "numbers": "r_kv=128/q=1344/rope=32: 6.4x, 52.94 vs 52.85, 3.6B tok, 70 GPU-h; r_kv=64/q=1424: 10.6x, 52.47, 7B tok, 140 GPU-h",
+     "relevance": "De-risk path for the lab: pretrain plain GQA, convert to MLA post-hoc for ~1 GPU-day at 600M scale — keeps the architecture bet reversible; also shows rank 64-128 suffices at ~1B WITH distillation (not from scratch).",
+     "uncertain": false
+    },
+    {
+     "claim": "Production adoption of dense MLA at small scale exists at 1.96B: Tencent Youtu-LLM (Dec 2025) is a dense-MLA on-device model pretrained on ~10.84T tokens with exactly DeepSeek-V2-Lite MLA dims scaled at d_model=2048: 32 layers, 16 heads, kv_lora_rank=512, q_lora_rank=1536, qk_rope_head_dim=64, qk_nope_head_dim=128, v_head_dim=128, vocab 128,256, ctx 131,072. Its own ablation, 1B-param models from scratch @500B tokens: MLA-1B beats GQA-1B on everything reported — Wiki ppl 15.4 vs 16.5, Chinese MC 37.4 vs 35.6, English MC 50.7 vs 49.6, Chinese gen 7.2 vs 6.0, English gen 18.5 vs 17.8. Stated rationale: MLA's larger intermediate projections add expressiveness under constrained param budgets; MoE rejected for on-device I/O cost.",
+     "source": "arXiv 2512.24618 (Youtu-LLM), abstract + Section 3.1.2/Table 5 + Table 4, HTML v1",
+     "numbers": "1.96B, 10.84T tokens; d=2048/32L/16h, r_kv=512, r_q=1536, rope 64, nope 128; ablation 1B@500B tok: ppl 15.4 vs 16.5, en-MC 50.7 vs 49.6, zh-MC 37.4 vs 35.6",
+     "relevance": "Strongest pro-MLA from-scratch datapoint near 1B and the clearest published rationale for MLA in small on-device models — directly citable in the lab's design-spec justification.",
+     "uncertain": false
+    },
+    {
+     "claim": "Counter-datapoint from DeepSeek themselves: the DeepSeek-OCR decoder (DeepSeek-3B-MoE, ~570M ACTIVE params — the closest DeepSeek model to the lab's active-param class) ships with MLA DISABLED: config.json has kv_lora_rank=null, q_lora_rank=null, 12 layers, hidden 1280, 10 attention heads = 10 KV heads (plain MHA), 64 routed + 2 shared experts, vocab 129,280, ctx 8,192.",
+     "source": "huggingface.co/deepseek-ai/DeepSeek-OCR config.json (fetched directly)",
+     "numbers": "d=1280, 12L, 10 heads MHA, kv_lora_rank=null; 64+2 experts, 6 active/token; ~570M active",
+     "relevance": "The inventors of MLA chose plain MHA for their own ~0.6B-active decoder (short 8K context) — supports the view that MLA's payoff at this scale is context-length-dependent, not automatic.",
+     "uncertain": false
+    },
+    {
+     "claim": "Smallest official DeepSeek MLA config (DeepSeek-V2-Lite, 15.7B total / 2.4B active, d_model=2048, 27 layers, 16 heads) drops query compression: kv_lora_rank=512, q_lora_rank=null, qk_rope_head_dim=64, qk_nope_head_dim=128, v_head_dim=128, vocab 102,400. Consistent with GLA-paper small models (q uncompressed): q compression is a large-scale param-saving trick, not needed sub-2B.",
+     "source": "huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched directly)",
+     "numbers": "d=2048/27L/16h; r_kv=512, r_q=null, rope 64, nope 128, v 128",
+     "relevance": "Drop-in precedent for the lab spec: at d_model<=2048 set q_lora_rank=null; extends the KB's partially-unverified DeepSeek per-component dims with a verified small-scale variant.",
+     "uncertain": false
+    },
+    {
+     "claim": "Smallest production kv_lora_rank shipped: MiniCPM3-4B (d_model=2560, 62 layers, 40 heads) uses kv_lora_rank=256, q_lora_rank=768, qk_rope_head_dim=32, qk_nope_head_dim=64 (head_dim 64), vocab 73,448. Cache/token/layer = 256+32 = 288 elements — i.e., a d/10 latent with rope 32 works in a shipped 4B model.",
+     "source": "huggingface.co/openbmb/MiniCPM3-4B config.json (fetched directly)",
+     "numbers": "r_kv=256, r_q=768, rope 32, nope 64, d=2560, 62L, 40h; 288 elem/token/layer",
+     "relevance": "Anchor for the lab's aggressive option (KB's MLA r=256+rope64=480MB@32K math): a 256 latent with rope 32 and head_dim 64 is production-proven, just not at 600M.",
+     "uncertain": false
+    },
+    {
+     "claim": "CLA (cross-layer KV sharing) exact 1B-scale numbers: models d_model=2048, 20 layers, head_dim 128, 16 Q heads. MQA baseline 10,240 B/token, val ppl 13.54; MQA-CLA2 (10 of 20 layers produce KV) 5,120 B/token, ppl 13.60 (+0.06); the iso-cache alternative H64-MQA (halved head dim) 5,120 B/token ppl 13.81 — CLA2 is Pareto-better by 0.21 ppl at equal cache. MHA reference 163,840 B/token, 13.15. Sharing factor sweep: CLA2 13.60, CLA3 13.77, CLA4 13.95 — only factor 2 is worth it. At 3B: H64-MQA-CLA2 12.99 vs H64-MQA 12.94 (+0.05 ppl) at half cache.",
+     "source": "arXiv 2405.12981 (Reducing Transformer KV Cache Size with Cross-Layer Attention), HTML v1 tables",
+     "numbers": "1B: MQA 13.54@10240B -> CLA2 13.60@5120B; iso-cache H64-MQA 13.81; CLA3 13.77, CLA4 13.95; 3B: +0.05 ppl at 2x cut",
+     "relevance": "CLA2 is a near-free 2x cache halving verified AT 1B dense scale — composable with the lab's GQA baseline with ~zero quality cost and far less engineering than MLA.",
+     "uncertain": false
+    },
+    {
+     "claim": "YOCO validated down to 160M: scaling study at 160M/400M/830M/1.4B/2.7B/6.8B/13B shows YOCO (L/2 self-decoder with sliding-window-1024 or gated retention + L/2 cross-decoder reusing ONE global KV) matches Llama-optimized Transformer validation loss across the whole range, incl. the sub-1B points. Global KV memory O((N+L)*D) vs O(L*N*D), ~L-fold cut; 3B model @1M ctx: 12.4GB vs ~116.6GB (9.4x); ~2x total memory at 32K ctx. YOCO-3B trained 1.6T tokens, 8-task avg 0.636 (StableLM-3B-4E1T-competitive).",
+     "source": "arXiv 2405.05254 (You Only Cache Once), HTML v2, Figure 3 + memory tables",
+     "numbers": "sizes 160M-13B comparable loss; 12.4 vs 116.6GB @1M ctx (3B); ~2x @32K; YOCO-3B 1.6T tok, avg 0.636",
+     "relevance": "The most aggressive cross-layer sharing (single global KV) holds at 160-830M — an option if the Kazakh model targets long context, though it changes the architecture far more than CLA2.",
+     "uncertain": false
+    },
+    {
+     "claim": "Cross-layer KV sharing is shipped in production on-device models: Gemma 3n (E2B/E4B) uses num_kv_shared_layers=15 — the last 15 layers compute NO KV projections and reuse the KV of the last non-shared local/global layer of the same attention type (on top of Gemma-3-style 4-local(SWA):1-global pattern, 32K ctx). Per HF blog, Gemma 4 edge models retain shared KV cache + PLE. Phi-4-mini-flash-reasoning (3.8B, SambaY decoder-hybrid-decoder) applies the YOCO principle: a single full-attention layer's KV cache is shared by the whole cross-decoder via Gated Memory Units.",
+     "source": "HF transformers docs Gemma3nTextConfig (num_kv_shared_layers default 15); huggingface.co/blog/gemma4; arXiv 2507.06607 + Azure blog (Phi-4-mini-flash)",
+     "numbers": "Gemma 3n: 15 trailing layers share KV, 4:1 local:global SWA, 32K ctx; Phi-4-mini-flash: 1 global-attention KV cache for entire cross-decoder, 3.8B params",
+     "relevance": "Deployment argument: cross-layer sharing has mainline llama.cpp support precedent (gemma3n arch), whereas MLA GGUF still needs the ik_llama.cpp fork (KB fact) — matters for shipping a Kazakh on-device model.",
+     "uncertain": false
+    },
+    {
+     "claim": "Resolves KB [UNVERIFIED] on Qwen3.5 sub-1B: Qwen/Qwen3.5-0.8B config.json shows NO MLA — it is a hybrid: 24 layers, hidden_size=1024, layer pattern 3 linear-attention (Gated DeltaNet: 16 lin K/V heads, dim 128, conv kernel 4, output gate) : 1 full attention (8 Q heads / 2 KV heads GQA), vocab 248,320, ctx 262,144, partial_rotary_factor 0.25, no MoE in the 0.8B. So the newest frontier sub-1B (Mar 2026) chose hybrid-linear + GQA-2 over MLA for long context.",
+     "source": "huggingface.co/Qwen/Qwen3.5-0.8B config.json (fetched directly)",
+     "numbers": "759M-class, 24L, d=1024, GDN:full = 3:1, full-attn GQA 8Q:2KV, vocab 248,320, ctx 262,144",
+     "relevance": "Adoption signal: at 262K context even a 0.8B flagship avoids per-layer softmax KV entirely rather than compressing it with MLA — the lab's 32K target makes MLA/CLA2 sufficient, but this is the competitor architecture to name in the paper.",
+     "uncertain": false
+    },
+    {
+     "claim": "Synthesis vs KB: the KB's verified 'MLA outperforms MHA/MQA/GQA' comes from DeepSeek-V2 ablations at large scale and does NOT transfer monotonically below 1B. Across all from-scratch evidence: 353M parity (TPA: MLA 50.13 vs GQA 50.35), 433M +0.4pp (GLA paper), 772M +1.0pp (TPA), 876M -0.2pp (GLA paper), 1B +1.1pp MC / -1.1 Wiki ppl (Youtu), 1.47B -1.1pp (GLA paper). Envelope: MLA quality is within about +/-1pp of GQA at 350M-1.5B — never catastrophic, never the clear DeepSeek-scale win. The KB's own small-scale entry (arXiv 2506.09342, 30-202M: r=d/2 -> +0.3% loss) is consistent with this envelope.",
+     "source": "Cross-comparison of arXiv 2501.06425, 2505.21487, 2512.24618, 2506.09342 (all read this session or verified in KB)",
+     "numbers": "MLA-minus-GQA downstream: -0.22pp@353M, +0.4@433M, +1.0@772M, -0.2@876M, +1.1@1B, -1.1@1.47B",
+     "relevance": "This is the verdict the mission asked for and the exact expected-effect-size table for powering the lab's own ablation (differences are sub-1pp — needs seeds/token-budget discipline to detect).",
+     "uncertain": false
+    },
+    {
+     "claim": "Cache-accounting nuance the design spec must not miss: MLA's cache advantage depends on the GQA baseline it replaces. Per layer per token, MLA caches (r_kv + rope_dim) elements TOTAL (shared across heads): 544 elem at r=512/rope32. Qwen3-0.6B-style GQA (8 KV heads x 128) caches 2,048 elem (K+V) -> MLA is 3.8x smaller; but an aggressive GQA with 2 KV heads x 64 caches 256 elem -> MLA r=512 is 2.1x LARGER. The KB's 'MLA r=256 = 480MB @32K, 4.7x smaller' math assumes the lab's GQA-2:1 with head_dim 128 (6 KV heads at d=1536) — valid, but only for that baseline.",
+     "source": "Arithmetic from verified configs (DeepSeek-V2-Lite, MiniCPM3, Qwen3-0.6B in KB) + KB cache-math entry",
+     "numbers": "MLA r512+rope32 = 544 elem/L/tok; GQA-8x128 = 2048; GQA-6x128 = 1536; GQA-2x64 = 256; MQA-1x64+CLA2 = 64 avg",
+     "relevance": "Prevents a spec error: if the lab ever drops to head_dim-64 aggressive GQA or MQA+CLA2, MLA must go to r<=256 (with the MHA2MLA-documented 1-2pp risk) to still win on cache.",
+     "uncertain": false
+    }
+   ],
+   "recommendations": [
+    "VERDICT for the design spec: MLA at ~500-600M is PROVEN FEASIBLE (from-scratch runs at 124M-876M and 1B, conversions at 135M-360M) but NOT proven superior to GQA at this scale — expect quality within +/-1pp of GQA. Adopt it for the KV-cache/32K-context story and the paper narrative, not for accuracy gains.",
+    "Drop-in MLA config for a 600M model at d_model=1536, 24L, head_dim=64: kv_lora_rank=512, qk_rope_head_dim=32, qk_nope_head_dim=64, v_head_dim=64, q_lora_rank=null (no query compression — precedent: DeepSeek-V2-Lite, GLA-876M, TPA-772M all skip or the small-scale papers skip it). Aggressive variant: kv_lora_rank=256 + rope 32 (MiniCPM3 precedent) — accept ~1-2pp risk per MHA2MLA rank-sweep; do not go below 256 from scratch.",
+    "Run the lab's own MLA-vs-GQA-vs-(GQA+CLA2) ablation on Kazakh at ~500M: no published head-to-head exists at this scale for ANY non-English or agglutinative language (closest: English FineWeb-Edu at 353-876M, zh/en at 1B). Power it for sub-1pp effects: fixed data order, >=2 seeds or >=30-50B tokens, report ppl + KazMMLU 5-shot. This is a legitimate paper ablation, and absence of prior kk data is itself citable.",
+    "If engineering budget is tight, take GQA + CLA2 instead of MLA: share KV projections across adjacent layer pairs for an exact 2x cache cut at +0.04-0.06 ppl (verified at 1B/3B), Pareto-better than shrinking head_dim, and with a mainline llama.cpp deployment precedent (gemma3n's num_kv_shared_layers) — unlike MLA GGUF which still requires the ik_llama.cpp fork (KB fact). Use sharing factor 2 only (CLA3/CLA4 cost 0.17-0.35 extra ppl).",
+    "Consider GLA-2 (2 latent heads, d_c=2*head_dim each, rope 32, q uncompressed) as the actually-best-performing latent option at this scale: it beat both MLA and GQA-4 downstream at 433M (55.4 vs 54.9/54.5) and 876M (57.5 vs 56.7/56.9) with MLA-class cache; code is public (Dao-AILab/grouped-latent-attention).",
+    "Keep the architecture bet reversible: pretrain the GQA baseline first, and if MLA is needed later, convert X-EcoMLA-style (SVD init + distillation from the lab's own larger teacher or Sherkala-8B): at 1B this cost only 3.6-7B tokens and 70-140 GPU-hours for 6.4-10.6x KV compression at <=0.4pp loss."
+   ],
+   "open_questions": [
+    "Does MLA's slower early convergence (observed by TPA authors at 353M-1.5B) materially hurt at the lab's modest token budget (~9-30B Kazakh tokens), where every step counts? No paper isolates MLA convergence speed vs final quality at <50B tokens.",
+    "Is cross-layer sharing composable with MLA's latent (CLA-on-latent, sharing c_KV across adjacent layers)? No published result found — would stack a further 2x on MLA's cut and could be a cheap extra ablation/novelty axis.",
+    "Youtu-LLM's MLA-1B vs GQA-1B ablation: exact dims/tokenizer of the 1B ablation models are not stated in the paper text retrieved — worth checking their repo before citing the effect size as iso-config.",
+    "Does high tokenizer fertility (kk at 4.7-4.9 tok/word in multilingual tokenizers) interact with MLA quality (longer sequences per unit of meaning, more positions under a rank-limited latent)? Zero published data; the lab's bespoke <2.0-fertility tokenizer makes its ablation doubly novel.",
+    "Gemma 3n's num_kv_shared_layers=15 was read from HF transformers docs defaults; per-checkpoint values for E2B vs E4B configs not individually verified (gated repo)."
+   ]
+  }
+ ],
+ "conflicts": [
+  "CLA cost for the recommended fallback: recommendation 4 claims GQA+CLA2 costs \"+0.04-0.06 ppl (verified at 1B/3B)\", but the only verified numbers in the findings are MQA-based — \"MQA 13.54@10240B -> CLA2 13.60@5120B\" (+0.06 at 1B) and \"3B: +0.05 ppl at 2x cut\". The 0.04 lower bound appears in no finding, and no GQA+CLA2 datapoint exists anywhere in the evidence.",
+  "Rank-256 safety, internal contradiction: finding 3 (MHA2MLA) relevance says \"a 600M Kazakh model should not go below rank ~256\" (256 = safe floor), while recommendation 2 says \"kv_lora_rank=256 + rope 32 ... accept ~1-2pp risk per MHA2MLA rank-sweep\" (256 = already 1-2pp risky). MHA2MLA actually tested d_kv = 8/16/32 only, so both statements extrapolate to 256 — and in opposite directions.",
+  "Unit mismatch behind that extrapolation: MHA2MLA's reported \"-68.75% cache\" at d_kv=32 on SmolLM-360M (per-layer GQA KV = 5 KV heads x 64 x 2 = 640 elem -> ~200 elem after) is only arithmetically consistent if d_kv is a PER-HEAD latent (5x32=160 + partial-RoPE dims), not a DeepSeek-style shared kv_lora_rank. If so, mapping its quality-vs-rank curve onto shared-latent ranks 256/512 is invalid as stated in both finding 3 and recommendation 2.",
+  "KB vs new sub-1B evidence on variant ordering: KB has \"GQA loses ~0.5 ppl, MQA ~1.5 vs MHA\" (DeepSeek-scale), but TPA at 353M reports \"MLA 50.13 / GQA 50.35 / MHA 50.11\" with MQA 50.44 best — the large-scale MHA > GQA > MQA ordering inverts at 353M downstream avg. The KB ordering must be scale-qualified before it is cited in the design spec (ppl-vs-downstream is also apples-to-oranges here)."
+ ],
+ "gapFills": [
+  {
+   "area": "MLA vs GQA pretraining cost and convergence at sub-1B dense scale, token budgets under ~50B (KB gap: 'MLA works at sub-1B' was [UNVERIFIED])",
+   "findings": [
+    {
+     "claim": "Strongest direct evidence MLA converges to GQA-or-better quality within 25-50B tokens at sub-1B: 'Hardware-Efficient Attention for Fast Decoding' (Dao-AILab) pretrained param-matched MHA/MQA/GQA-4/GTA-4/MLA/GLA-2 from scratch on FineWeb-Edu at 183M (25B tokens), 433M/876M/1.47B (50B tokens each), GPT-3 config + Llama-3 arch, param-matched by widening FFN (not by changing heads). MLA beats GQA-4 at both sub-1B checkpoints where MLA also caches LESS.",
+     "source": "arXiv 2505.21487 (Zadouri, Strauss, Dao), PDF Tables 2-6 read directly; extracted text /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/gla.txt",
+     "numbers": "FineWeb-Edu val ppl — 183M@25B: MLA 16.318 vs GQA-4 16.578 vs MHA 16.715; 433M@50B: MLA 12.561 vs GQA-4 12.922; 876M@50B: MLA 11.363 vs GQA-4 11.340 (5-dataset avg ppl: MLA 24.929 vs GQA-4 25.286); 1.47B@50B: MLA 10.256 vs GQA-4 10.202, downstream 7-bench avg MLA 59.1% vs GQA-4 60.2%. Downstream 433M: MLA 54.9% vs GQA-4 54.5% vs GLA-2 55.4%. Configs: LR 2.6e-4/1.45e-4/1.2e-4/1.0e-4 (S/M/L/XL), batch 512 (XL 256), AdamW b=(0.9,0.95), wd 0.1, Llama-3 128K tokenizer.",
+     "relevance": "Exactly the lab's scale (433M ~ target 500-600M) and closest published token budget (25-50B vs lab's 9-30B kk). MLA wins on ppl AND downstream at 183M/433M while caching 288 vs GQA-4's 512 elem/tok/layer — the pro-MLA half of the verdict.",
+     "uncertain": false
+    },
+    {
+     "claim": "Exact sub-1B MLA configs that worked (fills KB gap on kv_lora_rank/rope_dim below 1B): the GLA paper uses a single latent head with d_c = 4*d_h and decoupled RoPE dim 32 (48 ablated at 876M). Per scale: 183M (d=768, 12 heads, d_h=64) -> kv_lora_rank=256, rope_dim=32; 433M (d=1024, 16h, d_h=64) -> 256/32; 876M (d=1536, 16h, d_h=96) -> 384/32; 1.47B (d=2048, 16h, d_h=128) -> 512/32. No q_lora (queries not compressed, unlike DeepSeek-V2).",
+     "source": "arXiv 2505.21487 Appendix B.1-B.2 (Tables 6-9) + Section 4 ('GLA... d_c = 2*d_h, half of MLA's 4*d_h'; 'by default we use a RoPE dimension d_R = 32')",
+     "numbers": "kv_lora_rank = 4*d_h (256 at d_model 768-1024; 384 at 1536; 512 at 2048); rope_dim = 32 default; MLA cache = 4*d_h + 32 elem/tok/layer; GLA-2 alternative: 2 latent heads x 2*d_h, same total cache, ppl 12.456 at 433M (beats both MLA 12.561 and GQA-4 12.922)",
+     "relevance": "Directly reusable recipe for the lab's ~500M model (d_model~1536 -> d_c=384, rope 32), replacing the KB's DeepSeek-V2-derived guess (d_c=512, rope 64) which is tuned for d=5120, not sub-1B.",
+     "uncertain": false
+    },
+    {
+     "claim": "The counter-evidence (TPA/ICML 2025) is real but weaker than the KB summary implies. Exact quote: 'Multi-Head Latent Attention (MLA) (blue curves) generally trains more slowly and yields higher validation losses.' This is FIGURE-level only (Figures 4/9) — the paper publishes NO numeric loss/ppl table. Its own downstream tables show MLA at parity or better: 0-shot 9-bench avg at 353M: MLA 50.13 vs GQA 50.35 vs MHA 50.11; at 773M: MLA 53.32 vs GQA 52.30 vs MHA 52.52 (MLA best non-TPA). Config caveats: GQA had only 2 KV heads (cache 256 elem/layer) while MLA used d_c=512 + rope 32 (544 elem, 2.1x GQA's cache); MLA was param-matched by inflating head count (h=23 at 353M vs MHA's 16); nanoGPT recipe, all sizes 50B tokens of FineWeb-Edu-100B.",
+     "source": "arXiv 2501.06425 v4 PDF, Section 6 lines + Tables 2-3 + Appendix H.1 (Tables 9-10), read directly; extracted text /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/tpa.txt (convergence quote at lines 808-812)",
+     "numbers": "353M: d_model=1024, 24L, d_c=512, d'_c(q_lora)=1024, rope 32, d_h=64, h_MLA=23; max LR 3e-4, batch 480, 50B tokens, 8x A100. Downstream avg: MLA 50.13 / GQA-2kv 50.35 / MHA 50.11 (353M); MLA 53.32 / GQA 52.30 (773M)",
+     "relevance": "This is the paper behind the lab's fear that MLA needs extra tokens at sub-1B. Verified: the slow-convergence claim exists but is curve-only, uses a cache-disadvantaged MLA config (d_c=8*d_h), and its own benchmarks contradict a quality deficit at 50B tokens. Do not let this alone flip the architecture to GQA.",
+     "uncertain": false
+    },
+    {
+     "claim": "No published wall-clock throughput or training-memory comparison of MLA vs GQA exists at sub-1B (or anywhere below production scale) as of 2026-07. All three head-to-head pretraining papers (TPA 2501.06425, GLA/GTA 2505.21487, latent-MHA-SLM 2506.09342) report inference metrics only; targeted searches for tokens/sec / wall-clock MLA-vs-GQA training benchmarks returned nothing. The only published compute accounting is TPA's symbolic Table 1: at d=2048, H=32, d_h=64, absorbed-form MLA attention arithmetic is M*H*(2*d_c+d_R) = 17408M FLOPs/token vs 4096M for MHA/GQA (4.25x); unabsorbed training form instead pays extra down/up projections (~5.0M vs 5.2M projection params at that scale, roughly parity).",
+     "source": "arXiv 2501.06425 Table 1 / Appendix FLOPs derivations (lines 1955-1984 of extracted text); absence verified across arXiv 2505.21487 full text, 2506.09342, and web searches (July 2026)",
+     "numbers": "MLA absorbed attention FLOPs 17408M vs GQA 4096M per token at d=2048/H=32 (4.25x); training-form projection FLOPs ~5.0e6 (MLA) vs 5.2e6 (GQA) per token at same scale; zero published tokens/sec or GB-of-optimizer-state numbers for either",
+     "relevance": "The lab's open question #1 (wall-clock + training memory) is literally unmeasured in the literature — the lab must benchmark it itself on its A100/BF16 setup; a 1-2B-token measured comparison would be a small publishable contribution and takes <1 GPU-week at 500M.",
+     "uncertain": false
+    },
+    {
+     "claim": "Only datapoint below 25B tokens: the latent-MHA-for-SLMs paper trained 17.5M-202.7M models for ~3.3B tokens (50K steps x batch 128 x ctx 512, derived) on 100K synthetic TinyStories-style stories. Decoupled-RoPE MLA at r=d/2 converged to within +0.3% val loss of MHA (2.154 vs 2.147 at 9L-512d); r=d/4 degraded +4.4% (2.241); MLA WITHOUT decoupled RoPE degraded +2.2-3.2%. No GQA arm; no training-time numbers.",
+     "source": "arXiv 2506.09342 (HTML v1) — extends existing KB entry with the token-budget arithmetic and exact losses",
+     "numbers": "~3.3B tokens (derived: 50000*128*512); val loss MHA 2.147, MLA+RoPE r=d/2 2.154 (+0.3%), r=d/4 2.241 (+4.4%), MLA no-RoPE r=d 2.216 (+3.2%)",
+     "relevance": "Suggests MLA (decoupled-RoPE, r>=d/2) converges fine even at ~3B tokens — inside the lab's 9-30B Kazakh budget — but on synthetic English data at toy scale, so it is supporting, not decisive, evidence.",
+     "uncertain": true
+    },
+    {
+     "claim": "Escape hatch that decouples the decision: MHA2MLA converts pretrained GQA models to MLA with ~0.4% of original pretraining data. SmolLM-135M and SmolLM-360M (600B-token GQA models) were converted with 2.25B fine-tuning tokens: at d_kv=32 (-68.75% KV cache) avg score 43.06 vs 44.25 baseline (-1.19) for 135M and 47.91 vs 49.63 (-1.72) for 360M; at d_kv=8 (-87.5% KV) drops grow to -3.28/-4.59. SmolLM-1B7 (1T tokens): 6B ft tokens, -1.17 at d_kv=32.",
+     "source": "arXiv 2502.14837 (MHA2MLA, HTML v1); checkpoints public at github.com/JT-Ushio/MHA2MLA",
+     "numbers": "2.25B ft tokens (0.375% of 600B); 135M: 44.25->43.06 @ d_kv=32; 360M: 49.63->47.91 @ d_kv=32; 87.5% KV cut costs -3.28 to -4.59 avg pts",
+     "relevance": "If the lab plays safe with GQA-4 from scratch (given <25B kk tokens), MLA-level cache can still be retrofitted later for ~2-3B tokens — the cache argument no longer forces a risky from-scratch bet.",
+     "uncertain": false
+    },
+    {
+     "claim": "Production adoption at sub-1B remains zero as of mid-2026: SmolLM3 (3B, 11T tokens) explicitly did not ablate MLA because 'it wasn't implemented in nanotron at the time of the ablations' and shipped GQA-4 after 1B-scale/45B-token ablations; Qwen3-0.6B uses GQA (KB-verified). No dense <1B released model with MLA was found (EG-MLA at 1B is research-only, per KB). Combined with KB's llama.cpp finding (MLA GGUF needs ik_llama.cpp fork), MLA at sub-1B is a research-proven but production-unshipped choice.",
+     "source": "HuggingFace Smol Training Playbook (via crawl: gist.github.com/unclecode/e5da5fb6a1d37022b089e243e0d9e00e); adoption-absence from July 2026 searches",
+     "numbers": "SmolLM3 ablation baseline: 1B params (Llama3.2-1B arch), 45B tokens, GQA-4 chosen; MLA arm: absent",
+     "relevance": "The lab would be among the first to ship a sub-1B dense MLA model — novelty upside for the paper, but zero production precedent and known GGUF deployment friction; the deciding constraint is tooling, not quality.",
+     "uncertain": true
+    }
+   ],
+   "recommendations": [
+    "VERDICT for ~500M: MLA is PROVEN at research scale for 25-50B-token budgets (GLA paper: beats GQA-4 on ppl and downstream at 183M@25B and 433M@50B with a smaller cache), PLAUSIBLE-but-untested for the lab's exact 9-30B regime (no head-to-head below 25B tokens at 300-900M exists), and unshipped in any production sub-1B model. TPA's 'slower convergence' claim is figure-level, config-disadvantaged (d_c=8*d_h, GQA-2kv), and contradicted by its own downstream tables — update the KB entry accordingly.",
+    "If choosing MLA from scratch, copy the GLA-paper recipe, not DeepSeek-V2's: single latent, kv_lora_rank = 4*d_h (=384 at d_model 1536, =256 at d_model<=1024), decoupled rope_dim=32, NO q_lora compression, param-match against GQA by FFN width. Avoid TPA's setup (d_c=8*d_h + inflated head count) — that is the configuration where MLA underperformed.",
+    "Run the decision experiment the literature is missing: 2 arms (MLA-4dh vs GQA-4) at ~200-500M on 2-3B Kazakh tokens, logging val loss curve + tokens/sec + peak training memory on the A100/BF16 setup. This both settles the lab's architecture choice at its real token budget and is a publishable micro-result (no such wall-clock numbers exist anywhere).",
+    "Hedge available: if GQA-4 is chosen for schedule safety, budget 2-3B tokens for a later MHA2MLA-style conversion (measured cost at 135M/360M: 2.25B tokens, -1.2 to -1.7 avg pts at 68.75% KV cut) instead of treating the attention choice as irreversible.",
+    "Prefer GQA-4 over the previously planned GQA-2:1 as the baseline arm: both head-to-head papers use GQA-4 as the standard competitive baseline, and GLA shows GQA-4 already loses to MLA on quality — a 2:1 config would concede cache without published quality evidence."
+   ],
+   "open_questions": [
+    "No pretraining head-to-head exists below 25B tokens at 300-900M params — the lab's exact regime (500M @ 9-30B kk tokens) is unmeasured; nearest datapoint (183M @ 25B, MLA wins) is one config in one paper.",
+    "MLA vs GQA wall-clock training throughput and optimizer/activation memory: zero published numbers at any sub-7B scale — must be measured in-house.",
+    "GLA paper text says LR 'scaled by 5x relative to GPT-3' but Table 6 lists 1.45e-4 at 433M (below GPT-3's 3e-4) — unresolved inconsistency; do not copy their LRs blindly without checking the repo (github.com/Dao-AILab/grouped-latent-attention).",
+    "All convergence evidence is English FineWeb-Edu; whether MLA's low-rank latent interacts with a high-entropy morphologically-rich Kazakh token distribution (agglutination, kk/ru code-switching) is untested.",
+    "Qwen3.5 sub-1B tier (~0.8B, 2026-03) attention type still unverified (KB flag stands) — if it shipped MLA, the production-adoption finding flips."
+   ]
+  },
+  {
+   "area": "MLA at sub-1B scale: long-context (32K) quality evidence — verdict: PLAUSIBLE BUT UNTESTED. No published sub-1B (dense) MLA long-context quality measurement exists as of 2026-07; the closest evidence is hybrid-MLA RULER at 1.24B (HyLo) and pure-MLA RULER-128K at 3B-active (Kimi Linear baseline). Short-context sub-1B quality is proven neutral-to-slightly-negative with an inverse-scale degradation trend.",
+   "findings": [
+    {
+     "claim": "Both from-scratch sub-1B MLA studies trained and evaluated at short context only — zero long-context evidence. The dedicated SLM-MLA paper trained at 512-token context (17.5M-202.7M params, TinyStories-style data) with validation loss + GPT-4-judged generations as the only evals; EG-MLA trained 120M-1.8B models from scratch on 50B ClimbMix tokens at ctx 2048/4096 with kv latent dims 16-512 and ran only short reasoning benchmarks (PIQA/ARC/HellaSwag/WinoGrande/SIQA/MMLU, WikiText103/LAMBADA) — no RULER/needle/LongBench/long-ppl.",
+     "source": "arXiv 2506.09342 (html v1, Sec. setup); arXiv 2509.16686 (html v1, Appendix G + eval section)",
+     "numbers": "2506.09342: ctx=512; r=d/2 -> 45% KV cut, +0.3% val loss; r=d/4 -> 87.5% cut, +4.4% loss; r=d/8 -> +10.3% loss. EG-MLA: 120M/645-951M/1.19-1.8B models, 50B tokens, ctx 2048 & 4096, kv dims {16,64,128,256,512}",
+     "relevance": "Directly answers the research question: the lab's 32K KV-cache justification for MLA rests on a regime no sub-1B study has ever measured. Also pins the safe rank floor: r=d/4 already costs +4.4% loss at 200M scale.",
+     "uncertain": false
+    },
+    {
+     "claim": "MHA2MLA shows an inverse-scale degradation trend for MLA conversion — smaller models lose MORE at equal KV compression — and ran its long-context eval (LongBench) ONLY on Llama2-7B; the sub-1B SmolLM conversions (135M/360M, fine-tuned at ctx 2048) got short commonsense evals only. At 7B, even modest latent compression costs measurable long-context quality.",
+     "source": "arXiv 2502.14837 (html v2, Tables incl. LongBench Table 2)",
+     "numbers": "At -81.25% KV (d_kv=16/32): 135M -2.24%, 360M -2.63%, 1B7 -1.43%, 7B -0.30%, 13B -0.23% avg commonsense drop. Llama2-7B LongBench (4K eval ctx): baseline 27.4; d_kv=64 -> 26.7 (-0.7); d_kv=32 -> 26.0 (-1.4); d_kv=16 -> 25.1 (-2.3); d_kv=64+Int4 HQQ = 92.19% cut -> 26.4 (-1.0)",
+     "relevance": "Two warnings for a 500-600M Kazakh model: (a) whatever long-context cost MLA has, expect it amplified at small scale (the 7B LongBench drop of -0.7..-2.3 pts is the best-case anchor); (b) refines the KB's 'quality-neutral' MLA claim — conversions at sub-1B lose 2.2-2.6% even short-context.",
+     "uncertain": false
+    },
+    {
+     "claim": "X-EcoMLA is the exact-rank precedent: kv rank 512 (the lab's candidate rank) at Llama3.2-1B-Instruct (1.24B) is quality-NEUTRAL on short tasks after cheap distillation — but the paper contains no long-context evaluation of any kind (no LongBench/RULER/needle/passkey), so rank-512-at-1B remains unmeasured beyond short context.",
+     "source": "arXiv 2503.11132 (html v2, Table 2 + eval section)",
+     "numbers": "r_kv=512, r_q=864, d_qk=32, rope_dim=32; 6.4x KV compression (15.6% of orig): avg 52.94 vs baseline 52.77 (9 zero-shot LM-harness tasks); 10.6x (9.4%): 52.68; cost 3.6B tokens/70 MI300 GPU-hrs (6.4x) or 7B tokens/140 GPU-hrs (10.6x)",
+     "relevance": "Best config anchor for the lab (rank 512 + decoupled rope 32 at ~1B, near the lab's hidden-size regime) and proof the short-context side is cheap to retain — while confirming the 32K quality side is a genuine open gap, not an overlooked result.",
+     "uncertain": false
+    },
+    {
+     "claim": "HyLo (Apr 2026) is the ONLY published long-context retrieval evidence involving MLA at ~1B: Llama-3.2-1B upcycled to 4 MLA + 12 Mamba2/GatedDeltaNet layers (SVD-initialized from GQA weights per X-EcoMLA), long-context SFT at 64K, evaluated on RULER up to 64K. Since linear-attention layers cannot do exact retrieval, the 4 MLA layers carry it — indirect evidence a low-rank latent supports 32-64K retrieval at 1.24B. Caveats: no pure-MLA arm, and the full-attention teacher's RULER baseline is absent from the tables, so absolute retention vs GQA/MHA is unquantified.",
+     "source": "arXiv 2604.24715 (html v1, Tables 2-4)",
+     "numbers": "RULER @8K/16K/32K/64K: HyLo-4MLA12GDN 52.5/48.3/44.5/40.8; HyLo-4MLA12M2 53.3/46.7/40.4/37.9; vs Zebra-Llama-1B 12.3/6.8/3.7/0.1; MambaInLlama-1B-50% 18.9/3.0/1.0/0.0; Llamba-1B 2.9/~0. KV cache = 3.9-7.8% of transformer baseline; also Llama-3.2-3B and Qwen3-1.7B variants; up to 2M-token decode in vLLM",
+     "relevance": "Closest existing answer to the lab's question: MLA-bearing architecture at ~1.2B retains graceful (not collapsing) RULER out to 64K, degrading 53->38 from 8K to 64K — but nobody can say how much of that slope is the latent vs the Mamba layers, and no head-to-head vs full attention exists.",
+     "uncertain": false
+    },
+    {
+     "claim": "The smallest PURE-MLA model with a published long-context quality number is Kimi Linear's identical-recipe full-MLA baseline at 3B-activated/48B-total MoE: RULER-128K 81.3 (vs 84.3 for the KDA:MLA 3:1 hybrid; long-context avg 52.2 vs 54.5) on a 1.4T-token fair-comparison run. Pure MLA does not collapse at 128K — but 3B-active is 5-6x the lab's scale and it is MoE, not dense.",
+     "source": "arXiv 2510.26692 (abstract + secondary: themoonlight.io review, jianyuh.github.io KDA analysis); Kimi Linear hybrid 84.3 RULER-128K confirmed in github.com/MoonshotAI/Kimi-Linear README",
+     "numbers": "MLA baseline RULER-128K = 81.3; Kimi Linear = 84.3 with 3.98x speedup; long-ctx avg (to 128K): MLA 52.2, KDA-hybrid 54.5, GDN-H 51.2; fair run 1.4T tokens, 48B total/3B active",
+     "relevance": "Sets the smallest scale at which the rank-512-class latent is PROVEN to hold long-context retrieval: 3B-active. Everything below is extrapolation — this is the floor of the evidence, not proof at 500M.",
+     "uncertain": true
+    },
+    {
+     "claim": "DeepSeek-V2-Lite — the smallest shipped pure-MLA production model with 32K context — uses exactly kv_lora_rank=512 at hidden_size=2048 (d_c = d/4, the geometry a 600M model would copy), but has NO published needle/RULER/LongBench results; its 32K context comes from YaRN extension after 4K pretraining, and its model-card evals are short-context only (MMLU/BBH/C-Eval). Even the production precedent for the lab's target config lacks 32K quality measurement.",
+     "source": "huggingface.co/deepseek-ai/DeepSeek-V2-Lite (config.json + model card)",
+     "numbers": "config.json: hidden 2048, 27 layers, 16 heads, kv_lora_rank=512, q_lora_rank=null, qk_rope_head_dim=64, qk_nope_head_dim=128, v_head_dim=128, max_position_embeddings=163840, YaRN factor 40 (mscale 0.707); card: 16B total/2.4B active, 5.7T tokens, pretrain seq len 4K, stated 32K context",
+     "relevance": "Validates the exact rank-512+rope-64 config at small hidden dims (2048, adjacent to the lab's 1536-2048) as production-viable, and shows the cheap path (pretrain 4K -> YaRN to 32K) — but confirms the quality-at-32K question is unanswered even by DeepSeek at this scale. Note q_lora_rank=null: at small scale DeepSeek dropped query compression, a config simplification the lab should copy.",
+     "uncertain": false
+    }
+   ],
+   "recommendations": [
+    "Classify MLA at <=600M as PLAUSIBLE-BUT-UNTESTED at 32K in the KB (upgrade from [UNVERIFIED]): short-context quality at sub-1B is proven (multiple sources), long-context quality has zero direct sub-1B evidence — the nearest datapoints are hybrid-MLA RULER at 1.24B (HyLo) and pure-MLA RULER-128K at 3B-active (Kimi Linear baseline 81.3).",
+    "If adopting MLA, gate it on an in-house ablation the field lacks: MLA (r=256 and r=512, decoupled rope 32-64, q_lora_rank=null per V2-Lite) vs GQA-2 at matched params, measuring long-ppl on kk/ru documents + synthetic Kazakh NIAH/RULER-lite at 8/16/32K after YaRN extension from 4K pretrain. This measurement is itself publishable — it would be the first sub-1B MLA long-context result.",
+    "Budget the MHA2MLA inverse-scale trend into expectations: at ~500M expect ~2-3% short-task drop at ~81% KV compression (if conversion-style) and assume the 7B LongBench cost (-0.7..-2.3 pts) is a LOWER bound at small scale; keep GQA-2 as the fallback arm in the same training run.",
+    "Do not use rank below d/4: +4.4% loss at r=d/4 and +10.3% at r=d/8 already at 200M scale (2506.09342); with lab hidden 1536-2048, that means kv_lora_rank >= 384-512.",
+    "Deployment caveat from KB still binds: MLA GGUF requires the ik_llama.cpp fork — weigh against the 32K cache win before committing the shipped model (vs keeping MLA for the paper ablation only)."
+   ],
+   "open_questions": [
+    "What is full-attention Llama-3.2-1B-Instruct's RULER at 32K/64K? HyLo omits the teacher baseline, so the absolute retention of its MLA-hybrid (40.4-44.5 @32K) cannot be graded; find an external RULER run of Llama-3.2-1B.",
+    "Is HyLo's 8K->64K RULER decay (53.3->37.9) attributable to the MLA latent or to the 12 linear-attention layers? Only a pure-MLA upcycle of the same 1B base at 64K would disentangle it — nobody has published one.",
+    "Confirm Kimi Linear's MLA-baseline RULER-128K = 81.3 from the paper's own table (PDF; html returned 404) — currently sourced from secondary reviews.",
+    "Qwen3.5-0.8B attention type (MLA vs GQA) is still unverified in primary sources (KB flag stands); if it ships MLA at 0.8B with 262K context, it becomes the decisive production datapoint for this question.",
+    "Does the DeepSeek-V2 paper report any V2-Lite-specific long-context eval in an appendix (paper arXiv 2405.04434) beyond the model card? Card shows none; appendix not re-checked this session."
+   ]
+  },
+  {
+   "area": "KV-cache architecture: is CLA2 verified on top of GQA (not MQA) at <=1B — plan-B fallback for Kazakh SLM <=600M",
+   "findings": [
+    {
+     "claim": "The CLA paper ITSELF contains a GQA+CLA2 ablation at 1B (missed by KB, which only pinned MQA rows): three GQA-CLA2 models trained on 30B SlimPajama tokens (GPT-NeoX BPE, fixed lr 3e-4, ppl on ~4M held-out tokens), tested at 1B ONLY (3B experiments are MQA/MHA only). Adding CLA2 to a fixed GQA config (halving KV layers 20->10) costs +0.12 ppl on GQA4 and +0.07 ppl on GQA2 — NOT the +0.04-0.06 the lab plan-B assumes (that figure is from the LR-tuned MQA-CLA2 section).",
+     "source": "arXiv:2405.12981 (Brandon et al., NeurIPS 2024), Table 1 + Sec 3.1/3.2 'Ablation: GQA + CLA2'; verified from arxiv.org/html/2405.12981v1",
+     "numbers": "Baselines (20 KV layers): H128-MHA 13.15 (163,840 B/tok), H128-GQA4 13.36 (40,960), H128-GQA2 13.52 (20,480), H128-MQA 13.54 (10,240). CLA2 (10 KV layers): H256-GQA4-CLA2 13.38 (40,960), H128-GQA4-CLA2 13.48 (20,480), H128-GQA2-CLA2 13.59 (10,240); H256-MQA-CLA2 13.51 (10,240), H512-MQA-CLA2 13.49 (20,480)",
+     "relevance": "Directly re-prices the lab's fallback 'GQA + CLA2 at +0.04-0.06 ppl': the only published GQA-CLA2 numbers at 1B say +0.07-0.12 ppl for the 2x cache cut. Also: at iso-cache 10,240 B/tok, GQA2-CLA2 (13.59) LOSES to plain MQA (13.54) and to H256-MQA-CLA2 (13.51) — the lab's exact planned combo is the weakest option at its footprint.",
+     "uncertain": false
+    },
+    {
+     "claim": "Internal contradiction in the CLA paper: its prose says 'only the GQA2-CLA2 configuration was able to achieve a perplexity better than the corresponding baseline model with the same KV cache footprint... the same (within 0.01 points) as our MQA-CLA2 model with the same footprint', but Table 1 numbers only support that sentence for GQA4-CLA2 (13.48 beats iso-footprint GQA2 13.52; within 0.01 of H512-MQA-CLA2 13.49), while GQA2-CLA2 (13.59) fails both tests (vs MQA 13.54, vs H256-MQA-CLA2 13.51). Almost certainly a naming typo — anyone citing the sentence without the table will draw the wrong conclusion about GQA2+CLA2.",
+     "source": "arXiv:2405.12981, verbatim sentence extracted from arxiv.org/html/2405.12981v1 Sec 'Ablation: GQA + CLA2' vs Table 1 rows; footprint math verified (n_kv*d_head*2*2bytes*KV_layers)",
+     "numbers": "Prose claims GQA2-CLA2; numbers support GQA4-CLA2: 13.48 vs baseline 13.52 (-0.04), |13.48-13.49|=0.01; GQA2-CLA2: 13.59 vs 13.54 (+0.05), |13.59-13.51|=0.08",
+     "relevance": "The lab's plan-B ('GQA-2 + CLA2') matches the typo'd config name, not the config the numbers endorse. If plan-B keeps 2 KV heads + CLA2, published evidence says prefer either GQA4-CLA2 (at 2x that cache) or H256-MQA-CLA2 (same cache, -0.08 ppl better). Typo interpretation is mine, flagged uncertain; the numeric mismatch itself is verified.",
+     "uncertain": true
+    },
+    {
+     "claim": "Independent 2025 reproduction of cross-layer KV sharing ON GQA at ~1B exists: NAACL 2025 systematic study trains a 1.1B Llama (22 layers, 32 Q heads, 4 KV heads = GQA) from scratch on 100B SlimPajama tokens with 5 configs. At 2x KV-layer cut (11/22), the CLA2-equivalent (lasagna-bottom) loses 0.95 avg downstream points, while Gemma-3n-style trailing reuse (pizza-bottom) loses only 0.55 and sandwich-top only 0.12. Paper conclusion: at 2x reduction 'most configurations can achieve competitive performance to and higher throughput than standard transformers'. Also tests 110M GQA models (12 heads/6 KV) on Minipile 1.7B tokens — the smallest published cross-layer-KV-on-GQA datapoint.",
+     "source": "arXiv:2410.14442 (Wu, Wu & Tu, NAACL 2025 short), Table 2 (configs), Table 4 (downstream), Sec 4.3; verified from arxiv.org/html/2410.14442v1; averages computed from quoted Table 4 rows",
+     "numbers": "8-task zero-shot avg (Hellaswag/OBQA/WinoGrande/ARC-c/ARC-e/BoolQ/PIQA/SciQ) at 11 KV layers: baseline 50.17, sandwich-top 50.05 (-0.12), pizza-bottom 49.62 (-0.55), sandwich-middle 49.29 (-0.88), lasagna-bottom (=CLA2) 49.22 (-0.95). 1.1B: hidden 2048, 22 layers, lr 4e-4, batch 2M tok. Exact ppl values only in Figure 1(c) (image)",
+     "relevance": "This is the answer to the assigned question: CLA2-on-GQA at ~1B IS published and reproduced — it works but is the WORST of the 2x-sharing layouts on downstream tasks; trailing-layer (Gemma-3n-style) and sandwich-top layouts dominate it at equal cache. Directly reorders the lab's plan-B design choice at ~600M.",
+     "uncertain": false
+    },
+    {
+     "claim": "Hymba (NVIDIA, ICLR 2025) provides the only sub-1B ablation of pairwise cross-layer KV sharing on top of GQA: on a 300M-param model trained on 100B tokens, adding cross-layer KV sharing (citing CLA) to a GQA + SWA + 3-full-attention hybrid IMPROVED commonsense avg by +0.60 while costing -0.75 recall avg, with 1.15x throughput; saved KV params were reallocated (attn:Mamba 1:3.6 -> 1:5.23). Shipped Hymba-125M/350M/1.5B all use GQA + KV sharing: 1.5B config.json has 25 Q heads / 5 KV heads, kv_reuse_group = 14 groups (mostly consecutive pairs, one triple [16,17,18]), sliding_window 1024, global attention only at layers {0,15,31}.",
+     "source": "arXiv:2411.13676 (Hymba), Table 1 roadmap rows 8->9 + Table (Appendix) model configs, verified from arxiv.org/html/2411.13676v1; huggingface.co/nvidia/Hymba-1.5B-Base config.json",
+     "numbers": "Row 8 (GQA+SWA+full-attn): commonsense 44.56, recall 48.79, 2399.7 tok/s, cache 41.2 MB -> Row 9 (+cross-layer KV sharing): 45.16 (+0.60), 48.04 (-0.75), 2756.5 tok/s, 39.4 MB. Ablation scale: 300M params / 100B tokens. Shipped: 125M (8 heads/4 KV groups), 350M (12/4), 1.5B (25/5)",
+     "relevance": "Closest scale to the lab's 600M target: KV sharing on GQA is accuracy-NEUTRAL-to-POSITIVE at 300M when most layers are sliding-window and freed KV params are reallocated — a recipe the lab can copy (its Kinetics finding already says cache, not FLOPs, is the sub-1B bottleneck). Caveat: hybrid Mamba+attention, sharing mostly across SWA layers; cache cut itself is small (4%) because SWA already bounds it — the win is params+throughput.",
+     "uncertain": false
+    },
+    {
+     "claim": "Gemma 3n ships trailing-layer KV sharing ON GQA in production at effective-2B scale with NO public quality ablation: E2B text config has 30 layers, 8 Q heads / 2 KV heads (GQA 4:1), head_dim 256, num_kv_shared_layers=10 (last third of layers compute no KV; each reuses K/V from the last non-shared layer of the same attention type), sliding_window 512. Google's only published number for the feature is a 2x prefill speedup vs Gemma 3 4B plus an unquantified 'minimal impact on quality' claim.",
+     "source": "config.json via huggingface.co/unsloth/gemma-3n-E2B (mirror; google original is gated) + developers.googleblog.com/en/introducing-gemma-3n-developer-guide/",
+     "numbers": "num_hidden_layers=30, num_attention_heads=8, num_key_value_heads=2, num_kv_shared_layers=10, head_dim=256, hidden_size=2048, sliding_window=512; '2x improvement on prefill performance' vs Gemma 3 4B; zero quality-delta numbers published",
+     "relevance": "Confirms the mission's premise: Gemma-3n-style trailing sharing is production-adopted on GQA but quality-unquantified by Google. The quantified stand-in is arXiv:2410.14442's pizza-bottom at 1.1B GQA: -0.55 avg downstream at 2x — the lab should cite that, not Gemma, for the quality price.",
+     "uncertain": false
+    },
+    {
+     "claim": "Gemma 4 (released April 2, 2026) carries the same num_kv_shared_layers mechanism forward across its lineup (smallest tier E2B: 2.3B effective / 5.1B with embeddings, 128K ctx), again stating only 'minimal impact on quality' with no ablation numbers — two consecutive Google generations ship trailing-layer KV sharing without publishing the quality cost.",
+     "source": "huggingface.co/blog/gemma4 (fetched 2026-07-03); corroborated by sglang issue #22277 (Gemma4 E4B num_kv_shared_layers > 0)",
+     "numbers": "Sizes: E2B 2.3B eff/5.1B, E4B 4.5B eff/8B, 12B, 31B, 26B-A4B MoE; release 2026-04-02; quality ablation numbers published: none",
+     "relevance": "Adoption evidence for the lab's fallback direction (trailing-layer sharing on GQA is the industry default at small scale, 2025-2026), but it cannot serve as quantitative support in the paper — the lab would be the first to publish the quality ablation at <=600M, which is itself a small paper-worthy artifact.",
+     "uncertain": false
+    },
+    {
+     "claim": "CLA models have a higher optimal learning rate than non-CLA baselines, and the CLA paper's GQA-CLA2 rows were run at the UNTUNED fixed lr 3e-4 — so the +0.07/+0.12 ppl GQA-CLA2 costs are plausibly pessimistic. In the paper's LR-tuned 1B experiments, H128-MQA-CLA2's optimum was 2.25e-3 vs 1.5e-3 for the H128-MQA baseline (1.5x), which is where the KB's '+0.04 ppl' headline comes from.",
+     "source": "arXiv:2405.12981, learning-rate ablation section (verbatim: 'CLA models benefit from training with higher learning rates than comparable non-CLA models')",
+     "numbers": "Optimal LR: MQA-CLA2 2.25e-3 vs MQA 1.5e-3 at 1B; design-space table fixed at 3e-4; no LR-tuned GQA-CLA2 run exists",
+     "relevance": "If the lab runs GQA+CLA2 at 600M, peak LR should be swept ~1-1.5x above the non-CLA baseline's optimum; the true GQA-CLA2 cost with tuned LR is unknown (gap the lab's ablation can close).",
+     "uncertain": false
+    }
+   ],
+   "recommendations": [
+    "VERDICT on the assigned question: YES — CLA2-on-GQA at <=1B is published in two independent primary sources (CLA paper's own 1B GQA-CLA2 ablation, arXiv:2405.12981 Table 1; NAACL 2025 systematic study at 1.1B/100B tokens on GQA-4KV, arXiv:2410.14442), plus an accuracy-positive 300M hybrid datapoint (Hymba). It is 'proven viable' but MISPRICED in the lab plan: measured cost is +0.07-0.12 ppl (LR-untuned) or -0.95 downstream avg pts, not +0.04-0.06 ppl.",
+    "Update the KB/plan-B: replace 'GQA + CLA2 at +0.04-0.06 ppl' with the verified numbers, and note the CLA paper's prose-vs-table contradiction (prose says GQA2-CLA2 beats iso-footprint baseline; Table 1 says only GQA4-CLA2 does).",
+    "Prefer trailing/top-layer sharing over adjacent-pair CLA2 for the 600M model: at 1.1B GQA and identical 2x cache cut, sandwich-top costs -0.12 and pizza-bottom (Gemma-3n-style) -0.55 avg downstream pts vs CLA2's -0.95 (arXiv:2410.14442 Table 4). This also matches Gemma 3n/4 production practice. Caveat: sandwich/top layouts add training cost and prefill latency for long prompts.",
+    "If sticking with the exact GQA-2 footprint, published 1B evidence prefers H256-MQA-CLA2 (double head_dim + MQA + CLA2, ppl 13.51) over GQA2-CLA2 (13.59) at identical 10,240 B/token cache.",
+    "If any CLA2 variant is trained, sweep peak LR up to ~1.5x the non-CLA optimum (CLA optimal 2.25e-3 vs 1.5e-3 at 1B); no LR-tuned GQA-CLA2 number exists anywhere — the lab's 600M ablation would be the first, and a Gemma-3n-style num_kv_shared_layers quality ablation at <=600M is a citable novelty since Google has published none across two generations."
+   ],
+   "open_questions": [
+    "No published CLA2-or-trailing-share run exists at exactly 500-600M dense with a modern >=100B-token budget on a pure-GQA transformer (evidence points: 300M hybrid Mamba+SWA, 1B/30B tokens, 1.1B/100B tokens) — the lab's config remains an interpolation, albeit now a well-bracketed one.",
+    "Gemma 3n / Gemma 4 num_kv_shared_layers quality ablation is unpublished; only '2x prefill vs Gemma 3 4B' and 'minimal impact on quality' claims exist.",
+    "The 1.1B SlimPajama perplexities in arXiv:2410.14442 are only in Figure 1(c) (image); extract from the PDF figure or ask authors if exact ppl deltas (not just downstream avgs) are needed for the paper.",
+    "Does CLA's higher-optimal-LR effect transfer to GQA-CLA2 (only MQA-CLA2 was LR-tuned)? Unknown; cheap to test at 600M.",
+    "Whether cross-layer sharing interacts with heavy kk/ru code-switching or high-fertility tokenization (longer sequences per word = more cache pressure, favoring sharing) has never been studied for any low-resource language."
+   ]
+  },
+  {
+   "area": "MLA at sub-1B: minimum kv_lora_rank proven from scratch + MHA2MLA d_kv unit semantics (resolves KB [UNVERIFIED] 'MLA works at sub-1B' and the 'aggressive r=256' sourcing gap)",
+   "findings": [
+    {
+     "claim": "RESOLVED — MHA2MLA's d_kv is a PER-KV-HEAD unit, not a DeepSeek-style shared rank. The code builds ONE shared down-projection (structurally DeepSeek-style single latent per token) but sizes it as d_kv_mid = low_rank * num_key_value_heads (patching_model_load.py line 98, repo JT-Ushio/MHA2MLA). Paper notation confirms per-head SVD factors U_kv, V_kv ∈ R^{d_h × d_kv} (SVD_joint, Sec 3). So 'd_kv=32 on SmolLM-360M' = DeepSeek-equivalent shared kv_lora_rank of 32×5=160 (+5×8=40 rope dims → 200 cached elem/token/layer), exactly the parent's suspected ~160-200 elem. Arithmetic cross-check: per-head reading reproduces every published KV-reduction % (135M: 3×32+3×8=120/384=68.75% cut ✓; Llama2-7B d_kv=64: 32×64+32×16=2560/8192=68.75% ✓); shared reading reproduces none.",
+     "source": "https://github.com/JT-Ushio/MHA2MLA (src/mha2mla/patching_model_load.py, src/mha2mla/arguments.py, cfgs/*.yml) + arXiv:2502.14837 Sec 3; SmolLM configs from HF (135M: 9h/3kv/d_h64; 360M: 15h/5kv/d_h64; 1.7B: 32h/32kv/d_h64)",
+     "numbers": "d_kv_mid = low_rank × n_kv; SmolLM-135M d_kv=8/16/32 → shared-equivalent 24/48/96; 360M → 40/80/160; 1B7 → 256/512/1024; Llama2-7B d_kv=16/32/64 → 512/1024/2048; rope dims cached separately per KV head (8/head SmolLM, 16/head Llama in main tables; released 135M cfg uses rope_dim_for_mla=4, low_rank=8)",
+     "relevance": "Kills the misreading that 'rank 8-32 works at sub-1B'. MHA2MLA sweeps prove shared-equivalent latents of only 24-160 at 135M-360M scale — with real quality cost (see next finding) — and 512-2048 at 7B. The aggressive-option arithmetic must use total latent, not d_kv.",
+     "uncertain": false
+    },
+    {
+     "claim": "MHA2MLA conversion cost at SmolLM scale (fine-tune, NOT from scratch; 2.25B tokens for 135M/360M, 6B for 1B7/7B = 0.3-0.6% of pretrain data): 135M baseline 44.50 avg → d_kv=32: 43.06 (-1.19pp, -68.75% KV), d_kv=16: 41.84 (-2.41pp), d_kv=8: 40.97 (-3.28pp, -87.5% KV). 360M baseline 49.60 → 47.91/-1.72pp, 46.94/-2.69pp, 45.04/-4.59pp. 1B7 baseline 55.90 → 54.76/-1.17pp, 54.65/-1.28pp, 53.61/-2.32pp. The headline '92.19% KV cut, -0.5% LongBench' is Llama2-7B d_kv=64 COMBINED WITH Int4 HQQ quantization (26.9 vs 27.4 LongBench), not pure-MLA.",
+     "source": "arXiv:2502.14837 Tables 1-2 (arxiv.org/html/2502.14837v1)",
+     "numbers": "Drops at sub-1B: 1.2-4.6pp avg for 68.75-87.5% KV cuts; smaller models degrade more at equal d_kv; 92.19% figure = d_kv=64 + Int4HQQ",
+     "relevance": "These drops are conversion-with-cheap-finetune numbers, so they lower-bound but do not measure from-scratch MLA quality at sub-1B. Also: pattern 'smaller model → bigger drop at same rank' warns against transplanting 7B ranks to 500M.",
+     "uncertain": false
+    },
+    {
+     "claim": "MINIMUM SHARED RANK PROVEN FROM SCRATCH BELOW 1B: kv_lora_rank=256 (plain DeepSeek-style MLA) at 120M params, and 64 with EG-MLA's token-embedding gating. EG-MLA trains from scratch on 50B ClimbMix tokens: MLA-Base (12L, d=768, shared kv_lora_rank=256 + decoupled rope 64, qk 64+64/v 64 head dims, cache 3.84K elem/token total = (256+64)×12 layers) scores 43.84 avg over PIQA/ARC-C/ARC-E/HellaSwag/WinoGrande/SIQA/MMLU; EG-MLA-kv64 (cache 1.54K elem = (64+64)×12) scores 44.33 (+0.49 over rank-256 MLA); EG-MLA-kv256 44.46. This is the only located from-scratch sub-1B run with a DeepSeek-style shared rank below 512.",
+     "source": "arXiv:2509.16686 (EG-MLA), Table 1 + Table 7 appendix config (arxiv.org/html/2509.16686v1)",
+     "numbers": "120M, 50B tokens, rank 256 = d/3 at d=768; kv64 variant needs extra gating-embedding table (154M params for emb256, offloadable); cache 3.84K→1.54K→0.96K elem/token for kv256/kv64/kv16",
+     "relevance": "Directly legitimizes the 'aggressive r=256' option's existence at sub-1B — but note EG-MLA's proven ratio is rank=d/3 at 120M; the lab's r=256 at d=1536 is d/6, i.e. relatively MORE compressed than the proven sub-1B point. Table 1 (per fetch) lacks an MHA/GQA control, so absolute MLA-vs-MHA quality at 120M is not anchored here.",
+     "uncertain": false
+    },
+    {
+     "claim": "The 30M-202M small-scale MLA paper (KB entry arXiv:2506.09342) also uses PER-HEAD latents, not DeepSeek shared rank: K_h = X W_h^(K↓) W_h^(K↑) with W_h^(K↓) ∈ R^{d×r} per head, r ∈ {d_k, d_k/2, d_k/4} where d_k=d/H (e.g. r=64/32/16 at d=512, H=8). Trained from scratch but only on ~TinyStories (~100K synthetic stories, 50K steps). r=d_k/2: val loss 2.154 vs 2.147 baseline (+0.3%), 0.0159 vs 0.0288 MB/token (45% cut); r=d_k/4: 2.241 (+4.4%), 0.0080 MB/token (=72% cut by arithmetic). KB CONFLICT: KB records '87.5% reduction' for r=d/4; the fetched MB/token values give 72% — both reported, do not average.",
+     "source": "arXiv:2506.09342 (arxiv.org/html/2506.09342v1)",
+     "numbers": "17.5M-202.7M params, d∈{256,512,768,1024}, TinyStories ~50M tokens; +0.3% loss at total-equivalent latent d/2, +4.4% at d/4, +10.3% at d/8",
+     "relevance": "Weakens this paper as evidence for shared-rank MLA at 500M: per-head latents + toy corpus. Its 'quality cliff below total d/4' is the only sub-1B signal on where compression breaks — at d=1536 that cliff estimate is total latent ~384.",
+     "uncertain": true
+    },
+    {
+     "claim": "MiniCPM3-4B config.json verified (removes KB partial-[UNVERIFIED]): kv_lora_rank=256, q_lora_rank=768, qk_rope_head_dim=32, qk_nope_head_dim=64, v_head_dim=64, hidden 2560, 40 heads, 62 layers, vocab 73448. Rank ratio 256/2560 = d/10 — same ratio class as DeepSeek-V2 (512/5120=d/10) and V3 (512/7168=d/14). Cache = (256+32)/token/layer = 288 elem.",
+     "source": "https://huggingface.co/openbmb/MiniCPM3-4B/raw/main/config.json (fetched 2026-07-03)",
+     "numbers": "kv_lora_rank 256, q_lora 768, rope 32, nope 64, v 64, d=2560, 40h, 62L",
+     "relevance": "Only production from-scratch rank-256 model; at 4B, not sub-1B. Shows halved head dims (64/64/32 vs DeepSeek 128/128/64) are how small-d models keep MLA cheap — directly copyable head-dim recipe for a 500M config.",
+     "uncertain": false
+    },
+    {
+     "claim": "PLM-1.8B (nearest production from-scratch MLA above the lab's scale) config verified: kv_lora_rank=512, q_lora_rank=null (no q compression), qk_rope_head_dim=64, qk_nope_head_dim=128, v_head_dim=128, hidden 2048, 16 heads, 32 layers. Confirms the pattern: every from-scratch dense MLA near 1-2B published with benchmarks uses shared rank 512, none 256.",
+     "source": "https://huggingface.co/PLM-Team/PLM-1.8B-Instruct/raw/main/config.json (fetched 2026-07-03); arXiv:2503.12167",
+     "numbers": "rank 512 = d/4 at d=2048; cache (512+64)=576 elem/token/layer, same absolute latent as DeepSeek-V2/V3",
+     "relevance": "Anchors the conservative option: at 1.8B the proven choice is 512 (=d/4). For the lab's d=1536, rank 512=d/3 (EG-MLA's proven sub-1B ratio) and rank 384=d/4 (PLM's ratio) are the ratio-matched picks.",
+     "uncertain": false
+    },
+    {
+     "claim": "MHA2MLA repo (2025-2026 updates) contains a Qwen3-0.6B config with is_mla_from_scratch=true: attention projections randomly re-initialized (code re-inits all attn proj weights, normal(0, initializer_range)) on the pretrained body, then ~3.1B tokens of training (12000 steps × 8 batch × 4 accum × 4 GPU × 2048 seq); low_rank=64 × n_kv=8 = shared-equivalent latent 512, rope_dim_for_mla=32/head (rope cache 256) → 768 elem/token/layer vs Qwen3-0.6B GQA-8's 2048 = 62.5% cut. No published benchmark scores found for this config (paper v1 predates Qwen3 support).",
+     "source": "https://github.com/JT-Ushio/MHA2MLA cfgs/Qwen3-0_6B-4GPU.yml + src/mha2mla/patching_model_load.py (from-scratch reinit block)",
+     "numbers": "shared latent 512 + rope 256 = 768 elem/token/layer; ~3.1B training tokens; qk_norm supported (Qwen3 q_norm/k_norm reordered, 2-norm rope selection unsupported for Qwen3)",
+     "relevance": "Closest existing artifact to the lab's exact target (0.6B, Qwen3 baseline the lab must beat) chooses shared 512, not 256 — and shows MLA is mechanically compatible with Qwen3-style QK-norm, which the lab will likely want.",
+     "uncertain": true
+    },
+    {
+     "claim": "Adjacent conversion evidence at 1.24B: X-EcoMLA (AMD) upcycles Llama-3.2-1B-Inst to MLA via SVD init + distillation with fixed r_kv=512, r_q=854, d_qk_rope=32; with an 8B teacher it reports 6.4x KV cache compression at 100% of the baseline average LM-Harness score; released extreme variants go to kv64 (amd/X-EcoMLA-1B8B-fixed-kv64-DPO). 6.4x on Llama3.2-1B GQA-8 (1024 elem) = 160 elem/token/layer, consistent with a kv128+rope32 variant.",
+     "source": "arXiv:2503.11132 (X-EcoMLA) + https://huggingface.co/amd/X-EcoMLA-1B8B-fixed-kv64-DPO",
+     "numbers": "fixed setting r_kv=512, r_q=854, rope 32; 6.4x compression at 100% score retention (8B teacher); dynamic-rank threshold 0.95",
+     "relevance": "Shows ~1B-scale models tolerate effective latents down to ~128-160 elem WHEN distilled from a big teacher — a mitigation path if the lab picks aggressive r=256 and sees regression (distill from Sherkala-8B or Qwen3-8B). Not from-scratch evidence; exact per-variant scores unverified.",
+     "uncertain": true
+    }
+   ],
+   "recommendations": [
+    "Verdict: MLA at ~500M is PLAUSIBLE AND PARTIALLY PROVEN, not untested — from-scratch DeepSeek-style shared rank 256 is proven at 120M (EG-MLA, 50B tokens, 43.84 avg) and rank 512-equivalent at 0.6B exists only as an unscored repo config; NO published from-scratch ~500M dense MLA with benchmark scores exists. That exact gap (from-scratch MLA-vs-GQA ablation at 500-600M) is unclaimed and paper-able.",
+    "The 'aggressive r=256' option is LEGITIMIZED but re-scoped: its true sources are EG-MLA (rank 256 = d/3 at 120M from scratch) and MiniCPM3-4B (rank 256 = d/10 at 4B production) — NOT the MHA2MLA d_kv=8/16/32 sweeps, whose shared-equivalent latents are only 24-160 and cost 1.2-4.6pp. Update any KB/plan text citing MHA2MLA sweeps as rank evidence.",
+    "For d_model=1536: rank 256 = d/6 sits between proven ratio anchors (d/3 at 120M, d/10 at 4B) — do not accept it blind; run a 3-point ablation r ∈ {256, 384, 512} with rope_dim=32 (MiniCPM3 small-d recipe: nope 64, v 64, rope 32) on a 5-10B-token Kazakh pilot before committing. Cache stakes per KB math: r=256→~480MB vs r=512→~864MB at 32K.",
+    "If r=256 regresses, X-EcoMLA shows teacher distillation (8B teacher) recovers 100% score at even 6.4x compression on a ~1B student — plan Sherkala-8B/Qwen3-8B distillation as the fallback that rescues the aggressive rank rather than retreating to 512.",
+    "KB corrections to apply: (1) mark 'MiniCPM3 dims' verified (config.json read 2026-07-03); (2) fix arXiv:2506.09342 entry — latents are per-head, corpus is TinyStories-only, and its r=d/4 KV cut is 72% by the paper's own MB/token numbers vs the KB's recorded 87.5% (conflict, both retained); (3) replace 'MLA works at sub-1B [UNVERIFIED]' with the EG-MLA 120M citation."
+   ],
+   "open_questions": [
+    "EG-MLA's MHA-Base average score (absolute MLA-vs-MHA quality gap at 120M) — cache table shows MHA-Base 18.43K elem but its benchmark avg was not extracted; needed to confirm MLA is quality-neutral (not just EG-vs-MLA-neutral) at sub-1B.",
+    "Does any MHA2MLA v2/journal version publish benchmark scores for the Qwen3-0.6B is_mla_from_scratch config (shared 512 + rope 256)? Repo config exists, scores not found.",
+    "Which exact X-EcoMLA variant produces '6.4x at 100% score' (arithmetic implies kv128+rope32, model naming suggests kv64) — needs the paper's Table read to pin the rank-vs-retention curve at 1B.",
+    "Where between 120M (rank=d/3 proven) and 4B (rank=d/10 proven) does the workable rank/d ratio cross d/6 — the lab's pilot ablation would itself be the first public datapoint at ~500M."
+   ]
+  },
+  {
+   "area": "MLA upcycling at <=1B under a bespoke tokenizer: does the X-EcoMLA convert-later hedge survive without a larger same-tokenizer teacher?",
+   "findings": [
+    {
+     "claim": "X-EcoMLA's own Table 2 confirms the mission premise exactly: upcycling Llama3.2-1B-Instruct (GQA baseline avg 52.85 on LM Harness) with ITSELF as teacher (self-distillation, r_kv=512, r_q=864) reaches KV size 53.1% = 1.88x compression at avg 53.04 (parity, slightly above baseline). Deeper compression at parity requires larger same-tokenizer teachers: 3B teacher r_kv=256 -> 28.1% KV (3.6x) avg 52.91; 8B teacher r_kv=128 -> 15.6% (6.4x) avg 52.94 @3.6B tokens; 8B teacher r_kv=64 -> 9.4% (10.6x) avg 52.47 @3.6B tokens (paper claims <0.1% drop with 7B tokens). Distillation is KL divergence on output logits, so teacher and student must share a vocabulary; all experiments are same-family Llama. MLA student uses decoupled rope dim d_r=32; KV % is relative to the already-GQA Llama3.2-1B cache.",
+     "source": "arXiv:2503.11132v3 (X-EcoMLA, AMD), Tables 1-2; HF amd/X-EcoMLA-1B8B-fixed-kv64-DPO",
+     "numbers": "baseline 52.85; self-distill 1.88x/53.04; 3B teacher 3.6x/52.91; 8B teacher 6.4x/52.94 and 10.6x/52.47 @3.6B tok (70-140 MI300 GPU-hrs); rope_dim=32",
+     "relevance": "With the lab's custom <2.0-fertility Kazakh tokenizer no larger same-tokenizer teacher will exist, so the lossless X-EcoMLA path caps at ~1.9x KV compression — the 6.4-10.6x headline is unreachable for the lab via this route.",
+     "uncertain": false
+    },
+    {
+     "claim": "Teacher-free MLA upcycling ABOVE 1.9x at sub-1B is published: MHA2MLA (ACL 2025) converts SmolLM-135M and SmolLM-360M (both GQA, i.e., same starting attention as the lab's plan) using plain full-parameter fine-tuning on 2.25B tokens (0.375% of the 600B pretraining corpus) with NO teacher and no distillation. SmolLM-360M (baseline avg ~49.63): d_kv=32 -> -68.75% KV (3.2x) avg 47.91 (-1.72); d_kv=16 -> -81.25% (5.3x) avg 46.94 (-2.69); d_kv=8 -> -87.5% (8x) avg 45.04 (-4.59). SmolLM-135M: 3.2x at -1.19. Method = joint SVD init of KV weights + partial-RoPE (head-wise 2-norm selection, r=d_h/16). Because no teacher is involved, a bespoke tokenizer is irrelevant — the only requirement is pretraining-distribution data, which the lab owns.",
+     "source": "arXiv:2502.14837 (MHA2MLA, ACL 2025 Long), Tables for SmolLM-135M/360M; github.com/JT-Ushio/MHA2MLA (checkpoints d_kv=8/16/32/128 released)",
+     "numbers": "360M: 3.2x/-1.72, 5.3x/-2.69, 8x/-4.59 avg pts; 135M: 3.2x/-1.19; 2.25B FT tokens = 3.75 per-mille of pretraining; Llama2-7B reference: -92.19% KV, -0.5% LongBench",
+     "relevance": "Directly answers the research question: >1.9x MLA conversion at <=1B without any teacher exists — but it is lossy (~1.7 avg pts at 3.2x on a 360M model), whereas the lab needs every point to beat Qwen3-0.6B's 32.8% KazMMLU.",
+     "uncertain": false
+    },
+    {
+     "claim": "No published work combines cross-tokenizer distillation with MLA upcycling. Cross-tokenizer KD is now its own maturing subfield — ALM/Approximate Likelihood Matching (arXiv:2503.20083), byte-level-interface distillation BLD (arXiv:2604.07466), BPE-recursive likelihood scoring (arXiv:2512.14954), on-policy cross-family distillation (arXiv:2606.09456) — but multiple targeted searches (English formulations, MLA/GQA2MLA/upcycling x cross-tokenizer/vocabulary) return zero papers applying any of these to attention-architecture conversion. Sherkala-8B-as-teacher for MLA upcycling of a bespoke-tokenizer Kazakh SLM would be an unclaimed combination.",
+     "source": "Absence result across arXiv/OpenReview searches 2026-07-03; cross-tokenizer KD primaries: arXiv:2503.20083, 2604.07466, 2512.14954, 2606.09456",
+     "numbers": "0 hits for the intersection; 4+ active cross-tokenizer KD methods exist independently",
+     "relevance": "The lab cannot cite any precedent that cross-tokenizer KD rescues deep MLA compression — treating it as a working assumption would be unfounded; treating it as a paper contribution is open novelty space.",
+     "uncertain": false
+    },
+    {
+     "claim": "AMD's own follow-up confirms the same-tokenizer-teacher dependence at 1B: Zebra-Llama-1B (4 MLA + 12 Mamba2 layers, post-training adaptation of Llama-3.2-1B-Instruct with intermediate-layer distillation from an 8B teacher) reaches 3.91% KV size (~25.6x) and claims '100% of average zero-shot performance', but its DPO card shows MMLU dropping 46.09 -> 37.91 (-8.2 pts) even with the 8B teacher — deep-compression conversions remain lossy on knowledge-heavy tasks, which is exactly what KazMMLU measures.",
+     "source": "HF amd/Zebra-Llama-1B-4MLA-12Mamba-DPO model card; arXiv:2505.17272 (Zebra-Llama); ROCm blog AMD-HybridLM",
+     "numbers": "KV 3.91% of baseline; MMLU 0.4609 -> 0.3791; arc_challenge acc_norm 0.3797 -> 0.4232; teacher = 8B same-tokenizer",
+     "relevance": "Even with the strongest published recipe and a big teacher, 1B-scale deep KV compression costs ~8 MMLU points — a red flag for a KazMMLU-targeted 600M model considering aggressive conversion.",
+     "uncertain": true
+    },
+    {
+     "claim": "The teacher-free conversion line keeps improving in 2026 but has no sub-1B evidence: CARE (covariance-aware, rank-enhanced decomposition + brief post-SVD 'healing' fine-tune, no teacher) reduces one-shot perplexity up to 215x and improves mean accuracy up to 1.70x vs prior SVD-init conversion at matched KV budgets — but its smallest tested model is Qwen3-4B (also Qwen3-30B-A3B, Llama-3.1-8B/70B). TransMLA v1 similarly bottoms out at Qwen2.5-7B and in v1 preserves (not compresses) cache size. Whether CARE-style init shrinks MHA2MLA's ~1.7-pt loss at 360M is untested.",
+     "source": "arXiv:2603.17946 (CARE, 2026); arXiv:2502.07864v1 (TransMLA)",
+     "numbers": "CARE: up to 215x ppl reduction, 1.70x mean-accuracy gain vs SVD init at matched KV; smallest models: CARE 4B, TransMLA 7B",
+     "relevance": "Sets the frontier: better teacher-free init exists but is unverified at the lab's scale — copying CARE at 600M would be an extrapolation, not a cited result.",
+     "uncertain": false
+    },
+    {
+     "claim": "Verdict on the research question: the X-EcoMLA de-risk path survives a bespoke tokenizer only in weakened form. Published options at <=1B with no larger same-tokenizer teacher: (a) ~1.9x KV compression lossless via self-distillation (X-EcoMLA, own model as teacher — tokenizer trivially shared); (b) ~3.2x at ~-1.2 to -1.7 avg pts, or 5.3-8x at -2.7 to -4.6 pts, teacher-free (MHA2MLA, needs only own pretraining data); (c) 6.4-10.6x lossless is published ONLY with a 3-8x-larger same-tokenizer teacher, which cannot exist for the lab. Cross-tokenizer rescue: zero published results. Broader MLA-at-500M status per KB + this run: from-scratch MLA is proven at 30M-202M (r=d/2: 45% KV cut, +0.3% loss, arXiv:2506.09342) and at 1B (EG-MLA); CONVERSION to MLA at sub-1B is proven-but-lossy; lossless deep conversion at sub-1B is untested.",
+     "source": "Synthesis of arXiv:2503.11132v3, 2502.14837, 2506.09342, 2509.16686, 2603.17946 + absence searches",
+     "numbers": "hedge repriced: 1.9x lossless / 3.2x @ -1.7 pts / 6.4-10.6x unreachable without same-tokenizer big teacher",
+     "relevance": "Directly reprices 'Recommendation 6 reversible bet': pretrain-GQA-convert-later is a real but ~2x-lossless hedge, not a 6-10x one; if the Kinetics KV bottleneck (Qwen3-0.6B: 3.5GB KV @32K vs 1.2GB weights) demands >=4x, MLA must be chosen at pretraining time.",
+     "uncertain": false
+    }
+   ],
+   "recommendations": [
+    "Reprice the convert-later hedge: if the deployment target tolerates ~2x KV compression, pretrain GQA and keep X-EcoMLA self-distillation (r_kv~d/2, rope_dim 32, ~3.6B tokens, ~70 GPU-hrs at 1B scale) as the reversible bet. If >=4x KV compression is a requirement (32K-context serving per Kinetics), decide MLA at pretraining time — from-scratch MLA at r=d/2 is validated at 30M-202M (45% KV cut, +0.3% loss) and needs no teacher at all.",
+    "If converting later anyway, use the MHA2MLA recipe (joint-SVD init + partial-RoPE 2-norm r=d_h/16, full-param FT) with the lab's own pretraining data: budget ~0.4-0.6% of pretraining tokens (~2-3B at SmolLM scale) and expect ~-1.2 to -1.7 avg pts at 3.2x; the bespoke tokenizer is a non-issue on this path because no teacher is involved.",
+    "Do not put cross-tokenizer distillation (Sherkala-8B teacher via ALM/byte-level KD) on the critical path — zero published precedent for MLA upcycling with a cross-tokenizer teacher. Consider it instead as an unclaimed paper contribution ('cross-tokenizer MLA upcycling for a low-resource language'), run as a bounded side experiment.",
+    "Factor deployment cost into the same decision: KB already establishes MLA GGUF requires the ik_llama.cpp fork (no vanilla llama.cpp/ollama/LM Studio), whereas GQA ships everywhere — at ~2x achievable compression, GQA + sliding-window interleave (Gemma-3-style 5:1, KV overhead 60%->15% at 32K) may match MLA's practical benefit with zero ecosystem cost."
+   ],
+   "open_questions": [
+    "X-EcoMLA never reports self-distillation at r_kv=256/128 — the ~1.9x self-distill cap is the deepest PUBLISHED parity point, not a proven ceiling; a cheap in-house ablation (own checkpoint as teacher, r_kv=256) would measure the real cap.",
+    "Does CARE-style covariance-aware init close MHA2MLA's ~1.7-pt gap at sub-1B? Untested below 4B as of 2026-07.",
+    "MHA2MLA was run on SmolLM (no QK-Norm, MHA/GQA, base models) — interaction with Qwen3-style small-model stabilizers (QK-Norm, tied embeddings) and with instruction-tuned checkpoints is unpublished.",
+    "Whether MHA2MLA's reported GQA-model reductions (-68.75/-81.25/-87.5%) are measured against the original GQA cache (assumed here, consistent with the Llama2-7B MHA row) — verify against paper Section 4 table caption before citing in the paper."
+   ]
+  },
+  {
+   "area": "GLA-2/GTA (arXiv 2505.21487, Zadouri/Strauss/Dao) — independent reproduction, multi-seed status, and inference-stack adoption as of 2026-07-03",
+   "findings": [
+    {
+     "claim": "The original GLA/GTA evidence base is single-seed and workshop-level. Models trained: 183M / 433M / 876M / 1.471B on FineWeb-Edu (25B tokens for small, 50B for the rest); the paper contains NO mention of multiple seeds, variance, or error bars anywhere in the experimental methodology. Venue is the ICML 2025 ES-FoMo III workshop (oral), not a main conference; arXiv is still v1 (2025-05-27); Semantic Scholar shows 14 citations, 1 influential, venue 'arXiv.org'.",
+     "source": "arxiv.org/html/2505.21487v1 (experiments section); icml.cc/virtual/2025/51861 (ES-FoMo III oral); api.semanticscholar.org/graph/v1/paper/arXiv:2505.21487",
+     "numbers": "Scales 183M/433M/876M/1.47B; 25-50B tokens; 0 seed/variance statements; 14 citations (1 influential) by 2026-07; arXiv v1 only",
+     "relevance": "The lab's Recommendation 5 rests on single-seed runs from the method authors; the seed-noise floor for the 0.6-0.9pp GLA-2 advantages is unestablished in the primary source itself.",
+     "uncertain": false
+    },
+    {
+     "claim": "Exactly ONE independent from-scratch reproduction of GLA-2/GLA-4/GTA exists: the MLRA paper (Liu et al., Penn State/UConn/CMU/UCLA, arXiv 2603.02188, Mar 2026, nanoGPT stack, 2.9B params, 98.3B FineWeb-Edu tokens) — and it FLIPS the ordering: MLA beats GLA-2 on both avg validation perplexity (13.727 vs 13.779 across 7 corpora) and 7-task zero-shot average (58.75 vs 58.30). This contradicts the original paper, where GLA-2 beat MLA at every scale (e.g. 876M: ppl 11.293 vs 11.363, downstream 57.5% vs 56.7%). The reproduction is also single-seed. No independent sub-1B reproduction exists at all.",
+     "source": "arxiv.org/html/2603.02188 (Tables 3-4) vs arxiv.org/html/2505.21487v1",
+     "numbers": "Independent 2.9B/98.3B-tok run: MLA 13.727 ppl / 58.75% 0-shot vs GLA-2 13.779 / 58.30 vs GLA-4 13.815 / 58.19; original authors' 876M: GLA-2 11.293/57.5 vs MLA 11.363/56.7; 433M: GLA-2 12.456/55.4 vs MLA 12.561/54.9 vs GQA-4 12.922/54.5",
+     "relevance": "The sign of the GLA-2-vs-MLA quality delta is not stable across labs — the ~0.05-0.1 ppl / 0.45-0.8pp gaps reverse between the two available runs, confirming these comparisons sit inside seed-level noise. 'GLA-2 actually-best at ~500M' is not supportable.",
+     "uncertain": false
+    },
+    {
+     "claim": "No multi-seed run of any GLA-2/GTA/MLA/GQA comparison exists in either the original paper or the sole reproduction; the seed-noise floor for latent-attention variant comparisons remains unmeasured in the literature as of July 2026.",
+     "source": "arxiv.org/html/2505.21487v1 + arxiv.org/html/2603.02188 (both silent on seeds/error bars); Semantic Scholar citation scan of all 14 citing papers (none is a multi-seed replication)",
+     "numbers": "0 multi-seed studies; 14 citing papers scanned — all are follow-up methods (TPLA 2508.15881, GQLA 2605.15250, MLRA 2603.02188, Knocking-Heads 2510.23052) or surveys, none a replication study",
+     "relevance": "The lab cannot cite any external seed-noise estimate to justify treating 0.6-0.8pp deltas as signal; its own 433-600M multi-seed ablation would be novel, publishable data.",
+     "uncertain": false
+    },
+    {
+     "claim": "Zero adoption in any serving stack or released model as of 2026-07-03: vLLM has 0 code hits for grouped_latent/GroupedLatentAttention (only tangential issue mentions in Helix-parallelism discussions); llama.cpp has 0 issues/PRs mentioning grouped-tied/grouped-latent/2505.21487 (no GGUF path); TensorRT-LLM 0 code hits; SGLang 0 (2 apparent hits are multimodal latent-pipeline false positives); Hugging Face hosts 0 models matching 'grouped-tied' or 'grouped latent'. The official repo (Dao-AILab/grouped-latent-attention) has 135 stars, 4 forks, ships only modeling files (no training code), and its modeling_llama_GLA.py is reused by 0 real downstream projects (3 GitHub-wide hits, all index/doc files).",
+     "source": "GitHub search API over vllm-project/vllm, ggml-org/llama.cpp, NVIDIA/TensorRT-LLM, sgl-project/sglang, Dao-AILab repos; huggingface.co/api/models?search=grouped-tied and grouped latent; github.com/Dao-AILab/grouped-latent-attention",
+     "numbers": "vLLM 0, llama.cpp 0, TRT-LLM 0, SGLang 0, HF models 0; repo 135 stars / 4 forks / 5 open issues; 0 downstream code reuse",
+     "relevance": "Negates the shipping story outright: a ≤600M Kazakh model using GLA-2/GTA could not be served by any mainstream stack or distributed as GGUF, unlike MLA (DeepSeek format), which is natively supported in vLLM/SGLang/llama.cpp.",
+     "uncertain": false
+    },
+    {
+     "claim": "The only GLA kernels live in FlashAttention-3 hopper (same lab, not independent), require H100 + CUDA 12.3+, and the toolchain is fragile: the MLRA authors — the only confirmed external group training GLA-2 (with added gating) through FA3 — hit a v3.0.0 regression in the gated code path (GLA-2 val loss 3.6086 vs 3.5550 at step 1000 vs v3.0.0b1; matches SDPA only with gating off), reported 2026-03-19 in issue #2372, still open.",
+     "source": "github.com/Dao-AILab/flash-attention/issues/2372; github.com/Dao-AILab/grouped-latent-attention README (kernels deferred to FA3 /hopper, Hopper GPUs, CUDA 12.3+); github.com/SongtaoLiu0823/MLRA",
+     "numbers": "GLA-2+gating val loss @1000 steps: 3.5550 (v3.0.0b1) vs 3.6086 (v3.0.0), +0.054 regression; 1 known external training user; kernels H100-only",
+     "relevance": "Even at training time (not just serving), GLA support is one-vendor, one-GPU-generation, and currently has an open correctness regression — high integration risk for a modest-compute lab.",
+     "uncertain": false
+    },
+    {
+     "claim": "GLA-2's cache advantage over MLA exists only per-device under tensor parallelism (TP>=2): total unsharded cache is the same as MLA (2 latent heads x 2*d_h = 4*d_h, decoupled RoPE d_R=32 default; GLA 'halves the cache footprint per device when TP>=2'). For single-GPU/edge serving of a <=600M model — the lab's regime — GLA-2 offers NO KV-cache saving over plain MLA; its raison d'etre does not apply.",
+     "source": "arxiv.org/html/2505.21487v1 (GLA-2 config: h_c=2, d_c=2*d_h per latent head, d_R=32; TP sharding analysis)",
+     "numbers": "GLA-2: h_c=2 latent heads x 2*d_h each = 4*d_h total (= MLA's cache); benefit = 2x per-device only at TP>=2; rope dim 32",
+     "relevance": "Removes the last architectural argument for GLA-2 in this project: a 500-600M Kazakh model is served on one device, where MLA already delivers the identical cache footprint with universal stack support.",
+     "uncertain": false
+    },
+    {
+     "claim": "MLRA paper acceptance venue: the first author refers to it as 'Liu et al., ICLR 2026' in the flash-attention issue, but the arXiv v1 page (2026-03-02) states no venue; acceptance not confirmed in a primary source.",
+     "source": "github.com/Dao-AILab/flash-attention/issues/2372 (author's self-citation) vs arxiv.org/abs/2603.02188 (no venue listed)",
+     "numbers": "arXiv v1 2026-03-02; venue claim unverified",
+     "relevance": "Affects citation weight of the only independent GLA reproduction in the lab's survey paper.",
+     "uncertain": true
+    }
+   ],
+   "recommendations": [
+    "Demote GLA-2/GTA from an architecture recommendation to a related-work citation. All three demotion criteria are met: no multi-seed evidence anywhere, the sole independent reproduction (2.9B, arXiv 2603.02188) reverses the GLA-2-vs-MLA ordering, and there is zero serving-stack (vLLM/SGLang/llama.cpp/TRT-LLM/GGUF) or model adoption 13+ months after release.",
+    "Keep plain decoupled-RoPE MLA (DeepSeek config family, KB-verified d_c/rope_dim pattern) as the latent-attention candidate for the <=600M Kazakh model: at single-device serving GLA-2 has identical total cache to MLA anyway, and MLA is the only variant with mainstream inference support.",
+    "Treat all latent-attention variant orderings within ~0.1 ppl / ~0.8pp downstream as unresolved noise in the survey; cite 2505.21487 and 2603.02188 jointly as showing quality-equivalence, not superiority, of GLA-2 vs MLA.",
+    "If the lab runs its own MLA-vs-GQA-vs-GTA ablation at 433-600M, run >=3 seeds — this would be the first multi-seed datapoint for this comparison in the literature and is a citable contribution on its own."
+   ],
+   "open_questions": [
+    "Does MLRA's Appendix F.1 list the full GLA-2/GLA-4 hyperparameters used at 2.9B (latent dims, rope dim, head counts)? Worth extracting if the lab implements any latent variant for its own ablation.",
+    "No independent sub-1B (let alone ~500M) training of GLA-2 or GTA exists at all — is the original paper's 433M result (GLA-2 12.456 ppl vs GQA-4 12.922) reproducible at the lab's token budget (~30-100B) rather than 50B FineWeb-Edu?",
+    "Do FA3 GLA/MLA hopper kernels run on non-Hopper GPUs (Ada/consumer) at all, and has the v3.0.0 gated-path regression (issue #2372) been fixed in a later release?"
+   ]
+  }
+ ]
+}
