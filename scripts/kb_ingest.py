@@ -18,15 +18,19 @@ Input format — the workflow sweep output:
      ...}
 Any top-level list of such area-objects (e.g. "gapFills") is ingested too.
 
+The KB is rebuildable: nodes.jsonl is derived state; kb/sweeps/*.json are the
+immutable inputs. After a parser fix, delete nodes.jsonl and re-ingest.
+
 Usage:
-    python scripts/kb_ingest.py kb/sweeps/slm-2026-07.json --sweep slm-2026-07
-    python scripts/kb_ingest.py kb/sweeps/*.json --enrich
+    python3 scripts/kb_ingest.py kb/sweeps/slm-2026-07.json --sweep slm-2026-07
+    python3 scripts/kb_ingest.py kb/sweeps/*.json --enrich
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import time
@@ -42,18 +46,38 @@ except ImportError:  # --enrich is optional; fail only when it is actually used
 ROOT = Path(__file__).resolve().parent.parent
 NODES = ROOT / "kb" / "nodes.jsonl"
 
-ARXIV_RE = re.compile(r"(?:arxiv[:./\s]+(?:abs/)?|^)(\d{4}\.\d{4,5})(?:v\d+)?", re.I)
+# Must match: 'arXiv 2405.04434', 'arXiv:2405.04434v2', 'arxiv.org/abs/2405.04434',
+# 'https://arxiv.org/pdf/2405.04434v2', API ids 'http://arxiv.org/abs/2405.04434v5',
+# and a bare id at string start.
+ARXIV_RE = re.compile(
+    r"(?:arxiv(?:\.org)?[:/\s]+(?:abs/|pdf/)?|^)(\d{4}\.\d{4,5})(?:v\d+)?", re.I
+)
 DOI_RE = re.compile(r"\b(10\.\d{4,9}/[^\s,;\"']+)", re.I)
-HF_RE = re.compile(r"huggingface\.co/([\w.-]+/[\w.-]+)", re.I)
+HF_RE = re.compile(r"huggingface\.co/(?:datasets/)?([\w.-]+/[\w.-]+)", re.I)
 
 
-def canonical_id(arxiv_id: str | None, doi: str | None, title: str) -> str:
-    """Stable node id; MUST match scrape_citations.py / build_map.py."""
+def title_slug(title: str) -> str:
+    """Unicode-aware title normalization (Kazakh/Cyrillic titles must survive)."""
+    return re.sub(r"[^\w]+", " ", title.lower()).replace("_", " ").strip()
+
+
+def canonical_id(
+    arxiv_id: str | None, doi: str | None, title: str, hf_repo: str | None = None
+) -> str | None:
+    """Stable node id, priority arxiv > doi > hf > title.
+
+    arxiv/doi/title forms MUST stay compatible with scrape_citations.py /
+    build_map.py. Returns None when no identifier can be derived — the caller
+    must skip (never mint an empty 'title:' id that absorbs unrelated works).
+    """
     if arxiv_id:
         return f"arxiv:{arxiv_id}"
     if doi:
         return f"doi:{doi.lower()}"
-    return "title:" + re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
+    if hf_repo:
+        return f"hf:{hf_repo.lower()}"
+    slug = title_slug(title)
+    return f"title:{slug}" if slug else None
 
 
 def parse_source(source: str) -> dict:
@@ -63,7 +87,12 @@ def parse_source(source: str) -> dict:
     hf = HF_RE.search(source)
     # Title guess: strip ids/urls, keep the longest remaining text run.
     text = re.sub(r"https?://\S+", " ", source)
-    text = re.sub(r"arxiv[:./\s]*(abs/)?\d{4}\.\d{4,5}(v\d+)?", " ", text, flags=re.I)
+    text = re.sub(
+        r"arxiv(?:\.org)?[:/\s]*(?:abs/|pdf/)?\d{4}\.\d{4,5}(v\d+)?",
+        " ",
+        text,
+        flags=re.I,
+    )
     title = max(
         (t.strip(" -—·|,;") for t in text.split("—")), key=len, default=""
     ).strip()
@@ -73,6 +102,17 @@ def parse_source(source: str) -> dict:
         "hf_repo": hf.group(1) if hf else None,
         "title": title or source[:120],
     }
+
+
+def area_slug(area: str) -> str:
+    """Short stable topic tag: part before ':' , slugified, capped at 40 chars.
+
+    Gap-fill agents write whole research questions into 'area'; tags must stay
+    queryable via kb_query --topic.
+    """
+    head = area.split(":", 1)[0].strip().lower()
+    slug = re.sub(r"[^\w]+", "-", head).strip("-")[:40].rstrip("-")
+    return slug or "unknown"
 
 
 def load_nodes() -> dict[str, dict]:
@@ -87,10 +127,13 @@ def load_nodes() -> dict[str, dict]:
 
 
 def save_nodes(nodes: dict[str, dict]) -> None:
+    """Atomic write (tmp + rename) — a crash mid-write must not truncate the KB."""
     NODES.parent.mkdir(parents=True, exist_ok=True)
-    with NODES.open("w", encoding="utf-8") as fh:
+    tmp = NODES.with_suffix(".jsonl.tmp")
+    with tmp.open("w", encoding="utf-8") as fh:
         for n in sorted(nodes.values(), key=lambda n: n["id"]):
             fh.write(json.dumps(n, ensure_ascii=False) + "\n")
+    os.replace(tmp, NODES)
 
 
 def iter_area_objects(payload: object):
@@ -106,14 +149,24 @@ def iter_area_objects(payload: object):
             yield from iter_area_objects(v)
 
 
-def ingest(path: Path, sweep: str, nodes: dict[str, dict]) -> tuple[int, int]:
+def ingest(path: Path, sweep: str, nodes: dict[str, dict]) -> tuple[int, int, int]:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    new_nodes = new_claims = 0
+    new_nodes = new_claims = skipped = 0
     for area_obj in iter_area_objects(payload):
-        area = area_obj.get("area", "unknown")
+        area = area_slug(area_obj.get("area", "unknown"))
         for f in area_obj.get("findings", []):
-            src = parse_source(f.get("source", ""))
-            nid = canonical_id(src["arxiv_id"], src["doi"], src["title"])
+            claim_text = (f.get("claim") or "").strip()
+            source_text = (f.get("source") or "").strip()
+            if not claim_text or not source_text:
+                skipped += 1  # unidentifiable findings never mint junk nodes
+                continue
+            src = parse_source(source_text)
+            nid = canonical_id(
+                src["arxiv_id"], src["doi"], src["title"], src["hf_repo"]
+            )
+            if nid is None:
+                skipped += 1
+                continue
             node = nodes.get(nid)
             if node is None:
                 node = {
@@ -128,20 +181,27 @@ def ingest(path: Path, sweep: str, nodes: dict[str, dict]) -> tuple[int, int]:
                 }
                 nodes[nid] = node
                 new_nodes += 1
+            if src["hf_repo"] and not node.get("hf_repo"):
+                node["hf_repo"] = src["hf_repo"]
             if area not in node["topics"]:
                 node["topics"].append(area)
             claim = {
-                "claim": f.get("claim", ""),
+                "claim": claim_text,
                 "numbers": f.get("numbers"),
                 "relevance": f.get("relevance"),
                 "uncertain": bool(f.get("uncertain")),
+                "source": source_text,  # verbatim attribution survives ingest
                 "sweep": sweep,
                 "area": area,
             }
-            if not any(c["claim"] == claim["claim"] for c in node["claims"]):
+            dup = any(
+                c["claim"] == claim["claim"] and c.get("numbers") == claim["numbers"]
+                for c in node["claims"]
+            )
+            if not dup:
                 node["claims"].append(claim)
                 new_claims += 1
-    return new_nodes, new_claims
+    return new_nodes, new_claims, skipped
 
 
 def enrich(nodes: dict[str, dict], sleep: float = 3.1) -> int:
@@ -159,14 +219,21 @@ def enrich(nodes: dict[str, dict], sleep: float = 3.1) -> int:
         batch = todo[i : i + 20]
         ids = ",".join(n["arxiv_id"] for n in batch)
         url = f"http://export.arxiv.org/api/query?id_list={ids}&max_results=20"
-        try:
-            with urllib.request.urlopen(url, timeout=30) as resp:
-                tree = ET.fromstring(resp.read())
-        except (OSError, ET.ParseError) as exc:
-            print(
-                f"[warn] arXiv batch failed ({exc}); keeping sparse nodes",
-                file=sys.stderr,
-            )
+        tree = None
+        for attempt in range(2):  # one retry: arXiv 429s are transient
+            try:
+                with urllib.request.urlopen(url, timeout=30) as resp:
+                    tree = ET.fromstring(resp.read())
+                break
+            except (OSError, ET.ParseError) as exc:
+                if attempt == 0:
+                    time.sleep(10)
+                    continue
+                print(
+                    f"[warn] arXiv batch failed ({exc}); keeping sparse nodes",
+                    file=sys.stderr,
+                )
+        if tree is None:
             continue
         by_id = {}
         for entry in tree.findall("a:entry", ns):
@@ -203,8 +270,13 @@ def main() -> int:
 
     nodes = load_nodes()
     for path in args.inputs:
-        added_n, added_c = ingest(path, args.sweep or path.stem, nodes)
-        print(f"[ingest] {path.name}: +{added_n} nodes, +{added_c} claims")
+        try:
+            added_n, added_c, skipped = ingest(path, args.sweep or path.stem, nodes)
+        except (json.JSONDecodeError, OSError) as exc:
+            print(f"[warn] {path.name}: skipped ({exc})", file=sys.stderr)
+            continue
+        note = f", {skipped} unidentifiable skipped" if skipped else ""
+        print(f"[ingest] {path.name}: +{added_n} nodes, +{added_c} claims{note}")
     if args.enrich:
         print(f"[enrich] {enrich(nodes)} nodes enriched from arXiv")
     save_nodes(nodes)

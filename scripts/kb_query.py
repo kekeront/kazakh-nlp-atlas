@@ -91,17 +91,31 @@ def main() -> int:
 
     nodes = load_nodes()
     if args.topic:
-        wanted = set(args.topic)
-        nodes = [n for n in nodes if wanted & set(n.get("topics", []))]
+        # Substring match: tags are slugs, but agents pass free-form area names.
+        wanted = [t.lower() for t in args.topic]
+        nodes = [
+            n
+            for n in nodes
+            if any(w in t or t in w for w in wanted for t in n.get("topics", []))
+        ]
     if args.grep:
-        rx = re.compile(args.grep, re.I)
+        try:
+            rx = re.compile(args.grep, re.I)
+        except re.error:
+            # Agents pass literal text with metacharacters ('C++') — degrade
+            # to a literal search instead of crashing.
+            rx = re.compile(re.escape(args.grep), re.I)
         nodes = [
             n
             for n in nodes
             if rx.search(n.get("title") or "")
-            or any(rx.search(c["claim"]) for c in n["claims"])
+            or any(
+                rx.search(c["claim"]) or rx.search(c.get("numbers") or "")
+                for c in n["claims"]
+            )
         ]
     if not nodes:
+        # Exit 1 on zero matches (grep convention) — not an error, just "empty".
         print("[empty] no KB nodes match the filters", file=sys.stderr)
         return 1
     print(render(nodes, args.max_chars))
