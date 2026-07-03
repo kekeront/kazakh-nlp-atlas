@@ -1,0 +1,30 @@
+# Node / Next.js
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+.venv/
+*.pyc
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+
+# Claude / session state
+.claude/
+prompt-history.md
+SESSION.md
+
+# Env & secrets
+.env
+.env.*
+.dev.vars
+
+# OS
+.DS_Store

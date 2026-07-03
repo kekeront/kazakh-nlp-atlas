@@ -1,0 +1,279 @@
+\documentclass{article}
+
+% ------------------------------------------------------------
+% arxiv.sty is in this directory (downloaded from kourgeorge/arxiv-style)
+% Build:  pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+% ------------------------------------------------------------
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A,T1]{fontenc}    % T2A enables Cyrillic glyphs
+\usepackage[russian,english]{babel}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\title{
+  Bөlinbeitin\footnote{Kazakh \emph{бөлінбейтін} — ``indivisible''; refers to the morpheme,
+  the smallest meaning-bearing unit of grammar.}: \\
+  A Morphological Alignment Audit of Subword Tokenization \\
+  for Agglutinative Kazakh and Fusional Russian
+}
+
+\author{
+  Altair Zhambyl \\
+  Independent Researcher \\
+  Almaty, Kazakhstan \\
+  \texttt{hey@evgenyastapov.com}
+}
+
+% ------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% ABSTRACT WRITING NOTES (delete before submission):
+% 150-250 words. Write LAST, after Results.
+% Structure: (1) one-sentence context (2) gap (3) what you did (4) main finding (5) implication.
+% Numbers go in the abstract when they are surprising.
+Subword tokenization with byte-pair encoding (BPE) has become the de-facto preprocessing
+step for large language models, yet its behaviour on morphologically rich languages
+remains under-studied. We present a controlled morphological alignment audit of six
+production tokenizers (GPT-4 \texttt{cl100k\_base}, LLaMA-3, mT5, BLOOM, Cohere Aya,
+and Qwen) on a native-annotated test set of Kazakh, an agglutinative Turkic language;
+Russian, a fusional Indo-European language; and English, an analytic baseline.
+We introduce two new metrics --- \emph{Morphological Boundary Alignment} (MBA) and
+\emph{Suffix Integrity Score} (SIS) --- that quantify how often token boundaries
+respect morpheme boundaries and how often inflectional suffixes survive as single
+tokens. \textsc{TODO Day 5: main quantitative finding goes here, e.g.\
+``We find that Kazakh requires \(X\times\) more tokens than English to encode equivalent
+content, and that fewer than \(Y\%\) of token boundaries align with morpheme boundaries
+even for the multilingual mT5 tokenizer.''} We release the annotated test sets under
+CC-BY-4.0 to support future work on morphology-aware tokenization for Turkic and
+other agglutinative language families.
+\end{abstract}
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+% WRITING NOTES (Day 6):
+% 1-1.5 pages. Funnel structure:
+% (a) Hook: general problem
+% (b) Specific gap in literature
+% (c) Contributions (bullet list)
+% (d) Roadmap
+
+% Hook
+\textsc{TODO Day 6: opening hook.}
+Large language models depend on subword tokenizers to bridge raw text and the
+fixed-vocabulary input layer of the network~\citep{sennrich2016bpe}.
+Tokenization choices shape both the cost of training and the inductive biases
+the model brings to morphology, syntax, and cross-lingual generalization.
+% Gap
+Recent work has documented dramatic per-token cost disparities across
+languages~\citep{petrov2023tokenizer, ahia2023languages},
+but the \emph{linguistic structure} underlying those disparities --- particularly
+the relationship between token boundaries and morpheme boundaries in
+morphologically rich, low-resource languages such as Kazakh --- remains largely
+unmeasured.
+
+% Contributions
+We make the following contributions:
+\begin{itemize}
+  \item A native-annotated morphological test set of \(500\) Kazakh words,
+        \(500\) Russian words, and \(200\) English words, released under
+        CC-BY-4.0.\footnote{\url{TODO github url}}
+  \item Two novel metrics for measuring token--morpheme structural alignment:
+        \emph{Morphological Boundary Alignment} (MBA, \S\ref{sec:metrics}) and
+        \emph{Suffix Integrity Score} (SIS, \S\ref{sec:metrics}).
+  \item A side-by-side audit of six production tokenizers across the three
+        languages, with all per-token outputs released for reproducibility.
+  \item A list of minimum design requirements for a morphology-aware tokenizer
+        targeting agglutinative Turkic languages (\S\ref{sec:discussion}).
+\end{itemize}
+
+The remainder of the paper is organized as follows.
+Section~\ref{sec:related} reviews prior work.
+Section~\ref{sec:method} describes our test sets, the tokenizers under audit, and our metrics.
+Section~\ref{sec:results} presents the audit results.
+Section~\ref{sec:discussion} discusses design implications.
+Section~\ref{sec:limitations} acknowledges limitations.
+Section~\ref{sec:conclusion} concludes.
+
+% ============================================================
+\section{Related Work}
+\label{sec:related}
+
+% WRITING NOTES (Day 4):
+% Three short paragraphs. ~0.7 pages total.
+
+\paragraph{Subword tokenization.}
+\textsc{TODO Day 4.} BPE~\citep{sennrich2016bpe}, WordPiece, Unigram LM.
+End with a sentence connecting to why this matters cross-lingually.
+
+\paragraph{Cross-lingual tokenization fairness.}
+\textsc{TODO Day 4.} Petrov et al.~\citep{petrov2023tokenizer} showed that token
+counts vary by a factor of up to 15 across the 22 languages they audited,
+penalizing speakers of low-resource languages through both higher inference cost
+and reduced effective context window. Ahia et al.~\citep{ahia2023languages}
+extended this analysis to API pricing. Our work goes one level deeper: instead of
+asking \emph{how many} tokens a language consumes, we ask \emph{whether those tokens
+correspond to linguistically meaningful units}.
+
+\paragraph{Morphological tokenization for agglutinative languages.}
+\textsc{TODO Day 4.} Toraman et al.~\citep{toraman2023turkish} audited tokenizers
+on Turkish, an agglutinative language closely related to Kazakh, and found
+substantial morphology--tokenization mismatch. Bostrom and
+Durrett~\citep{bostrom2020bpe} argued BPE is suboptimal for language model
+pretraining. We contribute the first such audit specifically for Kazakh, the
+fourth-most-spoken Turkic language with $\sim$13M speakers but limited NLP coverage.
+
+% ============================================================
+\section{Method}
+\label{sec:method}
+
+% WRITING NOTES (Day 2-3):
+% Be precise enough that a stranger can reproduce your numbers.
+
+\subsection{Test Sets}
+\label{sec:testsets}
+We construct three parallel test sets of single tokens (words) with morphological
+annotation:
+\begin{itemize}
+  \item \textbf{Kazakh} (500 words): collected and annotated by the author,
+        a native speaker. Each entry records the orthographic word, a hyphen-separated
+        morpheme analysis, a Leipzig-style gloss~\citep{lehmann2004leipzig}, part-of-speech,
+        and a test-case category.
+  \item \textbf{Russian} (500 words): annotated similarly; cross-checked against the
+        \texttt{pymorphy3} morphological analyzer.
+  \item \textbf{English} (200 words): a smaller baseline reflecting English's
+        comparatively poor morphological inventory.
+\end{itemize}
+Test cases are distributed across categories including bare nouns, case-marked nouns,
+possessive constructions, plural marking, verbal inflection, negation, and derivational
+morphology. The Kazakh set additionally targets the seven case markers (\emph{septik})
+and the six possessive paradigms (\emph{tauelldik}). \textsc{TODO Day 3: insert
+distribution table.}
+
+\subsection{Tokenizers Under Audit}
+\label{sec:tokenizers}
+We audit six production tokenizers, chosen for their use in widely deployed LLMs and
+their declared training-data multilinguality. \textsc{TODO Day 2: insert table from
+TOPIC.md with vocab sizes, model families, and language coverage notes.}
+
+\subsection{Metrics}
+\label{sec:metrics}
+
+\paragraph{Tokens per word (TPW) and per character (TPC).}
+Standard efficiency measures: $\textrm{TPW}(t, w) = |t(w)|$ where $t(\cdot)$ is the
+tokenizer applied to word $w$, and $\textrm{TPC} = \textrm{TPW}/|w|$ averaged over
+the test set.
+
+\paragraph{Morphological Boundary Alignment (MBA).}
+Given a word $w$ with morpheme boundaries $B_m = \{b_1, \dots, b_k\}$ (character offsets
+between morphemes) and tokenizer output with token boundaries $B_t$, we define
+\[
+  \textrm{MBA}(w, t) \;=\; \frac{|B_t \cap B_m|}{|B_t|}.
+\]
+MBA $= 1$ means every token boundary the tokenizer introduced respects a real morpheme
+boundary; MBA $= 0$ means every boundary cuts a morpheme in half.
+
+\paragraph{Suffix Integrity Score (SIS).}
+For each inflectional suffix $s$ in the annotated test set, $\textrm{SIS}(s, t) = 1$
+if $s$ appears as a single contiguous substring of one token in $t(w)$, else $0$.
+We report mean SIS per suffix category (case markers, possessive markers, person markers).
+
+\subsection{Reproducibility Protocol}
+All tokenizer outputs, raw metric tables, and the annotated test sets are released
+under CC-BY-4.0. A single command (\texttt{python run\_audit.py}) regenerates every
+table and figure in the paper.
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+% WRITING NOTES (Day 4-5):
+% One subsection per RQ. Lead with a figure. Then prose.
+
+\subsection{RQ1: How many tokens per word?}
+\label{sec:rq1}
+\textsc{TODO Day 3-4: lead with bar chart Figure.}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/tpw_by_lang_tokenizer.pdf}
+\caption{Mean tokens per word across three languages and six tokenizers.
+The ``Kazakh tax'' is visible as the consistent leftmost-bar elevation across all tokenizers.}
+\label{fig:tpw}
+\end{figure}
+
+\textsc{TODO Day 5: 2-3 paragraphs interpreting Figure~\ref{fig:tpw}.}
+
+\subsection{RQ2: How well do token boundaries align with morpheme boundaries?}
+\label{sec:rq2}
+\textsc{TODO Day 4-5.}
+
+\subsection{RQ3: Do inflectional suffixes survive tokenization?}
+\label{sec:rq3}
+\textsc{TODO Day 4-5.}
+
+% ============================================================
+\section{Discussion: Design Implications}
+\label{sec:discussion}
+
+\textsc{TODO Day 5.}
+Based on our findings, a morphology-aware tokenizer for agglutinative Turkic
+languages should:
+\begin{enumerate}
+  \item \textsc{TODO 4-6 concrete design requirements.}
+\end{enumerate}
+
+% ============================================================
+\section{Limitations}
+\label{sec:limitations}
+
+% Be honest. Reviewers respect this.
+\begin{itemize}
+  \item Test sets were annotated by a single native speaker; future work should
+        include inter-annotator agreement studies.
+  \item The Kazakh test set is small (500 words) relative to a real corpus,
+        and was not stratified by frequency.
+  \item We measure structural alignment, not downstream task impact;
+        Paper 2 in this research programme will close that gap.
+  \item We cover only the standard literary Kazakh orthography (Cyrillic script,
+        2024 Latin reform not included) and do not address dialectal variation.
+  \item Six tokenizers is a snapshot; the production-tokenizer landscape moves quickly.
+\end{itemize}
+
+% ============================================================
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+\textsc{TODO Day 6.}
+This paper is the first step of a longer research programme on
+Kazakh-first language modelling. Immediate next steps include:
+(i) training a morphology-informed BPE tokenizer for Kazakh and re-running
+this audit on it; (ii) measuring downstream impact on Kazakh NLP tasks; and
+(iii) extending the test set to additional Turkic languages
+(Kyrgyz, Uzbek, Tatar) for cross-family comparison.
+
+% ============================================================
+\section*{Acknowledgements}
+The author thanks the open-source community --- particularly the maintainers of
+HuggingFace \texttt{tokenizers}, \texttt{tiktoken}, \texttt{sentencepiece},
+\texttt{pymorphy3}, and the Apertium project --- whose tools made this audit
+possible on a single laptop. \textsc{TODO Day 7: add specific human acknowledgements.}
+
+% ============================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

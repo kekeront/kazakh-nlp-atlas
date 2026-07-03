@@ -1,0 +1,14 @@
+# English Test Set — seed file
+# English как baseline: морфологически беднее, поэтому контраст с казахским будет резкий.
+# Цель: 200 слов хватит. Не главный язык исследования.
+# Tab-separated.
+#
+word	morpheme_split	gloss	pos	category	notes
+house	house	house	NOUN	basic_noun	bare form
+houses	house-s	house-PL	NOUN	plural
+house's	house-'s	house-POSS	NOUN	possessive	clitic
+houses'	house-s-'	house-PL-POSS	NOUN	possessive_plural	written but unspoken
+went	went	go.PST	VERB	verb_tense	suppletion (irregular)
+running	run-ning	run-PROG	VERB	verb_tense	present participle
+unhappiness	un-happi-ness	NEG-happy-NMLZ	NOUN	derivational	3 morphemes, rare for English
+# ---- ТВОИ ПРИМЕРЫ ВНИЗ ----

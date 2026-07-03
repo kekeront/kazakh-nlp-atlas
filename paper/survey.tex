@@ -1,0 +1,358 @@
+\documentclass{article}
+
+% ------------------------------------------------------------
+% First publication (survey). Separate from main.tex (the audit, "Bөlinbeitin").
+% arxiv.sty is in this directory (kourgeorge/arxiv-style).
+% Build:  pdflatex survey.tex && pdflatex survey.tex
+% (bibliography is inline via thebibliography, so no bibtex pass needed for the draft)
+% ------------------------------------------------------------
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+% NOTE: the typeset content is English-only. If Kazakh examples in Cyrillic are added later,
+% restore  \usepackage[T2A,T1]{fontenc}  and  \usepackage[russian,english]{babel}
+% (requires the texlive-lang-cyrillic package locally; arXiv's TeX Live already ships it).
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\newcommand{\todo}[1]{\textcolor{red}{[\textbf{TODO}: #1]}}
+
+\title{
+  The State of Kazakh NLP: \\
+  A Data-Driven Survey from Global Breakthroughs \\
+  to an Open Research Agenda
+}
+
+\author{
+  Altair Zhambyl \\
+  Independent Researcher \\
+  Almaty, Kazakhstan \\
+  \texttt{hey@evgenyastapov.com}
+}
+
+% ------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Kazakh, an agglutinative Turkic language spoken by roughly 13 million people, has
+moved in a few years from near-absence in the NLP literature to a small but rapidly
+growing research field. Yet existing surveys treat Kazakh only as one of several Central
+Asian Turkic languages, leaving newcomers without a field-level map of what has been done
+in Kazakh specifically and where the open problems lie. We present the first survey
+dedicated to Kazakh, and the first built by a \emph{reproducible}, citation-grounded
+pipeline rather than hand-curation: we automatically assemble a corpus of \textbf{222}
+Kazakh-focused papers
+(2013--2026) from the arXiv and Semantic Scholar APIs and analyse the resulting
+citation graph. Three findings organise the field. First, Kazakh NLP exhibits a
+\textbf{4--7 year adoption lag} behind global architectural breakthroughs (the
+Transformer appears in 2017 but the first large Kazakh LLMs only in 2024--2025).
+Second, the field rests on a handful of \emph{dataset hubs}---the Kazakh Speech Corpus
+is cited 14 times within the corpus---and on four global pillars (the Transformer, BPE,
+BERT, and XLM-R). Third, the field is both young and lopsided: \textbf{47\%} of all
+papers (105 of 222) appeared in 2024--2026, while across all years effort concentrates in
+speech (110 papers) and machine translation (105), leaving tokenization (21) and
+morphology (48) a thin, under-charted frontier. We close with an actionable
+research agenda of cited pain points and unverified hypotheses aimed at first-time
+contributors. All code, the corpus, and an interactive atlas are released to support
+reproduction and extension.
+\end{abstract}
+
+\section{Introduction}
+Large language models have reorganised natural language processing around a small set
+of architectural and training breakthroughs, but the benefits of those breakthroughs
+reach the world's languages unevenly. Kazakh---an agglutinative Turkic language with
+rich suffixal morphology and vowel harmony---is a representative case of a
+\emph{moderately resourced} language: too central to a nation-state to be ignored,
+too far from the high-resource core to be well served by multilingual models trained
+predominantly on English.
+
+In the span of roughly five years, Kazakh NLP has grown from scattered speech-recognition
+experiments into a field with dedicated corpora, named-entity and question-answering
+datasets, sentiment resources, and---most recently---several from-scratch and adapted
+large language models. This growth has been fast and largely uncoordinated, and no
+survey has yet stepped back to ask: \emph{what, exactly, has been built, in what order,
+on whose shoulders, and what remains open?}
+
+This paper answers that question with three contributions:
+\begin{enumerate}
+  \item \textbf{A reproducible, data-driven survey method.} Rather than hand-pick papers,
+  we assemble the corpus automatically from public APIs and release the scraping and
+  analysis code, so the survey can be re-run and extended as the field grows
+  (Section~\ref{sec:method}).
+  \item \textbf{A quantitative genealogy of the field.} Using the citation graph, we order
+  the work as a citation-derived sequence of breakthroughs, surface the dataset and
+  architectural hubs the field depends on, and measure the adoption lag behind global research
+  (Sections~\ref{sec:foundations}--\ref{sec:models}).
+  \item \textbf{An open research agenda.} We compile cited pain points and unverified
+  hypotheses scoped to be tractable for first-time contributors, turning a passive survey
+  into a roadmap (Section~\ref{sec:agenda}).
+\end{enumerate}
+
+To our knowledge this is the first survey dedicated specifically to Kazakh, and the first
+built by a reproducible, citation-grounded pipeline. The closest prior work surveys Kazakh
+as one of four Central Asian Turkic languages~\cite{loreslm} or reviews Turkic NLP at
+large~\cite{turkicreview}; others treat Kazakh as one of many languages in a broader
+cross-lingual study---e.g.\ the 70-language morphological-alignment study of Arnett et
+al.~\cite{arnett70}. None provides the field-level, single-language, citation-grounded
+genealogy we present.
+
+\section{Methodology}
+\label{sec:method}
+\paragraph{Corpus construction.}
+We query the arXiv API and the Semantic Scholar Graph API (both accessed in June 2026) for
+Kazakh-related NLP/ML work. A paper is retained only if (i) its title or abstract mentions
+\emph{Kazakh} or \emph{Qazaq}, and (ii) it is relevant to NLP/ML (a keyword filter over
+tasks such as language modelling, tokenization, morphology, translation, and speech).
+Records are de-duplicated across sources by arXiv id, DOI, or normalised title. The
+resulting corpus contains \textbf{222} papers spanning 2013--2026; because of the API
+coverage limits noted below, all counts in this survey are best read as lower bounds on the
+true literature rather than exact censuses.
+
+\paragraph{Citation graph.}
+For each resolvable paper we retrieve its reference list via the Semantic Scholar
+\texttt{batch} endpoint and keep edges whose target is also in the corpus
+(\emph{intra-corpus} edges) or is one of a small set of global breakthrough papers.
+This yields \textbf{312} edges (182 intra-corpus and 130 to global hubs); 205 of 222
+papers were resolved and 104 form the connected core. We use in-degree (citations
+received within the corpus) as a measure of local influence and a topological view of
+the graph to order the field chronologically and logically
+(Section~\ref{sec:genealogy}).
+
+\paragraph{Task tagging.}
+Each paper is assigned one or more of ten task categories (tokenization, morphology,
+language modelling, machine translation, speech, NER/IE, dataset/corpus, evaluation,
+classification, embeddings) by a keyword heuristic over title and abstract.
+
+\paragraph{Reproducibility and scope.}
+The scrapers, the corpus, the citation graph, and an interactive atlas are released as a
+public artifact.\footnote{Code, corpus, citation graph, and interactive atlas:
+\url{https://github.com/altairzhambyl/kazakh-nlp-survey}.}
+We note two limitations of the method up front (expanded in Section~\ref{sec:limits}):
+the Semantic Scholar API was intermittently rate-limited, so coverage of non-arXiv
+venues in some categories is incomplete; and category tags are heuristic rather than
+manually adjudicated.
+
+\section{Global Foundations}
+\label{sec:foundations}
+Kazakh NLP is built almost entirely on architectures developed elsewhere. The citation
+graph makes the dependence explicit: the most-cited external works, ranked by how many
+Kazakh papers reference them, are the Transformer~\cite{transformer} (23 citing papers),
+byte-pair encoding for NMT~\cite{bpe} (17), BERT~\cite{bert} (16), XLM-R~\cite{xlmr} (15),
+attention-based translation~\cite{bahdanau} (12), and GPT-3~\cite{gpt3} (10). Tokenization
+research enters the picture through Sennrich et al.'s subword units~\cite{bpe} and, later,
+fertility-based analyses of multilingual tokenizers~\cite{rust}. These four
+``pillars''---a contextual architecture (Transformer/BERT), a multilingual encoder
+(XLM-R), a subword algorithm (BPE), and a scaling recipe (GPT-3)---account for the bulk of
+external influence on the field.
+
+\section{A Genealogy of Kazakh NLP}
+\label{sec:genealogy}
+Ordering the citation graph topologically yields a reproducible sequence of breakthroughs
+that we group into five eras. This order is one of several valid topological sortings; we
+break ties by publication year, so the sequence below should be read as a structural
+narrative rather than a unique ranking.
+
+\paragraph{Era I --- Speech first (2015--2019).}
+Kazakh NLP grew out of speech and translation rather than text understanding. The earliest
+hubs are bilingual Kazakh--Russian ASR systems and English--Kazakh NMT efforts that build
+directly on attention and BPE~\cite{bahdanau,bpe,transformer}.
+
+\paragraph{Era II --- The foundational corpus (2020).}
+The single most influential resource is the crowdsourced Kazakh Speech Corpus
+(KSC)~\cite{ksc}, cited 14 times within our corpus---more than any other Kazakh work. It
+converts speech recognition from a bespoke effort into a shared benchmark and seeds most
+of what follows.
+
+\paragraph{Era III --- The dataset-building years (2021--2022).}
+A wave of open resources builds on KSC: KazNERD for named-entity
+recognition~\cite{kaznerd} (11 citations), the KazakhTTS~\cite{kazakhtts} and
+KazakhTTS2~\cite{kazakhtts2} text-to-speech corpora (7 and 8), and the industrial-scale
+KSC2~\cite{ksc2} (7). The field is, structurally, \emph{dataset-driven}: progress is
+gated by corpora, and a handful of them carry most downstream work.
+
+\paragraph{Era IV --- LLMs and evaluation (2024).}
+Attention turns to large models and to measuring them. ``Do LLMs Speak
+Kazakh?''~\cite{dollms} provides the first systematic evaluation of seven models (6
+citations); KazQAD~\cite{kazqad}
+and KazSAnDRA~\cite{kazsandra} add open-domain QA and sentiment, and KazMMLU~\cite{kazmmlu}
+and TUMLU~\cite{tumlu} bring knowledge benchmarks. These works depend jointly on the earlier
+datasets and on global encoders~\cite{bert,xlmr}.
+
+\paragraph{Era V --- From-scratch and adapted LLMs (2025--2026).}
+The frontier is Kazakh-specific language models: Sherkala~\cite{sherkala}, the from-scratch
+SozKZ family~\cite{sozkz}, the tokenizer-free KazByte adapter~\cite{kazbyte}, and the
+state-backed Til-Core.\footnote{Til-Core-0.5B model card:
+\url{https://huggingface.co/TilQazyna/Til-Core-0.5B}. At the time of writing it has no
+accompanying paper or published benchmark results.} The adoption lag is now quantifiable: the Transformer (2017) is
+cited throughout, but the first large Kazakh LLMs appear only in 2024--2025---a 4--7 year
+delay between a global breakthrough and its Kazakh realisation.
+
+\section{The Landscape by Task}
+\label{sec:landscape}
+Table~\ref{tab:categories} shows the distribution of the corpus across task categories.
+Because tags are multi-label, the figures are tag counts rather than a partition of the
+222 papers. The shape is informative: Kazakh NLP is, historically, a
+\emph{speech-and-translation} field. Dataset/corpus papers (146) dominate because resource
+construction is the binding
+constraint; speech (110) and machine translation (105) follow. Crucially, the two
+categories most relevant to the language's defining property---its agglutinative
+morphology---are the thinnest: morphology (48) and tokenization (21). This is the central
+empirical observation of the survey: the field has invested heavily where data could be
+collected, and least where the language is hardest. The corpus is also sharply concentrated
+in time: 105 of the 222 papers (47\%) carry a 2024--2026 date, against 18 in 2020 and 3 at
+the earliest point in 2013, confirming that Kazakh NLP is overwhelmingly a development of
+the last three years.
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{Task category} & \textbf{Papers tagged} \\
+    \midrule
+    Dataset / corpus      & 146 \\
+    Speech (ASR / TTS)    & 110 \\
+    Machine translation   & 105 \\
+    Evaluation / benchmark & 76 \\
+    NER / information extraction & 55 \\
+    Language modelling / LLM & 50 \\
+    Morphology / segmentation & 48 \\
+    Classification / sentiment & 26 \\
+    Embeddings            & 22 \\
+    \textbf{Tokenization} & \textbf{21} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Corpus by task category. Tags are multi-label, so a paper may be counted under
+  several categories: the column reports the number of papers carrying each tag and sums to
+  659 tag occurrences across the 222 papers, not to 222. Tokenization and
+  morphology---most relevant to Kazakh's agglutinative structure---are the least studied.}
+  \label{tab:categories}
+\end{table}
+
+\section{Models and Tokenizers}
+\label{sec:models}
+Table~\ref{tab:models} compares the flagship Kazakh-facing models. Two patterns stand out.
+First, the field is converging on \emph{Kazakh-specific tokenization}: vocabularies grow
+from 32k (KazRoBERTa) to 256k (Til-Core), and approaches diverge from extended BPE
+(Sherkala) to from-scratch BPE (SozKZ) to abandoning the tokenizer entirely
+(KazByte~\cite{kazbyte}). Second, claims are running ahead of evidence: the state-backed
+Til-Core advertises a morpheme-constrained tokenizer (``support for Kazakh morphology'')
+but has, at the time of writing, \emph{no published benchmark results}. Whether
+morphology-aware tokenization actually helps Kazakh remains an open question---and a
+contested one, since prior work on agglutinative languages finds morphological
+segmentation does not reliably beat BPE downstream~\cite{saleva}.
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{lllll}
+    \toprule
+    \textbf{Model} & \textbf{Year} & \textbf{Vocab} & \textbf{Morphology claim} & \textbf{Benchmarks} \\
+    \midrule
+    Til-Core-0.5B   & 2025 & 256k (morphBPE) & yes (segmenter unreleased) & \textbf{none} \\
+    Sherkala-Chat-8B & 2025 & 159k & no (fertility-driven) & yes \\
+    SozKZ (50M--600M) & 2026 & 50k (from scratch) & no & partial \\
+    KazByte          & 2026 & byte-level (none) & n/a & yes \\
+    KazLLM (8B/70B)  & 2024 & 128k (Llama-3.1) & no & yes \\
+    KazRoBERTa       & 2022 & 32k & no & partial \\
+    \bottomrule
+  \end{tabular}
+  \caption{Flagship Kazakh-facing models. The ``morphology claim'' column reports authors'
+  assertions, not verified results. Entries without an accompanying paper (Til-Core, KazLLM,
+  KazRoBERTa) are characterised from their public model cards rather than peer-reviewed work.}
+  \label{tab:models}
+\end{table}
+
+\section{An Open Research Agenda}
+\label{sec:agenda}
+We distil the survey into concrete entry points for new contributors, separating
+\emph{pain points} (capabilities or resources the field lacks) from \emph{unverified
+hypotheses} (claims that are asserted or assumed but not rigorously tested).
+
+\subsection{Pain points}
+Representative, tractable gaps include: the high \emph{tokenization tax} on Kazakh, which
+motivates KazByte~\cite{kazbyte} and SozKZ~\cite{sozkz} but is not measured downstream;
+the absence of a standardised \emph{morpheme-boundary benchmark}; weak support for
+Kazakh--Russian \emph{code-switching}, despite its prevalence in real usage; a
+\emph{fragmented evaluation landscape} (KazMMLU, TUMLU, KazQAD, Qorgau use different
+protocols~\cite{kazmmlu,tumlu,kazqad,qorgau}); near-absent ASR for spontaneous and
+children's speech; and the failure of multimodal models on Kazakh Arabic/Latin-script OCR.
+Further tractable gaps include sentiment analysis beyond product reviews, intrinsic
+embedding benchmarks for Kazakh, and ASR punctuation restoration. The released agenda lists
+each with its motivating citation.
+
+\subsection{Unverified hypotheses}
+The field carries several load-bearing assumptions that a student could test:
+(1) morphology-aware segmentation improves downstream Kazakh tasks over BPE---\emph{contested}
+by~\cite{saleva}; (2) byte-level tokenization beats BPE for agglutinative
+Kazakh---\emph{unverified}, with KazByte's authors noting validation is ongoing~\cite{kazbyte};
+(3) cross-lingual transfer from Turkish beats transfer from Russian---\emph{assumed} but
+never ablated; (4) larger tokenizer vocabularies meaningfully improve downstream
+quality---\emph{unverified}, with no controlled study; (5) a small from-scratch Kazakh model
+beats a large multilingual one at equal inference budget---\emph{unverified}. Each is stated
+with a concrete experiment in the released agenda.
+
+\section{Limitations}
+\label{sec:limits}
+This survey is bounded by its method. Semantic Scholar rate-limiting left non-arXiv
+coverage incomplete in several categories, so counts are lower bounds rather than exact
+censuses. Task tags are heuristic and were not manually adjudicated. The citation graph
+captures only references resolvable through Semantic Scholar, so the connected core (104
+papers) under-counts true dependencies. Finally, this survey synthesises the field from
+titles, abstracts, and citation structure rather than a close reading of every paper; the
+per-paper claims, numbers, and attributions in
+Sections~\ref{sec:genealogy}--\ref{sec:models} should therefore be read as a structural map
+of the field rather than a verified account of each individual result.
+
+\section{Conclusion}
+Kazakh NLP is young, fast-growing, and structurally lopsided: rich in speech and
+translation resources, thin where the language is morphologically hardest, and dependent
+on a small set of datasets and global architectures. By mapping the field reproducibly and
+ending with a concrete agenda, we hope to lower the barrier for the next wave of
+contributors---especially those making a first contribution---and to make the morphology
+and tokenization frontier, where the open questions are sharpest, easier to enter.
+
+% ------------------------------------------------------------
+% NOTE: author/year fields below need verification during the depth-read pass.
+% Kazakh-resource authors (ISSAI et al.) are cited title-first to avoid misattribution.
+% ------------------------------------------------------------
+\begin{thebibliography}{99}
+
+\bibitem{transformer} A.~Vaswani et al. Attention Is All You Need. \emph{NeurIPS}, 2017. arXiv:1706.03762.
+\bibitem{bert} J.~Devlin et al. BERT: Pre-training of Deep Bidirectional Transformers. \emph{NAACL}, 2019. arXiv:1810.04805.
+\bibitem{bpe} R.~Sennrich, B.~Haddow, A.~Birch. Neural Machine Translation of Rare Words with Subword Units. \emph{ACL}, 2016. arXiv:1508.07909.
+\bibitem{xlmr} A.~Conneau et al. Unsupervised Cross-lingual Representation Learning at Scale (XLM-R). \emph{ACL}, 2020. arXiv:1911.02116.
+\bibitem{bahdanau} D.~Bahdanau, K.~Cho, Y.~Bengio. Neural Machine Translation by Jointly Learning to Align and Translate. \emph{ICLR}, 2015. arXiv:1409.0473.
+\bibitem{gpt3} T.~Brown et al. Language Models are Few-Shot Learners (GPT-3). \emph{NeurIPS}, 2020. arXiv:2005.14165.
+\bibitem{rust} P.~Rust et al. How Good is Your Tokenizer? \emph{ACL}, 2021. arXiv:2012.15613.
+\bibitem{arnett70} C.~Arnett et al. Evaluating Morphological Alignment of Tokenizers in 70 Languages. 2025. arXiv:2507.06378.
+\bibitem{saleva} J.~S\"alev\"a, C.~Lignos. The Effectiveness of Morphology-aware Segmentation in Low-Resource NMT. 2021. arXiv:2103.11189.
+
+\bibitem{ksc} Y.~Khassanov, S.~Mussakhojayeva, A.~Mirzakhmetov, A.~Adiyev, M.~Nurpeiissov, H.~A.~Varol. A Crowdsourced Open-Source Kazakh Speech Corpus and Initial Speech Recognition Baseline. 2020. arXiv:2009.10334.
+\bibitem{kaznerd} KazNERD: Kazakh Named Entity Recognition Dataset. \emph{LREC}, 2022. arXiv:2111.13419.
+\bibitem{kazakhtts} S.~Mussakhojayeva et al. KazakhTTS: An Open-Source Kazakh Text-to-Speech Synthesis Dataset. \emph{Interspeech}, 2021. arXiv:2104.08459.
+\bibitem{kazakhtts2} KazakhTTS2: Extending the Open-Source Kazakh TTS Corpus. \emph{LREC}, 2022. arXiv:2201.05771.
+\bibitem{ksc2} KSC2: An Industrial-Scale Open-Source Kazakh Speech Corpus. \emph{Interspeech}, 2022.
+\bibitem{kazqad} KazQAD: Kazakh Open-Domain Question Answering Dataset. 2024. arXiv:2404.04487.
+\bibitem{kazsandra} KazSAnDRA: Kazakh Sentiment Analysis Dataset of Reviews and Attitudes. 2024. arXiv:2403.19335.
+\bibitem{dollms} A.~Maxutov, A.~Myrzakhmet, P.~Braslavski. Do LLMs Speak Kazakh? A Pilot Evaluation of Seven Models. \emph{SIGTURK}, 2024. ACL Anthology 2024.sigturk-1.8.
+\bibitem{kazmmlu} KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge. 2025. arXiv:2502.12829.
+\bibitem{tumlu} TUMLU: A Unified Native Language Understanding Benchmark for Turkic Languages. 2025. arXiv:2502.11020.
+\bibitem{qorgau} Qorgau: Evaluating LLM Safety in Kazakh-Russian Bilingual Contexts. 2025. arXiv:2502.13640.
+
+\bibitem{sherkala} Sherkala-Chat: Building a State-of-the-Art LLM for Kazakh in a Moderately Resourced Setting. 2025. arXiv:2503.01493.
+\bibitem{sozkz} SozKZ: Training Efficient Small Language Models for Kazakh from Scratch. 2026. arXiv:2603.20854.
+\bibitem{kazbyte} KazByte: Adapting Qwen Models to Kazakh via a Byte-level Adapter. 2026. arXiv:2603.27859.
+
+\bibitem{loreslm} Y.~Veitsman, M.~Hartmann. Recent Advancements and Challenges of Turkic Central Asian Language Processing. \emph{Proc. First Workshop on Language Models for Low-Resource Languages (LoResLM)}, 2025. arXiv:2407.05006.
+\bibitem{turkicreview} P.~Muhetaer. Natural Language Processing and Speech Technologies for Central Asian Turkic Languages: A Review of Current Methods, Resources, and Challenges. \emph{Actual Problems of the Present}, 2025.
+
+\end{thebibliography}
+
+\end{document}

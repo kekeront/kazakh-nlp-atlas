@@ -1,0 +1,23 @@
+# Russian Test Set — seed file
+# Цель Дня 2-3: 500 слов. На День 1 хватит обзора формата.
+# Tab-separated. Формат тот же что у казахского — см. README.
+# Будем сравнивать fusional Russian vs agglutinative Kazakh.
+#
+# Можешь использовать pymorphy3 как референс для разметки морфем — он open source,
+# но финальное решение твоё.
+#
+word	morpheme_split	gloss	pos	category	notes
+дом	дом	house	NOUN	basic_noun	номинатив, нулевое окончание
+дома	дом-а	house-GEN.SG	NOUN	case_marked	родительный
+дому	дом-у	house-DAT.SG	NOUN	case_marked	дательный
+домом	дом-ом	house-INS.SG	NOUN	case_marked	творительный
+доме	дом-е	house-LOC.SG	NOUN	case_marked	предложный (с предлогом)
+дома	дом-а	house-NOM.PL	NOUN	plural	омонимия! та же форма что GEN.SG — интересный кейс для токенизатора
+домов	дом-ов	house-GEN.PL	NOUN	plural	родительный множественного
+домашний	дом-ашн-ий	house-ADJ-NOM.M.SG	ADJ	derivational	прилагательное от существительного
+домик	дом-ик	house-DIM	NOUN	derivational	уменьшительное
+бегаю	бег-а-ю	run-PRES-1SG	VERB	verb_finite	1-е лицо ед. наст.
+бежишь	беж-ишь	run-2SG.PRES	VERB	verb_finite	чередование г/ж
+не бегу	не бег-у	NEG run-1SG	VERB	verb_negative	отрицание отдельным словом (отличие от каз!)
+# ---- ТВОИ ПРИМЕРЫ ВНИЗ ----
+# Стартанём с этого в День 2.

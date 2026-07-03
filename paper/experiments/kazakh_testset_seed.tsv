@@ -1,0 +1,87 @@
+# Kazakh Test Set — seed file
+# Цель Day 7: ~50 слов demo-set (scope уменьшен с 500 после career-pivot Day 2).
+# Tab-separated. См. paper/experiments/README.md за объяснением колонок.
+#
+# Структура файла:
+#   1. 15 seed слов от Karpathy (строки 11-25).
+#   2. Закомментированные ранние попытки студента (формат TSV не задался — перенесли в draft).
+#   3. 50 draft строк от deep-researcher (Apertium-kaz lexc + Wiktionary) — нужен native verify.
+#
+word	morpheme_split	gloss	pos	category	notes
+үй	үй	house	NOUN	basic_noun	базовый кейс, номинатив
+үйлер	үй-лер	house-PL	NOUN	plural	-лер вариант после звонкой
+үйім	үй-ім	house-1SG.POSS	NOUN	possessive	мой дом
+үйде	үй-де	house-LOC	NOUN	case_marked	жатыс септік
+үйден	үй-ден	house-ABL	NOUN	case_marked	шығыс септік
+үйге	үй-ге	house-DAT	NOUN	case_marked	барыс септік
+үйдің	үй-дің	house-GEN	NOUN	case_marked	ілік септік
+үйлеріміздегі	үй-лер-іміз-де-гі	house-PL-1PL.POSS-LOC-REL	NOUN	agglutinative_chain	главный demo: 5 морфем подряд
+кітап	кітап	book	NOUN	basic_noun	арабское заимствование? проверь этимологию
+кітабым	кітап-ым	book-1SG.POSS	NOUN	possessive	чередование п/б
+бармын	бар-мын	exist-1SG	VERB	verb_finite	я есть/я нахожусь
+барамын	бар-а-мын	go-PRES-1SG	VERB	verb_finite	я иду (наст. время)
+бармаймын	бар-ма-й-мын	go-NEG-PRES-1SG	VERB	verb_negative	я не иду
+оқушы	оқу-шы	study-NMLZ	NOUN	derivational	ученик, деривация от глагола
+қазақша	қазақ-ша	Kazakh-ADV	ADV	derivational	по-казахски
+# ---- ТВОИ РАННИЕ ПОПЫТКИ (закомментированы — формат TSV не задался, перенесли работу в draft ниже) ----
+# алма алма ТҒГТҚ яблоко
+# алма ал-ма не бери
+# аспан ас-пан небо
+# алатау а-ла-тау гора алатау
+# жібек жі-бек шёлк
+# ыстық ыс-тық горячий
+# арыстан а-рыс-тан лев
+# сол сол лево
+# оң оң право
+# он он десять
+# алтын ал-тын золото
+# неге не-ге почему
+# не не что
+# бастау бас-тау начать
+# бас бас голова
+# ---- DRAFT FROM DEEP-RESEARCHER (Apertium-kaz lexc + Wiktionary, Day 2) ----
+# Native-speaker verify priority: строки с (?) в notes
+адам	адам	person	NOUN	basic_noun	Arabic loanword (ʾādam), fully integrated
+су	су	water	NOUN	basic_noun	Monomorphemic native Turkic
+мектеп	мектеп	school	NOUN	loanword	Arabic мактаб via Persian
+балалар	бала-лар	child-PL	NOUN	plural	Vowel-final back-vowel stem → -лар
+адамдар	адам-дар	person-PL	NOUN	plural	Sonorant-final (-м) back-vowel stem → -дар
+кітаптар	кітап-тар	book-PL	NOUN	plural	Voiceless-final (-п) back-vowel stem → -тар
+көлдер	көл-дер	lake-PL	NOUN	plural	Sonorant-final (-л) front-vowel stem → -дер
+үйіміз	үй-іміз	house-1PL.POSS	NOUN	possessive	Front stem → -іміз; back-vowel form: -ымыз
+үйің	үй-ің	house-2SG.POSS	NOUN	possessive	Front stem → -ің (back: -ың)
+кітабы	кітап-ы	book-3SG.POSS	NOUN	possessive	п→б voicing before vowel-initial suffix
+атасы	ата-сы	father-3SG.POSS	NOUN	possessive	Vowel-final back stem → -сы
+мектепте	мектеп-те	school-LOC	NOUN	case_marked	Voiceless-final → -те
+мектептен	мектеп-тен	school-ABL	NOUN	case_marked	Voiceless-final → -тен
+адамға	адам-ға	person-DAT	NOUN	case_marked	Sonorant-final back stem → -ға
+баланың	бала-ның	child-GEN	NOUN	case_marked	Vowel-final back stem → -ның
+адамның	адам-ның	person-GEN	NOUN	case_marked	Sonorant-final back stem → -ның
+үйлерімізде	үй-лер-іміз-де	house-PL-1PL.POSS-LOC	NOUN	agglutinative_chain	4-suffix chain; front harmony
+балаларымызға	бала-лар-ымыз-ға	child-PL-1PL.POSS-DAT	NOUN	agglutinative_chain	Back-vowel chain
+кітаптарымызды	кітап-тар-ымыз-ды	book-PL-1PL.POSS-ACC	NOUN	agglutinative_chain	морф. валидно, но в разговоре носители предпочитают аналитич. «біздің кітаптар»
+мектептерде	мектеп-тер-де	school-PL-LOC	NOUN	case_marked	native verify: упрощено с -ін- (POSS) до базовой PL-LOC формы
+теміржолшылар	темір-жол-шы-лар	iron-road-AGENT-PL	NOUN	agglutinative_chain	Compound+derivation+plural
+барады	бар-а-ды	go-PRES-3	VERB	verb_finite	Present: stem+aorist converb -а + 3sg -ды
+келдім	кел-ді-м	come-PST-1SG	VERB	verb_finite	Past: front stem → -ді + 1SG -м
+жазады	жаз-а-ды	write-PRES-3	VERB	verb_finite	Present 3sg back-vowel
+оқыдым	оқы-ды-м	read-PST-1SG	VERB	verb_finite	Vowel-final stem + past -ды + 1SG -м
+барар	бар-ар	go-FUT	VERB	verb_finite	Aorist/future back stem
+бармайды	бар-ма-й-ды	go-NEG-PRES-3	VERB	verb_negative	NEG -ма + converb -й + 3sg -ды
+келмеді	кел-ме-ді	come-NEG-PST-3	VERB	verb_negative	NEG -ме + past -ді + 3SG zero
+оқымаймын	оқы-ма-й-мын	read-NEG-PRES-1SG	VERB	verb_negative	native confirmed
+барған	бар-ған	go-PTCP.PST	VERB	verb_participle	Past participle: back stem → -ған
+келген	кел-ген	come-PTCP.PST	VERB	verb_participle	Past participle: front stem → -ген
+жазатын	жаз-атын	write-PTCP.HAB	VERB	verb_participle	Habitual participle
+жазушы	жаз-ушы	write-AGENT	NOUN	derivational	native confirmed (split analysis -ушы as suffix)
+әнші	ән-ші	song-AGENT	NOUN	derivational	Front stem ән + -ші
+еркіндік	еркін-дік	free-ABSTR.N	NOUN	derivational	Adjectival root + -дік
+бір	бір	one	NUM	function_word	Monomorphemic cardinal
+екі	екі	two	NUM	function_word	Monomorphemic cardinal
+неге	неге	why	ADV	function_word	lexicalized: исторически не+ге (what-DAT), но носитель чувствует как монолит → KEY paper example
+қашан	қашан	when	ADV	function_word	Monomorphemic interrogative adverb
+теміржол	темір-жол	iron-road	NOUN	compound	N+N compound: темір (iron) + жол (road) = railway
+арыстан	арыстан	lion	NOUN	loanword	Old Turkic arslan (НЕ персидский — частая ошибка)
+мұғалім	мұғалім	teacher	NOUN	loanword	Arabic muʕallim via Persian
+жұмыс	жұмыс	work	NOUN	basic_noun	Proto-Turkic *yumuĺ; native
+# ---- END DRAFT ----
