@@ -1,0 +1,30 @@
+{
+ "research": [
+  {
+   "area": "llm-alignment-data",
+   "findings": [
+    {
+     "claim": "Qorgau (MBZUAI, Feb 2025): the first LLM safety benchmark for the Kazakh-Russian bilingual context — two-level taxonomy of 6 high-level risk areas + 17 fine-grained harm types incl. region-specific sensitive topics (risk type VI); ~1000 human-annotated samples per language plus responses of 12 models (xlsx/csv in repo); evaluated with GPT-4o judge + human assessment across kk, ru and code-switched prompts.",
+     "source": "arXiv 2502.13640 — Qorgau: Evaluating LLM Safety in Kazakh-Russian Bilingual Contexts; github.com/mbzuai-nlp/qorgau-kaz-ru-safety",
+     "numbers": "6 risk areas / 17 harm types; 12 models; ~1000 annotated per language; kk leaders: Claude 96.5% safe, GPT-4o 95.8%; ru leader YandexGPT 93.57%; best open: KazLLM-1.0-70B 87.5%",
+     "relevance": "Partially closes the 'zero kk safety data' gap from the sector decomposition: a safety EVAL exists; still missing an open kk safety CLASSIFIER — Qorgau's taxonomy+annotations are the natural training substrate for it (paper milestone update).",
+     "uncertain": false
+    },
+    {
+     "claim": "Qorgau key result: models are often SAFER in Kazakh than Russian because low-resource exposure yields vague generic answers; region-specific topics (risk VI) dominate unsafe responses in both languages; code-switching can both amplify (access to unsafe ru content) and reduce risk. Caveats: repo has NO license (usability unclear), 2 stars, last push 2025-09 — a citable claim-vs-adoption datapoint for the atlas.",
+     "source": "arXiv 2502.13640 — Qorgau; github.com/mbzuai-nlp/qorgau-kaz-ru-safety README",
+     "numbers": "risk VI = majority of unsafe answers; Aya101 lowest kk safety despite kk-tailoring; license: none declared",
+     "relevance": "For QymyzLM: safety eval protocol to adopt at SFT stage; for the survey: evaluation-territory entry; for backlog: kk safety classifier task now reads 'train on Qorgau taxonomy' instead of 'create eval from scratch'.",
+     "uncertain": false
+    }
+   ],
+   "recommendations": [
+    "Add Qorgau to QazaqEval protocol as the safety axis",
+    "kk safety classifier milestone: fine-tune on Qorgau annotations (license needs clarification with authors first)"
+   ],
+   "open_questions": [
+    "Dataset license — repo declares none; contact authors before training on it"
+   ]
+  }
+ ]
+}
