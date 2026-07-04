@@ -1,0 +1,36 @@
+{
+  "colorGroups": [
+    {
+      "query": "path:papers/",
+      "color": {
+        "a": 1,
+        "rgb": 5011412
+      }
+    },
+    {
+      "query": "path:sources/",
+      "color": {
+        "a": 1,
+        "rgb": 5680494
+      }
+    },
+    {
+      "query": "path:maps/",
+      "color": {
+        "a": 1,
+        "rgb": 14721342
+      }
+    },
+    {
+      "query": "Home",
+      "color": {
+        "a": 1,
+        "rgb": 14701654
+      }
+    }
+  ],
+  "showTags": false,
+  "showAttachments": false,
+  "collapse-color-groups": false,
+  "scale": 1
+}

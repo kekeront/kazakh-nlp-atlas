@@ -29,3 +29,7 @@ SESSION.md
 # OS
 .DS_Store
 .context/
+kb/.vault_build_tmp/
+kb/vault_manifest.json
+kb/vault/.obsidian/workspace*.json
+kb/vault/.obsidian/cache

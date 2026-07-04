@@ -1,0 +1,2826 @@
+{
+  "version": 1,
+  "edges": [
+    {
+      "from": "arxiv:1809.05053",
+      "to": "arxiv:2511.08376",
+      "why": "Turkish (sister Turkic) has NLI+STS enabling TurkEmbed; Kazakh has neither, so an equivalent kk supervised-STS embedder is blocked",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "arxiv:2305.16264",
+      "to": "arxiv:2510.06548",
+      "why": "Overtrained-base saturation complicates the ≤4-epoch reuse law: reusing an overtrained model saturates continued scaling",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2305.16264",
+      "to": "arxiv:2603.20854",
+      "why": "Data-constrained + T4 feasibility argues against from-scratch; SozKZ is the executed Kazakh-from-scratch counterpoint",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2305.16264",
+      "to": "arxiv:2604.28075",
+      "why": "Both argue repeated high-signal data rivals fresh tokens; Repetition-over-Diversity extends the ≤4-epoch result",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2306.11644",
+      "to": "arxiv:2502.13252",
+      "why": "Quantifies the translationese risk in Sherkala's 24% synthetic-MT Kazakh; assesses viability of MT-data pretraining",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2309.14322",
+      "to": "arxiv:2501.00656",
+      "why": "OLMo2 adopts this paper's qk-layernorm + z-loss stability pair as its production recipe",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2309.14322",
+      "to": "arxiv:2510.26788",
+      "why": "Both target fp16 numerical stability; relevant to the T4's forced fp16 regime this claim flags as never ablated at sub-1B",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2401.04088",
+      "to": "arxiv:2401.06066",
+      "why": "DeepSeekMoE formalizes the expert-specialization sparsity Mixtral popularized; both report total as the size class",
+      "agent": "topic:parameter-counting-convention-and-iso-si"
+    },
+    {
+      "from": "arxiv:2401.04088",
+      "to": "arxiv:2412.19437",
+      "why": "Co-cited precedent: DeepSeek-V3 is 'the 671B model' (37B active, 5.5%) — models bracketed by total, not active",
+      "agent": "topic:parameter-counting-convention-and-iso-si"
+    },
+    {
+      "from": "arxiv:2401.06066",
+      "to": "arxiv:2601.21204",
+      "why": "Both argue the total-vs-active tradeoff; DeepSeekMoE says MoE collapses sub-600M, the latter that scaling embeddings beats scaling experts",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2402.14714",
+      "to": "arxiv:2406.11477",
+      "why": "Both parameter-efficient vocab-expansion recipes for new languages; EEVE staged-freeze vs 0.01GB-target expansion",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2402.14714",
+      "to": "arxiv:2407.05841",
+      "why": "Both study vocab-expansion init; EEVE's staged freezing needs untied embeddings (breaks 0.6B cap) where the empirical study just compares…",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "arxiv:2402.14905",
+      "to": "arxiv:2502.05795",
+      "why": "Curse of Depth warns Pre-LN deep layers underperform — tension with MobileLLM's depth-over-width thesis",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2403.00686",
+      "to": "arxiv:2605.24718",
+      "why": "Both quantify per-language token/byte cost disparities; Tokenizer Tax measures 25 European langs vs this NLLB/FLORES byte premium",
+      "agent": "topic:kazakh-tokenizer-fertility-vs-byte-premi"
+    },
+    {
+      "from": "arxiv:2403.08763",
+      "to": "arxiv:2405.04434",
+      "why": "DeepSeek-V2 scales Ibrahim's replay recipe: 30% replay + non-decayed checkpoint for 6T-token CPT",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2403.08763",
+      "to": "arxiv:2411.15242",
+      "why": "Zamba2 adopts 60% replay in a 50B-token decay phase — high-dose instance of Ibrahim's replay finding",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2403.13638",
+      "to": "arxiv:2503.01493",
+      "why": "translationese's cheap low-resource MT-filtering result predicts Sherkala's 24% synthetic-MT Kazakh works at low cost",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2403.13638",
+      "to": "hf:blog/davanstrien",
+      "why": "translationese's tiny native-LM perplexity filter is a viable substitute for the FineWeb-Edu classifier davanstrien shows is absent for…",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2403.19399",
+      "to": "arxiv:2603.22290",
+      "why": "KazParC's 372k human parallel pairs are the contrastive supervision anchor the low-resource embedding-adaptation recipe depends on",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "arxiv:2404.03608",
+      "to": "arxiv:2502.12829",
+      "why": "Sailor's exam-flat result (M3Exam -0.05) at 0.5B directly threatens the exam-style KazMMLU target",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2404.04487",
+      "to": "arxiv:2502.12829",
+      "why": "The two Kazakh axes a joint ≤600M head must serve simultaneously — KazQAD (retrieval) and KazMMLU (generation)",
+      "agent": "topic:joint-generative-embedding-head-on-one-6"
+    },
+    {
+      "from": "arxiv:2404.04487",
+      "to": "arxiv:2502.13595",
+      "why": "KazQAD is NOT integrated into MMTEB — the retrieval gap the lab's kkMTEB upstream PR is meant to fill",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2404.04487",
+      "to": "hf:issai/ragbench_kazakh",
+      "why": "Both ISSAI Kazakh retrieval resources; KazQAD supplies the ODQA questions + qrels, RAGBench the RAG eval layer",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2404.05961",
+      "to": "arxiv:2506.20923",
+      "why": "Both strip the causal mask (bidirectional) + mean pooling to convert a decoder; iso-scale 0.5B evidence bidir+mean beats causal+EOS",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2405.04434",
+      "to": "arxiv:2502.14837",
+      "why": "That work converts existing MHA models to V2-style MLA for economical inference — builds on this MLA formulation",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2405.04434",
+      "to": "arxiv:2603.02188",
+      "why": "Multi-Head Low-Rank Attention is a successor to V2's MLA; competing low-rank KV-compression at equal cache",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2405.05254",
+      "to": "arxiv:2507.06607",
+      "why": "Decoder-Hybrid-Decoder (SambaY) directly builds on YOCO's decoder-decoder single-global-KV design for long reasoning",
+      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+    },
+    {
+      "from": "arxiv:2405.07883",
+      "to": "arxiv:2503.20083",
+      "why": "Both cross-tokenizer transfer; ALM distillation is an alternative to ZeTT's hypernetwork for swapping vocab",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2405.07883",
+      "to": "arxiv:2506.06607",
+      "why": "Competing tokenizer-transfer: ZeTT hypernetwork-predicted embeddings vs OMP training-free transplantation",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2405.09673",
+      "to": "arxiv:2412.06484",
+      "why": "Both study continual pretraining for a new language; direct LoRA-vs-full evidence for the Kazakh CPT path",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2405.09673",
+      "to": "arxiv:2605.03229",
+      "why": "Both frame the learn-vs-forget tradeoff; SMF positions itself as low-forgetting alternative to LoRA AND full-FT",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2405.12981",
+      "to": "arxiv:2405.05254",
+      "why": "Both reuse KV across depth; YOCO caches once globally for a decoder-decoder split, CLA shares pairwise between adjacent layers",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2405.12981",
+      "to": "arxiv:2410.14442",
+      "why": "The Systematic Study of Cross-Layer KV Sharing generalizes and stress-tests CLA's adjacent-layer KV-reuse scheme",
+      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+    },
+    {
+      "from": "arxiv:2405.12981",
+      "to": "arxiv:2603.02188",
+      "why": "Different KV-reduction mechanism: cross-layer sharing vs multi-head low-rank projection of K/V",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2405.17428",
+      "to": "arxiv:2407.15831",
+      "why": "Same NVIDIA embedding lineage; NV-Retriever's positive-aware hard-negative mining complements NV-Embed's latent-attention two-stage tuning",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2406.07887",
+      "to": "arxiv:2411.13676",
+      "why": "Mamba study says ~7-8% attention layers recover recall; Hymba operationalizes this as a parallel hybrid-head SLM",
+      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+    },
+    {
+      "from": "arxiv:2406.11477",
+      "to": "arxiv:2503.20083",
+      "why": "Yamaguchi finds low-data full replacement catastrophically fails; ALM cross-tokenizer distillation offers a training-signal route to…",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "arxiv:2406.11794",
+      "to": "arxiv:2603.20854",
+      "why": "DCLM 400M-1x is the specified recipe analog; SozKZ is the real Kazakh from-scratch execution to compare against",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2407.13623",
+      "to": "arxiv:2601.21204",
+      "why": "both address param allocation between embeddings/vocab and the transformer body; disagree on whether scaling embeddings pays off",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2407.15831",
+      "to": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "why": "NV-Retriever's TopK-PercPos is the concrete recipe behind evallab's pinned hard-negative protocol (100 BM25 candidates)",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2407.17465",
+      "to": "arxiv:2510.19093",
+      "why": "u-muP claims muP fixes fp16 divergence; 2510.19093 argues weight decay not muP drives LR transfer — disputes muP's value",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2407.19669",
+      "to": "arxiv:2509.20354",
+      "why": "mGTE (305M) and EmbeddingGemma (308M) are competing lightweight multilingual v0 base options with MRL and instruction prefixes",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2408.04303",
+      "to": "arxiv:2405.07883",
+      "why": "Both study full tokenizer swap; ZeTT closes the gap at 7B with <1B tokens but tested only encoder/Mistral-7B, leaving sub-1B swap tax open",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "arxiv:2408.04303",
+      "to": "arxiv:2412.21140",
+      "why": "Both reinit embeddings for a vocab swap; LEP learns Russian embeddings, trans-tok uses translation-aligned source averages — rival inits…",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "arxiv:2408.12503",
+      "to": "arxiv:2511.08376",
+      "why": "ruMTEB is the kkMTEB construction template; TurkEmbed is the Turkic-family analogue — both test whether monolingual specialization beats mE5",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2409.05152",
+      "to": "arxiv:2405.17428",
+      "why": "Both turn a decoder LLM into a retriever; NV-Embed drops the causal mask for pure embedding, OneGen keeps it for joint gen+retrieval via…",
+      "agent": "topic:joint-generative-embedding-head-on-one-6"
+    },
+    {
+      "from": "arxiv:2409.19606",
+      "to": "arxiv:2512.24880",
+      "why": "mHC is the manifold-constrained successor that critiques raw HC's instability at larger scales",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2410.14442",
+      "to": "arxiv:2511.18643",
+      "why": "Orthogonal, composable KV-cut axis: layer-sharing vs 2-bit KV quantization",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2410.14442",
+      "to": "arxiv:2603.20854",
+      "why": "Both train Kazakh/small LMs from scratch; cross-layer KV sharing is a candidate cut for SozKZ-scale from-scratch models",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2410.14442",
+      "to": "hf:unsloth/gemma-3n-e2b",
+      "why": "Gemma-3n's trailing-layer reuse = study's pizza-bottom layout (-0.55), which it finds strictly better than CLA2",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2410.17897",
+      "to": "arxiv:2410.14442",
+      "why": "ResFormer's SVFormer shares layer-1 values across layers ~halving KV — same family as cross-layer KV sharing",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2411.13676",
+      "to": "arxiv:2405.12981",
+      "why": "Hymba explicitly cites CLA and supplies the only sub-1B GQA pairwise cross-layer sharing ablation missing from CLA",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2411.13676",
+      "to": "arxiv:2507.22448",
+      "why": "Both hybrid-head SLM architectures pairing attention with a linear/Mamba path; Falcon-H1 is the later family",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "arxiv:2411.14198",
+      "to": "arxiv:2305.16264",
+      "why": "Concludes gap is data-quantity driven after byte scaling; grounds it in data-constrained scaling laws",
+      "agent": "topic:kazakh-tokenizer-fertility-vs-byte-premi"
+    },
+    {
+      "from": "arxiv:2411.14198",
+      "to": "arxiv:2510.09947",
+      "why": "Both argue fertility is a weak predictor; STRR proposes a replacement metric for multilingual tokenizer quality",
+      "agent": "topic:kazakh-tokenizer-fertility-vs-byte-premi"
+    },
+    {
+      "from": "arxiv:2412.06464",
+      "to": "arxiv:2406.07887",
+      "why": "GDN improves Mamba2 with the delta rule; the empirical Mamba study is the from-scratch SSM baseline it beats at 1.3B",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2412.06464",
+      "to": "arxiv:2504.03624",
+      "why": "Both Mamba-transformer hybrids; Nemotron-H sets KB's ~7-8% attention floor, above which GDN's 3:1-2:1 ratios sit",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2412.06484",
+      "to": "arxiv:2403.08763",
+      "why": "NorMistral's 3-stage tokenizer-swap + realign + full CPT instantiates the general continual-pretraining recipe this formalizes",
+      "agent": "topic:architecture-fork"
+    },
+    {
+      "from": "arxiv:2412.06484",
+      "to": "arxiv:2603.02041",
+      "why": "Both continual-adapt a base to a low-resource language; NorMistral adds the from-scratch control EstLLM lacks",
+      "agent": "topic:architecture-fork"
+    },
+    {
+      "from": "arxiv:2412.07633",
+      "to": "arxiv:2603.02041",
+      "why": "Both continual-pretrain a base into a new EU language; ChocoLlama swaps the tokenizer at 32B tokens, EstLLM adapts Estonian — comparable…",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "arxiv:2412.09764",
+      "to": "arxiv:2401.06066",
+      "why": "Memory Layers beats iso-param DeepSeekMoE-style MoE at 134M/373M on NQ/TQA — memory vs experts as competing sparse axes",
+      "agent": "topic:sparse-memory-2026-engram-lineage-beyond"
+    },
+    {
+      "from": "arxiv:2412.09764",
+      "to": "arxiv:2601.21204",
+      "why": "Both scale explicit embedding/lookup memory as a sparsity axis; parallel lineage entries to Memory Layers' product-key result",
+      "agent": "topic:sparse-memory-2026-engram-lineage-beyond"
+    },
+    {
+      "from": "arxiv:2412.09871",
+      "to": "arxiv:2508.05628",
+      "why": "BLT says byte starts below BPE at 1B; H-Net++ claims tokenizer-free beats BPE on morph-rich at 252M — direct sub-1B dispute",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2412.09871",
+      "to": "arxiv:2603.27859",
+      "why": "KazByte applies a byte-level adapter to Kazakh Qwen; BLT warns byte hurts quality exactly at that sub-1B scale",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2412.17743",
+      "to": "arxiv:2309.14322",
+      "why": "YuLan-Mini's stability kit (muP init, z-loss, residual scaling) operationalizes the small-scale training-instability diagnostics of this…",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2412.19437",
+      "to": "arxiv:2310.18313",
+      "why": "V3's fine-grained tile/block FP8 recipe builds on FP8-LM; both hit the Hopper-only tensor-core hardware constraint",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2412.19437",
+      "to": "arxiv:2506.09342",
+      "why": "V3 anchors MLA KV-cache math at d=7168; LMHA re-tests MLA KV savings at the sub-1B scale QymyzLM targets",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2501.00656",
+      "to": "arxiv:2502.02732",
+      "why": "OLMo2 reordered-norm and Peri-LN are the same normalize-sublayer-outputs family for residual-stream stability",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2501.06425",
+      "to": "arxiv:2405.04434",
+      "why": "TPA synthesis: DeepSeek-V2's MLA>MHA/MQA/GQA ablation does not transfer monotonically below 1B",
+      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+    },
+    {
+      "from": "arxiv:2501.12948",
+      "to": "arxiv:2509.24945",
+      "why": "Both push reasoning below R1's 1.5B distill floor; MobileLLM-R1 tests sub-billion reasoning the R1 distills never reached",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2501.19393",
+      "to": "arxiv:2509.24945",
+      "why": "s1 budget forcing collapses on 1.5B distills; MobileLLM-R1 probes whether sub-billion reasoning is trainable at all",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2502.00894",
+      "to": "arxiv:2507.06378",
+      "why": "Both quantify tokenizer morphological alignment; 70-language study contextualizes MorphBPE's per-language consistency-F1 gains",
+      "agent": "topic:novelty-check"
+    },
+    {
+      "from": "arxiv:2502.00894",
+      "to": "arxiv:2511.03237",
+      "why": "MUTANT tested and REJECTED morphology-aware pretokenization (latency/brittleness), contradicting MorphBPE's morph-constrained-merge thesis…",
+      "agent": "topic:tokenizer-morphology"
+    },
+    {
+      "from": "arxiv:2502.02732",
+      "to": "arxiv:2510.26788",
+      "why": "both target fp16 numerical stability; Peri-LN keeps hidden states below FP16 max architecturally",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2502.05795",
+      "to": "arxiv:2412.17743",
+      "why": "LNS explicitly incompatible with YuLan-Mini's residual scaling 1.4/sqrt(n_layers) — pick one, never stack",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2502.11089",
+      "to": "arxiv:2510.26692",
+      "why": "Both natively-trainable efficient-attention architectures validated at scale; NSA's block-sparse vs Kimi Linear's linear attention",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2502.12829",
+      "to": "title:hf qwen qwen3 0 6b config user provided kazmmlu baseline",
+      "why": "Paper's sub-1B analysis pins Qwen3-0.6B ~32.8 as best sub-1B KazMMLU — the lab's canonical baseline model",
+      "agent": "topic:win-bar-protocol-audit"
+    },
+    {
+      "from": "arxiv:2502.13252",
+      "to": "arxiv:2404.03608",
+      "why": "both scale multilingual open-model data; TransWebEdu fully MT from-scratch vs Sailor continual-PT on native SE-Asian web",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2502.13595",
+      "to": "arxiv:2510.23896",
+      "why": "AfriMTEB is the regional-MTEB template proving a kk-MTEB is buildable; MMTEB itself currently has zero native kk tasks",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "arxiv:2502.13640",
+      "to": "arxiv:2412.04261",
+      "why": "Qorgau finds Aya101 lowest kk safety despite kk-tailoring; Aya Expanse is the successor whose kk safety is untested here",
+      "agent": "topic:llm-alignment-data"
+    },
+    {
+      "from": "arxiv:2502.13640",
+      "to": "arxiv:2502.12829",
+      "why": "Companion MBZUAI Kazakh benchmarks: Qorgau measures safety, KazMMLU measures capability — two axes of the same eval suite",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "arxiv:2502.13640",
+      "to": "arxiv:2503.01493",
+      "why": "Qorgau evaluates Kazakh LLM safety (best open = KazLLM-70B 87.5%); Sherkala is the SOTA Kazakh LLM whose safety this benchmark would score",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "arxiv:2502.13640",
+      "to": "hf:issai/ragbench_kazakh",
+      "why": "Both are Kazakh eval resources with adoption/usability caveats; Qorgau's no-license all-rights-reserved status is a claim-vs-adoption…",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "arxiv:2502.13640",
+      "to": "hf:nurlykhan/kazembed-v5",
+      "why": "Adoption/license contrast: Qorgau has NO license (eval-only) vs apache-2.0 Kazakh artifact — the atlas's claim-vs-usability datapoint",
+      "agent": "topic:llm-alignment-data"
+    },
+    {
+      "from": "arxiv:2502.14837",
+      "to": "arxiv:2502.02737",
+      "why": "MHA2MLA converts SmolLM-135M/360M/1B7 — these SmolLM2 GQA models are the from-scratch base it upcycles",
+      "agent": "topic:mla-at-sub-1b-scale"
+    },
+    {
+      "from": "arxiv:2502.14837",
+      "to": "arxiv:2509.16686",
+      "why": "Both target MLA at ~1B; EG-MLA builds MLA from scratch whereas MHA2MLA adapts pretrained GQA, trading data cost for accuracy",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2502.14837",
+      "to": "arxiv:2511.18643",
+      "why": "MHA2MLA's headline 92.19% cut stacks MLA with Int4 HQQ; Kitty is an orthogonal 2-bit KV-quant axis",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "arxiv:2502.14837",
+      "to": "arxiv:2603.02188",
+      "why": "Both are low-rank KV-compression attention; MHLA is an alternative decomposition to MLA conversion",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "arxiv:2502.16982",
+      "to": "arxiv:2503.04715",
+      "why": "Both give sub-2B optimizer/LR scaling laws; Step-Law's AdamW HP transfer complements Muon's FLOPs-efficiency claim",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2502.16982",
+      "to": "arxiv:2510.26788",
+      "why": "Muon's fp16 Newton-Schulz is unvalidated on T4; this node argues fp16 training is viable, testing that gap",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2502.20936",
+      "to": "arxiv:2407.15831",
+      "why": "Both on hard-negative mining; WebFAQ 2.0 finds random negatives beat mined hard-negs under MNR (false negatives), tension with…",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "arxiv:2502.20936",
+      "to": "hf:mteb/webfaqretrieval",
+      "why": "WebFAQ supplies the WebFAQRetrieval-kaz MTEB task (~12.5k kk natural pairs; e5-large nDCG@10 0.7269)",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2503.01493",
+      "to": "arxiv:2407.05841",
+      "why": "Sherkala's WECHSEL top-5 embedding init is one vocab-expansion initialization method empirically compared in this study",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2503.01493",
+      "to": "hf:mbzuai/kazmmlu",
+      "why": "Sherkala's 9,870-Q eval subset equals the dataset's Kazakh-language test split, aligning ceiling and baseline on subset",
+      "agent": "topic:win-bar-protocol-audit"
+    },
+    {
+      "from": "arxiv:2503.04715",
+      "to": "arxiv:2407.17465",
+      "why": "Competing routes to hyperparameter transfer: Step Law's directly-fitted LR/batch formulas vs u-muP's unit-scaled parametrization",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2503.10267",
+      "to": "arxiv:2511.01066",
+      "why": "HPLT 2.0 Kazakh token counts superseded by HPLT 3.0's larger monolingual resources",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2503.11132",
+      "to": "arxiv:2509.16686",
+      "why": "X-EcoMLA converts to MLA at 1.24B; EG-MLA is the from-scratch MLA-at-1B endpoint the conversion path is judged against",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "arxiv:2503.11132",
+      "to": "arxiv:2604.24715",
+      "why": "X-EcoMLA reports no long-context eval; long-context-aware upcycling targets exactly this gap",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "arxiv:2503.11132",
+      "to": "arxiv:2605.23857",
+      "why": "X-EcoMLA finds bigger same-tokenizer teacher unlocks deeper lossless compression; 'Strong Teacher Not Needed' contests teacher-strength…",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2503.12167",
+      "to": "arxiv:2412.19437",
+      "why": "PLM-1.8B's rank-512 latent is the same absolute cache as DeepSeek-V3; confirms 1–2B from-scratch uses 512",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "arxiv:2503.13423",
+      "to": "arxiv:2511.03237",
+      "why": "MUTANT/IndicSuperTokenizer is SuperBPE ported to 22 morph-rich Indic langs — the missing morph-rich eval SuperBPE lacked",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2503.19786",
+      "to": "arxiv:2405.05254",
+      "why": "Both slash KV cache for long context; SWA local:global interleave vs cache-once decoder-decoder — different mechanism, same 32K goal",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2503.19786",
+      "to": "arxiv:2601.21204",
+      "why": "Gemma3-270M spends ~63% of params on 256K-vocab embeddings; this paper argues scaling embeddings beats experts — corroborating allocation",
+      "agent": "topic:slm-architecture"
+    },
+    {
+      "from": "arxiv:2503.20083",
+      "to": "arxiv:2503.01493",
+      "why": "Sherkala-8B as a cross-tokenizer teacher for MLA upcycling of a bespoke-tokenizer Kazakh SLM is the unclaimed combination this node flags",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2503.20083",
+      "to": "arxiv:2506.06607",
+      "why": "Both attack the cross-tokenizer barrier; training-free tokenizer transplantation is an alternative to ALM's likelihood matching for…",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2505.01618",
+      "to": "arxiv:2407.17465",
+      "why": "Competing muP variant (unit-scaled max-update) vs CompleteP's depth-muP for single-scale HP transfer",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2505.01618",
+      "to": "arxiv:2503.04715",
+      "why": "both are HP-transfer/scaling recipes for picking LR on a small proxy before the full run",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2505.01618",
+      "to": "arxiv:2510.19093",
+      "why": "CompleteP extends muP transfer to depth; 2510.19093 says muP benefit is replaceable by modified warmup — direct disagreement",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2505.09388",
+      "to": "arxiv:2502.02732",
+      "why": "Both target residual/attention stability at scale; Qwen3 uses QK-Norm, Peri-LN repositions the norm",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2505.09388",
+      "to": "arxiv:2510.06548",
+      "why": "Qwen3-0.6B is overtrained ~60k tok/param; this paper warns overtrained models saturate when reused as CPT init — direct risk to the…",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2505.09388",
+      "to": "arxiv:2603.27859",
+      "why": "KazByte adapts this exact Qwen3-0.6B backbone to Kazakh via a byte-level adapter",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2505.17272",
+      "to": "arxiv:2604.24715",
+      "why": "Both are hybrid-model upcycling of pretrained transformers; long-context-aware upcycling extends the frontier Zebra-Llama's short-eval…",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2505.21487",
+      "to": "arxiv:2509.16686",
+      "why": "EG-MLA gates MLA with embeddings; builds on the sub-1B MLA config this paper pins (kv_lora, decoupled rope)",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "arxiv:2505.21487",
+      "to": "arxiv:2511.18643",
+      "why": "Competing KV-cache reduction axes: MLA latent compression vs Kitty 2-bit KV quantization",
+      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+    },
+    {
+      "from": "arxiv:2505.21487",
+      "to": "hf:blog/smollm3",
+      "why": "GLA paper shows MLA beats GQA-4 sub-1B, yet SmolLM3 shipped GQA-4 without ablating MLA (not in nanotron at the time)",
+      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+    },
+    {
+      "from": "arxiv:2505.21487",
+      "to": "hf:qwen/qwen3-0.6b-base",
+      "why": "Lab's GQA-8x128 baseline; 2505 shows GQA-4 approx MLA at sub-1B, motivating MLA over Qwen3-0.6B's GQA-8",
+      "agent": "topic:gla-2-gta-arxiv-2505-21487-zadouri-strau"
+    },
+    {
+      "from": "arxiv:2506.05176",
+      "to": "arxiv:2402.03216",
+      "why": "BGE-M3 encoder beats decoder-embedder Qwen3-Emb-0.6B on Kazakh Belebele (0.9017 vs 0.7545) — encoder > decoder-to-embedder on kk",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2506.05176",
+      "to": "arxiv:2506.20923",
+      "why": "KaLM-V2 removes the causal mask (bidir+mean) and beats Qwen3-Emb-0.6B 67.81 vs 64.33, contesting 'causal attention is on par'",
+      "agent": "topic:joint-generative-embedding-head-on-one-6"
+    },
+    {
+      "from": "arxiv:2506.05176",
+      "to": "arxiv:2507.23386",
+      "why": "Causal2Vec fixes decoder causal-mask limitation via a prepended bidirectional contextual token vs Qwen3's plain EOS pooling",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2506.05176",
+      "to": "arxiv:2509.20354",
+      "why": "Both sub-1B decoder→embedders; Qwen3-Emb-0.6B (64.33) beats EmbeddingGemma-308M (61.15) on MMTEB but loses params/QAT",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2506.05176",
+      "to": "title:per model belebeleretrieval json files extracted 2026 07 03",
+      "why": "Belebele kaz nDCG@10 behind Qwen3-Emb's Kazakh loss (0.7545 vs mE5-large-instruct 0.8949) comes from these extracted per-model JSONs",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2506.05333",
+      "to": "arxiv:2502.06703",
+      "why": "Kinetics refutes Can-1B: compute-optimal TTS overstated once KV memory counted; sub-1B not on Pareto frontier",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2506.05333",
+      "to": "arxiv:2502.11089",
+      "why": "Kinetics names block-top-k sparse attention as TTS enabler; NSA is the hardware-aligned trainable sparse-attention mechanism",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2506.05333",
+      "to": "arxiv:2511.18643",
+      "why": "Both attack the KV-memory wall that caps small-model TTS; Kitty does 2-bit KV quant where Kinetics uses sparse attention",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2506.06607",
+      "to": "arxiv:2407.05841",
+      "why": "OMP benchmarks against the WECHSEL/FOCUS init this paper surveys — OMP 99.1% vs FOCUS 73.4% vs WECHSEL 63.0% MMLU",
+      "agent": "topic:architecture-fork"
+    },
+    {
+      "from": "arxiv:2506.06607",
+      "to": "arxiv:2502.12829",
+      "why": "OMP's caveat — cross-scheme transplant collapses GSM8K -78.7% — directly threatens STEM-heavy KazMMLU numeric reasoning",
+      "agent": "topic:architecture-fork"
+    },
+    {
+      "from": "arxiv:2506.07900",
+      "to": "arxiv:2502.11089",
+      "why": "MiniCPM4's InfLLM-v2 and Native Sparse Attention are both natively-trainable sparse-attention schemes; shared method family",
+      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+    },
+    {
+      "from": "arxiv:2506.09342",
+      "to": "arxiv:2604.24715",
+      "why": "From-scratch sub-1B MLA trained at ctx 512 only; long-context upcycling addresses the missing evidence",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "arxiv:2506.20920",
+      "to": "arxiv:2503.10267",
+      "why": "FineWeb2 reports outperforming HPLT/CulturaX downstream and adds per-language rehydration over HPLT's raw Kazakh counts",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2506.20923",
+      "to": "arxiv:2501.01028",
+      "why": "KaLM-V2 succeeds KaLM-Embedding v1, adding focal reweighting, online hard-neg mixing, and Qwen3-Emb-8B distillation",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2507.06378",
+      "to": "arxiv:2508.08424",
+      "why": "Both conclude Unigram-LM aligns to morpheme boundaries better than BPE, strongest for agglutinative languages",
+      "agent": "topic:tokenizer-morphology"
+    },
+    {
+      "from": "arxiv:2507.06607",
+      "to": "arxiv:2503.19786",
+      "why": "Gemma 3n's shared-KV (num_kv_shared_layers=15) is layered on top of Gemma-3's 5:1 local-SWA:global attention pattern",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "arxiv:2507.06607",
+      "to": "hf:unsloth/gemma-3n-e2b",
+      "why": "Same Gemma 3n shared-KV mechanism corroborated in the fetched E2B config.json",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "arxiv:2507.22448",
+      "to": "arxiv:2504.03624",
+      "why": "Falcon-H1 runs attention+Mamba-2 parallel per layer; Nemotron-H interleaves them sequentially",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2507.23386",
+      "to": "arxiv:2402.15449",
+      "why": "Causal2Vec's contextual token cuts sequence 85% / inference 82% vs Echo's input-doubling — direct efficiency refutation of echo-style…",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2508.08424",
+      "to": "arxiv:2502.00894",
+      "why": "Unigram-dominance finding qualifies MorphBPE: morph pre-segmentation helps BPE but gives Unigram no consistent gain",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2508.18756",
+      "to": "arxiv:2401.06066",
+      "why": "UltraMemV2 reaches parity with an 8-expert MoE at matched compute+params and wins on memorization/ICL",
+      "agent": "topic:sparse-memory-2026-engram-lineage-beyond"
+    },
+    {
+      "from": "arxiv:2509.11414",
+      "to": "arxiv:2403.08763",
+      "why": "LayRA is the no-replay alternative to the replay + LR-rewarming standard continual-PT baseline this establishes",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2509.11414",
+      "to": "arxiv:2605.03229",
+      "why": "Both target low-forgetting language addition; LayRA = layer-selective LoRA vs sparse-memory finetuning — competing forgetting-mitigation…",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2509.14252",
+      "to": "arxiv:2603.27859",
+      "why": "Cites KazByte byte-adapter as the other Kazakh SLM competitor; neither touches embeddings, validating embedding-first",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2509.15811",
+      "to": "arxiv:2603.21036",
+      "why": "Best-of-L routes a high-resource verifier to score Kazakh candidates; Left Behind frames cross-lingual transfer as the low-resource bridge",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "arxiv:2509.20354",
+      "to": "arxiv:2510.23896",
+      "why": "AfriMTEB finds EmbeddingGemma underperforms the E5 family on African LRLs — external evidence its lightweight-decoder gains don't transfer…",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2509.24945",
+      "to": "arxiv:2402.14905",
+      "why": "Same Meta lineage that founded deep-narrow MobileLLM shipped a shallow-wide 360M in R1 — reversed shape choice",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2510.06548",
+      "to": "arxiv:2407.07263",
+      "why": "Bounds 'Reuse Don't Retrain': the reuse/transfer benefit saturates as base pretraining tokens grow, decaying the advantage",
+      "agent": "topic:architecture-fork"
+    },
+    {
+      "from": "arxiv:2510.15103",
+      "to": "arxiv:2405.09673",
+      "why": "both frame method choice around forgetting; A's sparse-mem NQ F1 -11% directly beats B's 'LoRA forgets less' claim (-71%)",
+      "agent": "topic:post-hoc-attachment-of-engram-style-cond"
+    },
+    {
+      "from": "arxiv:2510.15103",
+      "to": "arxiv:2412.09764",
+      "why": "A sparsely finetunes the Berges-et-al memory-layer models B introduces; B is the from-scratch substrate A adapts (best-case bound, not…",
+      "agent": "topic:post-hoc-attachment-of-engram-style-cond"
+    },
+    {
+      "from": "arxiv:2510.23896",
+      "to": "arxiv:2603.22290",
+      "why": "Both adapt mE5 to LRLs — AfriE5 by cross-lingual distillation (+1.1/+1.7), Less-is-More by base-weight averaging; same thin-margin regime",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2510.23896",
+      "to": "hf:nurlykhan/kazembed-v5",
+      "why": "AfriE5 +1.1/+1.7 is consistent with kazembed-v5's +2.1% MRR — the only dedicated Kazakh embedder, same modest LRL-adaptation ceiling",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2510.26692",
+      "to": "arxiv:2412.06464",
+      "why": "Kimi Linear's 3:1 hybrid pairs full-MLA with KDA, a gated-delta-rule linear layer from this Gated DeltaNet line",
+      "agent": "topic:mla-at-sub-1b-scale"
+    },
+    {
+      "from": "arxiv:2510.26692",
+      "to": "arxiv:2505.17272",
+      "why": "Both hybridize attention with linear layers; Kimi Linear reports full-MLA beats its own hybrid on RULER-128K, Zebra collapses",
+      "agent": "topic:mla-at-sub-1b-scale"
+    },
+    {
+      "from": "arxiv:2510.26788",
+      "to": "hf:qwen/qwen3-0.6b-base",
+      "why": "the untested fp16-CPT stability claim is precisely about this bf16-native checkpoint the lab plans to adapt",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "arxiv:2511.01066",
+      "to": "arxiv:2506.20920",
+      "why": "Overlapping Kazakh web corpora: HPLT notes heavy dedup overlap with FineWeb-2, so naive concatenation double-counts tokens",
+      "agent": "topic:kazakh-turkic-nlp"
+    },
+    {
+      "from": "arxiv:2511.08376",
+      "to": "arxiv:2603.22290",
+      "why": "Turkic sibling: TurkEmbed's 34.2M pairs fail to beat mE5, tempering Less-is-More's claim of cheaply winning on a Kazakh-family LRL",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2511.08376",
+      "to": "title:aclanthology org 2025 findings emnlp 471 tr mteb emnlp 2025 findings huggingface co trmteb",
+      "why": "TurkEmbed is evaluated on TR-MTEB, where mE5 variants still lead retrieval",
+      "agent": "topic:embeddings-training"
+    },
+    {
+      "from": "arxiv:2511.23404",
+      "to": "arxiv:2411.13676",
+      "why": "Rival small-LM hybrids: LFM2 conv+few-GQA vs Hymba parallel hybrid-head attention+SSM",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2512.03989",
+      "to": "arxiv:2402.01035",
+      "why": "Shared method: re-running BPE / tokenizer choice for domain-and-language adaptation before CPT",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2512.17351",
+      "to": "arxiv:2601.07372",
+      "why": "Canon depthwise Conv1D functionally overlaps Engram's built-in Conv1D — competing local-mixing, not complementary",
+      "agent": "topic:residual-stream-stability-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2512.24880",
+      "to": "arxiv:2601.21579",
+      "why": "KromHC extends mHC with Kronecker-product mixing — evidence mHC is a fast-moving mainstream subfield, indefensible as a novel contribution",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2601.07372",
+      "to": "arxiv:2508.18756",
+      "why": "Both scale static memory tables to huge param counts; UltraMemV2 is an alternate memory-network architecture reaching 120B",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2601.07372",
+      "to": "arxiv:2601.16531",
+      "why": "Direct Engram extension: collision-free hot-tier fixes the multiplicative-XOR hash collisions of this base design",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2601.07372",
+      "to": "arxiv:2605.20948",
+      "why": "Memory Grafting is Engram-lineage; slice cites its identical suffix-n-gram gate α=sigmoid(<RMSNorm K,Q>/√d)",
+      "agent": "topic:deepseek-tech"
+    },
+    {
+      "from": "arxiv:2603.02041",
+      "to": "arxiv:2506.20920",
+      "why": "EstLLM refutes FineWeb-2 quality for discriminative tasks — found it full of machine-translated spam by inspection",
+      "agent": "topic:continual-pt-lowres-qlora-vs-full-cpt-re"
+    },
+    {
+      "from": "arxiv:2603.02188",
+      "to": "arxiv:2509.16686",
+      "why": "MLRA trains GLA-2 with added gating; EG-MLA gates MLA embeddings — same gate-the-latent-attention trend",
+      "agent": "topic:gla-2-gta-arxiv-2505-21487-zadouri-strau"
+    },
+    {
+      "from": "arxiv:2603.05883",
+      "to": "arxiv:2606.18717",
+      "why": "Both morphology-aware Turkic tokenizers; VerChol validated only on Tamil, Morpheus built for Turkish",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "arxiv:2603.05883",
+      "to": "arxiv:2606.23943",
+      "why": "Both argue morphological-boundary accuracy is a necessary tokenizer metric / grammar-first design for low-resource agglutinative languages",
+      "agent": "topic:tokenizer-morphology"
+    },
+    {
+      "from": "arxiv:2603.10006",
+      "to": "arxiv:2603.20854",
+      "why": "TOBA is the dense+Engram+agglutinative analog; SozKZ-600M is the Kazakh from-scratch SLM a morpheme-Engram would augment",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2603.10006",
+      "to": "arxiv:2606.12113",
+      "why": "closest fragmenting-tokenizer Engram analogs (syllable vs char n-grams); both post-hoc frame sub-lexical capture, no segmenter integrated",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2603.10006",
+      "to": "arxiv:2606.18717",
+      "why": "TOBA-LM only post-hoc reinterprets syllable n-grams as 'morphemes' with no segmenter; Morpheus is a real morphology-aware Turkic tokenizer…",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2603.17946",
+      "to": "arxiv:2603.02188",
+      "why": "Both are 2026 low-rank/MLA decomposition methods; CARE is covariance-aware SVD conversion, Multi-Head Low-Rank Attention is an adjacent…",
+      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+    },
+    {
+      "from": "arxiv:2603.20854",
+      "to": "arxiv:2506.09342",
+      "why": "SozKZ uses fully vanilla MHA; latent MHA at small scale is an untested efficiency upgrade the Kazakh attention axis lacks",
+      "agent": "topic:kazakh-turkic-nlp"
+    },
+    {
+      "from": "arxiv:2603.21036",
+      "to": "arxiv:2412.04261",
+      "why": "Aya Expanse is the model whose Kazakh collapse (15.7%, emits Kyrgyz) Left Behind diagnoses as sibling-language interference",
+      "agent": "topic:kazakh-turkic-nlp"
+    },
+    {
+      "from": "arxiv:2603.22290",
+      "to": "arxiv:2401.00368",
+      "why": "Both use LLM-synthetic pairs; L-i-M shows 10k noisy MT pairs suffice for LRLs, undercutting the massive-synthetic premise",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2603.22290",
+      "to": "hf:nurlykhan/kazembed-v5",
+      "why": "Less-is-More 10k-pair full-FT+avg is the counter-recipe to kazembed-v5's 61k-pair MNRL that gained only +2.1% MRR",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "arxiv:2603.28554",
+      "to": "arxiv:2402.09906",
+      "why": "Hydra's controlled 0.8B/4B ablation refutes GRIT's 'joint training lossless' — generation collapses at our scale under LoRA joint training",
+      "agent": "topic:decoder-to-embedder"
+    },
+    {
+      "from": "arxiv:2603.28554",
+      "to": "arxiv:2405.09673",
+      "why": "Hydra's frozen-base + r=32 LoRA retrieval mode banks on exactly the 'LoRA forgets less' property this paper quantifies",
+      "agent": "topic:joint-generative-embedding-head-on-one-6"
+    },
+    {
+      "from": "arxiv:2604.21724",
+      "to": "arxiv:2605.24869",
+      "why": "Both 2026 Engram-extending n-gram memory variants at small scale; X-gram refines token-ID grams via ShortConv, Lngram moves to latent…",
+      "agent": "topic:novelty-check"
+    },
+    {
+      "from": "arxiv:2604.28075",
+      "to": "arxiv:2306.11644",
+      "why": "both filter for educational/textbook quality; 2604.28075 shows quality-filter + repetition beats single-pass diversity",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "arxiv:2605.20948",
+      "to": "arxiv:2601.16531",
+      "why": "Both target the small-table hash-collision failure that sinks sub-1B Engram; MG uses offline exact-match, this a collision-free hot-tier",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2605.20948",
+      "to": "arxiv:2604.21724",
+      "why": "Both Engram-lineage fixes to n-gram memory; X-gram uses data-aware extraction vs MG's frozen donor hidden-states",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2605.20948",
+      "to": "arxiv:2605.24869",
+      "why": "Both kill tokenizer-ID hash collisions: MG via offline exact longest-match, Lngram via learned latent discrete keys; MG cites Lngram…",
+      "agent": "topic:does-the-engram-conditional-memory-modul"
+    },
+    {
+      "from": "arxiv:2605.23857",
+      "to": "arxiv:2501.12948",
+      "why": "DeepSeek-R1 distillation assumes a very strong teacher; this node shows stronger teachers can saturate or reverse gains",
+      "agent": "topic:small-lm-training-recipes-qymyzlm-design"
+    },
+    {
+      "from": "arxiv:2605.23857",
+      "to": "arxiv:2503.20083",
+      "why": "Both on KD; cross-tokenizer distillation enables teacher/student across vocabularies, complementing the weak-teacher-suffices finding",
+      "agent": "topic:training-recipes"
+    },
+    {
+      "from": "arxiv:2605.24718",
+      "to": "arxiv:2411.14198",
+      "why": "Tokenizer Tax quantifies the Cyrillic fertility penalty; this paper links high fertility to worse downstream LM quality",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2605.24718",
+      "to": "title:own measurement transformers 5 5 2 autotokenizer qwen qwen3 0 6b base 66 word kazakh paragraph",
+      "why": "Tax study: Qwen3 fragments Cyrillic 8-9 subw/word; own Kazakh measurement corroborates at 5.3 tok/word via byte fallback",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2605.24869",
+      "to": "arxiv:2510.15103",
+      "why": "both adapt memory over a converged backbone; Lngram's frozen-backbone +5.14pp is the lineage's one post-hoc-attach datapoint",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2605.24869",
+      "to": "arxiv:2603.10006",
+      "why": "TOBA (B) already applies Engram to agglutinative Indonesian with morpheme-flavored framing, eroding A's/lab's morpheme first-of-kind claim",
+      "agent": "topic:post-hoc-attachment-of-engram-style-cond"
+    },
+    {
+      "from": "arxiv:2605.24869",
+      "to": "arxiv:2606.18717",
+      "why": "A's 'learn your own latent lookup units, drop tokenizer IDs' motivation directly rivals the hand-specified morpheme keys of B (Morpheus…",
+      "agent": "topic:post-hoc-attachment-of-engram-style-cond"
+    },
+    {
+      "from": "arxiv:2606.08347",
+      "to": "arxiv:2411.14198",
+      "why": "Tensorizing's high-fertility transfer argument (Kazakh fragmentation mimics tiny-vocab regime) leans on morphological-complexity penalty…",
+      "agent": "topic:sparse-memory-2026-engram-lineage-beyond"
+    },
+    {
+      "from": "arxiv:2606.08347",
+      "to": "arxiv:2508.18756",
+      "why": "both scale/compress memory networks; UltraMemV2 learned-slot keyed to 120B, TN-gram CP-factorizes n-gram tables, neither morpheme",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2606.08347",
+      "to": "arxiv:2605.20948",
+      "why": "Tensorizing's positive micro-scale dense gains contrast with Memory Grafting's negative production-vocab sub-1B result (45.03 vs MoE 45.62)",
+      "agent": "topic:sparse-memory-2026-engram-lineage-beyond"
+    },
+    {
+      "from": "arxiv:2606.08347",
+      "to": "arxiv:2606.12113",
+      "why": "both micro-scale dense Engram configs on fragmenting vocabs; MolGram char-level n={4,6}, TN-gram CP-shares latents across orders",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2606.18717",
+      "to": "arxiv:2502.00894",
+      "why": "both morpheme-aware tokenizers; either could source the morpheme keys for the conditional memory neither builds",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2606.18717",
+      "to": "doi:10.3390/info17020128",
+      "why": "Morpheus is Turkish-only; the Kazakh CSE-guided segmenter is the Kazakh analog to source morpheme keys",
+      "agent": "topic:novelty-check-has-any-2026-preprint-impl"
+    },
+    {
+      "from": "arxiv:2606.23943",
+      "to": "arxiv:2507.06378",
+      "why": "Shared method — morphological-alignment/boundary-accuracy of tokenizers; QuechuaTok on one LRL, this paper across 70 languages",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "arxiv:2606.23943",
+      "to": "arxiv:2508.08424",
+      "why": "Both argue morphology-aware metric matters and unigram/PRPE beat surface BPE on morpheme boundaries in agglutinative LRLs",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "arxiv:2606.23943",
+      "to": "arxiv:2510.09947",
+      "why": "Both refute fertility as a sufficient tokenizer metric; QuechuaTok proposes morpheme-boundary accuracy, Beyond-Fertility proposes STRR",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "arxiv:2606.23943",
+      "to": "title:mdpi information 2026 17 2 128 morphology aware segmentation and tokenization for turkic languages the kazakh case",
+      "why": "Quechua morpheme-boundary metric transfers to the Kazakh Turkic segmentation case both are agglutinative LRL tokenizer eval",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "arxiv:2606.27019",
+      "to": "arxiv:2508.08424",
+      "why": "MinGram and the Telugu study independently corroborate Unigram-family beats BPE on bits-per-byte across languages",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "doi:10.3389/frai.2025.1708566",
+      "to": "doi:10.36227/techrxiv.175942902.25827042",
+      "why": "The hybrid analyzer's top-accuracy stage (92.3%) stacks KazRoBERTa on FST+CRF — this is that KazRoBERTa model's card",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "doi:10.3390/info17020128",
+      "to": "arxiv:2603.05883",
+      "why": "Both grammar/morphology-first tokenization for agglutinative languages, evaluated on curated data rather than noisy crawl",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "doi:10.36227/techrxiv.175942902.25827042",
+      "to": "arxiv:2404.05961",
+      "why": "kaz-roberta is the strongest monolingual kk encoder but never got sentence-embedding training; LLM2Vec-style conversion is the missing step",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "hf:ai-forever/frida",
+      "to": "arxiv:2408.12503",
+      "why": "FRIDA is a ruMTEB-lineage Russian embedder; node documents it excludes kk despite shared Cyrillic — cross-script ru→kk transfer is…",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "hf:api/datasets",
+      "to": "arxiv:2403.19399",
+      "why": "source-of: issai/kazparc is the HF release of the KazParC Kazakh parallel corpus paper",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:api/datasets",
+      "to": "arxiv:2404.04487",
+      "why": "source-of: issai/kazqad-retrieval is the HF release of the KazQAD paper's ~815k-passage open-domain QA corpus",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:api/datasets",
+      "to": "hf:issai/ragbench_kazakh",
+      "why": "sibling ISSAI Kazakh retrieval/RAG feedstock dataset from the same lab lineage",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:blog/davanstrien",
+      "to": "arxiv:2306.11644",
+      "why": "the Textbooks/FineWeb-Edu educational-quality paradigm has no Kazakh classifier and does not transfer across translation",
+      "agent": "topic:data-efficiency-10b-kazakh-10b-token-pre"
+    },
+    {
+      "from": "hf:blog/gemma4",
+      "to": "arxiv:2503.19786",
+      "why": "Direct Gemma lineage: Gemma 3 -> 3n -> 4, all shipping trailing KV sharing without published quality cost",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "hf:blog/gemma4",
+      "to": "hf:unsloth/gemma-3n-e2b",
+      "why": "Gemma 4 carries the same num_kv_shared_layers mechanism forward, again with no ablation numbers",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "hf:deepseek-ai/deepseek-ocr",
+      "to": "arxiv:2512.24618",
+      "why": "Opposite production choices near sub-2B: DeepSeek-OCR ships MLA DISABLED (~570M active MoE) while Youtu-LLM ships dense MLA at 1.96B…",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "hf:ibm-granite/granite-4.0-h-350m",
+      "to": "arxiv:2406.07887",
+      "why": "Granite-4-H-350M is a 7:1 Mamba2:attention hybrid; empirical Mamba study is its architectural lineage and closest same-family baseline",
+      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+    },
+    {
+      "from": "hf:mbzuai/kazmmlu",
+      "to": "arxiv:2502.11020",
+      "why": "KazMMLU and TUMLU are parallel MMLU-style native benchmarks for Turkic languages; TUMLU covers the same regional-knowledge evaluation niche",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "hf:mbzuai/kazmmlu",
+      "to": "hf:qwen/qwen3-0.6b-base",
+      "why": "Qwen3-0.6B-Base is the model scored 32.8% on this benchmark — the canonical generative target to beat",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "hf:mbzuai/kazmmlu",
+      "to": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+      "why": "This dataset quirk (dev=3) is exactly what caused that eval run's [:5] truncation and the 5-shot→3-shot mislabel",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "hf:mteb/webfaqretrieval",
+      "to": "arxiv:2502.13595",
+      "why": "WebFAQRetrieval is an MMTEB task; MMTEB is the benchmark whose kaz coverage is too thin for a headline eval",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:mteb/webfaqretrieval",
+      "to": "title:mteb pypi package mteb get tasks languages kaz verified locally 2026 07 03",
+      "why": "the tiny kaz WebFAQ split is one of the few tasks mteb.get_tasks(languages=['kaz']) actually returns",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:nurlykhan/kazembed-v5",
+      "to": "arxiv:2511.08376",
+      "why": "Turkic-sibling target: TurkEmbed is a Turkish embedding model, closest-language comparator for Kazakh",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:openbmb/minicpm3-4b",
+      "to": "arxiv:2405.04434",
+      "why": "MiniCPM3-4B rank 256 = d/10, same latent ratio class as DeepSeek-V2 (512/5120=d/10)",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "hf:openbmb/minicpm3-4b",
+      "to": "arxiv:2412.19437",
+      "why": "MiniCPM3's kv_lora_rank=256 is d/10, same rank-ratio class as DeepSeek-V3's 512/7168=d/14",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "hf:qwen/qwen3.5-0.8b",
+      "to": "arxiv:2412.06464",
+      "why": "Qwen3.5-0.8B's 3:1 linear layers ARE Gated DeltaNet — it chose hybrid-linear + GQA-2 over MLA for 256K context",
+      "agent": "topic:mla-sub1b"
+    },
+    {
+      "from": "hf:shyngys879/kazakh-e5-rag-embedding",
+      "to": "arxiv:2407.15831",
+      "why": "NV-Retriever formalizes hard-negative mining — the candidate-pool construction that determines shyngys879's swinging MRR",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:shyngys879/kazakh-e5-rag-embedding",
+      "to": "hf:nurlykhan/kazembed-v5",
+      "why": "refutes: same lineage shows mE5-large collapses 0.919->0.449 by pool, so kazembed-v5 card's 0.909 is a protocol artifact",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:shyngys879/kazakh-e5-rag-embedding",
+      "to": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "why": "its protocol-dependence motivates evallab's pinned KazQAD BM25 hard-neg recipe (100 candidates, k1=1.5, b=0.75)",
+      "agent": "topic:embeddings-retrieval"
+    },
+    {
+      "from": "hf:unsloth/gemma-3n-e2b",
+      "to": "arxiv:2503.19786",
+      "why": "Gemma-3n's headline 2x prefill speedup is measured against Gemma 3 4B (same lineage, no cross-layer sharing)",
+      "agent": "topic:kv-cache-architecture"
+    },
+    {
+      "from": "title:apertium github io apertium kaz frontiers 2025 frai 2025 1708566 hybrid kazakh analyzer",
+      "to": "arxiv:2502.00894",
+      "why": "apertium-kaz FST + KazMorphCorpus-2025 supply the gold morpheme segmentation that MorphBPE-style tokenizers require to run on Kazakh",
+      "agent": "topic:tokenizer-morphology"
+    },
+    {
+      "from": "title:arxiv org html 2505 21487v1 gla 2 config h c 2 d c 2 d h per latent head d r 32 tp sharding analysis",
+      "to": "title:arithmetic from verified configs deepseek v2 lite minicpm3 qwen3 0 6b in kb kb cache math entry",
+      "why": "TP>=2-only per-device saving feeds lab KV menu; at TP=1 GLA-2 collapses to plain MLA's cache",
+      "agent": "topic:gla-2-gta-arxiv-2505-21487-zadouri-strau"
+    },
+    {
+      "from": "title:arxiv org html 2603 02188 tables 3 4 vs arxiv org html 2505 21487v1",
+      "to": "arxiv:2506.09342",
+      "why": "No independent sub-1B latent-attention replication exists; 2506.09342 is a separate MLA-at-SLM study, not a rerun",
+      "agent": "topic:gla-2-gta-arxiv-2505-21487-zadouri-strau"
+    },
+    {
+      "from": "title:catherinearnett byte premium tool all merged 20240223 tsv byte coef nllb column",
+      "to": "arxiv:2602.06942",
+      "why": "Byte-premium data show Latin Turkic near English (tur_latn 1.044); Turkish subword study operates in that low-premium Latin regime",
+      "agent": "topic:kazakh-tokenizer-fertility-vs-byte-premi"
+    },
+    {
+      "from": "title:cfgs qwen3 0 6b 4gpu yml src mha2mla patching model load py from scratch reinit block",
+      "to": "arxiv:2505.09388",
+      "why": "Config is Qwen3-0.6B-specific: qk_norm reordering supported, 2-norm rope selection unsupported for Qwen3",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "title:cfgs qwen3 0 6b 4gpu yml src mha2mla patching model load py from scratch reinit block",
+      "to": "hf:qwen/qwen3-0.6b-base",
+      "why": "MHA2MLA from-scratch config re-inits attention on the Qwen3-0.6B-Base body, the lab's canonical target",
+      "agent": "topic:mla-at-sub-1b"
+    },
+    {
+      "from": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+      "to": "arxiv:2305.16264",
+      "why": "feasible ~3.8-6.4B-token envelope must be spent under data-constrained scaling (repeat-epoch value bounds)",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+      "to": "arxiv:2403.08763",
+      "why": "budget bounds the CPT recipe this paper recommends; 20-25B tok-seen exceeds the Kaggle quota by ~40-80x",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+      "to": "arxiv:2603.27859",
+      "why": "KazByte adapts Qwen to Kazakh via byte adapter — an alternative low-compute path under the same T4 constraint",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:empirical muon ns py and smoke2 py this session torch 2 11 0 cu130 sm75",
+      "to": "arxiv:2510.26788",
+      "why": "Converging fp16>bf16 prescription: node's reason is SM75 tensor-core absence, this paper's is defeating train-inference mismatch",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical smoke one py smoke2 py timings this session",
+      "to": "title:kaggle product feedback announcement notebooks update new gpu t4s options",
+      "why": "The 7-9 min per-session Triton compile tax compounds the Kaggle session/quota limits described in that announcement",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "to": "arxiv:2502.11089",
+      "why": "NSA claims hardware-aligned attention; node shows fla linear kernels are hardware-MISaligned on SM75 (28-47x SDPA, 64KB fallback)",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "to": "arxiv:2504.03624",
+      "why": "Node gates hybrid design: Mamba2 costs 28-47x SDPA on SM75, so a Nemotron-H-style Mamba2-Transformer hybrid is T4-infeasible",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "to": "arxiv:2510.26692",
+      "why": "Refutes Kimi Linear's linear-attn speed premise on SM75: its KDA only beats SDPA at T~12-16K, far above CPT ctx 1024-4096",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+      "to": "arxiv:2406.07887",
+      "why": "fla-Triton Mamba2 runs fwd+bwd on SM75; adds a hardware-gate datapoint to this paper's Mamba LM empirics",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+      "to": "arxiv:2412.06464",
+      "why": "GatedDeltaNet from this paper PASSES on SM75 but at 14K tok/s/layer (28-47x SDPA) via fla-0.5.1 fallback configs",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+      "to": "arxiv:2502.16982",
+      "why": "Empirical SM75 6.6x bf16 trap in KellerJordan Muon; this paper argues Muon scales but is silent on Turing/fp16 NS5 path",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+      "to": "title:lab measurement peak vram standard adam state arithmetic 2 2 4 4 4 bytes param mixed precision bitsandbytes 8 bit adam",
+      "why": "Muon's single momentum buffer confirms the ~50% optimizer-VRAM saving vs the AdamW 2+2+4+4+4 arithmetic in that node",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:ggml org llama cpp discussions 3167 4167 8273 xiongjiedai gpu benchmarks on llm inference",
+      "to": "arxiv:2510.09947",
+      "why": "Edge tok/s → perceived words/s divides by tokenizer fertility; STRR reframes how to measure that multilingual fertility premium",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "title:ggml org llama cpp howto add model md discussion 16770 ubergarm deepseek v3 gguf card ik llama cpp requirement",
+      "to": "arxiv:2503.11132",
+      "why": "MLA export breaks mainline GGUF (ik_llama.cpp fork only); X-EcoMLA's upcycled MLA inherits this deployment penalty",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "title:ggml org llama cpp howto add model md discussion 16770 ubergarm deepseek v3 gguf card ik llama cpp requirement",
+      "to": "arxiv:2601.07372",
+      "why": "Deployment tax: Engram conditional-lookup memory needs a full custom llm_arch + gguf-py C++ integration, not a drop-in",
+      "agent": "topic:inference-tts"
+    },
+    {
+      "from": "title:github com dao ailab flash attention issues 2372 github com dao ailab grouped latent attention readme kernels deferred to fa3 hopper hopper gpus cuda 12 3 github com songtaoliu0823 mlra",
+      "to": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+      "why": "GLA kernels need H100+CUDA12.3; lab's canonical compute is Kaggle T4 (sm75) — GLA/GTA unrunnable there",
+      "agent": "topic:gla-2-gta-arxiv-2505-21487-zadouri-strau"
+    },
+    {
+      "from": "title:github com dao ailab flash attention readme fetched 2026 07 04 empirical sdpa measurement this session turing port performance details from search snippets only",
+      "to": "arxiv:2505.21487",
+      "why": "Both weigh hardware-fit of attention; node measures SDPA fp16 as fastest SM75 kernel while FA2 needs Ampere+",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:github com state spaces mamba setup py raw main branch fetched 2026 07 04 local build attempt blocked by nvcc 11 5 11 6",
+      "to": "title:ggml org llama cpp deepwiki supported model architectures devingulliver mamba gguf",
+      "why": "Both track Mamba deployability; node confirms mamba-ssm CUDA builds for sm_75, complementing llama.cpp Mamba GGUF support",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "to": "hf:api/datasets",
+      "why": "The pinned protocol reads issai/kazqad-retrieval @ a3999685; this dataset-API source is the provenance for the 825k-passage full corpus",
+      "agent": "topic:joint-generative-embedding-head-on-one-6"
+    },
+    {
+      "from": "title:hf datasets api metadata 2026 07 03",
+      "to": "arxiv:2401.00368",
+      "why": "kk has only ~100-150k MT instruction pairs vs the LLM-synthesized instruction-data scale that E5-mistral's embedding recipe assumes",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+      "to": "title:hf qwen qwen3 0 6b config user provided kazmmlu baseline",
+      "why": "Lab's measured 0.328 confirms the user-provided Qwen3-0.6B KazMMLU baseline figure under a fully specified runner",
+      "agent": "topic:win-bar-protocol-audit"
+    },
+    {
+      "from": "title:https arxiv org html 2412 04506v2 https www snowflake com en engineering blog snowflake arctic embed 2 multilingual",
+      "to": "title:https github com arailym ray kaz qa rag",
+      "why": "KAZ-QA-RAG benchmark names Arctic-Embed the best off-the-shelf Kazakh retriever (best pair: KazLLM-8B + Arctic-Embed)",
+      "agent": "topic:embed-sota"
+    },
+    {
+      "from": "title:huggingface smol training playbook via crawl gist github com unclecode e5da5fb6a1d37022b089e243e0d9e00e adoption absence from july 2026 searches",
+      "to": "hf:qwen/qwen3-0.6b-base",
+      "why": "Evidence that production sub-1B MLA adoption is zero: Qwen3-0.6B is a shipped GQA model, no MLA arm",
+      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+    },
+    {
+      "from": "title:ibm announcement marktechpost 2025 10 29 infoq 2025 11",
+      "to": "arxiv:2507.22448",
+      "why": "Both sub-1B Mamba-2/Transformer hybrids; Granite is mostly-Mamba+few-attn vs Falcon's every-layer parallel",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "title:lab measurement 2026 07 04 torch 2 11 0 cu130 transformers 5 5 2 hf qwen qwen3 0 6b base config json",
+      "to": "title:nvidia com en us data center tesla t4 official spec page fetched 2026 07 04 a100 numbers from nvidia a100 datasheet standard published specs local measurement context",
+      "why": "~15-20% MFU is derived against T4 spec FLOPs; 2070 measurement is the anchor for the missing T4 0.6B-training number",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lab measurement peak vram standard adam state arithmetic 2 2 4 4 4 bytes param mixed precision bitsandbytes 8 bit adam",
+      "to": "arxiv:2405.09673",
+      "why": "VRAM says QLoRA has no rationale at 0.6B so full-FT dominates; LoRA-Learns-Less confirms LoRA underperforms full-FT",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lab measurement peak vram standard adam state arithmetic 2 2 4 4 4 bytes param mixed precision bitsandbytes 8 bit adam",
+      "to": "arxiv:2510.15103",
+      "why": "VRAM rules out QLoRA as the PEFT; sparse-memory finetuning is the competing low-forgetting alternative to full-FT",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lab measurement t4bench2 py t4bench3 py qwen3 0 6b base config json max position embeddings 32768",
+      "to": "arxiv:2405.14591",
+      "why": "proposed 2048-ctx CPT with late 4K annealing interacts with RoPE base, which bounds usable context length",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lab probe 2026 07 04 torch nn attention sdpa kernel warnings verbatim reproduced oom vs 2 73 gib with patch in t4bench2 py",
+      "to": "arxiv:2502.11089",
+      "why": "NSA's hardware-aligned kernels assume Ampere+; on sm_75 with no FlashAttention such sparse-attention wins do not port to Kaggle T4",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lab probe 2026 07 04 torch nn attention sdpa kernel warnings verbatim reproduced oom vs 2 73 gib with patch in t4bench2 py",
+      "to": "title:github com dao ailab flash attention readme issues 887 1608 github com farnghwai flash attention 2080ti",
+      "why": "independently confirm FlashAttention is unavailable on sm_75 Turing (T4/2080Ti class)",
+      "agent": "topic:kaggle-t4x2-compute-vram-budget-for-the"
+    },
+    {
+      "from": "title:lm eval 0 4 11 installed package registry inspection 2026 07 03",
+      "to": "arxiv:2404.04487",
+      "why": "kazqad is one of the three task names absent from the lm-eval registry, blocking KazQAD retrieval eval until custom-wired",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "title:lm eval 0 4 11 installed package registry inspection 2026 07 03",
+      "to": "hf:mbzuai/kazmmlu",
+      "why": "The empty task registry is why KazMMLU needed a custom task YAML + include_path to load at all",
+      "agent": "topic:eval-benchmarks"
+    },
+    {
+      "from": "title:marktechpost 2025 09 14 venturebeat the kaitchup",
+      "to": "arxiv:2509.24945",
+      "why": "This blog summarizes the MobileLLM-R1 primary paper's sub-1B reasoning results",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "title:marktechpost 2026 03 31 aihola com distillabs ai",
+      "to": "arxiv:2510.06548",
+      "why": "Saturation result challenges LFM2.5-350M's 80,000:1 extreme-overtraining log-linear claim",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "title:mdpi applied sciences 14 13 5369 a benchmark for morphological segmentation in uyghur and kazakh tables incl oov table 8",
+      "to": "arxiv:2411.14198",
+      "why": "Kazakh's 8.52% OOV recall and unsupervised-segmenter collapse concretize why LMs perform worse for morphologically complex languages",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "title:mdpi applied sciences 14 13 5369 a benchmark for morphological segmentation in uyghur and kazakh tables incl oov table 8",
+      "to": "arxiv:2506.05227",
+      "why": "Both tackle low-resource Kazakh/agglutinative morphology under scarce annotation; benchmark quantifies OOV failure this method aims to fix",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    },
+    {
+      "from": "title:mdpi make 8 5 128 hf issai qolda",
+      "to": "arxiv:2505.09388",
+      "why": "Qolda is a Qwen3-4B adaptation that beats its own backbone; Qwen3 is the base model it adapts",
+      "agent": "topic:kazakh-turkic-nlp"
+    },
+    {
+      "from": "title:nvidia com en us data center tesla t4 official spec page fetched 2026 07 04 a100 numbers from nvidia a100 datasheet standard published specs local measurement context",
+      "to": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+      "why": "T4=21%-of-A100 ceiling here underpins the 6N-FLOPs T4 compute-budget/token derivation in that node",
+      "agent": "topic:hardware-gate"
+    },
+    {
+      "from": "title:own measurement transformers 5 5 2 autotokenizer qwen qwen3 0 6b base 66 word kazakh paragraph",
+      "to": "arxiv:2603.27859",
+      "why": "measured ~5.3 tok/word Qwen-Kazakh explosion is exactly the fertility problem KazByte's byte-adapter targets",
+      "agent": "topic:tokenizer-agglutinative"
+    },
+    {
+      "from": "title:per model belebeleretrieval json files extracted 2026 07 03",
+      "to": "arxiv:2402.03216",
+      "why": "BGE-M3 (M3-Embedding, 568M) is the concrete ≤600M bar at 0.9017 on BelebeleRetrieval kaz that QymyzLM's embedder must clear",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "title:per model belebeleretrieval json files extracted 2026 07 03",
+      "to": "arxiv:2509.20354",
+      "why": "EmbeddingGemma-300m measured at 0.6839 — the sub-600M laggard showing size alone doesn't buy kk retrieval quality",
+      "agent": "topic:embed-kazakh"
+    },
+    {
+      "from": "title:sebastian raschka mla gallery knightli deepseek analyses martinalderson kv cache history",
+      "to": "arxiv:2503.11132",
+      "why": "X-EcoMLA upcycles pretrained GQA attention into MLA — the conversion path realizing MLA's KV savings",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "title:sebastian raschka mla gallery knightli deepseek analyses martinalderson kv cache history",
+      "to": "arxiv:2506.09342",
+      "why": "Both push MLA KV compression; this paper tests MLA specifically at SLM scale the gallery only sketches",
+      "agent": "topic:sota-slm"
+    },
+    {
+      "from": "title:vrcp nozaki et al 2nd sumeval workshop 2025 aclanthology org 2025 sumeval 2 5 pdf tables 1 4",
+      "to": "arxiv:2601.16531",
+      "why": "VRCP holds vocab size constant (155.58M table, zero freed) — unlike a shrinking swap it yields no headroom for Engram, a tradeoff against…",
+      "agent": "topic:qymyzlm-architecture-fork"
+    },
+    {
+      "from": "title:wiki apertium org wiki apertium kaz apertium kaz transducer stats page",
+      "to": "arxiv:2506.20920",
+      "why": "apertium-kaz FST coverage drops on Wikipedia and is untested on FineWeb2-style crawl — the very noisy pipeline QymyzLM would ingest",
+      "agent": "topic:kazakh-morphological-segmentation-qualit"
+    }
+  ],
+  "mocs": {
+    "architecture-fork": {
+      "summary": "The core decision — adapt a strong base (continual pretraining / tokenizer transplant) vs build from scratch — is settled toward adaptation by the evidence that matters most for QymyzLM. The single most on-point datapoint is CONFIRMED and damning to from-scratch: SozKZ-600M (from-scratch, ~9B Kazakh tokens, dedicated 50K BPE with a 2-3x fertility edge) scores MC-QA 30.3 / Belebele 27.0, BELOW an un-adapted, smaller Qwen2.5-0.5B (31.5 / 30.0) that had zero Kazakh training — best tokenizer, no knowledge win. The only same-data head-to-head (NorMistral, Norwegian) favors continual on every metric including knowledge-QA (NorQuAD +21.1 F1, NRK-Quiz +9.7). The chief from-scratch justification — a native tokenizer — is largely capturable: training-free OMP transplant retains 99.1% of MMLU and recovers to 101.4% after only 2B CPT tokens (vs FOCUS 73.4%, WECHSEL 63.0%). Two live caveats bound this: (1) cross-scheme transplants catastrophically break numeric reasoning (GSM8K -78.7%) unless digit tokenization is preserved — a direct threat to STEM-heavy KazMMLU; (2) continual's Pareto FLOP edge (~26-40% savings) decays logarithmically with base pretraining, and Qwen3-0.6B is heavily overtrained, so the transfer benefit is real but saturating. Open question: whether the from-scratch architecture-ablation space (entirely unclaimed on Kazakh — SozKZ is vanilla Llama, no morphology/memory) is worth a first-on-Kazakh result, or whether adapting Qwen3-0.6B-Base within a 9-10B-token budget dominates given saturation plus the digit-tokenization risk.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "On-point datapoint: from-scratch SozKZ-600M under-knows a smaller un-adapted Qwen despite a 2-3x better tokenizer"
+        },
+        {
+          "node_id": "arxiv:2412.06484",
+          "phrase": "Only same-data continual-vs-from-scratch head-to-head; continual wins every metric incl. knowledge-QA (+21.1 F1)"
+        },
+        {
+          "node_id": "arxiv:2506.06607",
+          "phrase": "Dissolves the tokenizer case for from-scratch (OMP 99.1% MMLU) but flags GSM8K -78.7% cross-scheme numeric break"
+        },
+        {
+          "node_id": "arxiv:2510.06548",
+          "phrase": "Bounds the win: continual's FLOP edge decays log with base pretraining; Qwen3-0.6B is overtrained"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Field prior: every Kazakh SOTA is an adaptation (Sherkala continual Llama-3.1 -> 41.4 KazMMLU), none from-scratch"
+        }
+      ]
+    },
+    "attention-kv-sub1b-attention-kv-architec": {
+      "summary": "The sub-1B attention/KV frontier has three cheap, scale-independent wins that are well-established: QK-Norm as the fp16-stability consensus (2309.14322, now shipped in Qwen3/OLMo2/Gemma3/Mellum2), a headwise sigmoid SDPA gate that collapses attention-sink from ~47% to ~5% for ~1.6M params and <2% latency (2505.06708), and sliding-window attention at 3:1–5:1 with window 512–1024 for a pure KV win (Gemma3 cuts KV from ~60% to <15% at 32K; Gemma3-270M's SWA recipe caches ~108MB@32K vs Qwen3-0.6B's 3.75GB, ~35x). The contested question is MLA: the strongest from-scratch head-to-head (2505.21487, Dao group, 183M–1.47B on FineWeb-Edu) shows MLA matches or beats GQA-4 at ≤876M while caching less (kv_lora=4×d_h, rope_dim 32, no q-compression), but MLA LOSES 1.1pp to GQA-4 at 1.47B — so the sub-1B MLA advantage is real but does not extend up, and its GLA-2/GTA-4 variants actually win at 433M/876M. Pure-MLA long-context is only validated at 3B-active MoE (Kimi Linear, uncertain), and GDN/Mamba2 hybrids replicate quality gains at 340M–1.3B (GDN-H1 56.4 vs Transformer++ 52.25 avg; Granite-4-H-350M +1.2 MMLU over its transformer twin) but are kernel-blocked on the lab's T4 (SM75) since FlashAttention-2 requires SM80+ and Triton FLA kernels are unverified there. The dominant open question is that NO non-vanilla attention mechanism has ever been trained or ablated on Kazakh — SozKZ-600M and Sherkala-8B are both stock attention — making even a small GQA-vs-MLA-vs-gated ablation on 9–10B Kazakh tokens a first-on-Kazakh publishable result.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2505.21487",
+          "phrase": "From-scratch 183M-1.47B MLA/GLA/GTA vs GQA head-to-head; MLA wins sub-1B but loses at 1.47B; pins kv_lora=4xd_h recipe"
+        },
+        {
+          "node_id": "arxiv:2505.06708",
+          "phrase": "Gated SDPA output (sink 47%->5%, ~0 cost) + the synthesis of which attention tricks pay off at 500M vs only at scale"
+        },
+        {
+          "node_id": "arxiv:2503.19786",
+          "phrase": "Gemma3-270M SWA recipe pinned from config: 15:3 local:global, window 512, KV ~108MB@32K vs 3.75GB (~35x)"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Only from-scratch Kazakh SLM: fully vanilla attention, 2K ctx, zero ablations — entire attention axis untested on Kazakh"
+        },
+        {
+          "node_id": "arxiv:2412.06464",
+          "phrase": "GDN hybrids beat Transformer++ at 1.3B on ppl/recall/throughput, but FLA kernels are T4-blocked"
+        },
+        {
+          "node_id": "title:github com dao ailab flash attention readme issues 887 1608 github com farnghwai flash attention 2080ti",
+          "phrase": "Hardware gate: FA2 needs SM80+, T4=SM75; any FA2-throughput or FLA-hybrid claim does not transfer to free compute"
+        }
+      ]
+    },
+    "continual-pt-lowres-qlora-vs-full-cpt-re": {
+      "summary": "For a sub-1B Kazakh CPT the frontier converges on full continued pretraining over LoRA/adapters: BLOOM+1 puts the adapter>full-CPT crossover at ~3B (full wins below it), and LoRA-Learns-Less shows LoRA r=256 at 20B code tokens (HumanEval 0.224) only matches full-FT at 4B (0.218) — ~5x worse data efficiency at the CPT scale that matters here. That verdict is regime-bounded, not universal: LLiMba reverses it at extreme-low-data (11.5M Sardinian tokens, rsLoRA-r256 28.5 BLEU vs full-FT 21.0), so the QLoRA-vs-full call hinges on token budget, not principle. Established supporting recipe: replay at ~25% for a strong English→new-language shift (Ibrahim 405M/10B), embedding-init choice washes out after ~500M CPT tokens, and <1B–2B tokens close a tokenizer-swap/vocab-expansion gap (ZeTT, EEVE). Two things stay genuinely open/contested: LR schedule (the three strongest recipes — re-warm+re-decay, NVIDIA no-warmup η_min-start, Sailor constant 1e-4 — openly CONFLICT and must not be averaged), and whether a 0.6B model can move exam-style KazMMLU at all — Sailor's exact-scale precedent (Qwen1.5-0.5B, ~140B SEA tokens) lifted QA strongly (TydiQA F1 +22.1) but left M3Exam FLAT (−0.05), and no study isolates the minimum Kazakh-token budget for KazMMLU movement at 0.6B. Structural constraint for the lab: EEVE's 7-stage schedule needs untied embeddings, which on tied Qwen3-0.6B-Base costs +155.58M params and breaches the ≤600M cap.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2405.09673",
+          "phrase": "Core evidence full-FT beats LoRA in the CPT regime: LoRA r256@20B tok ~ full-FT@4B; learns ~5x less"
+        },
+        {
+          "node_id": "arxiv:2404.03608",
+          "phrase": "Closest 0.5B precedent: 200B-token Qwen1.5-0.5B CPT lifts QA (+22.1 F1) but exams stay FLAT (M3Exam -0.05)"
+        },
+        {
+          "node_id": "arxiv:2605.09015",
+          "phrase": "Regime reversal: at 11.5M tokens rsLoRA (28.5 BLEU) beats full-FT (21.0) — bounds LoRA-Learns-Less"
+        },
+        {
+          "node_id": "arxiv:2407.07263",
+          "phrase": "LR-schedule evidence CONFLICTS across the 3 strongest recipes — re-warm vs no-warmup vs constant; do not average"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Proven Kazakh CPT recipe (Llama-3.1-8B, 45.3B tok, 3:1:3 mix, KazMMLU 41.4) but 13x cap and cross-protocol"
+        },
+        {
+          "node_id": "arxiv:2402.14714",
+          "phrase": "EEVE 7-stage schedule needs untied embeddings — on tied Qwen3-0.6B breaks the 600M cap (+155.58M)"
+        }
+      ]
+    },
+    "data-efficiency-10b-kazakh-10b-token-pre": {
+      "summary": "The frontier question is how to assemble and train on a ~9-10B-token Kazakh corpus efficiently, since raw Kazakh web is scarce: CulturaX kk ~2.80B, HPLT 2.0 dedup ~1.41B tokens (2503.10267), so SozKZ had to aggregate 18 sources to reach 9.0B (13.7M docs, 48.2% pass, MD5 dedup only). The one direct datapoint is discouraging: SozKZ-600M trained from scratch on 9B tokens for just 1 epoch (15.3:1 tok/param) scores 30.3% MC-QA, BELOW un-adapted Qwen2.5-0.5B (31.5%) — from-scratch loses on knowledge at this budget, while Sherkala's stronger 8B recipe used 45.3B tokens of which 24% of the Kazakh was synthetic English-Wiki MT. Two under-exploited efficiency levers are established off-Kazakh but untested on it: (1) quality-filter + multi-epoch repetition, where a DenseCore 28B subset repeated 7.2 epochs still gained at 1B (2604.28075), extending Muennighoff's 4-epoch data-constrained rule — but ONLY on genuinely high-quality data (weak-filter cores repeated 4.8x HURT, and curriculum ordering underperformed a pure high-quality mix); and (2) synthetic MT data, cheap for low-resource with a tiny native-LM perplexity filter (2403.13638) and scalable to 1.7T tokens (2502.13252), yet never applied to Kazakh/Turkic. The open blocker: no off-the-shelf Kazakh educational-quality classifier exists (FineWeb-C has 0 Kazakh annotations) and the English FineWeb-Edu classifier does not transfer across translation, so whether repetition + MT + native-LM filtering can push a sub-1B Kazakh model above SozKZ's ~30% floor is unresolved.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "The direct baseline: from-scratch 600M on 9B kk tokens, 1 epoch, 30.3% MC-QA — LOSES to un-adapted Qwen2.5-0.5B"
+        },
+        {
+          "node_id": "arxiv:2604.28075",
+          "phrase": "Quality-filter + repetition beats diversity: 28B DenseCore x7.2 epochs still gaining; weak-filter cores HURT"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Proven kk recipe: 45.3B mix, 24% of Kazakh is synthetic English-Wiki MT, balanced vs English forgetting"
+        },
+        {
+          "node_id": "arxiv:2503.10267",
+          "phrase": "Exact kk web token budget: CulturaX 2.80B, HPLT2.0 dedup 1.41B — quantifies the scarcity"
+        },
+        {
+          "node_id": "arxiv:2403.13638",
+          "phrase": "MT data nearly free for low-resource (-0.87% NLU) if filtered by a 28M/85M native-LM perplexity"
+        },
+        {
+          "node_id": "hf:blog/davanstrien",
+          "phrase": "No off-shelf Kazakh quality classifier: 0 FineWeb-C annotations; EN FineWeb-Edu filter fails across translation"
+        }
+      ]
+    },
+    "decoder-to-embedder": {
+      "summary": "The topic covers converting causal decoder LMs into text embedders, directly relevant to reusing a QymyzLM Qwen3-0.6B backbone as the embedding head. Established mechanics: post-hoc conversion works cheaply (LLM2Vec: S-LLaMA-1.3B hits 49.42 unsup / 61.96 sup MTEB, MNTP in 1000 steps), a 0.5B decoder can be a top multilingual embedder (KaLM), and Qwen3-Embedding-0.6B (64.33 MMTEB, causal + last-token EOS pooling, initialized from Qwen3-0.6B-Base) is the concrete sub-600M target. There is broad recipe convergence (multi-stage contrastive pretrain → hard-negative SFT → slerp checkpoint merge → MRL → instruction prefixes → distillation). The contested frontier is two-fold: (1) pooling/attention at ≤1B is unsettled — Qwen3 reports causal+EOS \"on par,\" but LLM2Vec/KaLM-V2 strip the causal mask (bidirectional+mean) and score higher, though never iso-controlled; and (2) joint generation+embedding — GRIT proves it lossless at 7B (MTEB 66.8 + gen 55.5), but Hydra's controlled 0.8B/4B ablation finds joint training COLLAPSES generation under LoRA, motivating a frozen-base + LoRA-adapter switch instead. Open questions: no recipe integrates contrastive objectives INTO pretraining at scale (LLM-JEPA only exploratory), no GRIT replication below 7B exists, and on the only public Kazakh signal Qwen3-Emb-0.6B loses badly to same-size encoders (Belebele kaz nDCG@10 0.7545 vs BGE-M3 0.9017) — LRL specialization yields only thin margins (AfriE5 +1.1/+1.7, kazembed-v5 +2.1%, TR-MTEB fails to beat mE5).",
+      "highlights": [
+        {
+          "node_id": "arxiv:2506.05176",
+          "phrase": "Qwen3-Embedding-0.6B: the sub-600M target, shared-backbone decoder→embedder, and the unsettled causal+EOS vs bidir+mean ablation"
+        },
+        {
+          "node_id": "arxiv:2603.28554",
+          "phrase": "Hydra: only controlled joint-vs-separate test at OUR scale — generation collapses at 0.8B, fix is frozen base + LoRA adapter"
+        },
+        {
+          "node_id": "arxiv:2402.09906",
+          "phrase": "GRIT: joint gen+embed lossless proof, but ONLY at 7B+; the claim Hydra contests at sub-1B"
+        },
+        {
+          "node_id": "arxiv:2404.05961",
+          "phrase": "LLM2Vec: cheapest conversion with sub-2B numbers; mean>last-token, bidirectional-without-training hurts"
+        },
+        {
+          "node_id": "arxiv:2507.23386",
+          "phrase": "Causal2Vec: contextual token, zero surgery on causal mask, cuts sequence 85% vs echo-style"
+        },
+        {
+          "node_id": "arxiv:2501.01028",
+          "phrase": "KaLM-Embedding: existence proof a 0.5B decoder (our size) tops sub-1B multilingual after mask removal"
+        }
+      ]
+    },
+    "deepseek-tech": {
+      "summary": "The DeepSeek stack supplies QymyzLM's two efficiency levers, but the slice's own math repeatedly shows they were validated at scales the ≤600M-dense target does not inhabit. MLA is the strongest transferable win: DeepSeek-V2 cuts KV cache 93.3% vs MHA (cache = d_c+d_h_rope = 576 elem/tok/layer ≈ GQA-2.25) while beating MHA/GQA/MQA quality, and EG-MLA proves it survives from scratch at 120M (kv_lora_rank=256, cache 3.84K elem/tok; rank-64 with token-embedding gating scores +0.49) — the only located sub-1B DeepSeek-style run below rank 512. The Engram lookup axis beats a strictly iso-param/iso-FLOP MoE-27B (MMLU +3.0, BBH +5.0, NIAH 84.2→97.0) with a clean U-shaped ρ≈75-80% allocation law, but every Engram result sits on an MoE backbone (min 568M active) with the table offloaded off-GPU, ρ=0 pure-dense is never tested, and param-accounting is decisive: a 500M dense backbone + ~512M table = ~1B total, outside the ≤600M class the peer group (Qwen3-0.6B, SozKZ-600M, Gemma3-270M) is measured in. Other levers are gated by scale/hardware: MTP degrades below a 1-3B threshold, R1's smallest distill is 1.5B with no 500M release, and FP8 training needs Hopper (A100/T4 cannot). The open question is whether MLA's and Engram's scale-validated gains, plus the genuinely unoccupied morpheme-keyed memory/MTP novelty, transfer down to a dense sub-600M agglutinative-Kazakh model.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "Engram conditional-memory axis: beats iso-param/iso-FLOP MoE-27B, but only on MoE backbones — ρ=0 dense untested"
+        },
+        {
+          "node_id": "arxiv:2405.04434",
+          "phrase": "MLA: 93.3% KV cut, beats MHA quality; the concrete cache win over the planned GQA-2"
+        },
+        {
+          "node_id": "arxiv:2509.16686",
+          "phrase": "EG-MLA: only located from-scratch sub-1B DeepSeek-MLA (120M, rank 256/64), proves MLA transfers down"
+        },
+        {
+          "node_id": "arxiv:2412.19437",
+          "phrase": "MTP threshold 1-3B (degrades below); FP8 needs Hopper — A100/T4 excluded"
+        },
+        {
+          "node_id": "arxiv:2401.06066",
+          "phrase": "MoE premise collapses at ≤600M total; sparse budget better spent on the lookup axis"
+        },
+        {
+          "node_id": "arxiv:2501.12948",
+          "phrase": "Reasoning distill floor: smallest R1 distill is 1.5B, needs domain-matched base + 800K CoT"
+        }
+      ]
+    },
+    "does-the-engram-conditional-memory-modul": {
+      "summary": "The frontier question is whether Engram-style conditional memory helps at QymyzLM's ≤600M dense scale, and the literature answers NO with direct evidence. Engram is CONFIRMED to work only at MoE scale ≥568M active: it beats an iso-param/iso-FLOP MoE at 27B (MMLU +3.0, BBH +5.0) via O(1) hashed n-gram lookup at ~0 extra FLOPs, but its own U-shaped ρ-law keeps 75-80% of the sparse budget in routed experts, so the allocation framework structurally requires MoE and ρ=0 (pure dense+Engram) is never tested. The one direct sub-1B datapoint is NEGATIVE — Memory Grafting reports vanilla Engram at 45.03 vs its MoE baseline 45.62 at 0.92B, attributed to hash collisions in a table too small for the key space — and it only recovers (46.98) by abandoning the live token-ID hash table for offline exact-match memory, mirrored by Lngram's learned latent keys. TOBA-LM is the sole dense+agglutinative artifact (1.2B dense GPT-2 + 500K×768 table) but its evidence is uncontrolled convergence-speed, not a with/without ablation, and it only post-hoc reinterprets syllable n-grams as \"morphemes\" without any segmenter. On param-counting, the memory table is fully counted in P_tot, pushing a 500M dense backbone + ~512M table to ~1B total — outside the ≤600M class the Qwen3-0.6B/SozKZ peer group is measured by. The open question — whether deterministic-hash collision noise sinks a small table on a dense backbone at the lab's ~3B-token kill-switch ablation — is unanswerable from literature: zero post-hoc-attach experiments exist in the entire Engram lineage.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2605.20948",
+          "phrase": "The only direct sub-1B datapoint, and it's NEGATIVE: vanilla Engram 45.03 vs MoE 45.62, collision-bound"
+        },
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "Source paper: zero dense config; ρ-law keeps 75-80% in MoE experts, so framework structurally needs routing"
+        },
+        {
+          "node_id": "arxiv:2603.10006",
+          "phrase": "Only dense+agglutinative Engram (TOBA-LM 1.2B), but loss-only, uncontrolled, no morpheme segmenter"
+        },
+        {
+          "node_id": "arxiv:2512.24880",
+          "phrase": "The paired residual-stream choice (mHC) also has NO sub-3B and NO dense validation — smallest tested is 3B MoE"
+        }
+      ]
+    },
+    "embed-kazakh": {
+      "summary": "Kazakh embedding is a near-greenfield with a thin but concrete evidence base. Established: KazQAD is the ONLY native kk retrieval benchmark (800k Wikipedia passages, ~6k questions, weak published baseline NDCG@10 0.389 / MRR 0.382), with WebFAQRetrieval-kaz as the second signal (~12.5k QA pairs, mE5-large nDCG@10 0.7269); the real ≤600M competitive bar on the main public signal (BelebeleRetrieval kaz_Cyrl) is BGE-M3 (568M) at 0.9017, with same-size Qwen3-Embedding-0.6B ~15 pts behind (0.7545) and EmbeddingGemma-300m at 0.6839. The only dedicated kk embedder that exists is Nurlykhan/kazembed-v5 — a naive mE5-base (278M) MNRL fine-tune on 61k pairs (KazQAD MRR 0.835); no from-scratch kk embedder, no kk reranker, and no kk STS/NLI dataset exist at all (XNLI's 15 and MUSTS's 13 languages both exclude kk). Contested/not-a-foundation: the widely-cited \"mE5-large MRR 0.909 on KazQAD hard-negs\" traces solely to that hobby HF card with unpublished candidate pools (same lineage spans 0.449–0.919), and no dense embedder has a measured record under evallab's pinned full-corpus + hardneg-bm25-v1 protocols (uncertain). The data ceiling — ~0.6M clean pairs (KazParC 372k anchor) + synthetic Wikipedia + filtered NLLB, 10–50x below SOTA English/Chinese recipes — makes teacher distillation structurally necessary (flagged uncertain). Open question: stand up native kk retrieval SOTA and a kk-MTEB from the KazQAD/WebFAQ/Belebele/KazSAnDRA seeds under reproducible protocols.",
+      "highlights": [
+        {
+          "node_id": "hf:nurlykhan/kazembed-v5",
+          "phrase": "The only dedicated kk embedder that exists: naive mE5-base fine-tune, MRR 0.835 — the entire field's current artifact"
+        },
+        {
+          "node_id": "arxiv:2404.04487",
+          "phrase": "Only native kk retrieval benchmark (800k passages); weak 0.389 baseline = the headroom the embed pillar targets"
+        },
+        {
+          "node_id": "title:per model belebeleretrieval json files extracted 2026 07 03",
+          "phrase": "Sets the real ≤600M bar: BGE-M3 0.9017 vs Qwen3-0.6B 0.7545 on BelebeleRetrieval kaz"
+        },
+        {
+          "node_id": "arxiv:1809.05053",
+          "phrase": "Structural gap: zero kk STS and zero kk NLI datasets exist anywhere — blocks a TurkEmbed-style recipe"
+        },
+        {
+          "node_id": "arxiv:2502.13595",
+          "phrase": "Kazakh is absent from MTEB/MMTEB as first-class; kk-MTEB must be built, not found"
+        },
+        {
+          "node_id": "arxiv:2502.20936",
+          "phrase": "Second kk retrieval task and largest NATURAL kk paired data (~12.5k WebFAQ QA pairs)"
+        }
+      ]
+    },
+    "embed-sota": {
+      "summary": "The general-purpose SOTA has converged on a reproducible sub-1B recipe: multi-stage contrastive training (weak-supervision pretrain on ~150-470M pairs → hard-negative SFT), InfoNCE with in-batch negatives and false-negative masking, Matryoshka dims, instruction prefixes, distillation, and slerp/model-souping — no top model (Qwen3-Embedding-0.6B 64.34 MMTEB, KaLM-V2 67.81, EmbeddingGemma 61.15, Granite R2, Arctic 2.0) skips more than one. Qwen3-Embedding-0.6B is the stable, beatable sub-600M target and an existence proof for the shared-backbone (Qwen3-0.6B → embedder) path, though it discards generation. The load-bearing REFUTATION for the Kazakh pillar: the newest decoder-derived embedders COLLAPSE on low-resource languages while old XLM-R-based mE5 holds — on Belebele kaz Qwen3-Emb scores nDCG@10 0.7545 vs BGE-M3 0.9017 / mE5-large-instruct 0.8949, and the MMTEB rank order inverts on Armenian (Qwen3-0.6B 47.38 vs mE5-large-it 72.99); AfriMTEB independently confirms this on African LRLs, cause being synthetic contrastive data skewed to high-resource languages. The cheapest winning path is Less-is-More: full-FT of mE5-base on just 10k noisy MT synthetic pairs + 0.5/0.5 base-weight-averaging (+11-12% avg, retrieval +35% rel., 1M pairs adds <1%). Open questions: (1) does noisy-alignment hold for Cyrillic LRLs sharing script with a high-resource neighbor (Kazakh/Russian code-switching) — explicitly flagged untested; (2) full-corpus KazQAD dense retrieval is UNMEASURED under the lab's pinned protocol (only BM25+reranker NDCG@10 0.389 exists; mE5's 0.909 MRR is a third-party number with unpublished candidate pools, 0.449-0.919 depending on pool). KazQAD is not integrated into MTEB, which has only 2 Kazakh text-retrieval tasks.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.22290",
+          "phrase": "Refutes decoder-embedder SOTA on LRLs; 10k-noisy-pair mE5 full-FT is cheapest path, flags Cyrillic/Kazakh untested"
+        },
+        {
+          "node_id": "arxiv:2506.05176",
+          "phrase": "Qwen3-Embedding-0.6B: stable sub-600M target (64.34 MMTEB), shared-backbone proof, but loses on Kazakh Belebele"
+        },
+        {
+          "node_id": "arxiv:2506.20923",
+          "phrase": "KaLM-V2: closest architectural template — Qwen2-0.5B causal-mask-removed → bidir+mean, 67.81 MTEB"
+        },
+        {
+          "node_id": "arxiv:2404.04487",
+          "phrase": "Only native Kazakh retrieval benchmark; weak baseline NDCG@10 0.389; not in MTEB — the headroom target"
+        },
+        {
+          "node_id": "title:https arxiv org html 2412 04506v2 https www snowflake com en engineering blog snowflake arctic embed 2 multilingual",
+          "phrase": "Arctic-Embed 2.0: empirical off-the-shelf leader on Kazakh retrieval per KAZ-QA-RAG"
+        },
+        {
+          "node_id": "title:mteb pypi package mteb get tasks languages kaz verified locally 2026 07 03",
+          "phrase": "Verified MTEB Kazakh inventory: 16 tasks, only 2 text-retrieval, 0 STS/reranking, KazQAD absent"
+        }
+      ]
+    },
+    "embeddings-retrieval": {
+      "summary": "The Kazakh embedding frontier is thin and protocol-fragile. Only one dedicated Kazakh embedder exists — Nurlykhan/kazembed-v5, mE5-base (278M) fine-tuned on 61,255 pairs with MultipleNegativesRankingLoss, reporting KazQAD MRR 0.835 (+2.1% over base e5); no from-scratch Kazakh embedder exists anywhere. The widely-cited \"mE5-large MRR 0.909 on KazQAD hard negatives\" is REFUTED as a stable number: it traces solely to the kazembed-v5 model card (a 289-download hobby artifact, one-line protocol), and its own successor lineage (shyngys879) shows the same model swings from MRR 0.4490 under HardTFIDF99 to 0.9189 under an easier KazQAD-100 local pool — so hard-negative MRR is protocol-defined, not model-defined, and evallab therefore pins BOTH full-corpus retrieval (paper baseline MRR 0.382) and a fixed BM25 hard-negative recipe. Feedstock is real but constrained: issai/kazqad-retrieval, issai/kazqad, issai/kazparc are all HF-gated (cc-by-sa-4.0 share-alike propagates; KazParC HF license is UNVERIFIED), splitting 3487/548/1929 queries over ~815k passages. Eval infrastructure is weak: MTEB's WebFAQRetrieval kaz split is only 300 queries / 2,995 docs / 1 qrel each (secondary-eval only), and PaDaS-Lab webfaq kaz (12,510 pairs) is usable for training but must be deduped against those test queries. Open question: fixing and publishing the canonical candidate-pool construction so any \"beat 0.909\" target becomes meaningful.",
+      "highlights": [
+        {
+          "node_id": "hf:shyngys879/kazakh-e5-rag-embedding",
+          "phrase": "Proves hard-negative MRR is protocol-defined: same mE5-large is 0.449 vs 0.919 by candidate pool"
+        },
+        {
+          "node_id": "hf:nurlykhan/kazembed-v5",
+          "phrase": "Only dedicated Kazakh embedder (278M, MRR 0.835) AND sole origin of the disputed 0.909 planka number"
+        },
+        {
+          "node_id": "hf:api/datasets",
+          "phrase": "KazQAD/KazParC feedstock is HF-gated with cc-by-sa share-alike; ~815k passages, 3487/548/1929 splits"
+        },
+        {
+          "node_id": "hf:mteb/webfaqretrieval",
+          "phrase": "MTEB kaz retrieval eval too tiny (300q/2995d) for a headline; webfaq pairs need dedup vs test"
+        }
+      ]
+    },
+    "embeddings-training": {
+      "summary": "The frontier converges on one recipe for sub-1B embedders: multi-stage training (weakly-supervised contrastive pretrain on ~150-470M synthetic/weak pairs → supervised fine-tune on ~6-7M pairs with hard negatives), InfoNCE + in-batch negatives with false-negative removal, Matryoshka (near-free, standard at 32-1024 dims), checkpoint souping/slerp as a free robustness gain, instruction prefixes, and distillation from a larger teacher (KaLM-V2 distills Qwen3-Embedding-8B). The concrete hard-negative protocol is NV-Retriever's TopK-PercPos (mine top-k with a teacher, discard candidates scoring >95% of the positive). The load-bearing open contest is pooling/attention at 0.5B: Qwen3-Embedding-0.6B keeps causal attention + last-token [EOS] and calls it \"on par,\" but KaLM-V2 and LLM2Vec REMOVE the causal mask (bidirectional + mean pooling) and reach higher MTEB (KaLM-V2 67.81 vs Qwen3-Emb 64.33) — not iso-controlled, so it must be a design-spec ablation. For Kazakh specifically the decoder-to-embedder path is REFUTED on the only public signal: Qwen3-Emb-0.6B (a Qwen3-0.6B-Base specialization, the lab's exact CPT base) scores Belebele kaz nDCG@10 0.7545, losing badly to encoders BGE-M3 (0.9017) and mE5-large-instruct (0.8949), traced to synthetic contrastive data skewed to high-resource languages. Turkic evidence (TurkEmbed/TR-MTEB, 34.2M pairs) and AfriE5/Less-is-More/kazembed-v5 all agree the realistic gain from adapting mE5 is small (+1.1 to +2.1), so beating mE5 on KazQAD is hard but achievable via cross-lingual contrastive distillation on a few tens of thousands of quality-filtered pairs.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2506.05176",
+          "phrase": "The sub-1B target to beat: full reproducible 3-stage recipe, causal+EOS, but REFUTED on Kazakh (Belebele 0.7545)"
+        },
+        {
+          "node_id": "arxiv:2506.20923",
+          "phrase": "Closest architectural template (Qwen2-0.5B, mask removed, mean+MRL, distills Qwen3-Emb-8B); 67.81 refutes causal parity"
+        },
+        {
+          "node_id": "arxiv:2510.23896",
+          "phrase": "Closest task analogue: adapt mE5 to LRL via cross-lingual contrastive distillation, +1.1/+1.7, ~60k COMET-filtered pairs"
+        },
+        {
+          "node_id": "arxiv:2511.08376",
+          "phrase": "Turkic warning: 34.2M Turkish pairs still fail to surpass mE5 — beating mE5 on a Kazakh sibling is hard"
+        },
+        {
+          "node_id": "arxiv:2407.15831",
+          "phrase": "The concrete hard-negative protocol evallab pins: TopK-PercPos, discard candidates >95% of positive score"
+        },
+        {
+          "node_id": "arxiv:2509.06888",
+          "phrase": "Only fresh encoder backbone with confirmed Kazakh pretraining (annealed language learning, 1833 langs)"
+        }
+      ]
+    },
+    "eval-benchmarks": {
+      "summary": "This topic is dominated by operational, inspection-verified facts about how Kazakh eval benchmarks actually behave in the lab, not contested research claims — all three nodes carry uncertain=false with null verdicts, i.e. CONFIRMED-by-direct-inspection. The load-bearing finding is that KazMMLU's dev split holds only 3 exemplars per subject config, so the qymyzlm April-2026 baseline table (Qwen3-0.6B-Base 32.8%) was capped at 3-shot yet mislabeled \"5-shot\" (relabeled 3-shot on 2026-07-03); further quirks (a 7-question config, variable 4-5 options, empty Option E) break fixed 5-choice task configs. Tooling is a second confirmed trap: installed lm-eval 0.4.11 ships NO kazmmlu/tumlu_mini/kazqad tasks, so every benchmark failed until custom YAMLs + TaskManager(include_path=...) were wired in. On safety, Qorgau (MBZUAI, Feb 2025) is the first kk-ru bilingual safety benchmark (6 risk areas / 17 harm types, 12 models; models often SAFER in Kazakh because low-resource exposure yields vague answers) but ships NO license — internal evaluation only, no re-hosting or training on annotations, plus a typo'd 'code_swithced_version' column. The open question is cross-protocol comparability: the canonical 32.8% target and the Sherkala 41.4% ceiling are only meaningful once both are re-run under evallab's pinned protocol.",
+      "highlights": [
+        {
+          "node_id": "hf:mbzuai/kazmmlu",
+          "phrase": "dev=3 exemplars/config caps 'N-shot' at 3; the 32.8% baseline was mislabeled 5-shot until relabeled 3-shot"
+        },
+        {
+          "node_id": "title:lm eval 0 4 11 installed package registry inspection 2026 07 03",
+          "phrase": "lm-eval 0.4.11 ships zero kazmmlu/tumlu/kazqad tasks — custom YAMLs mandatory; every eval failed until reconciled"
+        },
+        {
+          "node_id": "arxiv:2502.13640",
+          "phrase": "first kk-ru safety benchmark, but NO license = internal-only; models safer in kk via vague low-resource answers"
+        }
+      ]
+    },
+    "gla-2-gta-arxiv-2505-21487-zadouri-strau": {
+      "summary": "arXiv:2505.21487 (Tri Dao group) is a from-scratch head-to-head on FineWeb-Edu where GLA-2 (2 latent heads, d_c=2·d_h, RoPE 32) and GTA-4 (tied KV) beat BOTH MLA and GQA-4 at sub-1B: at 876M GLA-2 hits 11.293 ppl/57.5% and GTA-4 11.232/57.6% with ~half GQA-4 cache, while MLA≈GQA parity holds (876M: 11.363 vs 11.340). Two facts hollow this out for the lab. First, the sole independent from-scratch reproduction (MLRA, arXiv:2603.02188, 2.9B/98.3B tok) FLIPS the ordering — MLA beats GLA-2 on both ppl (13.727 vs 13.779) and 0-shot avg (58.75 vs 58.30) — and everything on both sides is single-seed with no error bars, so the seed-noise floor is unmeasured and no independent sub-1B replication exists. Second, GLA-2's cache advantage over MLA is per-device only at TP≥2; for the lab's single-GPU ≤600M regime (TP=1) it collapses to plain MLA's cache with none of the benefit. Adoption is zero (vLLM/llama.cpp/TRT-LLM/SGLang/HF all 0 hits) and the only kernels live in FA3-Hopper (H100+CUDA 12.3, still-open regression #2372) — unrunnable on the canonical Kaggle T4. Open question: does the GLA-2/GTA win survive a multi-seed, sub-1B independent rerun, and is it worth adopting given no TP=1 benefit and no serving path? Current evidence says fall back to plain MLA.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2505.21487",
+          "phrase": "Primary result: GLA-2/GTA-4 beat MLA and GQA-4 at 876M with MLA-class cache and better TP sharding"
+        },
+        {
+          "node_id": "title:arxiv org html 2603 02188 tables 3 4 vs arxiv org html 2505 21487v1",
+          "phrase": "Sole independent reproduction FLIPS ordering — MLA>GLA-2 at 2.9B, contradicting every-scale win"
+        },
+        {
+          "node_id": "title:arxiv org html 2505 21487v1 gla 2 config h c 2 d c 2 d h per latent head d r 32 tp sharding analysis",
+          "phrase": "GLA-2 cache win is per-device at TP>=2 only; at lab's single-GPU <=600M it equals plain MLA"
+        },
+        {
+          "node_id": "hf:api/models",
+          "phrase": "Zero adoption: vLLM/llama.cpp/TRT-LLM/SGLang/HF all 0; official repo 0 downstream reuse"
+        },
+        {
+          "node_id": "title:arxiv org html 2505 21487v1 arxiv org html 2603 02188 both silent on seeds error bars semantic scholar citation scan of all 14 citing papers none is a multi seed replication",
+          "phrase": "All runs single-seed, no error bars; seed-noise floor for these variants unmeasured"
+        },
+        {
+          "node_id": "title:github com dao ailab flash attention issues 2372 github com dao ailab grouped latent attention readme kernels deferred to fa3 hopper hopper gpus cuda 12 3 github com songtaoliu0823 mlra",
+          "phrase": "Only kernels are FA3-Hopper H100-only with an open v3.0.0 regression — unrunnable on T4"
+        }
+      ]
+    },
+    "hardware-gate": {
+      "summary": "This topic is the lab's own SM75 (Kaggle T4 / RTX 2070 proxy, cc 7.5, 64KB shared-mem, no bf16 tensor cores) execution gate for QymyzLM architecture choices, all first-hand measurements under torch 2.11.0+cu130 / triton 3.6.0 / fla 0.5.1. GATE OPEN is CONFIRMED: GatedDeltaNet, KimiDeltaAttention (KDA), and fla-Triton Mamba2 all run fwd+bwd in fp16 with finite outputs/grads, and mamba-ssm's CUDA path builds for sm_75. The load-bearing REFUTATION is a throughput inversion — the classic linear-attention speed premise is inverted on SM75: torch SDPA fp16 is the fastest kernel measured and beats every linear kernel up to T=8192 (KDA break-even only extrapolated to T~12-16K), so at CPT ctx 1024-4096 a KDA layer costs 2.7-4.8x SDPA and GDN/Mamba2 layers cost 28-47x (fla fallback under the 64KB limit); KDA is the only fla linear kernel with acceptable SM75 throughput. Two silent traps are established: bf16 (torch.cuda.is_bf16_supported() lies — returns True but runs 7.3x slower than fp16 GEMM), forcing fp16+GradScaler pins everywhere, and KellerJordan Muon's hard-cast to bf16 (6.6x trap, fixed by a one-line .bfloat16()->.half() patch, with its single momentum buffer confirming ~50% optimizer-VRAM saving vs AdamW). All numbers sit against a T4 = ~21% of one A100 (both axes) ceiling. Open question: none of these are yet run on the actual Kaggle T4 or on a Kazakh model — every claim carries flag transferable-untested, and the mamba-ssm/Turing-FA2 runtime behavior is inferred from build targets, not observed.",
+      "highlights": [
+        {
+          "node_id": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+          "phrase": "GATE OPEN: GDN, KDA, fla-Mamba2 all PASS fwd+bwd in fp16 on real SM75 hardware — the foundational go/no-go"
+        },
+        {
+          "node_id": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+          "phrase": "Throughput inversion refutes linear-attn motivation: SDPA beats all linear kernels to T=8192; KDA 2.7-4.8x, GDN/Mamba2 28-47x"
+        },
+        {
+          "node_id": "title:empirical muon ns py and smoke2 py this session torch 2 11 0 cu130 sm75",
+          "phrase": "bf16 is a silent trap on SM75: capability flag lies, 7.3x slower GEMM — every T4 config must pin fp16+GradScaler"
+        },
+        {
+          "node_id": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+          "phrase": "Muon usable on T4 after a 1-line fp16 patch (6.6x bf16 trap); single momentum buffer = ~50% optimizer VRAM vs AdamW"
+        },
+        {
+          "node_id": "title:nvidia com en us data center tesla t4 official spec page fetched 2026 07 04 a100 numbers from nvidia a100 datasheet standard published specs local measurement context",
+          "phrase": "Grounds every number: T4 = ~21% of one A100 on compute and bandwidth; 2xT4 aggregate ~41.7%"
+        },
+        {
+          "node_id": "title:empirical smoke one py smoke2 py timings this session",
+          "phrase": "Triton first-call compile tax is 7-9 min/session on Kaggle unless TRITON_CACHE_DIR points at /kaggle/working"
+        }
+      ]
+    },
+    "hybrid-efficiency-efficient-attention-se": {
+      "summary": "The frontier splits into three efficiency levers for a ≤600M Kazakh SLM, all measured but none carrying novelty alone. (1) Latent/low-rank attention: DeepSeek-V2 MLA cuts KV cache 93.3% (~576 elem/tok/layer ≈ GQA-2.25) while beating MHA perplexity, but the only from-scratch sub-1B evidence (arxiv:2506.09342, 30M–202M) shows decoupled-RoPE MLA at r=d/2 gives just 45% KV cut at +0.3% loss, and r=d/4 costs +4.4%—and it was never benchmarked vs GQA, all at ctx≤512. (2) Cross-layer/global KV sharing: CLA2 gives 2x cut at +0.04–0.06 ppl for MQA, but the slice flags an internal contradiction—the paper's prose credits GQA2-CLA2 while Table 1 only supports GQA4-CLA2, and untuned GQA-CLA2 rows actually cost +0.07/+0.12 ppl (uncertain), so plan-B's \"+0.04\" is optimistic; YOCO caches one global KV layer for ~L-fold savings. (3) SSM/conv hybrids: pure Mamba trails Transformers ~15pt on 5-shot MMLU until ~7-8% attention layers are added; the shipped sub-1B winners (LFM2-350M conv+6-GQA beating Qwen3-0.6B on multilingual MMLU 37.99 vs 30.84; Falcon-H1-0.5B parallel attn+Mamba) prove hybrids compete. Gemma3-270M's 5:1 sliding-window recipe (window 512, KV ≈108MB@32K vs Qwen3-0.6B's 3.75GB) is the strongest ≤300M long-context template. Open question: which lever (MLA vs sliding-window vs conv-hybrid) survives at ≤600M ACTIVE params on Kazakh with only free T4 compute, given no from-scratch MLA-vs-GQA head-to-head exists at this scale.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2405.04434",
+          "phrase": "DeepSeek-V2 MLA reference: 93.3% KV cut, beats MHA, ≈GQA-2.25 cache—the efficient-attention anchor"
+        },
+        {
+          "node_id": "arxiv:2506.09342",
+          "phrase": "Only from-scratch sub-1B MLA study: r=d/2 = 45% cut/+0.3% loss, no GQA arm, ctx≤512"
+        },
+        {
+          "node_id": "arxiv:2503.19786",
+          "phrase": "Gemma3-270M 5:1 sliding-window: KV ≈108MB@32K vs 3.75GB—strongest ≤300M long-context template"
+        },
+        {
+          "node_id": "arxiv:2511.23404",
+          "phrase": "LFM2-350M conv+6-GQA hybrid beats Qwen3-0.6B multilingual MMLU (37.99 vs 30.84), 2x faster on CPU"
+        },
+        {
+          "node_id": "arxiv:2405.12981",
+          "phrase": "CLA2 = 2x KV cut; slice flags prose/table contradiction, untuned GQA-CLA2 costs +0.07-0.12 ppl"
+        },
+        {
+          "node_id": "arxiv:2507.22448",
+          "phrase": "Falcon-H1-0.5B parallel attn+Mamba block leads sub-1B math/code but covers no Turkic language"
+        }
+      ]
+    },
+    "inference-tts": {
+      "summary": "The headline result is that compute-optimal test-time scaling lets sub-1B models beat 405B on MATH-500 (Can-1B: Llama-3.2-1B 66.2%, Qwen2.5-0.5B 76.4% vs Llama-3.1-405B 71.4%), but the win is method/PRM-dependent — beam search for ≤7B policies, and the PRM must match the policy's output distribution or gains collapse. Kinetics is the load-bearing refutation: once KV memory is counted, small-model TTS is overestimated (Qwen3-0.6B needs 3.5GB KV @32K vs 1.2GB weights), only ≥14B benefit from CoT beyond 10K tokens, and block-top-k sparse attention (+45pts, 8.58x cheaper) is the actual enabler because TTS at small scale is memory-access-bound, not FLOP-bound. Two failure modes are CONFIRMED at small scale: budget forcing collapses (s1: R1-distill-1.5B accuracy declines as tokens go 17K→25K, with content loops), and external-draft speculative decoding is non-viable for a 500M target (needs 10-20x size ratio and ≥60% acceptance), forcing self-speculative MTP heads instead (V3 MTP ~1.8x, EAGLE-3 3.0-6.5x). Deployment carries a concrete tax: MLA breaks mainline GGUF export (needs the ik_llama.cpp fork) and any Engram/custom module needs full C++ integration; edge throughput for 0.5-1.5B is 30-60 tok/s but perceived words/s scales ~2.4x with tokenizer fertility. The open question is whether TTS gains transfer to Kazakh knowledge — SozKZ-600M sits at ~30% MC-QA (below Qwen2.5-0.5B), no morphology-aware MTP or Kazakh PRM exists yet, and cross-lingual reward transfer (Best-of-L) remains the untested pragmatic path.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2506.05333",
+          "phrase": "Memory-aware refutation: sub-1B TTS overestimated; sparse attention (+45pts, 8.58x) is the real enabler"
+        },
+        {
+          "node_id": "arxiv:2502.06703",
+          "phrase": "Headline compute-optimal TTS: 0.5B hits 76.4% MATH-500 > 405B 71.4%, but PRM/policy-dependent"
+        },
+        {
+          "node_id": "arxiv:2412.19437",
+          "phrase": "Core inference tech: MTP self-speculative 1.8x, MLA KV-cache math, FP8 (A100 can't use it)"
+        },
+        {
+          "node_id": "arxiv:2501.19393",
+          "phrase": "Budget forcing FAILS at small scale: R1-distill-1.5B accuracy drops 17K→25K tokens"
+        },
+        {
+          "node_id": "arxiv:2601.18902",
+          "phrase": "500M target has no viable external draft (needs 10-20x ratio, ≥60% accept) → self-speculative only"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Kazakh from-scratch baseline: fertility→throughput axis, ~30% MC-QA below Qwen2.5-0.5B"
+        }
+      ]
+    },
+    "joint-generative-embedding-head-on-one-6": {
+      "summary": "The frontier question is whether ONE model ≤600M active params can carry both a generative head and an MTEB-grade embedding head jointly. Positive evidence exists but only at large scale: GRIT (GritLM-7B) proves joint training loses nothing at 7B (MTEB 66.8 + gen 55.5, >60% RAG speedup via KV reuse, ~2x batch memory), and OneGen pushes the floor to Qwen2-1.5B where joint self-retrieval matches a Contriever pipeline WITHOUT degrading generation — but OneGen's retrieval is special-token contextual embedding, not a standalone dense embedder, and BPR beats InfoNCE precisely because InfoNCE restricts generation. The only controlled joint-vs-separate experiment near our scale REFUTES naive joint training: Hydra at 0.8B/4B found GritLM-style joint training collapses the generation mode, and its fix is NOT joint at all — freeze the base LM byte-for-byte (426/426 tensors) and switch to retrieval via a r=32 LoRA, i.e. two modes on shared weights (~-59% memory vs co-resident models). Qwen3-Embedding-0.6B confirms the shared-Qwen3-0.6B-backbone→embedder path but is embedding-ONLY (generation discarded, so a two-model datapoint, not joint) and loses badly on Kazakh (BelebeleRetrieval kaz nDCG@10 0.7545 vs BGE-M3 0.9017), the decoder-embedder LRL collapse that Less-is-More documents and fixes with 10k noisy pairs on mE5 — with Cyrillic code-switching Kazakh explicitly flagged untested. Open questions: no published joint gen+emb recipe below 1.5B, no recipe folding contrastive loss INTO pretraining at any scale, and KazQAD has ZERO measured dense-retrieval records under evallab's pinned protocols (KazQADRetrieval full-corpus, kazqad-hardneg-bm25-v1).",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.28554",
+          "phrase": "Only controlled joint-vs-separate at our scale: joint training collapses generation at 0.8B; fix is frozen base + r=32 LoRA"
+        },
+        {
+          "node_id": "arxiv:2402.09906",
+          "phrase": "Positive existence proof of joint gen+emb (MTEB 66.8+gen 55.5, >60% RAG speedup) but ONLY at 7B+, no sub-7B replication"
+        },
+        {
+          "node_id": "arxiv:2409.05152",
+          "phrase": "Smallest joint gen+retrieval without gen loss (Qwen2-1.5B); BPR>InfoNCE protects generation; not MTEB-grade embedder"
+        },
+        {
+          "node_id": "arxiv:2506.05176",
+          "phrase": "Shared Qwen3-0.6B-backbone→embedder proof, but embedding-only (gen discarded) and fails Kazakh 0.7545 vs BGE-M3 0.9017"
+        },
+        {
+          "node_id": "arxiv:2603.22290",
+          "phrase": "Decoder-embedder LRL collapse + the 10k-noisy-pair mE5 counter-recipe; Cyrillic code-switching Kazakh flagged untested"
+        },
+        {
+          "node_id": "arxiv:2404.04487",
+          "phrase": "The Kazakh measurement target with ZERO dense-retrieval records under evallab's pinned full-corpus/hard-neg protocols"
+        }
+      ]
+    },
+    "kaggle-t4x2-compute-vram-budget-for-the": {
+      "summary": "The lab has empirically pinned the Kaggle-free-tier CPT envelope for Qwen3-0.6B-Base (596M params) on T4x2 (2x16GB, sm_75, no NVLink), and the load-bearing verdict is that VRAM is NOT the binding constraint — throughput and quota are. Measured fwd+bwd peak is only 2.73 GiB at 4K ctx; full-FT totals ~12.3GB (fp32 Adam) or ~7GB (8-bit Adam), so ZeRO/FSDP is unnecessary, plain DDP is preferred, and QLoRA has no memory rationale at this scale (NF4 saves <0.9GB while blocking full-param gains). The hard wall is tokens/wall-time: measured 1,584–2,049 tok/s/GPU (~15–20% MFU) → ~0.31–0.53B tokens/week under the ~30h/week (T4x2 counts 1x → effective ~60 GPU-h) quota, making the literature-recommended 20–25B-token CPT dead on arrival (38–81 weeks); the feasible 12-week campaign is ~3.8–6.4B tokens-seen. Two engineering landmines are confirmed: sm_75 has NO FlashAttention and the mem-efficient SDPA kernel rejects Qwen3's 16-vs-8 GQA head mismatch, silently falling to the O(s²) MATH backend (reproduced OOM) unless a repeat_kv patch expands KV heads; and fp16 CPT of the bf16-native checkpoint is the one UNCERTAIN item — no published success/failure exists, with adjacent evidence pointing both ways (Qwen fp16 NaN reports vs arXiv:2510.26788 arguing bf16 rounding, not fp16 range, is the real instability). Open questions: whether fp16 CPT is stable at lr~1e-4 on this checkpoint, and whether 2048-ctx + late-4K-annealing (to reclaim ~23% throughput) holds for Kazakh long-context.",
+      "highlights": [
+        {
+          "node_id": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
+          "phrase": "Verdict: 20-25B-token CPT is DOA on Kaggle (38-81 wk); feasible envelope ~3.8-6.4B tok / 12-wk campaign"
+        },
+        {
+          "node_id": "title:lab measurement peak vram standard adam state arithmetic 2 2 4 4 4 bytes param mixed precision bitsandbytes 8 bit adam",
+          "phrase": "VRAM not binding: full-FT fits one 16GB T4 (~12.3GB/~7GB); QLoRA and ZeRO/FSDP have no rationale at 0.6B"
+        },
+        {
+          "node_id": "title:lab probe 2026 07 04 torch nn attention sdpa kernel warnings verbatim reproduced oom vs 2 73 gib with patch in t4bench2 py",
+          "phrase": "sm_75 has no FlashAttention; GQA 16-vs-8 forces MATH backend OOM unless repeat_kv patch expands KV heads"
+        },
+        {
+          "node_id": "title:lab measurement 2026 07 04 torch 2 11 0 cu130 transformers 5 5 2 hf qwen qwen3 0 6b base config json",
+          "phrase": "Throughput anchor: 1,584 tok/s @4K, 2,049 @bs4x2048, ~15-20% MFU on Turing sm_75 (closest T4 proxy)"
+        },
+        {
+          "node_id": "arxiv:2510.26788",
+          "phrase": "Only UNCERTAIN item: fp16 CPT of bf16-native ckpt untested; paper argues bf16 rounding not fp16 range is instability"
+        },
+        {
+          "node_id": "title:kaggle product feedback announcement notebooks update new gpu t4s options",
+          "phrase": "Hardware envelope: ~30 GPU-h/week, 12h sessions, T4x2 at 1x quota = effective ~60 GPU-h/week"
+        }
+      ]
+    },
+    "kazakh-morphological-segmentation-qualit": {
+      "summary": "The established picture: on clean, lab-annotated or synthetic Kazakh data, SUPERVISED morphological segmenters win big (FEMSeg 92.34% F1, FEMSeg-CRF 92.84%; CSE-guided FEMSeg_kaz 99.62% morph-F1 on 2.33M synthetic wordforms), while UNSUPERVISED segmenters collapse (Morfessor 27.26%, BPE 27.83%, MMSeg 35.22% F1), and MMSeg's Kazakh OOV recall is just 8.52% vs 46.69% on Uyghur — long stems and morphological ambiguity are the culprit. Cross-lingual evidence (QuechuaTok) confirms a load-bearing caveat: low fertility can be a MISLEADING surface-memorization artifact — plain BPE hits fertility 1.636 but only 6.67% morpheme-boundary accuracy, whereas morphology-aware PRPE reaches 83.33% MorphAcc at fertility 1.797 (though on a fragile 15-word eval set). The contested/unresolved core: every high-accuracy Kazakh number is measured on curated/gold/synthetic text — apertium-kaz FST reports ~94.5% NAIVE (coverage, not correctness) dropping to 90.10% on Wikipedia, and the hybrid KazMorphCorpus analyzer needs FST+CRF+KazRoBERTa stacked to reach 92.3% open-vocab (FST alone only 81.5%). NO published number exists for segmenter accuracy on noisy monolingual crawl (CulturaX/HPLT/mC4) — exactly the data QymyzLM targets, where borrowings, code-switching, typos and OOV names dominate. The open question that decides QymyzLM's tokenizer axis: does morphological segmentation quality actually buy DOWNSTREAM accuracy? The direct baseline SozKZ says no — its dedicated low-fertility 50K BPE (2-3x fertility advantage, zero morphology) still loses knowledge QA to an un-adapted Qwen2.5-0.5B (30.3 vs 31.5 MC-QA).",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Direct baseline: best low-fertility Kazakh BPE, zero morphology, still loses knowledge QA to un-adapted Qwen2.5-0.5B"
+        },
+        {
+          "node_id": "arxiv:2606.23943",
+          "phrase": "Cross-lingual proof that low fertility (BPE 1.636) hides 6.67% morph-accuracy; morphology-aware PRPE 83.33% at fert 1.797"
+        },
+        {
+          "node_id": "title:mdpi applied sciences 14 13 5369 a benchmark for morphological segmentation in uyghur and kazakh tables incl oov table 8",
+          "phrase": "Unsupervised segmenters collapse to ~27% F1 vs supervised 92%; Kazakh OOV recall only 8.52% vs Uyghur 46.69%"
+        },
+        {
+          "node_id": "doi:10.3389/frai.2025.1708566",
+          "phrase": "Affordable FST-only stage just 81.5% open-vocab; 92.3% needs FST+CRF+KazRoBERTa; errors are web-text failure modes"
+        },
+        {
+          "node_id": "title:frontiers pmc12741073 kazmorphcorpus 2025 spec table 1",
+          "phrase": "All high-accuracy Kazakh segmentation is on curated/gold/synthetic; zero measurement on noisy crawl"
+        },
+        {
+          "node_id": "doi:10.3390/info17020128",
+          "phrase": "99.62% morph-F1 achieved on 2.33M synthetic harmony wordforms — no OOV or noise-robustness benchmark"
+        }
+      ]
+    },
+    "kazakh-tokenizer-fertility-vs-byte-premi": {
+      "summary": "The frontier here has largely inverted the intuitive story that a better Kazakh tokenizer buys accuracy. CONFIRMED: the Kazakh cross-lingual gap is driven by the script-based byte premium (kaz_cyrl 1.76x on NLLB / 1.88x on FLORES, ~1.80 UTF-8 bytes/char, arxiv:2403.00686), not by fertility or morphology — a 70-language study finds fertility explains only R²=0.021 of alignment variance and MorphScore has no significant correlation with perplexity (F(1,13)=0.323, p=0.580), with the gap becoming insignificant once training data is byte-premium-scaled (arxiv:2411.14198). This is corroborated empirically: SozKZ-600M ships a dedicated 50K ByteLevel-BPE with a 2-3x fertility advantage yet scores MC-QA 30.3% / Belebele 27.0%, LOSING to Qwen2.5-0.5B (31.5 / 30.0) which tokenizes Kazakh ~5x worse (arxiv:2603.20854). The CONTESTED counter-evidence is Parallel Tokenizers, which shows improving fertility 1.89→1.57 yields a real but small +0.72-1.28 F1, largest in low-data regimes (arxiv:2510.06128) — so fertility is a second-order lever, not a null one. Open questions: whether a morphology-aware or byte-level tokenizer (KazByte's BLT-style adapter remains a proposal with ZERO results, arxiv:2603.27859) can convert the ~2.4x efficiency/context win into accuracy, and whether the planned Latin-script transition — which would nearly halve the premium (tur_latn 1.044 vs kaz_cyrl 1.76) — changes the calculus.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2411.14198",
+          "phrase": "Fertility explains only R²=0.021 of gap; byte premium (up to 5x) is the real driver, not morphology"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "SozKZ: 2-3x-better tokenizer, still loses knowledge QA to Qwen2.5-0.5B — decouples tokenizer from accuracy"
+        },
+        {
+          "node_id": "arxiv:2403.00686",
+          "phrase": "Exact Kazakh byte premium 1.76x/1.88x; script-driven (1.80 bytes/char), NOT agglutination"
+        },
+        {
+          "node_id": "arxiv:2510.06128",
+          "phrase": "Counter-evidence: fertility 1.89→1.57 does buy +0.72-1.28 F1, second-order lever largest in low-data"
+        },
+        {
+          "node_id": "title:catherinearnett byte premium tool all merged 20240223 tsv byte coef nllb column",
+          "phrase": "Premium is pure script effect: Latin transition would halve it (tur_latn 1.044 vs kaz_cyrl 1.76)"
+        },
+        {
+          "node_id": "arxiv:2603.27859",
+          "phrase": "KazByte BLT-style byte adapter frames fertility as efficiency lever; a proposal with NO results yet"
+        }
+      ]
+    },
+    "kazakh-turkic-nlp": {
+      "summary": "The established fact is that every published Kazakh SOTA at any scale is an ADAPTATION of a strong base, never from-scratch: Sherkala-8B is a continual-pretrain of Llama-3.1-8B (45.3B tokens, 3:1:3 kk:(ru+tr):en, vocab +25% to 159,766, Kazakh fertility 4.73->2.04) reaching KazMMLU 41.4 chat / 51.6 base, and Qolda (Qwen3-4B) hits 60.37 zero-shot and beats its own backbone. At <=1B nothing dedicated beats general Qwen3-0.6B's ~32.8% KazMMLU; the lab's target is +3.2pp over that. The contested/refuted result is that a great tokenizer does not buy accuracy: from-scratch SozKZ-600M (dedicated 50K ByteLevel-BPE, 2-3x fertility advantage, ~9B tokens) scores only MC-QA 30.3 / Belebele 27.0, LOSING to un-adapted Qwen2.5-0.5B (31.5 / 30.0); and broad multilingual coverage actively HURTS Kazakh (Aya Expanse collapses to 15.7% by emitting Kyrgyz). Corpus supply is a hard ceiling at ~9-10B unique Kazakh tokens (HPLT 3.0 7.34B, SozKZ 9B, FineWeb-2 ~1.8B). The open question is whether architectural novelty can push a <=600M-ACTIVE model past the baseline: no non-vanilla attention (GQA/MLA/gated) has EVER been trained on Kazakh, and no memory mechanism keys on morphemes -- but Engram/mHC are validated only on MoE >=3B, and counting the memory table pushes a dense-plus-table model into the ~1B-TOTAL class where the real peers (Qwen2.5-1.5B 34.3) are stronger.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Closest prior art: from-scratch SozKZ-600M (best-in-class Kazakh tokenizer) still LOSES knowledge QA to un-adapted Qwen2.5-0.5B"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Kazakh SOTA and ceiling reference: Llama-3.1-8B continual-PT -> KazMMLU 51.6 base / 41.4 chat; adaptation, not architecture"
+        },
+        {
+          "node_id": "arxiv:2502.12829",
+          "phrase": "Primary eval defining the bar: Qwen3-0.6B 32.8%, best open 55.2% (70B); shot count swings scores ~11pp"
+        },
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "Engram conditional memory: beats iso-param/iso-FLOP MoE at 27B via O(1) n-gram lookup, but only MoE, never dense/sub-1B"
+        },
+        {
+          "node_id": "arxiv:2603.21036",
+          "phrase": "Refutes free cross-lingual transfer: Kazakh-Kyrgyz proximity leaks generation (Aya Expanse 15.7% Kazakh vs 82.3% English)"
+        },
+        {
+          "node_id": "title:mdpi make 8 5 128 hf issai qolda",
+          "phrase": "Adaptation beats from-scratch: Qolda (Qwen3-4B) 60.37 zero-shot -> 76.0 with RAG, outperforms its backbone"
+        }
+      ]
+    },
+    "kv-cache-architecture": {
+      "summary": "The frontier here is cross-layer KV sharing on top of GQA/MQA — reusing K/V across layers so only a subset compute it. CONFIRMED: sharing across 2 layers (2x KV cut) is the only factor worth taking — CLA (arxiv:2405.12981) shows CLA3/CLA4 degrade monotonically (1B ppl 13.60→13.77→13.95), and at equal cache CLA2 is Pareto-better than halving head dim (13.60 vs 13.81). The load-bearing correction is that the lab's assumed \"+0.04-0.06 ppl\" cost is from the LR-tuned MQA-CLA2 rows (optimal lr 2.25e-3 vs 1.5e-3); the paper's actual untuned GQA+CLA2 ablation costs +0.07 (GQA2) to +0.12 (GQA4), and its prose/table even contradict each other on which GQA config wins (uncertain claim, likely a naming typo). CONTESTED: the independent NAACL-2025 from-scratch 1.1B reproduction (arxiv:2410.14442) finds CLA2's layout (lasagna-bottom, -0.95 avg) is the WORST of five layouts — trailing-reuse (pizza-bottom, -0.55) and sandwich-top (-0.12) are strictly better, which is exactly the trailing scheme Gemma-3n and Gemma 4 ship in production (num_kv_shared_layers) — yet Google publishes only \"minimal impact on quality\" with zero ablation numbers across two generations. The one sub-1B GQA datapoint with numbers is Hymba (arxiv:2411.13676): +0.60 commonsense but -0.75 recall at 300M. Open question for QymyzLM: at ≤600M from scratch, is trailing-layer reuse (not CLA2) the right layout, and does the recall hit matter for a retrieval-adjacent target.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2410.14442",
+          "phrase": "Only from-scratch 1.1B GQA reproduction: CLA2 layout is WORST (-0.95); trailing/sandwich beat it — refutes CLA2-best"
+        },
+        {
+          "node_id": "arxiv:2405.12981",
+          "phrase": "Foundational CLA; real GQA+CLA2 cost is +0.07/+0.12 ppl (untuned), not the lab's +0.04; only factor-2 pays off"
+        },
+        {
+          "node_id": "arxiv:2411.13676",
+          "phrase": "Only sub-1B GQA ablation with numbers: +0.60 commonsense but -0.75 recall at 300M, 1.15x throughput"
+        },
+        {
+          "node_id": "hf:unsloth/gemma-3n-e2b",
+          "phrase": "Production trailing KV sharing at 2B-eff (num_kv_shared_layers=10) with NO quality ablation — only 2x prefill"
+        },
+        {
+          "node_id": "hf:blog/gemma4",
+          "phrase": "Second Google generation shipping trailing KV sharing with zero published quality cost"
+        }
+      ]
+    },
+    "llm-alignment-data": {
+      "summary": "This topic is anchored by a single node, Qorgau (arxiv:2502.13640, MBZUAI Feb 2025) — the first LLM-safety benchmark for the Kazakh-Russian bilingual context: a two-level taxonomy (6 risk areas / 17 harm types, incl. region-specific risk VI), ~1000 human-annotated prompts per language, and GPT-4o-judge + human scoring of 12 models across kk, ru and code-switched inputs. Its established, non-uncertain findings: closed models lead kk safety (Claude 96.5%, GPT-4o 95.8%; best open KazLLM-1.0-70B 87.5%), models are frequently SAFER in Kazakh than Russian because low-resource exposure yields vague generic answers, and region-specific risk VI dominates unsafe responses in both languages. The load-bearing caveat is adoption, not correctness: the repo declares NO license (default all-rights-reserved), so it is evaluation-only — no redistribution, HF re-hosting, or training on its annotations — plus practical parsing traps (question files are .xlsx; the code-switch column is typo'd 'code_swithced_version'). The open question for the lab is whether QymyzLM/other new Kazakh models can be run through Qorgau at all given the license, and how a ≤600M model's safety compares when its Kazakh answers are inherently vaguer. No claim here is REFUTED or flagged uncertain, but every downstream use is constrained by the licensing datapoint.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2502.13640",
+          "phrase": "First Kazakh-Russian LLM safety benchmark: 6 risk / 17 harm taxonomy, ~1000/lang, 12 models, GPT-4o+human judge"
+        }
+      ]
+    },
+    "mla-at-sub-1b": {
+      "summary": "MLA is CONFIRMED viable below 1B along three distinct paths, and this slice pins the tradeoffs. From-scratch: 2506.09342 (30–202M, decoupled-RoPE MLA at r=d/2 gives 45% KV cut for +0.3% val loss) and EG-MLA (120M, shared kv_lora_rank=256, and 64 with token-embedding gating) prove shared ranks well below the DeepSeek-V2/PLM-1.8B default of 512; MiniCPM3-4B ships rank 256 (=d/10). Teacher-free conversion (MHA2MLA) converts SmolLM-135M/360M GQA→MLA with only ~2.25B tokens (0.38% of pretrain) but is lossy and shows inverse-scale degradation — smaller models lose MORE at equal compression (360M: −1.72pp at −68.75% KV, −4.59pp at −87.5%). Distillation upcycling (X-EcoMLA) reaches ~1.9x lossless via self-distillation, but 6.4–10.6x lossless is published ONLY with a 3–8x-larger SAME-tokenizer teacher — unreachable for a bespoke Kazakh vocab. The load-bearing open question: cross-tokenizer lossless deep conversion at sub-1B has ZERO published results, and every sub-1B MLA study (from-scratch or converted) evaluated short-context only — no LongBench/RULER/needle evidence exists below 7B. Two internal conflicts are flagged uncertain: X-EcoMLA's config-to-ratio mapping (kv_lora_rank 128 vs 512) and 2506.09342's KV-reduction figure (87.5% vs 72%).",
+      "highlights": [
+        {
+          "node_id": "arxiv:2502.14837",
+          "phrase": "Teacher-free GQA→MLA conversion at 135M/360M on 0.38% of pretrain; lossy with inverse-scale degradation"
+        },
+        {
+          "node_id": "arxiv:2503.11132",
+          "phrase": "Distillation upcycling Llama3.2-1B: 1.9x lossless self-distill; deep lossless needs larger same-tokenizer teacher"
+        },
+        {
+          "node_id": "arxiv:2509.16686",
+          "phrase": "Only from-scratch sub-1B run with shared rank below 512: kv256 and kv64-gated at 120M"
+        },
+        {
+          "node_id": "arxiv:2506.09342",
+          "phrase": "Dedicated 30–202M MLA study: r=d/2 → 45% KV cut, +0.3% loss; decoupled RoPE mandatory"
+        },
+        {
+          "node_id": "arxiv:2503.12167",
+          "phrase": "Production from-scratch dense MLA at 1.8B pins the rank-512 (=d/4) precedent, never 256"
+        },
+        {
+          "node_id": "hf:openbmb/minicpm3-4b",
+          "phrase": "Smallest shipped kv_lora_rank=256 (=d/10 + rope32), same ratio class as DeepSeek-V2/V3"
+        }
+      ]
+    },
+    "mla-at-sub-1b-scale": {
+      "summary": "The frontier splits cleanly into three evidence classes. FROM-SCRATCH MLA is proven small: the Latent-MHA-for-SLMs paper (30M-202M, arxiv:2506.09342) shows decoupled-RoPE MLA at r=d/2 costs only +0.3% val loss for a 45% KV cut, but collapses at r=d/4 (+4.4%) and needs the RoPE branch. CONVERSION at sub-1B is proven-but-lossy and teacher-free: MHA2MLA (arxiv:2502.14837) converts SmolLM-135M/360M on ~0.38% of pretraining tokens, but shows an inverse-scale law — smaller models lose more at equal KV compression (135M -3.28pp vs 7B -0.30pp at deep cuts). LOSSLESS deep conversion at ~1B exists only with a 3-8x-larger same-tokenizer teacher (X-EcoMLA, arxiv:2503.11132: 6.4-10.6x KV at parity via distillation), a path the lab cannot use with a bespoke tokenizer — leaving ~1.9x self-distill lossless or ~3.2x teacher-free at -1.7pp as the realistic ceiling. The dominant OPEN question is long-context: every sub-1B result is short-context; the only long-context retrieval evidence at ~1B is HyLo (arxiv:2604.24715, 4 MLA + 12 linear layers, RULER-64K 40.8) with no pure-MLA arm, and the smallest pure-MLA RULER-128K number (81.3) belongs to Kimi Linear's 3B-active MoE baseline. Even DeepSeek-V2-Lite, the smallest shipped pure-MLA config (kv_lora_rank=512 at d/4), has no published needle/RULER results. All six nodes are unverified (verdict null); the X-EcoMLA config-to-ratio mapping is internally contradictory and self-flagged uncertain.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2604.24715",
+          "phrase": "Only long-context retrieval evidence for MLA at ~1B: 4-MLA+12-linear, RULER-64K 40.8; no pure-MLA arm"
+        },
+        {
+          "node_id": "arxiv:2502.14837",
+          "phrase": "Teacher-free conversion at 135M/360M on 0.38% of tokens; inverse-scale law — small models lose more"
+        },
+        {
+          "node_id": "arxiv:2503.11132",
+          "phrase": "1.24B distillation upcycle: 1.9x lossless self-distill, 6.4-10.6x only with bigger same-tokenizer teacher"
+        },
+        {
+          "node_id": "arxiv:2506.09342",
+          "phrase": "Only from-scratch MLA at 30M-202M: r=d/2 = 45% KV cut at +0.3% loss, needs decoupled RoPE"
+        },
+        {
+          "node_id": "arxiv:2510.26692",
+          "phrase": "Smallest pure-MLA with RULER-128K (81.3) — but 3B-active MoE, 5-6x lab scale, not dense"
+        },
+        {
+          "node_id": "hf:deepseek-ai/deepseek-v2-lite",
+          "phrase": "Smallest shipped pure-MLA config (kv_lora_rank=512 at d/4) — but zero long-context evals"
+        }
+      ]
+    },
+    "mla-sub1b": {
+      "summary": "The frontier question — does MLA earn its place at sub-1B ACTIVE params — resolves to \"rough parity, not a clear win.\" Two independent from-scratch head-to-heads bound it: the Dao group (2505.21487, 183M-1.47B FineWeb-Edu) finds MLA (single latent kv_lora_rank=4*d_h + rope32, queries NOT compressed) beats GQA-4 at 433M/876M while caching LESS, whereas TPA (2501.06425) reports MLA \"trains more slowly and yields higher validation losses\" — but that claim is figure-only with no numeric table, and TPA's own downstream tables show MLA at parity/better (772M: MLA 53.32 > GQA 52.30). Synthesis envelope: MLA sits within about ±1pp of GQA across 350M-1.5B, never catastrophic, never the DeepSeek-scale win. Conversion paths are de-risked but tiered: MHA2MLA (2502.14837) is teacher-free on ~0.4% of pretrain data but lossy (-1.2 to -4.6pp for 3.2-8x KV cut, and smaller models degrade MORE at equal d_kv); X-EcoMLA (2503.11132) reaches 6.4-10.6x lossless only with a 3-8x-larger same-tokenizer teacher — unreachable under a bespoke Kazakh tokenizer, leaving ~1.9x self-distill lossless or ~3.2x@-1.7pp as the realistic hedge. Production signal is genuinely split: MiniCPM3-4B (kv_lora_rank=256=d/10) and DeepSeek-V2-Lite (512, q-compression dropped sub-2B) ship MLA and Youtu-LLM ships dense MLA at 1.96B claiming MLA beats GQA in its own 1B ablation, yet DeepSeek-OCR ships MLA DISABLED at ~570M active and Qwen3.5-0.8B chose hybrid-linear (Gated DeltaNet) + GQA-2 over MLA. Open questions: lossless DEEP MLA conversion under a bespoke tokenizer, and long-context (RULER/needle/LongBench) MLA quality at sub-1B — the latter unmeasured everywhere (X-EcoMLA and DeepSeek-V2-Lite both publish short-context evals only).",
+      "highlights": [
+        {
+          "node_id": "arxiv:2505.21487",
+          "phrase": "Strongest from-scratch evidence: MLA beats GQA-4 at 433M/876M while caching less; pins kv_lora_rank=4*d_h, rope32"
+        },
+        {
+          "node_id": "arxiv:2501.06425",
+          "phrase": "First from-scratch MLA-vs-GQA in the d_model window; source of the ±1pp-vs-GQA envelope and the 'MLA slower' caveat"
+        },
+        {
+          "node_id": "arxiv:2502.14837",
+          "phrase": "Teacher-free GQA→MLA conversion on 0.4% pretrain data — tokenizer-agnostic escape hatch, but lossy sub-1B"
+        },
+        {
+          "node_id": "arxiv:2503.11132",
+          "phrase": "Lossless 6.4-10.6x MLA upcycling — but only with a larger same-tokenizer teacher, no long-context eval"
+        },
+        {
+          "node_id": "hf:deepseek-ai/deepseek-ocr",
+          "phrase": "Counter-datapoint: DeepSeek ships MLA DISABLED at ~570M active (kv_lora_rank=null, plain MHA)"
+        },
+        {
+          "node_id": "arxiv:2512.24618",
+          "phrase": "Dense-MLA production at 1.96B; own 1B ablation has MLA beating GQA on ppl and MC across the board"
+        }
+      ]
+    },
+    "mla-upcycling-at-1b-under-a-bespoke-toke": {
+      "summary": "The question — can a ≤1B GQA model be upcycled to MLA when it uses a bespoke Kazakh tokenizer that no larger teacher shares — resolves into a three-tier frontier. Teacher-free conversion is CONFIRMED at sub-1B: MHA2MLA (arxiv:2502.14837) converts SmolLM-135M/360M via joint-SVD init + partial-RoPE on only 2.25B FT tokens (0.375% of pretrain), tokenizer-irrelevant because no teacher is involved, but it is LOSSY — 3.2x KV cut costs -1.2/-1.7pp and 8x costs -3.3/-4.6pp, with smaller models degrading more at equal d_kv. Lossless deep compression (6.4-10.6x) is published only via distillation from a 3-8x-larger SAME-tokenizer teacher (X-EcoMLA arxiv:2503.11132), which cannot exist for the lab; its only tokenizer-safe option is ~1.9x lossless self-distillation. The decisive open gap: zero published work combines cross-tokenizer KD (ALM arxiv:2503.20083 and peers) with MLA upcycling, so a Sherkala-8B→bespoke-Kazakh-SLM MLA conversion is unclaimed. Contested/caveats: X-EcoMLA's internal config-to-ratio mapping is self-conflicting (uncertain), Zebra-Llama shows deep hybrid compression still drops MMLU -8.2pp even with an 8B teacher (uncertain), and 2026 teacher-free advances (CARE) bottom out at 4B with no sub-1B evidence.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2502.14837",
+          "phrase": "Teacher-free GQA→MLA proven at 135M/360M on 0.375% FT data — tokenizer-irrelevant but lossy (3.2x@-1.7pp)"
+        },
+        {
+          "node_id": "arxiv:2503.11132",
+          "phrase": "Verdict node: 1.9x lossless self-distill is the only tokenizer-safe path; 6.4-10.6x needs an unreachable same-tokenizer teacher"
+        },
+        {
+          "node_id": "arxiv:2503.20083",
+          "phrase": "The open gap: zero papers combine cross-tokenizer KD with MLA upcycling — Sherkala-teacher route is unclaimed"
+        },
+        {
+          "node_id": "arxiv:2505.17272",
+          "phrase": "Deep hybrid compression still lossy on knowledge: MMLU -8.2pp with 8B same-tokenizer teacher — what KazMMLU measures"
+        },
+        {
+          "node_id": "arxiv:2603.17946",
+          "phrase": "2026 teacher-free conversion improves (215x ppl, 1.70x acc at matched KV) but smallest tested model is 4B — no sub-1B evidence"
+        }
+      ]
+    },
+    "mla-vs-gqa-pretraining-cost-and-converge": {
+      "summary": "The frontier question is whether MLA beats GQA enough to justify it when pretraining a sub-1B model from scratch. Three independent from-scratch head-to-heads now exist — TPA/T6 (353M/772M, FineWeb-Edu ~49B tok), the Dao-group GLA paper (183M-1.47B, 25-50B tok), and latent-MHA-for-SLMs (30-202M, ~3.3B tok TinyStories). Established: MLA quality sits within roughly ±1pp of GQA across 350M-1.5B — never the DeepSeek-V2 large-scale win, never catastrophic; the Dao group shows MLA (kv_lora_rank=4·d_h + rope 32) matching or beating GQA-4 while caching LESS (876M: MLA 11.363 vs GQA-4 11.340 ppl; MLA best at 433M), and their GLA-2 variant beats both. Contested: TPA claims MLA \"trains more slowly, higher validation loss,\" but this is figure-only (no numeric table) and its own downstream tables show parity/better, so the convergence-penalty is weak evidence — and its GQA arm cached only 256 elem vs MLA's 544. Open: zero published wall-clock or training-memory MLA-vs-GQA numbers at sub-1B, zero long-context (RULER/LongBench) evidence for from-scratch sub-1B MLA, and production adoption is zero (SmolLM3, Qwen3-0.6B both shipped GQA-4). Escape hatch: MHA2MLA converts an existing GQA model to MLA with ~0.4% of pretraining data (-1.2/-1.7pp at -69% KV), decoupling the choice from the from-scratch run.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2505.21487",
+          "phrase": "Strongest from-scratch evidence: MLA matches/beats GQA-4 while caching less at 433M/876M (11.363 vs 11.340 ppl)"
+        },
+        {
+          "node_id": "arxiv:2501.06425",
+          "phrase": "First MLA-vs-GQA head-to-head; parity@353M, +1pp@772M, but figure-only slower-convergence caveat, GQA under-cached"
+        },
+        {
+          "node_id": "arxiv:2502.14837",
+          "phrase": "Escape hatch: GQA->MLA conversion with 0.4% pretrain data, -1.2/-1.7pp at -69% KV, decouples the decision"
+        },
+        {
+          "node_id": "arxiv:2506.09342",
+          "phrase": "Smallest-scale MLA study (30-202M): decoupled-RoPE r=d/2 -> 45% KV cut at +0.3% loss, needs RoPE"
+        },
+        {
+          "node_id": "title:huggingface smol training playbook via crawl gist github com unclecode e5da5fb6a1d37022b089e243e0d9e00e adoption absence from july 2026 searches",
+          "phrase": "Production sub-1B MLA adoption is zero: SmolLM3 and Qwen3-0.6B both shipped GQA-4"
+        }
+      ]
+    },
+    "novelty-check": {
+      "summary": "The novelty audit converges on one point: every component QymyzLM plans is established prior art EXCEPT morpheme-keyed conditional memory. MLA (2405.04434), n-gram/lookup memory (Memory Layers 2412.09764, Engram 2601.07372, X-gram, Tensorizing Engram), morphology-aware tokenizers (MorphBPE 2502.00894, Kazakh MDPI 17(2):128, Mongolian PLM), mHC (2512.24880), byte-level H-Net++ (2508.05628), and Unigram-over-BPE (2508.08424) are all occupied axes. The genuine gap is confirmed: every Engram-lineage paper keys lookup on trailing token-IDs — \"suffix n-gram\" means last-k token IDs, a naming collision with the linguistic suffix, verbatim across Engram, X-gram, Memory Grafting and Tensorizing — never on morphological stem+suffix units. Contested/REFUTED: the argument that sub-1B DENSE Engram gains transfer to a Kazakh production-vocab model carries verdict REFUTED — the positive dense results used char/tiny vocabs (100, 1024) while the one production-vocab sub-1B datapoint (Memory Grafting 45.03 < MoE 45.62) loses, and Engram's ρ≈75-80% allocation law structurally needs an MoE sparse budget a 600M dense backbone (P_sparse≈0) lacks. SozKZ (2603.20854) is the closest prior art — same ≤600M from-scratch Kazakh target but architecturally vanilla, and it loses knowledge QA to an un-adapted Qwen2.5-0.5B (30.3 vs 31.5), the strongest differentiation opening; X-gram (2604.21724) is the most dangerous collision, a conditional lookup memory at exactly the sub-1.2B target scale (+4.4pt over vanilla, +3.2 over Engram at 0.73B). Open question: whether morpheme-keyed memory actually helps at 600M dense, since the transfer argument is refuted and the token-ID/morpheme naming collision is a reviewer landmine.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "Defines the one clean novelty gap: morpheme-keyed memory unoccupied; but every Engram config is MoE, no dense sub-1B validation"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Closest prior art: same from-scratch ≤600M Kazakh target, architecturally vanilla, loses knowledge QA to un-adapted Qwen2.5-0.5B"
+        },
+        {
+          "node_id": "arxiv:2604.21724",
+          "phrase": "Most dangerous collision: conditional lookup memory at exactly sub-1.2B, +4.4pt over vanilla / +3.2 over Engram, still token-ID keyed"
+        },
+        {
+          "node_id": "arxiv:2606.08347",
+          "phrase": "REFUTED as transfer argument: dense sub-1B Engram gains only appear under char/vocab-1024 tokenizers, not production vocab"
+        },
+        {
+          "node_id": "arxiv:2412.09764",
+          "phrase": "Proof n-gram/lookup memory is a crowded 2026 subfield (6+ papers to 128B), so memory itself cannot be claimed novel"
+        },
+        {
+          "node_id": "arxiv:2502.00894",
+          "phrase": "Reference morphology-aware tokenizer tested at 300M/1B, so a Kazakh 'morphology-aware tokenizer' claim is not novel per se"
+        }
+      ]
+    },
+    "novelty-check-has-any-2026-preprint-impl": {
+      "summary": "CONFIRMED across the whole 2026 Engram lineage: no preprint keys conditional memory by morphological units — a morpheme-segmented (stem+suffix) lookup memory count in the literature is 0. The load-bearing finding is a terminology trap: \"suffix n-gram\" in Engram (2601.07372), Memory Grafting (2605.20948), X-gram (2604.21724) and Tensorizing Engram (2606.08347) always means trailing TOKEN-ID tuples of the context, never linguistic suffixes. The three genuine erosions of \"first-of-kind\" are (a) that naming collision, (b) TOBA LM (2603.10006), which applies UNMODIFIED Engram to a 2,843-unit syllable vocab and post-hoc interprets the 2/3-gram pathways as \"morpheme structures\" without any segmenter, and (c) Lngram (2605.24869), whose \"learn your own latent lookup symbols, drop tokenizer IDs\" motivation directly rivals hand-specified morpheme keys (+0.63pp over Engram at 22B). Morpheme-aware tokenizers for Turkic DO exist and are recent — Morpheus (2606.18717, Turkish, MorphScore F1 0.61), MorphBPE, VerChol, the Kazakh CSE-guided segmenter — so morpheme keys are feasible to source, but none feeds a conditional-memory table. The surviving defensible novelty = explicit morphological-segmentation-keyed memory with vowel-harmony/allomorph-normalized keys, and the first Turkic/Kazakh-benchmarked memory augmentation; the open question is whether keyed morphemes beat Lngram's learned latent units and whether any of the sub-1B token-ID results transfer to a natural high-fertility language.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2605.24869",
+          "phrase": "VERDICT node: neither Lngram nor X-gram subsumes morpheme keys; names the 3 competing preprints to distinguish"
+        },
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "The base component: confirms 'suffix n-gram' = token-ID tuples, not morphology — the reviewer landmine"
+        },
+        {
+          "node_id": "arxiv:2604.21724",
+          "phrase": "Most dangerous sub-1B collision: token-ID n-gram memory at 0.73/1.15B beating Engram +3.2pt at matched budget"
+        },
+        {
+          "node_id": "arxiv:2603.10006",
+          "phrase": "TOBA LM: only dense+Engram+agglutinative artifact, 'morpheme-flavored' framing but no segmenter"
+        },
+        {
+          "node_id": "arxiv:2606.18717",
+          "phrase": "Morpheus proves morpheme-aware Turkic tokenizers exist (F1 0.61) yet none feeds a memory table"
+        },
+        {
+          "node_id": "arxiv:2606.08347",
+          "phrase": "Field moves monthly; first controlled micro-scale dense+Engram datapoints, none Turkic"
+        }
+      ]
+    },
+    "parameter-counting-convention-and-iso-si": {
+      "summary": "The frontier here is a single load-bearing accounting question for QymyzLM: does a ~500M-active dense backbone plus a ~512M Engram lookup table belong to the ≤600M size class, or does the field re-bracket it as a ~1B-total model? The KB answer is CONFIRMED and cuts against the ≤600M framing: the sparse-model convention (Mixtral 8x7B = \"47B/13B active\"; DeepSeek-V3 = \"the 671B model\", 5.5% activation) size-classes by TOTAL params, crediting capacity to total and only compute to active. Engram's own Section 3.1 defines P_tot ⊇ the memory table and its headline is explicitly iso-TOTAL-param AND iso-FLOP (5.7B/568M-active, 9.9B/993M-active), so invoking Engram to beat a smaller-total model contradicts the source. All three Kazakh peers (Qwen3-0.6B 32.8%, SozKZ-600M ~30%, Gemma3-270M) are DENSE — total==active — so at ~1B total the honest peer bar rises to Llama-3.2-1B/Gemma3-1B/Qwen2.5-1.5B (34.3%), and \"beats every 500M SLM\" becomes a category error. Two axes stay separable: the model is genuinely competitive on the active/FLOP axis, but on the footprint axis (512M table ≈1GB fp16, offloaded to host/NVMe) it is 1.7–3.7x its named peers. The only flagged-uncertain thread is whether Engram's U-shaped ρ≈75–80% allocation law transfers to a dense backbone with P_sparse≈0, where adding the table is pure addition rather than reallocation.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "Engram Sec 3.1 defines P_tot ⊇ memory table; headline is iso-TOTAL-param AND iso-FLOP — no smaller-class claim"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Dense Kazakh peers have total==active; at ~1B total the bar rises to Qwen2.5-1.5B 34.3%, re-bracketing the model"
+        },
+        {
+          "node_id": "arxiv:2401.04088",
+          "phrase": "MoE convention size-classes by TOTAL: Mixtral=47B(13B active), DeepSeek-V3=671B — capacity credited to total"
+        }
+      ]
+    },
+    "post-hoc-attachment-of-engram-style-cond": {
+      "summary": "The frontier question is whether QymyzLM can bolt a random-init, deterministic-hash Engram-style conditional memory onto a converged dense ~500M backbone (Qwen3-0.6B) during continual PT and have it form useful Kazakh knowledge without wrecking the kk/ru/en base. CONFIRMED at exactly lab scale: post-hoc attach works when the integration is ADDITIVE (keep the pretrained MLP, add alpha*mem with learnable alpha_init=0.01) and preceded by a memory-only \"healing\" recovery phase — on Qwen2.5-0.5B additive gives MedMCQA +2.5pp with PPL BELOW base and TriviaQA -0.4pp, while REPLACEMENT (discard MLP) is Pareto-dominated (PPL +26%); sparse memory FT is genuinely low-forgetting (NQ F1 -11% vs LoRA -71%, full FT -89%). The feared failure mode — gate suppression of a random module over a converged residual stream — is effectively REFUTED at 0.5-1.7B (Lngram Table 4 CONFIRMED: a frozen backbone + ~200M memory learns domain QA, gate does not suppress, +5.54pp over full FT). BUT every positive datapoint uses LEARNED keys (product-key memory, latent binary symbols), never Engram's deterministic token-ID hash, so none actually supports the plan as specified. The real, unanswered risk is COLLISION NOISE: vanilla Engram UNDERPERFORMS its MoE baseline at 0.92B (45.03 vs 45.62, 9-task avg) attributed to hash collisions in a table too small for the key space, and no Engram-lineage paper has ever attached hash-keyed memory post-hoc (Memory Grafting relegates it to future work with zero experiments) — so QymyzLM's ~3B-token kill-switch ablation is literally unanswerable from the literature. Compounding this, Engram's own convention counts the memory table in TOTAL params (500M dense + ~512M table ≈ 1B), pushing the model outside the ≤600M size class it competes in.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2605.03229",
+          "phrase": "Decisive result at lab scale (Qwen2.5-0.5B): ADDITIVE attach (alpha=0.01) wins, REPLACEMENT Pareto-dominated"
+        },
+        {
+          "node_id": "arxiv:2605.20948",
+          "phrase": "GAP CONFIRMED: zero post-hoc hash-memory experiments; real risk is collision noise (45.03<45.62 at 0.92B), not gate suppression"
+        },
+        {
+          "node_id": "arxiv:2605.24869",
+          "phrase": "Strongest positive post-hoc datapoint (+5.54pp on frozen Qwen3-1.7B) but LEARNED latent keys — does NOT support the deterministic-hash plan"
+        },
+        {
+          "node_id": "arxiv:2604.05248",
+          "phrase": "Documents the attach loss-spike and cheap memory-only healing: val loss 2.3->2.1 in ~1k steps before joint training"
+        },
+        {
+          "node_id": "arxiv:2510.15103",
+          "phrase": "Low-forgetting substrate: sparse memory FT drops NQ F1 -11% vs LoRA -71%, full FT -89% — but base had memory from scratch"
+        },
+        {
+          "node_id": "arxiv:2601.07372",
+          "phrase": "The Engram source: all results MoE-only, table counted in TOTAL params, plus zero-init-value safe-attach math"
+        }
+      ]
+    },
+    "qymyzlm-architecture-fork": {
+      "summary": "The fork is how to give Qwen3-0.6B-Base (tied embeddings, 151,936×1024 = 155.58M = 26% of ~596M params) a Kazakh tokenizer under a ≤600M ACTIVE cap. Param math is CONFIRMED ground truth: a full swap to a ~60K Kazakh vocab shrinks the table to 61.4M and frees ~94M for Engram, while a Sherkala-style +31.5K expansion (→187.8M, ~628M total) breaks the cap, and EEVE's staged freezing is structurally incompatible with tied weights (untying costs +155.58M). Three viable paths survive: plain TIED expansion works (Yamaguchi, Gemma2-9B, up to 1.57x speedup) but costs 5.3–18.7pp of source-language knowledge; iso-size REPLACEMENT (VRCP) gains 2.2x JA efficiency at ZERO added params; and full trans-tokenization swap+CPT retains base advantage at tiny budgets, the only Turkic-tested route (Tatar Mistral-7B, 107M tokens → PPL 10.96). The decisive open question is a measurement gap: NO published swap-vs-from-scratch head-to-head exists at ≤1B, where the reinitialized table is ~26% of params vs ~2% at 8B, so the sub-1B \"swap tax\" is unmeasured — a publishable ablation QymyzLM can claim, with the swap cost bar (Dagan's >50B tokens) sitting 5x above the lab's ~10B-token Kazakh ceiling.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2408.04303",
+          "phrase": "Only Turkic-tested swap (Tatar, 107M tok) AND flags the decision-relevant sub-1B swap-tax evidence gap"
+        },
+        {
+          "node_id": "hf:qwen/qwen3-0.6b-base",
+          "phrase": "Re-derived param ground truth: 26% tied table; 60K swap frees ~94M, +31.5K expansion breaks cap"
+        },
+        {
+          "node_id": "arxiv:2402.14714",
+          "phrase": "EEVE 7-stage schedule structurally incompatible with tied embeddings; untying breaks the 600M cap"
+        },
+        {
+          "node_id": "arxiv:2406.11477",
+          "phrase": "Tied plain expansion works (1.57x) but low-data full replacement fails; expansion costs 5–19pp source knowledge"
+        },
+        {
+          "node_id": "title:vrcp nozaki et al 2nd sumeval workshop 2025 aclanthology org 2025 sumeval 2 5 pdf tables 1 4",
+          "phrase": "Third path: iso-size replacement, 2.2x JA efficiency at zero added params, GPU footprint unchanged"
+        },
+        {
+          "node_id": "arxiv:2412.07633",
+          "phrase": "Swap+CPT beats kept tokenizer at 32B tokens, but LoRA-CPT alone gives ~0 gain on strong multilingual base"
+        }
+      ]
+    },
+    "residual-stream-stability-qymyzlm-design": {
+      "summary": "This topic maps residual-stream/normalization stability tricks for the from-scratch ~500M QymyzLM path, which must train in fp16-only on a T4 (no bf16). The best-established fp16-relevant result is Peri-LN (arxiv:2502.02732): Pre-LN hidden-state magnitude exceeds the FP16 max (65504) by ~0.5B tokens while Peri-LN stays below it and cuts seed variance >2x (400M loss 3.43->3.34). LayerNorm Scaling (arxiv:2502.05795) is the largest zero-parameter perplexity win (1B/8.9B tok 17.02->15.71 ppl) but is explicitly INCOMPATIBLE with scaled init, conflicting with YuLan-Mini's 1.4/sqrt(n_layers) residual scaling — pick one. Value Residual/ResFormer (arxiv:2410.17897) is the cheapest zero-overhead win at exactly our scale (468M: iso-loss at -16.1% params), and OLMo 2's reordered-norm+QK-norm kit tames spikes only jointly. The contested frontier: the Hyper-Connections lineage delivers only marginal gains at sub-1B (KromHC BPB delta ~0.002-0.003) while raw HC costs +26% training memory — effectively dead on T4; plain muP diverges in fp16 (u-µP) and its LR-transfer benefit is itself disputed (weight decay, not muP). The open question is composition: no published run combines Peri-LN, LNS, GPAS, value residual and Canon at any scale (the one measured interaction, LNS+scaled-init, is negative), and SozKZ proves the entire technique set is untested on Kazakh — a plain-Llama 600M baseline reaches only 30.3% cultural QA.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2502.02732",
+          "phrase": "Direct fp16 evidence: Pre-LN overflows FP16 max at 0.5B tok, Peri-LN stays below + halves seed variance"
+        },
+        {
+          "node_id": "arxiv:2502.05795",
+          "phrase": "Largest zero-param ppl win (17.02->15.71 @1B) but incompatible with scaled init — can't stack"
+        },
+        {
+          "node_id": "arxiv:2410.17897",
+          "phrase": "Cheapest win at 468M scale: iso-loss with -16% params, zero FLOP/memory overhead"
+        },
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Kazakh baseline: plain-Llama 600M, none of these techniques used — whole ablation space unclaimed"
+        },
+        {
+          "node_id": "arxiv:2501.00656",
+          "phrase": "Stability kit: reordered-norm + QK-norm reduce spikes only jointly; spikes traced to repeated n-grams"
+        },
+        {
+          "node_id": "arxiv:2601.21579",
+          "phrase": "Settles HC-at-sub-1B: marginal (~0.002 BPB), extends 'mHC has no sub-3B dense validation' gap"
+        }
+      ]
+    },
+    "slm-architecture": {
+      "summary": "This slice frames sub-1B SLM architecture around two competing KV-efficiency mechanisms. (1) Sliding-window hybrid attention: Gemma 3 interleaves local SWA and global layers 5:1 (window 1024, RoPE 10K local / 1M global), cutting KV overhead from ~60% to <15% at 32K with minimal perplexity cost; the 270M config (18L, d640, MQA 4Q/1KV, 15:3 window-512:global) yields a constant ~108 MB KV@32K vs Qwen3-0.6B's ~3.75 GB (~35x smaller) — the strongest ≤300M long-context attention template, though that KV derivation is still uncertain-tagged. (2) MLA conversion/upcycling: X-EcoMLA upcycles Llama3.2-1B-Instruct to MLA via SVD init + distillation, reaching 6.4x KV compression at score parity (52.94 vs 52.85) with an 8B teacher on ~3.6B tokens/70 MI300-h. The load-bearing contest: X-EcoMLA's own node carries a CONFIRMED internal config conflict (kv_lora_rank 128 vs 512, r_q 1344/864/854, baseline 52.85 vs 52.77), so every specific config→ratio mapping is unverified — only \"up to 6.4x via post-hoc MLA conversion\" stands. Two open questions dominate: deep lossless compression (6.4–10.6x) is published ONLY with a 3–8x-larger same-tokenizer teacher (impossible under a bespoke Kazakh tokenizer; cross-tokenizer rescue = zero published results), and NO MLA-conversion paper evaluates long context (no LongBench/RULER/needle), so rank-512-at-1B is unmeasured beyond short tasks. As a base LM Gemma3-270M is near-random (24.4% KazMMLU, lab measurement), positioned as a fine-tuning substrate not a generative target.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2503.11132",
+          "phrase": "MLA-conversion precedent at 1.24B: 6.4x KV at parity w/ 8B teacher, but config conflict + zero long-context eval"
+        },
+        {
+          "node_id": "arxiv:2503.19786",
+          "phrase": "Sliding-window 5:1 template: ~108MB KV@32K at 270M (~35x < Qwen3-0.6B), the ≤300M long-context attention baseline"
+        }
+      ]
+    },
+    "small-lm-training-recipes-qymyzlm-design": {
+      "summary": "The recipe frontier for a ≤600M Kazakh SLM is now sharply forked into two costed paths. CONFIRMED convergence exists for from-scratch HPs at 350-500M: warmup ~2000 steps (4/4 modern recipes), peak LR in the 3e-3 (DCLM-412M, SmolLM2-360M) to 4e-3 (MobileLLM-R1) band, WD 0.033-0.1, single-stage high-quality data, and a 4-way-convergent fp16 stability stack (QK-norm + z-loss 1e-4 + RMSNorm/reordered-norm, per OLMo2/DCLM/Qwen3/MobileLLM-R1). DCLM 400M-1x (412M/8.2B tok) is the closest fully-specified analog. The decisive constraint is compute: re-derived at 3e19 FLOPs, a from-scratch pass needs 256-650 T4x2 wall-hours (~8+ weeks of Kaggle's 30 GPU-h/week) versus QLoRA/CPT of Qwen3-0.6B being 1-2 orders cheaper — but LoRA-in-CPT underperforms full FT ~5x on data-efficiency (Biderman: HumanEval LoRA-r256@20B 0.224 vs full 0.263), and Kazakh is a larger distribution shift than code/math. Contested: muP's value at single scale (2510.19093 argues weight decay, not muP, drives LR transfer), whether Muon's ~52%-of-AdamW-FLOPs win survives fp16 Newton-Schulz on T4 (unvalidated anywhere), and teacher strength for distillation (Strong-Teacher-Not-Needed: same-size/weak teachers help, stronger ones can reverse gains). Open question: can a QLoRA/CPT path on Qwen3-0.6B (already 32.8% KazMMLU) clear the ≥36% design bar without paying the from-scratch compute, given LoRA's learning deficit.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2406.11794",
+          "phrase": "DCLM 400M-1x (412M/8.2B tok) — the closest fully-specified published analog to a 500M/10B Kazakh run"
+        },
+        {
+          "node_id": "arxiv:2305.16264",
+          "phrase": "Data-constrained law (≤4 epochs≈fresh) + re-derived T4 feasibility: from-scratch = 256-650 wall-hours vs CPT 1-2 orders cheaper"
+        },
+        {
+          "node_id": "arxiv:2505.09388",
+          "phrase": "Qwen3-0.6B — the frozen CPT backbone at 32.8% KazMMLU, already carries QK-Norm fp16 safeguard"
+        },
+        {
+          "node_id": "arxiv:2405.09673",
+          "phrase": "LoRA in CPT underperforms full FT ~5x on data-efficiency; risk worse for a big Kazakh distribution shift"
+        },
+        {
+          "node_id": "arxiv:2501.00656",
+          "phrase": "OLMo2 fp16-only stability stack (QK-norm+z-loss 1e-4+reordered RMSNorm) — the T4 no-bf16 recipe"
+        },
+        {
+          "node_id": "arxiv:2509.24945",
+          "phrase": "MobileLLM-R1: full open recipe, LR 4e-3, matches Qwen3-0.6B reasoning on 11.7% of tokens but loses on knowledge"
+        }
+      ]
+    },
+    "sota-slm": {
+      "summary": "The sub-1B frontier is converged on a handful of architectural facts: DEPTH beats WIDTH (MobileLLM, adopted by SmolLM2-360M's 32L/d960 deep-thin GQA), tied input/output embeddings are near-universal, GQA head ratios cluster at 2:1-4:1 with head_dim=64, and extreme token/param overtraining is the dominant lever (Qwen3-0.6B ~60,000 tok/param; LFM2.5-350M claims 80,000:1 on 28T tokens). The hard, CONFIRMED constraint for this lab is that NO mainstream sub-1B SLM is trained for Kazakh/Turkic — Falcon-H1 and LFM2 exclude all Turkic, and the practical ≤1B KazMMLU ceiling is held by general Qwen3-0.6B at 32.8% (lab-measured, 3-shot), with Gemma-3-270M and Llama-3.2-1B at random (24-25%). The live architectural contest is attention/KV efficiency: Gemma 3's 5:1 sliding-window interleave (KV 60%→~15% at 32K), Falcon-H1's parallel attention+Mamba-2-per-layer, LFM2/Granite's conv-or-Mamba + few-global-attention hybrids, versus MLA's latent KV compression (70KB/tok vs GQA's 192-328KB). Contested/uncertain: whether extreme overtraining still pays (saturation results loom), Gemma-3-270M's exact d_model (embedding arithmetic implies ~640, not the reported 1024), and Qwen3.5-0.8B's undocumented sub-1B specs. The open question for QymyzLM: adapt the frozen Qwen3-0.6B backbone (QLoRA-CPT, KV pinned at 3.75GB@32K) or train Kazakh from scratch to exploit depth-over-width and a Turkic-native tokenizer.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2505.09388",
+          "phrase": "Qwen3-0.6B: the 32.8% KazMMLU baseline and frozen CPT backbone — QK-Norm, GQA 2:1, 60k tok/param"
+        },
+        {
+          "node_id": "arxiv:2502.12829",
+          "phrase": "KazMMLU primary eval: no dedicated sub-1B model beats ~33%; sets the 32.8→36 target delta"
+        },
+        {
+          "node_id": "arxiv:2503.19786",
+          "phrase": "Gemma 3: 5:1 sliding-window KV template (60→15% @32K) + 270M fine-tuning substrate at random on Kazakh"
+        },
+        {
+          "node_id": "arxiv:2511.23404",
+          "phrase": "LFM2-350M conv+GQA hybrid beats Qwen3-0.6B on multilingual MMLU at fewer params, 2x faster on CPU"
+        },
+        {
+          "node_id": "arxiv:2402.14905",
+          "phrase": "MobileLLM founding result: depth>>width and embedding-sharing at sub-1B, adopted by all successors"
+        },
+        {
+          "node_id": "title:sebastian raschka mla gallery knightli deepseek analyses martinalderson kv cache history",
+          "phrase": "MLA compresses KV 2.7-4.7x vs GQA (70KB/tok) — the alternative to sliding-window/hybrid KV routes"
+        }
+      ]
+    },
+    "sparse-memory-2026-engram-lineage-beyond": {
+      "summary": "The Engram/n-gram-memory lineage is a crowded 2026 subfield (Memory Layers, UltraMemV2, Tensorizing Engram, Lngram, X-gram, MolGram, Engram-Nine), so conditional lookup-memory itself is CONFIRMED not novel — only a morphology/Turkic-specific instantiation is open, and searches re-confirm ZERO published work keys memory on morphological units. What is established at sub-1B DENSE scale: Memory Layers gives ~3.5x NaturalQuestions gains at 134M (product-key, value pool shared across 3 FFN-replacing layers); Tensorizing Engram supplies the first controlled micro-scale datapoints (TN-gram matches Engram BPB with ~21-27% fewer memory params via CP decomposition); MolGram is the smallest validated instance (6.7M, char vocab 100). Two framing claims are REFUTED: the \"only adaptation-time datapoint\" framing (Lngram's frozen-backbone attach to Qwen3-1.7B gains +5.54pp BDD, CONFIRMED numbers but on driving-QA, not Turkic), and the high-fertility transfer argument (both positive dense results used tiny vocab 100/1,024, and the one production-vocab sub-1B result — Memory Grafting — was negative 45.03 vs MoE 45.62). Engram-Nine adds two useful negatives: collision-free MPHF hot-tier gives NO significant val-loss benefit (collisions act as implicit regularization) at 11-12% throughput cost, and host-offload is unnecessary at QymyzLM's T4 scale (a 128M-300M table is 256-600MB fp16, VRAM-resident). The open question is whether explicit morpheme-segmented + vowel-harmony-normalized keys — sourceable now from Turkic segmenters like Morpheus/VerChol/Kazakh CSE — actually buy accuracy on a dense sub-600M Kazakh model, which no paper has tested.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2601.16531",
+          "phrase": "Two clean negatives: collision-free hot-tier = no val-loss gain (collisions regularize); T4 host-offload unnecessary"
+        },
+        {
+          "node_id": "arxiv:2606.08347",
+          "phrase": "First controlled dense micro-scale Engram: TN-gram matches BPB at ~21-27% fewer params; high-fertility transfer REFUTED"
+        },
+        {
+          "node_id": "arxiv:2605.24869",
+          "phrase": "Only adaptation-time attach datapoint (frozen Qwen3-1.7B +5.54pp) but latent keys, driving-QA — not the QymyzLM plan"
+        },
+        {
+          "node_id": "arxiv:2412.09764",
+          "phrase": "Strongest dense sub-400M factual evidence: ~3.5x NQ at 134M via product-key memory, beats iso-param MoE"
+        },
+        {
+          "node_id": "arxiv:2603.10006",
+          "phrase": "Only dense+Engram+agglutinative artifact (TOBA LM) but no morpheme segmenter, training-loss-only, uncontrolled"
+        },
+        {
+          "node_id": "arxiv:2606.18717",
+          "phrase": "Morpheme-aware Turkic tokenizer exists (F1 0.61) — morpheme keys are sourceable, yet no memory table uses them"
+        }
+      ]
+    },
+    "tokenizer-agglutinative": {
+      "summary": "The frontier for tokenizing agglutinative Kazakh converges on a few CONFIRMED points and one live dispute. Algorithm choice dominates: Unigram beats BPE by 8-13 points on Telugu and gives lower bits-per-byte across 6 languages (arxiv:2508.08424, arxiv:2606.27019), and explicit morphological pre-segmentation helps BPE but NOT Unigram — so a Unigram+Morfessor hybrid likely buys nothing. Vocabulary is systematically under-sized: the γ≈0.83 scaling law puts a ~500M non-embedding model's optimum at ~64-75K tokens (arxiv:2407.13623), but under a hard 500M param cap tied embeddings at 200K would eat >60% of capacity, and the measured problem is concrete — Qwen3-0.6B's own tokenizer explodes real Kazakh prose to ~5.3 tok/word via byte fallback (own measurement), worse than Llama-3.1's 4.73, and the Tokenizer Tax study shows Cyrillic fragmentation is driven by Cyrillic-specific merge share, not raw vocab size (arxiv:2605.24718). The open dispute is tokenizer-free/byte-level: BLT says large-patch byte models start BELOW BPE at 1B and only cross over at larger scale (arxiv:2412.09871), while H-Net++ claims dynamic chunking already beats BPE on morph-rich Persian at 252M/1.4B-tokens (arxiv:2508.05628) — making a byte angle for Kazakh non-novel but contested at the exact sub-1B scale QymyzLM lives in. SuperBPE's superword gains are real but demonstrated only at 8B/200K vocab, and MUTANT's Indic port got just +1.5% downstream while rejecting morphology-aware pretokenization for latency/brittleness — a caution against over-engineering.",
+      "highlights": [
+        {
+          "node_id": "arxiv:2407.13623",
+          "phrase": "γ≈0.83 vocab scaling law: ~500M non-embed optimum is 64-75K tokens; sets the QymyzLM vocab budget"
+        },
+        {
+          "node_id": "arxiv:2508.08424",
+          "phrase": "Unigram beats BPE 8-13pts on agglutinative Telugu; algorithm dominates, morph pre-seg helps BPE not Unigram"
+        },
+        {
+          "node_id": "arxiv:2412.09871",
+          "phrase": "BLT: byte/large-patch models start BELOW BPE at 1B — byte-only is not competitive at QymyzLM scale"
+        },
+        {
+          "node_id": "arxiv:2508.05628",
+          "phrase": "H-Net++ contests BLT: tokenizer-free dynamic chunking beats BPE on morph-rich Persian at 252M"
+        },
+        {
+          "node_id": "title:own measurement transformers 5 5 2 autotokenizer qwen qwen3 0 6b base 66 word kazakh paragraph",
+          "phrase": "Qwen3-0.6B tokenizer hits ~5.3 tok/word on Kazakh Cyrillic via byte fallback — the concrete backbone problem"
+        },
+        {
+          "node_id": "arxiv:2511.03237",
+          "phrase": "MUTANT ports SuperBPE to 22 Indic langs: only +1.5% downstream, and REJECTED morphology-aware pretok"
+        }
+      ]
+    },
+    "tokenizer-morphology": {
+      "summary": "The load-bearing, near-consensus finding is that a better tokenizer does NOT buy knowledge accuracy for Kazakh: SozKZ-600M's dedicated 50K ByteLevel-BPE (2-3x fertility advantage, ~9B tokens) still scores 30.3% MC-QA, BELOW un-adapted Qwen2.5-0.5B's 31.5% and Llama-3.2-1B's 32.0%, and the 70-language study (2411.14198) finds fertility+MorphScore explain only R²=0.021 of the cross-lingual gap — the real drivers are the byte premium (Kazakh 1.76x, up to 5x for extreme scripts) and data quantity (Kazakh CommonCrawl 117x smaller than English). The established Kazakh recipe is Sherkala's +25% vocab extension (128,256→159,766) with WECHSEL/text-embedding-3-large init, which halves fertility 4.73→2.04 tok/word; continued-BPE-training (2512.03989) now supersedes its train-separate-and-append-merges with +9.6% bytes/token, fewer unreachable tokens, and −26% CPT time. Contested: whether morphology-aware pretokenization pays off — MorphBPE reports large morph-consistency-F1 gains (HU 0.87 vs 0.13 BPE) and faster convergence at 300M/1B, but MUTANT explicitly TESTED and REJECTED it for 22 Indic languages (latency/brittleness), keeping only regex pretok (38-40% of the gain); Unigram-LM meanwhile beats BPE on morpheme alignment for agglutinative families. Vocabulary sizing is a hard design constraint: the scaling law (γ≈0.83) predicts ~64-75K optimal vocab for a 500M non-embedding model, yet tied embeddings at that vocab consume 15-31% of a ≤600M active budget. Open question for QymyzLM: since tokenizer quality does not move knowledge accuracy, is any Kazakh-specific tokenizer investment beyond a fertility-<2.0 vocab extension worth the transformer capacity it steals — and is fertility even the right target (vs STRR, byte premium)?",
+      "highlights": [
+        {
+          "node_id": "arxiv:2603.20854",
+          "phrase": "Closest prior art: from-scratch 600M Kazakh with best-in-class 2-3x fertility tokenizer still LOSES knowledge to un-adapted Qwen2.5-0.5B"
+        },
+        {
+          "node_id": "arxiv:2411.14198",
+          "phrase": "Morphology+fertility explain only R²=0.021 of cross-lingual gap; byte premium & data quantity are the real drivers"
+        },
+        {
+          "node_id": "arxiv:2407.13623",
+          "phrase": "Vocab scales Nv∝Nnv^0.83 → ~64-75K for 500M, but tied embeddings then eat 15-31% of a ≤600M budget"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Proven Kazakh recipe: +25% vocab extension cuts fertility 4.73→2.04, WECHSEL init, 45.3B-token CPT"
+        },
+        {
+          "node_id": "arxiv:2502.00894",
+          "phrase": "Reference morphology-aware tokenizer (morph-constrained merges) — makes a naive 'morph-aware for Kazakh' claim non-novel"
+        },
+        {
+          "node_id": "arxiv:2512.03989",
+          "phrase": "Continued-BPE-training supersedes append-merges: +9.6% bytes/token, fewer dead tokens, −26% CPT time"
+        }
+      ]
+    },
+    "training-recipes": {
+      "summary": "The frontier is anchored by one proven Kazakh recipe: Sherkala-8B reached KazMMLU 41.4% (chat) / 51.6% (base) by continual-pretraining Llama-3.1-8B on a 45.3B-token 3:1:3 Kazakh:(Ru+Tr):English mix with a +25% WECHSEL-initialized vocab extension — and the field-wide prior is unambiguous: every published Kazakh SOTA is an adaptation, none from-scratch. For QymyzLM's CPT backbone, Qwen3-0.6B is extreme deployment overtraining (~60k tok/param, QK-Norm for fp16 stability), which is a double-edged foundation given that reused overtrained models are argued to saturate. Established levers: WSD scheduling with anneal-phase high-quality-data injection (MiniCPM ~192 tok/param; SmolLM2 single-stage LR 3e-3 @360M), directly-fitted LR/batch formulas from Step Law that make an explicit muP sweep largely avoidable, the data-constrained ≤4-epoch repetition law (binding on Kazakh's 9-10B corpus → ≤40B useful tokens), and knowledge distillation where MobileLLM-R1 matches Qwen3-0.6B on reasoning with 11.7% of the tokens and finds SFT>RL at sub-1B. The contested/uncertain edge: whether a strong teacher even helps (Strong Teacher Not Needed reports non-monotone, sometimes-reversing gains; uncertain), translationese risk in Sherkala's 24%-synthetic-MT Kazakh, and forgetting mitigation without replay (LayRA layer-selective LoRA). Open question: given a from-scratch Chinchilla run is a multi-month Kaggle-T4 commitment (~256-650 wall-hours), is QLoRA/full CPT on Qwen3-0.6B the only feasible path, and does overtraining-saturation undercut it?",
+      "highlights": [
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "The proven Kazakh recipe: continual-PT Llama-3.1-8B, 45.3B 3:1:3 mix, +25% vocab → 41.4/51.6 KazMMLU ceiling"
+        },
+        {
+          "node_id": "arxiv:2505.09388",
+          "phrase": "QymyzLM's CPT backbone: Qwen3-0.6B, 36T tok (~60k/param), QK-Norm carries the fp16 stability safeguard"
+        },
+        {
+          "node_id": "arxiv:2509.24945",
+          "phrase": "MobileLLM-R1 matches Qwen3-0.6B reasoning on 11.7% of tokens; SFT>RL sub-1B, KD from Llama-3.1-8B"
+        },
+        {
+          "node_id": "arxiv:2305.16264",
+          "phrase": "Data-constrained law: ≤4 epochs ≈ fresh data; binds Kazakh's ~10B corpus to ≤40B useful tokens"
+        },
+        {
+          "node_id": "arxiv:2503.04715",
+          "phrase": "Step Law's fitted eta/batch formulas give ready HPs (~2e-3, ~0.4M tok @350M/20B), skipping a muP sweep"
+        },
+        {
+          "node_id": "arxiv:2605.23857",
+          "phrase": "Contests distillation dogma: stronger teachers can saturate/reverse gains; weak same-size teachers still help [uncertain]"
+        }
+      ]
+    },
+    "win-bar-protocol-audit": {
+      "summary": "The audit resolves how the lab's 32.8% KazMMLU baseline and the Sherkala \"ceiling\" relate, and the answer is: they are NOT directly comparable. CONFIRMED and pinned in code — the lab protocol is the Kazakh-only 12-subject test split (9,870 questions), 3-shot (the dev split holds exactly 3 exemplars, so num_fewshot=5 hard-errors), next-token letter-logit argmax, fp16, giving Qwen3-0.6B-Base = 0.328. The subset matches Sherkala's, but the 41.4/51.6 figures diverge on three axes: shots (0 vs 3), scoring (normalized full-string log-likelihood vs letter-logit), and base-vs-chat. A load-bearing KB CONFLICT is flagged: the 41.4 was mislabeled \"5-shot avg\" when the paper text says 0-shot. Two quantitative facts make cross-protocol mixing indefensible — shot count alone moves scores ~11pp (Qwen-2.5-7B-Instruct 47.8→58.9, 0→3-shot), larger than the whole 32.8→36 target delta, and instruction tuning costs -10.2pp (Sherkala base 51.6 vs chat 41.4), meaning the honest base-to-base ceiling reference is 51.6, not 41.4. Open question: the only clean comparison is base-to-base through the same runner, so any QymyzLM claim must be re-measured under the pinned protocol rather than cited against Sherkala's published numbers.",
+      "highlights": [
+        {
+          "node_id": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+          "phrase": "Canonical protocol pinned in code: 9,870-Q kk split, 3-shot (dev=3 hard max), letter-logit, Qwen3-0.6B=0.328"
+        },
+        {
+          "node_id": "arxiv:2503.01493",
+          "phrase": "Ceiling audit: 41.4/51.6 are 0-shot string-log-lik, mislabeled '5-shot'; cross-protocol on 3 axes vs lab's 32.8"
+        },
+        {
+          "node_id": "arxiv:2502.12829",
+          "phrase": "Shot count moves scores ~11pp (47.8→58.9); paper's own Table 4 is a third protocol (0-shot English, full 23K)"
+        }
+      ]
+    }
+  },
+  "home": {
+    "pillars": [
+      {
+        "name": "QymyzLM — Generative SLM (≤600M active)",
+        "topics": [
+          "architecture-fork",
+          "attention-kv-sub1b-attention-kv-architec",
+          "continual-pt-lowres-qlora-vs-full-cpt-re",
+          "data-efficiency-10b-kazakh-10b-token-pre",
+          "deepseek-tech",
+          "does-the-engram-conditional-memory-modul",
+          "gla-2-gta-arxiv-2505-21487-zadouri-strau",
+          "hybrid-efficiency-efficient-attention-se",
+          "inference-tts",
+          "kazakh-morphological-segmentation-qualit",
+          "kazakh-tokenizer-fertility-vs-byte-premi",
+          "kv-cache-architecture",
+          "mla-at-sub-1b",
+          "mla-at-sub-1b-scale",
+          "mla-sub1b",
+          "mla-upcycling-at-1b-under-a-bespoke-toke",
+          "mla-vs-gqa-pretraining-cost-and-converge",
+          "post-hoc-attachment-of-engram-style-cond",
+          "qymyzlm-architecture-fork",
+          "residual-stream-stability-qymyzlm-design",
+          "slm-architecture",
+          "small-lm-training-recipes-qymyzlm-design",
+          "sota-slm",
+          "sparse-memory-2026-engram-lineage-beyond",
+          "tokenizer-agglutinative",
+          "tokenizer-morphology",
+          "training-recipes",
+          "eval-benchmarks",
+          "llm-alignment-data"
+        ]
+      },
+      {
+        "name": "Kazakh Text-Embedding Models",
+        "topics": [
+          "decoder-to-embedder",
+          "embed-kazakh",
+          "embed-sota",
+          "embeddings-retrieval",
+          "embeddings-training",
+          "joint-generative-embedding-head-on-one-6"
+        ]
+      },
+      {
+        "name": "Cross-cutting / Meta",
+        "topics": [
+          "hardware-gate",
+          "kaggle-t4x2-compute-vram-budget-for-the",
+          "kazakh-turkic-nlp",
+          "novelty-check",
+          "novelty-check-has-any-2026-preprint-impl",
+          "parameter-counting-convention-and-iso-si",
+          "win-bar-protocol-audit"
+        ]
+      }
+    ]
+  }
+}
