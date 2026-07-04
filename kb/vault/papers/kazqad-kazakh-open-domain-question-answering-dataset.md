@@ -56,7 +56,7 @@ tags: ["paper", "topic/embed-sota", "topic/embed-kazakh", "topic/decoder-to-embe
 >
 > **Numbers:** Full-corpus anchor: NDCG@10 0.389 / MRR 0.382 (BM25+reranker, reported). Hard-neg anchor: mE5-large MRR 0.909 [reported, pools unpublished; 0.4490 under HardTFIDF99 vs 0.9189 under KazQAD-100-local in successor card]. Measured dense baselines under lab protocol: 0.
 > **Relevance:** The embedding deliverable's target number does not exist yet — the design panel cannot fix a win condition until mE5-large/BGE-M3/Qwen3-Emb-0.6B are run through evallab; this is a ~2-3 GPU-hour Kaggle job and the single highest-leverage prerequisite.
-> **Source:** /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/hardneg.py, /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/tasks/kazqad_retrieval.py, /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/README.md + results/*.json; arXiv:2404.04487; web sweep 2026-07-04 · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** evallab/src/kazeval/hardneg.py, evallab/src/kazeval/tasks/kazqad_retrieval.py, evallab/README.md + results/*.json; arXiv:2404.04487; web sweep 2026-07-04 · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
 - [[kazmmlu-evaluating-language-models-on-kazakh-russian-and-regional-knowledge-of|KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhst…]] — The two Kazakh axes a joint ≤600M head must serve simultaneously — KazQAD (retrieval) and KazMMLU (generation)

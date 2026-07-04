@@ -16,7 +16,7 @@ This slice frames sub-1B SLM architecture around two competing KV-efficiency mec
 - [[gemma-3-technical-report|Gemma 3 Technical Report]] — Sliding-window 5:1 template: ~108MB KV@32K at 270M (~35x < Qwen3-0.6B), the ≤300M long-context attention baseline
 
 ## Papers (2)
-- [[x-ecomla-upcycling-pre-trained-attention-into-mla-for-efficient-and-extreme-kv|X-EcoMLA: Upcycling Pre-Trained Attention into MLA for Efficient and Extreme KV Compression]] (2025) — mla-sub1b
+- [[x-ecomla-upcycling-pre-trained-attention-into-mla-for-efficient-and-extreme-kv|X-EcoMLA: Upcycling Pre-Trained Attention into MLA for Efficient and Extreme KV Compression]] (2025) — mla-at-sub-1b-scale
 - [[gemma-3-technical-report|Gemma 3 Technical Report]] (2025) — sota-slm
 
 [[Home]]

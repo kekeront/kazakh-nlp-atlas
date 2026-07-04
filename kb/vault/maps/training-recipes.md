@@ -42,6 +42,6 @@ The frontier is anchored by one proven Kazakh recipe: Sherkala-8B reached KazMML
 ## Related topics
 - [[small-lm-training-recipes-qymyzlm-design]] — 5 shared nodes
 - [[sota-slm]] — 3 shared nodes
-- [[attention-kv-sub1b-attention-kv-architec]] — 2 shared nodes
+- [[attention-kv-architecture-sub-1b]] — 2 shared nodes
 
 [[Home]]

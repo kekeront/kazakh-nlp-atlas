@@ -6,24 +6,24 @@ arxiv_id: "2309.14322"
 doi: null
 hf_repo: null
 year: 2023
-topics: ["attention-kv-sub1b-attention-kv-architec", "small-lm-training-recipes-qymyzlm-design"]
+topics: ["attention-kv-architecture-sub-1b", "small-lm-training-recipes-qymyzlm-design"]
 claims: 2
 uncertain_claims: 1
 verdicts: []
 aliases: ["Small-scale proxies for large-scale Transformer training instabilities", "arXiv:2309.14322", "arxiv:2309.14322"]
-tags: ["paper", "topic/attention-kv-sub1b-attention-kv-architec", "topic/small-lm-training-recipes-qymyzlm-design"]
+tags: ["paper", "topic/attention-kv-architecture-sub-1b", "topic/small-lm-training-recipes-qymyzlm-design"]
 ---
 # Small-scale proxies for large-scale Transformer training instabilities
 
 [arXiv](https://arxiv.org/abs/2309.14322)
-**Topics:** [[attention-kv-sub1b-attention-kv-architec]], [[small-lm-training-recipes-qymyzlm-design]]
+**Topics:** [[attention-kv-architecture-sub-1b]], [[small-lm-training-recipes-qymyzlm-design]]
 
 > [!abstract]
 > Teams that have trained large Transformer-based models have reported training instabilities at large scale that did not appear when training with the same hyperparameters at smaller scales. Although the causes of such instabilities are of scientific interest, the amount of resources required to reproduce them has made investigation difficult. In this work, we seek ways to reproduce and study train …
 
 ## Claims
 
-> [!note] CLAIM — attention-kv-sub1b-attention-kv-architec
+> [!note] CLAIM — attention-kv-architecture-sub-1b
 > [transferable-untested] QK-norm is the consensus fp16-stability mechanism and is already inside the lab's CPT base: attention-logit-growth instability reproduces at small scale at high LR, and QK-layernorm lets models reach similar loss across orders of magnitude of learning-rate variation (small-scale proxies paper); Qwen3 explicitly added QK-Norm and removed QKV-bias 'to stabilize small-scale training' (KB); Mellum-2 (2026, ablation-driven production report) also ships QK-Norm (RMSNorm on Q and K projections). No paper ablates QK-norm on pure-fp16 (non-bf16) pretraining at sub-1B — the exact regime Kaggle T4 forces.
 >
 > **Numbers:** LR robustness across ~orders of magnitude with QK-layernorm (2309.14322); adopted by Qwen3, OLMo2, Gemma3, Mellum2

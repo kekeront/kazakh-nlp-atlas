@@ -6,17 +6,17 @@ arxiv_id: "2507.22448"
 doi: null
 hf_repo: "blog/tiiuae"
 year: 2025
-topics: ["sota-slm", "hybrid-efficiency-efficient-attention-se"]
+topics: ["sota-slm", "hybrid-efficient-attention-architectures"]
 claims: 2
 uncertain_claims: 0
 verdicts: []
 aliases: ["Falcon-H1: A Family of Hybrid-Head Language Models Redefining Efficiency and Performance", "arXiv:2507.22448", "arxiv:2507.22448"]
-tags: ["paper", "topic/sota-slm", "topic/hybrid-efficiency-efficient-attention-se"]
+tags: ["paper", "topic/sota-slm", "topic/hybrid-efficient-attention-architectures"]
 ---
 # Falcon-H1: A Family of Hybrid-Head Language Models Redefining Efficiency and Performance
 
 [arXiv](https://arxiv.org/abs/2507.22448)
-**Topics:** [[sota-slm]], [[hybrid-efficiency-efficient-attention-se]]
+**Topics:** [[sota-slm]], [[hybrid-efficient-attention-architectures]]
 
 > [!abstract]
 > In this report, we introduce Falcon-H1, a new series of large language models (LLMs) featuring hybrid architecture designs optimized for both high performance and efficiency across diverse use cases. Unlike earlier Falcon models built solely on Transformer or Mamba architectures, Falcon-H1 adopts a parallel hybrid approach that combines Transformer-based attention with State Space Models (SSMs), k …
@@ -30,7 +30,7 @@ tags: ["paper", "topic/sota-slm", "topic/hybrid-efficiency-efficient-attention-s
 > **Relevance:** Proves a very deep (36L), very thin (d1024) parallel-hybrid can top sub-1B reasoning on only 2.5T tokens. Its 18-language set excludes Turkic — a market gap the Kazakh paper fills. Its 8Q/2KV (GQA 4:1) plus SSM is an aggressive KV-saving template.
 > **Source:** arXiv 2507.22448 (Falcon-H1) Table 1; huggingface.co/blog/tiiuae/falcon-h1 · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > Falcon-H1-0.5B uses a PARALLEL hybrid block: attention and Mamba-2 run concurrently on the same input and their outputs are concatenated before projection, with channels split roughly SSM:Attention:MLP = 2:1:5. Exact 0.5B config: 36 layers, d_model=1024, Q/KV heads 8/2, 24 SSM heads, d_state=128, head_dim=64, 16K context, vocab 32,778, 2.5T tokens. Supports 18 languages but NOT Kazakh.
 >
 > **Numbers:** 36 layers, d=1024, attn 8/2 heads, 24 SSM heads, d_state=128, head_dim=64, ctx 16K, vocab 32,778, 2.5T tokens; channel ratio ~2:1:5

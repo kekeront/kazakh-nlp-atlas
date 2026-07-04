@@ -33,7 +33,7 @@ tags: ["source", "topic/eval-benchmarks"]
 - [[sherkala-chat-building-a-state-of-the-art-llm-for-kazakh-in-a-moderately|Sherkala-Chat: Building a State-of-the-Art LLM for Kazakh in a Moderately Resourced Settin…]] — Sherkala's 9,870-Q eval subset equals the dataset's Kazakh-language test split, aligning ceiling and baseline on subset
 - [[tumlu-a-unified-and-native-language-understanding-benchmark-for-turkic-languages|TUMLU: A Unified and Native Language Understanding Benchmark for Turkic Languages]] — KazMMLU and TUMLU are parallel MMLU-style native benchmarks for Turkic languages; TUMLU covers the same regional-knowledge evaluation niche
 - [[huggingface-co-qwen-qwen3-0-6b-base-config-json-fetched-raw|huggingface.co/Qwen/Qwen3-0.6B-Base config.json (fetched raw, 2026-07-…]] — Qwen3-0.6B-Base is the model scored 32.8% on this benchmark — the canonical generative target to beat
-- [[home-altairzhambyl-projects-slms-qymyzlm-evallab-results|/home/altairzhambyl/projects/SLMs/qymyzlm/evallab/results/2026-04-30__…]] — This dataset quirk (dev=3) is exactly what caused that eval run's [:5] truncation and the 5-shot→3-shot mislabel
+- [[evallab-results-2026-04-30-kazmmlu-kk-qwen-qwen3-0-6b-base|evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json]] — This dataset quirk (dev=3) is exactly what caused that eval run's [:5] truncation and the 5-shot→3-shot mislabel
 - [[lm-eval-0-4-11-installed-package-registry-inspection-2026|lm-eval 0.4.11 installed-package registry inspection, 2026-07-03]] — The empty task registry is why KazMMLU needed a custom task YAML + include_path to load at all
 
 [[Home]]

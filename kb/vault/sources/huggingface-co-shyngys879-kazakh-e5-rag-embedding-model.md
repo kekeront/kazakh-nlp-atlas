@@ -32,6 +32,6 @@ tags: ["source", "topic/embeddings-retrieval"]
 ## Related
 - [[nv-retriever-improving-text-embedding-models-with-effective-hard-negative-mining|NV-Retriever: Improving text embedding models with effective hard-negative mining]] — NV-Retriever formalizes hard-negative mining — the candidate-pool construction that determines shyngys879's swinging MRR
 - [[huggingface-co-nurlykhan-kazembed-v5-apache-2-0|huggingface.co/Nurlykhan/kazembed-v5 (apache-2.0)]] — refutes: same lineage shows mE5-large collapses 0.919->0.449 by pool, so kazembed-v5 card's 0.909 is a protocol artifact
-- [[grep-of-home-altairzhambyl-projects-slms-qymyzlm-evallab|grep of /home/altairzhambyl/projects/SLMs/qymyzlm/evallab (2026-07-04)]] — its protocol-dependence motivates evallab's pinned KazQAD BM25 hard-neg recipe (100 candidates, k1=1.5, b=0.75)
+- [[grep-of-evallab-2026-07-04|grep of evallab (2026-07-04)]] — its protocol-dependence motivates evallab's pinned KazQAD BM25 hard-neg recipe (100 candidates, k1=1.5, b=0.75)
 
 [[Home]]

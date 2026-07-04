@@ -30,12 +30,12 @@ The recipe frontier for a ≤600M Kazakh SLM is now sharply forked into two cost
 - [[datacomp-lm-in-search-of-the-next-generation-of-training-sets-for-language|DataComp-LM: In search of the next generation of training sets for language models]] (2024) — small-lm-training-recipes-qymyzlm-design
 - [[2-olmo-2-furious|2 OLMo 2 Furious]] (2024) — residual-stream-stability-qymyzlm-design
 - [[scaling-data-constrained-language-models|Scaling Data-Constrained Language Models]] (2023) — training-recipes
-- [[small-scale-proxies-for-large-scale-transformer-training-instabilities|Small-scale proxies for large-scale Transformer training instabilities]] (2023) — attention-kv-sub1b-attention-kv-architec
+- [[small-scale-proxies-for-large-scale-transformer-training-instabilities|Small-scale proxies for large-scale Transformer training instabilities]] (2023) — attention-kv-architecture-sub-1b
 
 ## Related topics
 - [[training-recipes]] — 5 shared nodes
 - [[residual-stream-stability-qymyzlm-design]] — 3 shared nodes
-- [[attention-kv-sub1b-attention-kv-architec]] — 2 shared nodes
+- [[attention-kv-architecture-sub-1b]] — 2 shared nodes
 - [[sota-slm]] — 2 shared nodes
 
 [[Home]]

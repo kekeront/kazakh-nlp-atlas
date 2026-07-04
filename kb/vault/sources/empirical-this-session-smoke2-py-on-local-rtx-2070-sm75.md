@@ -1,7 +1,7 @@
 ---
-kb_id: "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention"
+kb_id: "title:empirical smoke2 on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention"
 type: "source"
-title: "Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects…"
+title: "Empirical, this session: smoke2.py on local RTX 2070 (SM75)"
 doi: null
 hf_repo: null
 year: null
@@ -9,15 +9,15 @@ topics: ["hardware-gate"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
-aliases: ["title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention"]
+aliases: ["title:empirical smoke2 on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention"]
 tags: ["source", "topic/hardware-gate"]
 ---
-# Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects…
+# Empirical, this session: smoke2.py on local RTX 2070 (SM75)
 
 **Topics:** [[hardware-gate]]
 
 ## Source URLs
-- Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/smoke2.py on local RTX 2070 (SM75)
+- Empirical, this session: smoke2.py on local RTX 2070 (SM75)
 - fla 0.5.1 from PyPI (github.com/fla-org/flash-linear-attention)
 
 ## Findings
@@ -27,7 +27,7 @@ tags: ["source", "topic/hardware-gate"]
 >
 > **Numbers:** fp16 fwd+bwd, B=2, T=1024, d=768, 6 heads: KDA 14.2 ms (144,270 tok/s/layer); GatedDeltaNet 144.3 ms (14,196 tok/s/layer); fla-Mamba2 (12 heads, head_dim 128) 245.6 ms (8,338 tok/s/layer); torch SDPA baseline 5.2 ms (397,144 tok/s/layer)
 > **Relevance:** Un-blocks the linear/SSM hybrid branch (GDN-H1-style, Falcon-H1-style) and Muon for the design panel: nothing hard-fails on Kaggle T4-class hardware. QLoRA-CPT v1 and from-scratch v2 menus can both legally include these components.
-> **Source:** Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/smoke2.py on local RTX 2070 (SM75); fla 0.5.1 from PyPI (github.com/fla-org/flash-linear-attention) · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** Empirical, this session: smoke2.py on local RTX 2070 (SM75); fla 0.5.1 from PyPI (github.com/fla-org/flash-linear-attention) · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
 - [[an-empirical-study-of-mamba-based-language-models|An Empirical Study of Mamba-based Language Models]] — fla-Triton Mamba2 runs fwd+bwd on SM75; adds a hardware-gate datapoint to this paper's Mamba LM empirics

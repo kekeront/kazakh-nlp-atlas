@@ -34,7 +34,7 @@ tags: ["paper", "topic/deepseek-tech"]
 - [[kimi-linear-an-expressive-efficient-attention-architecture|Kimi Linear: An Expressive, Efficient Attention Architecture]] — Both natively-trainable efficient-attention architectures validated at scale; NSA's block-sparse vs Kimi Linear's linear attention
 - [[kinetics-rethinking-test-time-scaling-laws|Kinetics: Rethinking Test-Time Scaling Laws]] — Kinetics names block-top-k sparse attention as TTS enabler; NSA is the hardware-aligned trainable sparse-attention mechanism
 - [[minicpm4-ultra-efficient-llms-on-end-devices|MiniCPM4: Ultra-Efficient LLMs on End Devices]] — MiniCPM4's InfLLM-v2 and Native Sparse Attention are both natively-trainable sparse-attention schemes; shared method family
-- [[empirical-this-session-tmp-claude-1000-home-altairzhambyl-8a3008cc|Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects…]] — NSA claims hardware-aligned attention; node shows fla linear kernels are hardware-MISaligned on SM75 (28-47x SDPA, 64KB fallback)
+- [[empirical-this-session-crossover-py-fp16-b-1-d-768|Empirical, this session: crossover.py (fp16, B=1, d=768)]] — NSA claims hardware-aligned attention; node shows fla linear kernels are hardware-MISaligned on SM75 (28-47x SDPA, 64KB fallback)
 - [[lab-probe-2026-07-04-torch-nn-attention-sdpa-kernel|Lab probe 2026-07-04 (torch.nn.attention.sdpa_kernel warnings verbatim…]] — NSA's hardware-aligned kernels assume Ampere+; on sm_75 with no FlashAttention such sparse-attention wins do not port to Kaggle T4
 
 [[Home]]

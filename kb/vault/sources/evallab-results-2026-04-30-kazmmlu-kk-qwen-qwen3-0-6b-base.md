@@ -1,7 +1,7 @@
 ---
-kb_id: "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml"
+kb_id: "title:evallab kazmmlu kk qwen3 0 6b base measurement 2026 04 30"
 type: "source"
-title: "/home/altairzhambyl/projects/SLMs/qymyzlm/evallab/results/2026-04-30__…"
+title: "evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json"
 doi: null
 hf_repo: null
 year: null
@@ -9,17 +9,17 @@ topics: ["win-bar-protocol-audit"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
-aliases: ["title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml"]
+aliases: ["title:evallab kazmmlu kk qwen3 0 6b base measurement 2026 04 30"]
 tags: ["source", "topic/win-bar-protocol-audit"]
 ---
-# /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/results/2026-04-30__…
+# evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json
 
 **Topics:** [[win-bar-protocol-audit]]
 
 ## Source URLs
-- /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json
-- /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/run_kazmmlu.py
-- /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/lm_eval_tasks/kazmmlu_kaz/_kazmmlu_kaz_template_yaml
+- evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json
+- evallab/src/kazeval/run_kazmmlu.py
+- evallab/src/kazeval/lm_eval_tasks/kazmmlu_kaz/_kazmmlu_kaz_template_yaml
 
 ## Findings
 
@@ -28,7 +28,7 @@ tags: ["source", "topic/win-bar-protocol-audit"]
 >
 > **Numbers:** 12 subjects; 9,870 test Q; num_fewshot=3 (dev=3 exemplars/config); acc=0.328; fp16; lm-eval 0.4.11 with bundled task YAMLs (no built-in kazmmlu task)
 > **Relevance:** The success definition for the generative deliverable is NOT undefined at the primary-target level: beat-32.8 is apples-to-apples by construction. Only the ceiling references are cross-protocol.
-> **Source:** /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json; /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/run_kazmmlu.py; /home/altairzhambyl/projects/SLMs/qymyzlm/evallab/src/kazeval/lm_eval_tasks/kazmmlu_kaz/_kazmmlu_kaz_template_yaml · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** evallab/results/2026-04-30__KazMMLU-kk__Qwen-Qwen3-0.6B-Base.json; evallab/src/kazeval/run_kazmmlu.py; evallab/src/kazeval/lm_eval_tasks/kazmmlu_kaz/_kazmmlu_kaz_template_yaml · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
 - [[huggingface-co-datasets-mbzuai-kazmmlu-dataset-inspection|huggingface.co/datasets/MBZUAI/KazMMLU (dataset inspection 2026-07-03)]] — This dataset quirk (dev=3) is exactly what caused that eval run's [:5] truncation and the 5-shot→3-shot mislabel

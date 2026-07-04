@@ -35,6 +35,6 @@ This topic maps residual-stream/normalization stability tricks for the from-scra
 
 ## Related topics
 - [[small-lm-training-recipes-qymyzlm-design]] — 3 shared nodes
-- [[attention-kv-sub1b-attention-kv-architec]] — 2 shared nodes
+- [[attention-kv-architecture-sub-1b]] — 2 shared nodes
 
 [[Home]]

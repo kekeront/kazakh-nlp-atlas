@@ -4,7 +4,7 @@ tags: ["moc"]
 nodes: 255
 papers: 170
 sources: 85
-topics: 42
+topics: 40
 claims: 448
 ---
 # Kazakh NLP Atlas — Research Vault
@@ -31,14 +31,14 @@ regenerate with `python scripts/build_vault.py`.
 
 | Topic | Nodes | Uncertain |
 | --- | --- | --- |
+| [[mla-at-sub-1b-scale]] | 19 | 8 |
 | [[sota-slm]] | 17 | 5 |
 | [[continual-pt-lowres-qlora-vs-full-cpt-re]] | 16 | 4 |
 | [[tokenizer-morphology]] | 16 | 6 |
 | [[training-recipes]] | 16 | 5 |
-| [[hybrid-efficiency-efficient-attention-se]] | 14 | 6 |
+| [[hybrid-efficient-attention-architectures]] | 14 | 6 |
 | [[inference-tts]] | 14 | 6 |
-| [[mla-sub1b]] | 13 | 3 |
-| [[attention-kv-sub1b-attention-kv-architec]] | 12 | 8 |
+| [[attention-kv-architecture-sub-1b]] | 12 | 8 |
 | [[residual-stream-stability-qymyzlm-design]] | 12 | 7 |
 | [[small-lm-training-recipes-qymyzlm-design]] | 11 | 6 |
 | [[tokenizer-agglutinative]] | 11 | 2 |
@@ -47,15 +47,13 @@ regenerate with `python scripts/build_vault.py`.
 | [[sparse-memory-2026-engram-lineage-beyond]] | 8 | 7 |
 | [[deepseek-tech]] | 7 | 5 |
 | [[gla-2-gta-arxiv-2505-21487-zadouri-strau]] | 7 | 1 |
-| [[mla-at-sub-1b]] | 7 | 5 |
 | [[qymyzlm-architecture-fork]] | 7 | 1 |
 | [[kazakh-tokenizer-fertility-vs-byte-premi]] | 6 | 3 |
-| [[mla-at-sub-1b-scale]] | 6 | 6 |
 | [[post-hoc-attachment-of-engram-style-cond]] | 6 | 4 |
 | [[architecture-fork]] | 5 | 5 |
 | [[kv-cache-architecture]] | 5 | 1 |
-| [[mla-upcycling-at-1b-under-a-bespoke-toke]] | 5 | 3 |
-| [[mla-vs-gqa-pretraining-cost-and-converge]] | 5 | 3 |
+| [[mla-upcycling-bespoke-tokenizer]] | 5 | 3 |
+| [[mla-vs-gqa-convergence-cost]] | 5 | 3 |
 | [[does-the-engram-conditional-memory-modul]] | 4 | 4 |
 | [[eval-benchmarks]] | 3 | 0 |
 | [[slm-architecture]] | 2 | 3 |
@@ -89,7 +87,7 @@ regenerate with `python scripts/build_vault.py`.
 | Topic | Focus | Nodes | Papers | Uncertain |
 | --- | --- | --- | --- | --- |
 | [[architecture-fork]] | The core decision — adapt a strong base (continual pretraining / tokenizer transplant) vs… | 5 | 5 | 5 |
-| [[attention-kv-sub1b-attention-kv-architec]] | The sub-1B attention/KV frontier has three cheap, scale-independent wins that are… | 12 | 10 | 8 |
+| [[attention-kv-architecture-sub-1b]] | The sub-1B attention/KV frontier has three cheap, scale-independent wins that are… | 12 | 10 | 8 |
 | [[continual-pt-lowres-qlora-vs-full-cpt-re]] | For a sub-1B Kazakh CPT the frontier converges on full continued pretraining over… | 16 | 14 | 4 |
 | [[data-efficiency-10b-kazakh-10b-token-pre]] | The frontier question is how to assemble and train on a ~9-10B-token Kazakh corpus… | 8 | 7 | 4 |
 | [[decoder-to-embedder]] | The topic covers converting causal decoder LMs into text embedders, directly relevant to… | 19 | 16 | 2 |
@@ -102,7 +100,7 @@ regenerate with `python scripts/build_vault.py`.
 | [[eval-benchmarks]] | This topic is dominated by operational, inspection-verified facts about how Kazakh eval… | 3 | 1 | 0 |
 | [[gla-2-gta-arxiv-2505-21487-zadouri-strau]] | arXiv:2505.21487 (Tri Dao group) is a from-scratch head-to-head on FineWeb-Edu where… | 7 | 2 | 1 |
 | [[hardware-gate]] | This topic is the lab's own SM75 (Kaggle T4 / RTX 2070 proxy, cc 7.5, 64KB shared-mem, no… | 8 | 0 | 2 |
-| [[hybrid-efficiency-efficient-attention-se]] | The frontier splits into three efficiency levers for a ≤600M Kazakh SLM, all measured but… | 14 | 13 | 6 |
+| [[hybrid-efficient-attention-architectures]] | The frontier splits into three efficiency levers for a ≤600M Kazakh SLM, all measured but… | 14 | 13 | 6 |
 | [[inference-tts]] | The headline result is that compute-optimal test-time scaling lets sub-1B models beat… | 14 | 11 | 6 |
 | [[joint-generative-embedding-head-on-one-6]] | The frontier question is whether ONE model ≤600M active params can carry both a… | 7 | 6 | 1 |
 | [[kaggle-t4x2-compute-vram-budget-for-the]] | The lab has empirically pinned the Kaggle-free-tier CPT envelope for Qwen3-0.6B-Base… | 8 | 1 | 2 |
@@ -111,11 +109,9 @@ regenerate with `python scripts/build_vault.py`.
 | [[kazakh-turkic-nlp]] | The established fact is that every published Kazakh SOTA at any scale is an ADAPTATION of… | 12 | 10 | 9 |
 | [[kv-cache-architecture]] | The frontier here is cross-layer KV sharing on top of GQA/MQA — reusing K/V across layers… | 5 | 3 | 1 |
 | [[llm-alignment-data]] | This topic is anchored by a single node, Qorgau (arxiv:2502.13640, MBZUAI Feb 2025) — the… | 1 | 1 | 0 |
-| [[mla-at-sub-1b]] | MLA is CONFIRMED viable below 1B along three distinct paths, and this slice pins the… | 7 | 5 | 5 |
-| [[mla-at-sub-1b-scale]] | The frontier splits cleanly into three evidence classes. | 6 | 5 | 6 |
-| [[mla-sub1b]] | The frontier question — does MLA earn its place at sub-1B ACTIVE params — resolves to… | 13 | 8 | 3 |
-| [[mla-upcycling-at-1b-under-a-bespoke-toke]] | The question — can a ≤1B GQA model be upcycled to MLA when it uses a bespoke Kazakh… | 5 | 5 | 3 |
-| [[mla-vs-gqa-pretraining-cost-and-converge]] | The frontier question is whether MLA beats GQA enough to justify it when pretraining a… | 5 | 4 | 3 |
+| [[mla-at-sub-1b-scale]] | The frontier splits cleanly into three evidence classes. | 19 | 13 | 8 |
+| [[mla-upcycling-bespoke-tokenizer]] | The question — can a ≤1B GQA model be upcycled to MLA when it uses a bespoke Kazakh… | 5 | 5 | 3 |
+| [[mla-vs-gqa-convergence-cost]] | The frontier question is whether MLA beats GQA enough to justify it when pretraining a… | 5 | 4 | 3 |
 | [[novelty-check]] | The novelty audit converges on one point: every component QymyzLM plans is established… | 18 | 16 | 15 |
 | [[novelty-check-has-any-2026-preprint-impl]] | CONFIRMED across the whole 2026 Engram lineage: no preprint keys conditional memory by… | 6 | 6 | 8 |
 | [[parameter-counting-convention-and-iso-si]] | The frontier here is a single load-bearing accounting question for QymyzLM: does a… | 3 | 3 | 4 |

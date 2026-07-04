@@ -32,7 +32,7 @@ tags: ["paper", "topic/embeddings-training"]
 
 ## Related
 - [[nv-embed-improved-techniques-for-training-llms-as-generalist-embedding-models|NV-Embed: Improved Techniques for Training LLMs as Generalist Embedding Models]] — Same NVIDIA embedding lineage; NV-Retriever's positive-aware hard-negative mining complements NV-Embed's latent-attention two-stage tuning
-- [[grep-of-home-altairzhambyl-projects-slms-qymyzlm-evallab|grep of /home/altairzhambyl/projects/SLMs/qymyzlm/evallab (2026-07-04)]] — NV-Retriever's TopK-PercPos is the concrete recipe behind evallab's pinned hard-negative protocol (100 BM25 candidates)
+- [[grep-of-evallab-2026-07-04|grep of evallab (2026-07-04)]] — NV-Retriever's TopK-PercPos is the concrete recipe behind evallab's pinned hard-negative protocol (100 BM25 candidates)
 - [[webfaq-a-multilingual-collection-of-natural-q-a-datasets-for-dense-retrieval|WebFAQ: A Multilingual Collection of Natural Q&A Datasets for Dense Retrieval]] — Both on hard-negative mining; WebFAQ 2.0 finds random negatives beat mined hard-negs under MNR (false negatives), tension with…
 - [[huggingface-co-shyngys879-kazakh-e5-rag-embedding-model|huggingface.co/shyngys879/kazakh-e5-rag-embedding (model card, fetched…]] — NV-Retriever formalizes hard-negative mining — the candidate-pool construction that determines shyngys879's swinging MRR
 

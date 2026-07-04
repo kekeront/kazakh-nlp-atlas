@@ -1,7 +1,7 @@
 ---
-kb_id: "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768"
+kb_id: "title:empirical crossover fp16 b 1 d 768"
 type: "source"
-title: "Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects…"
+title: "Empirical, this session: crossover.py (fp16, B=1, d=768)"
 doi: null
 hf_repo: null
 year: null
@@ -9,15 +9,15 @@ topics: ["hardware-gate"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
-aliases: ["title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768"]
+aliases: ["title:empirical crossover fp16 b 1 d 768"]
 tags: ["source", "topic/hardware-gate"]
 ---
-# Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects…
+# Empirical, this session: crossover.py (fp16, B=1, d=768)
 
 **Topics:** [[hardware-gate]]
 
 ## Source URLs
-- Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/crossover.py (fp16, B=1, d=768)
+- Empirical, this session: crossover.py (fp16, B=1, d=768)
 
 ## Findings
 
@@ -26,7 +26,7 @@ tags: ["source", "topic/hardware-gate"]
 >
 > **Numbers:** fwd+bwd per layer — T=2048: KDA 13.5 ms vs SDPA 4.3 ms (3.1x); T=4096: 26.0 vs 12.6 ms (2.1x); T=8192: 51.3 vs 42.1 ms (1.2x); KDA throughput flat ~151-160K tok/s/layer (linear scaling confirmed), SDPA decays 480K->194K tok/s/layer
 > **Relevance:** The panel should not adopt a hybrid for THROUGHPUT on T4x2 — only for quality (+4.2pp GDN-H1-class) or KV-cache reasons; and the 10B-token compute budget must price linear layers at 2-5x attention cost at our context lengths.
-> **Source:** Empirical, this session: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/crossover.py (fp16, B=1, d=768) · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** Empirical, this session: crossover.py (fp16, B=1, d=768) · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
 - [[native-sparse-attention-hardware-aligned-and-natively-trainable-sparse-attention|Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention]] — NSA claims hardware-aligned attention; node shows fla linear kernels are hardware-MISaligned on SM75 (28-47x SDPA, 64KB fallback)

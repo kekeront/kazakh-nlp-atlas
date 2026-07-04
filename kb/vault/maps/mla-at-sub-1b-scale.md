@@ -1,10 +1,10 @@
 ---
 type: "moc"
 topic: "mla-at-sub-1b-scale"
-nodes: 6
-papers: 5
-sources: 1
-uncertain_claims: 6
+nodes: 19
+papers: 13
+sources: 6
+uncertain_claims: 8
 tags: ["moc"]
 ---
 # Topic: mla-at-sub-1b-scale
@@ -19,20 +19,33 @@ The frontier splits cleanly into three evidence classes. FROM-SCRATCH MLA is pro
 - [[kimi-linear-an-expressive-efficient-attention-architecture|Kimi Linear: An Expressive, Efficient Attention Architecture]] — Smallest pure-MLA with RULER-128K (81.3) — but 3B-active MoE, 5-6x lab scale, not dense
 - [[huggingface-co-deepseek-ai-deepseek-v2-lite-config-json|huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched direc…]] — Smallest shipped pure-MLA config (kv_lora_rank=512 at d/4) — but zero long-context evals
 
-## Papers (5)
+## Papers (13)
 - [[long-context-aware-upcycling-a-new-frontier-for-hybrid-llm-scaling|Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling]] (2026) — mla-at-sub-1b-scale
-- [[towards-economical-inference-enabling-deepseek-s-multi-head-latent-attention-in|Towards Economical Inference: Enabling DeepSeek's Multi-Head Latent Attention in Any Transformer-bas…]] (2025) — mla-sub1b
-- [[x-ecomla-upcycling-pre-trained-attention-into-mla-for-efficient-and-extreme-kv|X-EcoMLA: Upcycling Pre-Trained Attention into MLA for Efficient and Extreme KV Compression]] (2025) — mla-sub1b
-- [[latent-multi-head-attention-for-small-language-models|Latent Multi-Head Attention for Small Language Models]] (2025) — hybrid-efficiency-efficient-attention-se
+- [[tensor-product-attention-is-all-you-need|Tensor Product Attention Is All You Need]] (2025) — mla-at-sub-1b-scale
+- [[towards-economical-inference-enabling-deepseek-s-multi-head-latent-attention-in|Towards Economical Inference: Enabling DeepSeek's Multi-Head Latent Attention in Any Transformer-bas…]] (2025) — mla-at-sub-1b-scale
+- [[x-ecomla-upcycling-pre-trained-attention-into-mla-for-efficient-and-extreme-kv|X-EcoMLA: Upcycling Pre-Trained Attention into MLA for Efficient and Extreme KV Compression]] (2025) — mla-at-sub-1b-scale
+- [[plm-efficient-peripheral-language-models-hardware-co-designed-for-ubiquitous|PLM: Efficient Peripheral Language Models Hardware-Co-Designed for Ubiquitous Computing]] (2025) — mla-at-sub-1b-scale
+- [[hardware-efficient-attention-for-fast-decoding|Hardware-Efficient Attention for Fast Decoding]] (2025) — mla-at-sub-1b-scale
+- [[latent-multi-head-attention-for-small-language-models|Latent Multi-Head Attention for Small Language Models]] (2025) — hybrid-efficient-attention-architectures
+- [[decoder-hybrid-decoder-architecture-for-efficient-reasoning-with-long-generation|Decoder-Hybrid-Decoder Architecture for Efficient Reasoning with Long Generation]] (2025) — mla-at-sub-1b-scale
+- [[eg-mla-embedding-gated-multi-head-latent-attention-for-scalable-and-efficient|EG-MLA: Embedding-Gated Multi-head Latent Attention for Scalable and Efficient LLMs]] (2025) — deepseek-tech
 - [[kimi-linear-an-expressive-efficient-attention-architecture|Kimi Linear: An Expressive, Efficient Attention Architecture]] (2025) — mla-at-sub-1b-scale
+- [[youtu-llm-unlocking-the-native-agentic-potential-for-lightweight-large-language|Youtu-LLM: Unlocking the Native Agentic Potential for Lightweight Large Language Models]] (2025) — mla-at-sub-1b-scale
+- [[you-only-cache-once-decoder-decoder-architectures-for-language-models|You Only Cache Once: Decoder-Decoder Architectures for Language Models]] (2024) — hybrid-efficient-attention-architectures
+- [[reducing-transformer-key-value-cache-size-with-cross-layer-attention|Reducing Transformer Key-Value Cache Size with Cross-Layer Attention]] (2024) — hybrid-efficient-attention-architectures
 
-## Sources & findings (1)
+## Sources & findings (6)
+- [[huggingface-co-deepseek-ai-deepseek-ocr-config-json-fetched|huggingface.co/deepseek-ai/DeepSeek-OCR config.json (fetched directly)]] — Counter-datapoint from DeepSeek themselves: the DeepSeek-OCR decoder (DeepSeek-3B-MoE, ~570M ACTIVE params — the closest…
 - [[huggingface-co-deepseek-ai-deepseek-v2-lite-config-json|huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched direc…]] — Smallest official DeepSeek MLA config (DeepSeek-V2-Lite, 15.7B total / 2.4B active, d_model=2048, 27 layers, 16 heads) d…
+- [[huggingface-co-openbmb-minicpm3-4b-config-json-fetched|huggingface.co/openbmb/MiniCPM3-4B config.json (fetched directly)]] — Smallest production kv_lora_rank shipped: MiniCPM3-4B (d_model=2560, 62 layers, 40 heads) uses kv_lora_rank=256, q_lora_…
+- [[huggingface-co-qwen-qwen3-5-0-8b-config-json-fetched|huggingface.co/Qwen/Qwen3.5-0.8B config.json (fetched directly)]] — Resolves KB [UNVERIFIED] on Qwen3.5 sub-1B: Qwen/Qwen3.5-0.8B config.json shows NO MLA — it is a hybrid: 24 layers, hidd…
+- [[arithmetic-from-verified-configs-deepseek-v2-lite-minicpm3|Arithmetic from verified configs (DeepSeek-V2-Lite, MiniCPM3, Qwen3-0.…]] — Cache-accounting nuance the design spec must not miss: MLA's cache advantage depends on the GQA baseline it replaces. Pe…
+- [[cfgs-qwen3-0-6b-4gpu-yml-src-mha2mla-patching-model-load-py|cfgs/Qwen3-0_6B-4GPU.yml + src/mha2mla/patching_model_load.py (from-sc…]] — MHA2MLA repo (2025-2026 updates) contains a Qwen3-0.6B config with is_mla_from_scratch=true: attention projections rando…
 
 ## Related topics
-- [[mla-at-sub-1b]] — 3 shared nodes
-- [[mla-sub1b]] — 3 shared nodes
-- [[mla-upcycling-at-1b-under-a-bespoke-toke]] — 2 shared nodes
-- [[mla-vs-gqa-pretraining-cost-and-converge]] — 2 shared nodes
+- [[mla-vs-gqa-convergence-cost]] — 4 shared nodes
+- [[hybrid-efficient-attention-architectures]] — 3 shared nodes
+- [[attention-kv-architecture-sub-1b]] — 2 shared nodes
+- [[mla-upcycling-bespoke-tokenizer]] — 2 shared nodes
 
 [[Home]]

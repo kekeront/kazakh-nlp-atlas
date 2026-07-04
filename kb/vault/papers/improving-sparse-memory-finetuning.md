@@ -28,6 +28,6 @@ tags: ["paper", "topic/post-hoc-attachment-of-engram-style-cond"]
 >
 > **Numbers:** Healing: 20k oasst1 samples (Sec 3.3; Sec 4.1 says 10k — internal inconsistency), val loss ~2.3 -> ~2.1 in ~1,000 steps, memory-only training; Stage-3 TriviaQA 1k samples; forgetting probes GSM8K loss + NaturalQuestions F1
 > **Relevance:** Predicts and bounds the failure mode for QymyzLM's Engram attach on Kaggle T4: expect an immediate perplexity spike, and budget a short memory-only healing phase (thousands of samples, not billions of tokens) before joint QLoRA-CPT. Note this paper used the destructive replacement mode; additive alpha=0.01 (finding 2) largely avoids the spike.
-> **Source:** arXiv:2604.05248v1 (Improving Sparse Memory Finetuning, UMich, Apr 6 2026), Sec. 3.3 + Fig. 2/4/5; PDF saved at /home/altairzhambyl/.claude/projects/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/tool-results/webfetch-1783151030556-th7o4v.pdf · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** arXiv:2604.05248v1 (Improving Sparse Memory Finetuning, UMich, Apr 6 2026), Sec. 3.3 + Fig. 2/4/5; PDF saved at [fetched PDF] · **Sweep:** `slm-arch-for-kazakh`
 
 [[Home]]

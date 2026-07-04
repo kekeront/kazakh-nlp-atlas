@@ -35,13 +35,13 @@
       "from": "arxiv:2309.14322",
       "to": "arxiv:2501.00656",
       "why": "OLMo2 adopts this paper's qk-layernorm + z-loss stability pair as its production recipe",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2309.14322",
       "to": "arxiv:2510.26788",
       "why": "Both target fp16 numerical stability; relevant to the T4's forced fp16 regime this claim flags as never ablated at sub-1B",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2401.04088",
@@ -161,7 +161,7 @@
       "from": "arxiv:2405.05254",
       "to": "arxiv:2507.06607",
       "why": "Decoder-Hybrid-Decoder (SambaY) directly builds on YOCO's decoder-decoder single-global-KV design for long reasoning",
-      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+      "agent": "topic:hybrid-efficient-attention-architectures"
     },
     {
       "from": "arxiv:2405.07883",
@@ -197,7 +197,7 @@
       "from": "arxiv:2405.12981",
       "to": "arxiv:2410.14442",
       "why": "The Systematic Study of Cross-Layer KV Sharing generalizes and stress-tests CLA's adjacent-layer KV-reuse scheme",
-      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+      "agent": "topic:hybrid-efficient-attention-architectures"
     },
     {
       "from": "arxiv:2405.12981",
@@ -215,7 +215,7 @@
       "from": "arxiv:2406.07887",
       "to": "arxiv:2411.13676",
       "why": "Mamba study says ~7-8% attention layers recover recall; Hymba operationalizes this as a parallel hybrid-head SLM",
-      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+      "agent": "topic:hybrid-efficient-attention-architectures"
     },
     {
       "from": "arxiv:2406.11477",
@@ -237,7 +237,7 @@
     },
     {
       "from": "arxiv:2407.15831",
-      "to": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "to": "title:evallab hardneg constants 2026 07 04 kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
       "why": "NV-Retriever's TopK-PercPos is the concrete recipe behind evallab's pinned hard-negative protocol (100 BM25 candidates)",
       "agent": "topic:embeddings-training"
     },
@@ -335,13 +335,13 @@
       "from": "arxiv:2412.06464",
       "to": "arxiv:2406.07887",
       "why": "GDN improves Mamba2 with the delta rule; the empirical Mamba study is the from-scratch SSM baseline it beats at 1.3B",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2412.06464",
       "to": "arxiv:2504.03624",
       "why": "Both Mamba-transformer hybrids; Nemotron-H sets KB's ~7-8% attention floor, above which GDN's 3:1-2:1 ratios sit",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2412.06484",
@@ -413,7 +413,7 @@
       "from": "arxiv:2501.06425",
       "to": "arxiv:2405.04434",
       "why": "TPA synthesis: DeepSeek-V2's MLA>MHA/MQA/GQA ablation does not transfer monotonically below 1B",
-      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+      "agent": "topic:mla-vs-gqa-convergence-cost"
     },
     {
       "from": "arxiv:2501.12948",
@@ -515,19 +515,19 @@
       "from": "arxiv:2502.14837",
       "to": "arxiv:2509.16686",
       "why": "Both target MLA at ~1B; EG-MLA builds MLA from scratch whereas MHA2MLA adapts pretrained GQA, trading data cost for accuracy",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2502.14837",
       "to": "arxiv:2511.18643",
       "why": "MHA2MLA's headline 92.19% cut stacks MLA with Int4 HQQ; Kitty is an orthogonal 2-bit KV-quant axis",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2502.14837",
       "to": "arxiv:2603.02188",
       "why": "Both are low-rank KV-compression attention; MHLA is an alternative decomposition to MLA conversion",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2502.16982",
@@ -581,25 +581,25 @@
       "from": "arxiv:2503.11132",
       "to": "arxiv:2509.16686",
       "why": "X-EcoMLA converts to MLA at 1.24B; EG-MLA is the from-scratch MLA-at-1B endpoint the conversion path is judged against",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2503.11132",
       "to": "arxiv:2604.24715",
       "why": "X-EcoMLA reports no long-context eval; long-context-aware upcycling targets exactly this gap",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2503.11132",
       "to": "arxiv:2605.23857",
       "why": "X-EcoMLA finds bigger same-tokenizer teacher unlocks deeper lossless compression; 'Strong Teacher Not Needed' contests teacher-strength…",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2503.12167",
       "to": "arxiv:2412.19437",
       "why": "PLM-1.8B's rank-512 latent is the same absolute cache as DeepSeek-V3; confirms 1–2B from-scratch uses 512",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2503.13423",
@@ -611,7 +611,7 @@
       "from": "arxiv:2503.19786",
       "to": "arxiv:2405.05254",
       "why": "Both slash KV cache for long context; SWA local:global interleave vs cache-once decoder-decoder — different mechanism, same 32K goal",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2503.19786",
@@ -623,13 +623,13 @@
       "from": "arxiv:2503.20083",
       "to": "arxiv:2503.01493",
       "why": "Sherkala-8B as a cross-tokenizer teacher for MLA upcycling of a bespoke-tokenizer Kazakh SLM is the unclaimed combination this node flags",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2503.20083",
       "to": "arxiv:2506.06607",
       "why": "Both attack the cross-tokenizer barrier; training-free tokenizer transplantation is an alternative to ALM's likelihood matching for…",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2505.01618",
@@ -671,25 +671,25 @@
       "from": "arxiv:2505.17272",
       "to": "arxiv:2604.24715",
       "why": "Both are hybrid-model upcycling of pretrained transformers; long-context-aware upcycling extends the frontier Zebra-Llama's short-eval…",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2505.21487",
       "to": "arxiv:2509.16686",
       "why": "EG-MLA gates MLA with embeddings; builds on the sub-1B MLA config this paper pins (kv_lora, decoupled rope)",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "arxiv:2505.21487",
       "to": "arxiv:2511.18643",
       "why": "Competing KV-cache reduction axes: MLA latent compression vs Kitty 2-bit KV quantization",
-      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+      "agent": "topic:mla-vs-gqa-convergence-cost"
     },
     {
       "from": "arxiv:2505.21487",
       "to": "hf:blog/smollm3",
       "why": "GLA paper shows MLA beats GQA-4 sub-1B, yet SmolLM3 shipped GQA-4 without ablating MLA (not in nanotron at the time)",
-      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+      "agent": "topic:mla-vs-gqa-convergence-cost"
     },
     {
       "from": "arxiv:2505.21487",
@@ -761,13 +761,13 @@
       "from": "arxiv:2506.07900",
       "to": "arxiv:2502.11089",
       "why": "MiniCPM4's InfLLM-v2 and Native Sparse Attention are both natively-trainable sparse-attention schemes; shared method family",
-      "agent": "topic:hybrid-efficiency-efficient-attention-se"
+      "agent": "topic:hybrid-efficient-attention-architectures"
     },
     {
       "from": "arxiv:2506.09342",
       "to": "arxiv:2604.24715",
       "why": "From-scratch sub-1B MLA trained at ctx 512 only; long-context upcycling addresses the missing evidence",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2506.20920",
@@ -791,13 +791,13 @@
       "from": "arxiv:2507.06607",
       "to": "arxiv:2503.19786",
       "why": "Gemma 3n's shared-KV (num_kv_shared_layers=15) is layered on top of Gemma-3's 5:1 local-SWA:global attention pattern",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2507.06607",
       "to": "hf:unsloth/gemma-3n-e2b",
       "why": "Same Gemma 3n shared-KV mechanism corroborated in the fetched E2B config.json",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "arxiv:2507.22448",
@@ -1013,7 +1013,7 @@
       "from": "arxiv:2603.17946",
       "to": "arxiv:2603.02188",
       "why": "Both are 2026 low-rank/MLA decomposition methods; CARE is covariance-aware SVD conversion, Multi-Head Low-Rank Attention is an adjacent…",
-      "agent": "topic:mla-upcycling-at-1b-under-a-bespoke-toke"
+      "agent": "topic:mla-upcycling-bespoke-tokenizer"
     },
     {
       "from": "arxiv:2603.20854",
@@ -1253,13 +1253,13 @@
       "from": "hf:deepseek-ai/deepseek-ocr",
       "to": "arxiv:2512.24618",
       "why": "Opposite production choices near sub-2B: DeepSeek-OCR ships MLA DISABLED (~570M active MoE) while Youtu-LLM ships dense MLA at 1.96B…",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "hf:ibm-granite/granite-4.0-h-350m",
       "to": "arxiv:2406.07887",
       "why": "Granite-4-H-350M is a 7:1 Mamba2:attention hybrid; empirical Mamba study is its architectural lineage and closest same-family baseline",
-      "agent": "topic:attention-kv-sub1b-attention-kv-architec"
+      "agent": "topic:attention-kv-architecture-sub-1b"
     },
     {
       "from": "hf:mbzuai/kazmmlu",
@@ -1275,7 +1275,7 @@
     },
     {
       "from": "hf:mbzuai/kazmmlu",
-      "to": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+      "to": "title:evallab kazmmlu kk qwen3 0 6b base measurement 2026 04 30",
       "why": "This dataset quirk (dev=3) is exactly what caused that eval run's [:5] truncation and the 5-shot→3-shot mislabel",
       "agent": "topic:eval-benchmarks"
     },
@@ -1301,19 +1301,19 @@
       "from": "hf:openbmb/minicpm3-4b",
       "to": "arxiv:2405.04434",
       "why": "MiniCPM3-4B rank 256 = d/10, same latent ratio class as DeepSeek-V2 (512/5120=d/10)",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "hf:openbmb/minicpm3-4b",
       "to": "arxiv:2412.19437",
       "why": "MiniCPM3's kv_lora_rank=256 is d/10, same rank-ratio class as DeepSeek-V3's 512/7168=d/14",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "hf:qwen/qwen3.5-0.8b",
       "to": "arxiv:2412.06464",
       "why": "Qwen3.5-0.8B's 3:1 linear layers ARE Gated DeltaNet — it chose hybrid-linear + GQA-2 over MLA for 256K context",
-      "agent": "topic:mla-sub1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "hf:shyngys879/kazakh-e5-rag-embedding",
@@ -1329,7 +1329,7 @@
     },
     {
       "from": "hf:shyngys879/kazakh-e5-rag-embedding",
-      "to": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "to": "title:evallab hardneg constants 2026 07 04 kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
       "why": "its protocol-dependence motivates evallab's pinned KazQAD BM25 hard-neg recipe (100 candidates, k1=1.5, b=0.75)",
       "agent": "topic:embeddings-retrieval"
     },
@@ -1367,13 +1367,13 @@
       "from": "title:cfgs qwen3 0 6b 4gpu yml src mha2mla patching model load py from scratch reinit block",
       "to": "arxiv:2505.09388",
       "why": "Config is Qwen3-0.6B-specific: qk_norm reordering supported, 2-norm rope selection unsupported for Qwen3",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "title:cfgs qwen3 0 6b 4gpu yml src mha2mla patching model load py from scratch reinit block",
       "to": "hf:qwen/qwen3-0.6b-base",
       "why": "MHA2MLA from-scratch config re-inits attention on the Qwen3-0.6B-Base body, the lab's canonical target",
-      "agent": "topic:mla-at-sub-1b"
+      "agent": "topic:mla-at-sub-1b-scale"
     },
     {
       "from": "title:derived from lab measurement t4bench2 py t4bench3 py kaggle quota product feedback 361104 flops basis 6n 3 58e9 tok 33 checkpoint recompute cross check vs kb from scratch derivation",
@@ -1406,43 +1406,43 @@
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "from": "title:empirical crossover fp16 b 1 d 768",
       "to": "arxiv:2502.11089",
       "why": "NSA claims hardware-aligned attention; node shows fla linear kernels are hardware-MISaligned on SM75 (28-47x SDPA, 64KB fallback)",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "from": "title:empirical crossover fp16 b 1 d 768",
       "to": "arxiv:2504.03624",
       "why": "Node gates hybrid design: Mamba2 costs 28-47x SDPA on SM75, so a Nemotron-H-style Mamba2-Transformer hybrid is T4-infeasible",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+      "from": "title:empirical crossover fp16 b 1 d 768",
       "to": "arxiv:2510.26692",
       "why": "Refutes Kimi Linear's linear-attn speed premise on SM75: its KDA only beats SDPA at T~12-16K, far above CPT ctx 1024-4096",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+      "from": "title:empirical smoke2 on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
       "to": "arxiv:2406.07887",
       "why": "fla-Triton Mamba2 runs fwd+bwd on SM75; adds a hardware-gate datapoint to this paper's Mamba LM empirics",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+      "from": "title:empirical smoke2 on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
       "to": "arxiv:2412.06464",
       "why": "GatedDeltaNet from this paper PASSES on SM75 but at 14K tok/s/layer (28-47x SDPA) via fla-0.5.1 fallback configs",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+      "from": "title:empirical muon ns code read of raw githubusercontent com kellerjordan muon master muon py",
       "to": "arxiv:2502.16982",
       "why": "Empirical SM75 6.6x bf16 trap in KellerJordan Muon; this paper argues Muon scales but is silent on Turing/fp16 NS5 path",
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+      "from": "title:empirical muon ns code read of raw githubusercontent com kellerjordan muon master muon py",
       "to": "title:lab measurement peak vram standard adam state arithmetic 2 2 4 4 4 bytes param mixed precision bitsandbytes 8 bit adam",
       "why": "Muon's single momentum buffer confirms the ~50% optimizer-VRAM saving vs the AdamW 2+2+4+4+4 arithmetic in that node",
       "agent": "topic:hardware-gate"
@@ -1484,7 +1484,7 @@
       "agent": "topic:hardware-gate"
     },
     {
-      "from": "title:grep of home altairzhambyl projects slms qymyzlm evallab 2026 07 04 hardneg py constants protocol kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
+      "from": "title:evallab hardneg constants 2026 07 04 kazqad hardneg bm25 v1 n candidates 100 bm25 k1 1 5 bm25 b 0 75",
       "to": "hf:api/datasets",
       "why": "The pinned protocol reads issai/kazqad-retrieval @ a3999685; this dataset-API source is the provenance for the 825k-passage full corpus",
       "agent": "topic:joint-generative-embedding-head-on-one-6"
@@ -1496,7 +1496,7 @@
       "agent": "topic:embed-kazakh"
     },
     {
-      "from": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+      "from": "title:evallab kazmmlu kk qwen3 0 6b base measurement 2026 04 30",
       "to": "title:hf qwen qwen3 0 6b config user provided kazmmlu baseline",
       "why": "Lab's measured 0.328 confirms the user-provided Qwen3-0.6B KazMMLU baseline figure under a fully specified runner",
       "agent": "topic:win-bar-protocol-audit"
@@ -1511,7 +1511,7 @@
       "from": "title:huggingface smol training playbook via crawl gist github com unclecode e5da5fb6a1d37022b089e243e0d9e00e adoption absence from july 2026 searches",
       "to": "hf:qwen/qwen3-0.6b-base",
       "why": "Evidence that production sub-1B MLA adoption is zero: Qwen3-0.6B is a shipped GQA model, no MLA arm",
-      "agent": "topic:mla-vs-gqa-pretraining-cost-and-converge"
+      "agent": "topic:mla-vs-gqa-convergence-cost"
     },
     {
       "from": "title:ibm announcement marktechpost 2025 10 29 infoq 2025 11",
@@ -1672,7 +1672,7 @@
         }
       ]
     },
-    "attention-kv-sub1b-attention-kv-architec": {
+    "attention-kv-architecture-sub-1b": {
       "summary": "The sub-1B attention/KV frontier has three cheap, scale-independent wins that are well-established: QK-Norm as the fp16-stability consensus (2309.14322, now shipped in Qwen3/OLMo2/Gemma3/Mellum2), a headwise sigmoid SDPA gate that collapses attention-sink from ~47% to ~5% for ~1.6M params and <2% latency (2505.06708), and sliding-window attention at 3:1–5:1 with window 512–1024 for a pure KV win (Gemma3 cuts KV from ~60% to <15% at 32K; Gemma3-270M's SWA recipe caches ~108MB@32K vs Qwen3-0.6B's 3.75GB, ~35x). The contested question is MLA: the strongest from-scratch head-to-head (2505.21487, Dao group, 183M–1.47B on FineWeb-Edu) shows MLA matches or beats GQA-4 at ≤876M while caching less (kv_lora=4×d_h, rope_dim 32, no q-compression), but MLA LOSES 1.1pp to GQA-4 at 1.47B — so the sub-1B MLA advantage is real but does not extend up, and its GLA-2/GTA-4 variants actually win at 433M/876M. Pure-MLA long-context is only validated at 3B-active MoE (Kimi Linear, uncertain), and GDN/Mamba2 hybrids replicate quality gains at 340M–1.3B (GDN-H1 56.4 vs Transformer++ 52.25 avg; Granite-4-H-350M +1.2 MMLU over its transformer twin) but are kernel-blocked on the lab's T4 (SM75) since FlashAttention-2 requires SM80+ and Triton FLA kernels are unverified there. The dominant open question is that NO non-vanilla attention mechanism has ever been trained or ablated on Kazakh — SozKZ-600M and Sherkala-8B are both stock attention — making even a small GQA-vs-MLA-vs-gated ablation on 9–10B Kazakh tokens a first-on-Kazakh publishable result.",
       "highlights": [
         {
@@ -1996,11 +1996,11 @@
       "summary": "This topic is the lab's own SM75 (Kaggle T4 / RTX 2070 proxy, cc 7.5, 64KB shared-mem, no bf16 tensor cores) execution gate for QymyzLM architecture choices, all first-hand measurements under torch 2.11.0+cu130 / triton 3.6.0 / fla 0.5.1. GATE OPEN is CONFIRMED: GatedDeltaNet, KimiDeltaAttention (KDA), and fla-Triton Mamba2 all run fwd+bwd in fp16 with finite outputs/grads, and mamba-ssm's CUDA path builds for sm_75. The load-bearing REFUTATION is a throughput inversion — the classic linear-attention speed premise is inverted on SM75: torch SDPA fp16 is the fastest kernel measured and beats every linear kernel up to T=8192 (KDA break-even only extrapolated to T~12-16K), so at CPT ctx 1024-4096 a KDA layer costs 2.7-4.8x SDPA and GDN/Mamba2 layers cost 28-47x (fla fallback under the 64KB limit); KDA is the only fla linear kernel with acceptable SM75 throughput. Two silent traps are established: bf16 (torch.cuda.is_bf16_supported() lies — returns True but runs 7.3x slower than fp16 GEMM), forcing fp16+GradScaler pins everywhere, and KellerJordan Muon's hard-cast to bf16 (6.6x trap, fixed by a one-line .bfloat16()->.half() patch, with its single momentum buffer confirming ~50% optimizer-VRAM saving vs AdamW). All numbers sit against a T4 = ~21% of one A100 (both axes) ceiling. Open question: none of these are yet run on the actual Kaggle T4 or on a Kazakh model — every claim carries flag transferable-untested, and the mamba-ssm/Turing-FA2 runtime behavior is inferred from build targets, not observed.",
       "highlights": [
         {
-          "node_id": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad smoke2 py on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
+          "node_id": "title:empirical smoke2 on local rtx 2070 sm75 fla 0 5 1 from pypi github com fla org flash linear attention",
           "phrase": "GATE OPEN: GDN, KDA, fla-Mamba2 all PASS fwd+bwd in fp16 on real SM75 hardware — the foundational go/no-go"
         },
         {
-          "node_id": "title:empirical this session tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad crossover py fp16 b 1 d 768",
+          "node_id": "title:empirical crossover fp16 b 1 d 768",
           "phrase": "Throughput inversion refutes linear-attn motivation: SDPA beats all linear kernels to T=8192; KDA 2.7-4.8x, GDN/Mamba2 28-47x"
         },
         {
@@ -2008,7 +2008,7 @@
           "phrase": "bf16 is a silent trap on SM75: capability flag lies, 7.3x slower GEMM — every T4 config must pin fp16+GradScaler"
         },
         {
-          "node_id": "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py",
+          "node_id": "title:empirical muon ns code read of raw githubusercontent com kellerjordan muon master muon py",
           "phrase": "Muon usable on T4 after a 1-line fp16 patch (6.6x bf16 trap); single momentum buffer = ~50% optimizer VRAM vs AdamW"
         },
         {
@@ -2021,7 +2021,7 @@
         }
       ]
     },
-    "hybrid-efficiency-efficient-attention-se": {
+    "hybrid-efficient-attention-architectures": {
       "summary": "The frontier splits into three efficiency levers for a ≤600M Kazakh SLM, all measured but none carrying novelty alone. (1) Latent/low-rank attention: DeepSeek-V2 MLA cuts KV cache 93.3% (~576 elem/tok/layer ≈ GQA-2.25) while beating MHA perplexity, but the only from-scratch sub-1B evidence (arxiv:2506.09342, 30M–202M) shows decoupled-RoPE MLA at r=d/2 gives just 45% KV cut at +0.3% loss, and r=d/4 costs +4.4%—and it was never benchmarked vs GQA, all at ctx≤512. (2) Cross-layer/global KV sharing: CLA2 gives 2x cut at +0.04–0.06 ppl for MQA, but the slice flags an internal contradiction—the paper's prose credits GQA2-CLA2 while Table 1 only supports GQA4-CLA2, and untuned GQA-CLA2 rows actually cost +0.07/+0.12 ppl (uncertain), so plan-B's \"+0.04\" is optimistic; YOCO caches one global KV layer for ~L-fold savings. (3) SSM/conv hybrids: pure Mamba trails Transformers ~15pt on 5-shot MMLU until ~7-8% attention layers are added; the shipped sub-1B winners (LFM2-350M conv+6-GQA beating Qwen3-0.6B on multilingual MMLU 37.99 vs 30.84; Falcon-H1-0.5B parallel attn+Mamba) prove hybrids compete. Gemma3-270M's 5:1 sliding-window recipe (window 512, KV ≈108MB@32K vs Qwen3-0.6B's 3.75GB) is the strongest ≤300M long-context template. Open question: which lever (MLA vs sliding-window vs conv-hybrid) survives at ≤600M ACTIVE params on Kazakh with only free T4 compute, given no from-scratch MLA-vs-GQA head-to-head exists at this scale.",
       "highlights": [
         {
@@ -2258,35 +2258,6 @@
         }
       ]
     },
-    "mla-at-sub-1b": {
-      "summary": "MLA is CONFIRMED viable below 1B along three distinct paths, and this slice pins the tradeoffs. From-scratch: 2506.09342 (30–202M, decoupled-RoPE MLA at r=d/2 gives 45% KV cut for +0.3% val loss) and EG-MLA (120M, shared kv_lora_rank=256, and 64 with token-embedding gating) prove shared ranks well below the DeepSeek-V2/PLM-1.8B default of 512; MiniCPM3-4B ships rank 256 (=d/10). Teacher-free conversion (MHA2MLA) converts SmolLM-135M/360M GQA→MLA with only ~2.25B tokens (0.38% of pretrain) but is lossy and shows inverse-scale degradation — smaller models lose MORE at equal compression (360M: −1.72pp at −68.75% KV, −4.59pp at −87.5%). Distillation upcycling (X-EcoMLA) reaches ~1.9x lossless via self-distillation, but 6.4–10.6x lossless is published ONLY with a 3–8x-larger SAME-tokenizer teacher — unreachable for a bespoke Kazakh vocab. The load-bearing open question: cross-tokenizer lossless deep conversion at sub-1B has ZERO published results, and every sub-1B MLA study (from-scratch or converted) evaluated short-context only — no LongBench/RULER/needle evidence exists below 7B. Two internal conflicts are flagged uncertain: X-EcoMLA's config-to-ratio mapping (kv_lora_rank 128 vs 512) and 2506.09342's KV-reduction figure (87.5% vs 72%).",
-      "highlights": [
-        {
-          "node_id": "arxiv:2502.14837",
-          "phrase": "Teacher-free GQA→MLA conversion at 135M/360M on 0.38% of pretrain; lossy with inverse-scale degradation"
-        },
-        {
-          "node_id": "arxiv:2503.11132",
-          "phrase": "Distillation upcycling Llama3.2-1B: 1.9x lossless self-distill; deep lossless needs larger same-tokenizer teacher"
-        },
-        {
-          "node_id": "arxiv:2509.16686",
-          "phrase": "Only from-scratch sub-1B run with shared rank below 512: kv256 and kv64-gated at 120M"
-        },
-        {
-          "node_id": "arxiv:2506.09342",
-          "phrase": "Dedicated 30–202M MLA study: r=d/2 → 45% KV cut, +0.3% loss; decoupled RoPE mandatory"
-        },
-        {
-          "node_id": "arxiv:2503.12167",
-          "phrase": "Production from-scratch dense MLA at 1.8B pins the rank-512 (=d/4) precedent, never 256"
-        },
-        {
-          "node_id": "hf:openbmb/minicpm3-4b",
-          "phrase": "Smallest shipped kv_lora_rank=256 (=d/10 + rope32), same ratio class as DeepSeek-V2/V3"
-        }
-      ]
-    },
     "mla-at-sub-1b-scale": {
       "summary": "The frontier splits cleanly into three evidence classes. FROM-SCRATCH MLA is proven small: the Latent-MHA-for-SLMs paper (30M-202M, arxiv:2506.09342) shows decoupled-RoPE MLA at r=d/2 costs only +0.3% val loss for a 45% KV cut, but collapses at r=d/4 (+4.4%) and needs the RoPE branch. CONVERSION at sub-1B is proven-but-lossy and teacher-free: MHA2MLA (arxiv:2502.14837) converts SmolLM-135M/360M on ~0.38% of pretraining tokens, but shows an inverse-scale law — smaller models lose more at equal KV compression (135M -3.28pp vs 7B -0.30pp at deep cuts). LOSSLESS deep conversion at ~1B exists only with a 3-8x-larger same-tokenizer teacher (X-EcoMLA, arxiv:2503.11132: 6.4-10.6x KV at parity via distillation), a path the lab cannot use with a bespoke tokenizer — leaving ~1.9x self-distill lossless or ~3.2x teacher-free at -1.7pp as the realistic ceiling. The dominant OPEN question is long-context: every sub-1B result is short-context; the only long-context retrieval evidence at ~1B is HyLo (arxiv:2604.24715, 4 MLA + 12 linear layers, RULER-64K 40.8) with no pure-MLA arm, and the smallest pure-MLA RULER-128K number (81.3) belongs to Kimi Linear's 3B-active MoE baseline. Even DeepSeek-V2-Lite, the smallest shipped pure-MLA config (kv_lora_rank=512 at d/4), has no published needle/RULER results. All six nodes are unverified (verdict null); the X-EcoMLA config-to-ratio mapping is internally contradictory and self-flagged uncertain.",
       "highlights": [
@@ -2316,36 +2287,7 @@
         }
       ]
     },
-    "mla-sub1b": {
-      "summary": "The frontier question — does MLA earn its place at sub-1B ACTIVE params — resolves to \"rough parity, not a clear win.\" Two independent from-scratch head-to-heads bound it: the Dao group (2505.21487, 183M-1.47B FineWeb-Edu) finds MLA (single latent kv_lora_rank=4*d_h + rope32, queries NOT compressed) beats GQA-4 at 433M/876M while caching LESS, whereas TPA (2501.06425) reports MLA \"trains more slowly and yields higher validation losses\" — but that claim is figure-only with no numeric table, and TPA's own downstream tables show MLA at parity/better (772M: MLA 53.32 > GQA 52.30). Synthesis envelope: MLA sits within about ±1pp of GQA across 350M-1.5B, never catastrophic, never the DeepSeek-scale win. Conversion paths are de-risked but tiered: MHA2MLA (2502.14837) is teacher-free on ~0.4% of pretrain data but lossy (-1.2 to -4.6pp for 3.2-8x KV cut, and smaller models degrade MORE at equal d_kv); X-EcoMLA (2503.11132) reaches 6.4-10.6x lossless only with a 3-8x-larger same-tokenizer teacher — unreachable under a bespoke Kazakh tokenizer, leaving ~1.9x self-distill lossless or ~3.2x@-1.7pp as the realistic hedge. Production signal is genuinely split: MiniCPM3-4B (kv_lora_rank=256=d/10) and DeepSeek-V2-Lite (512, q-compression dropped sub-2B) ship MLA and Youtu-LLM ships dense MLA at 1.96B claiming MLA beats GQA in its own 1B ablation, yet DeepSeek-OCR ships MLA DISABLED at ~570M active and Qwen3.5-0.8B chose hybrid-linear (Gated DeltaNet) + GQA-2 over MLA. Open questions: lossless DEEP MLA conversion under a bespoke tokenizer, and long-context (RULER/needle/LongBench) MLA quality at sub-1B — the latter unmeasured everywhere (X-EcoMLA and DeepSeek-V2-Lite both publish short-context evals only).",
-      "highlights": [
-        {
-          "node_id": "arxiv:2505.21487",
-          "phrase": "Strongest from-scratch evidence: MLA beats GQA-4 at 433M/876M while caching less; pins kv_lora_rank=4*d_h, rope32"
-        },
-        {
-          "node_id": "arxiv:2501.06425",
-          "phrase": "First from-scratch MLA-vs-GQA in the d_model window; source of the ±1pp-vs-GQA envelope and the 'MLA slower' caveat"
-        },
-        {
-          "node_id": "arxiv:2502.14837",
-          "phrase": "Teacher-free GQA→MLA conversion on 0.4% pretrain data — tokenizer-agnostic escape hatch, but lossy sub-1B"
-        },
-        {
-          "node_id": "arxiv:2503.11132",
-          "phrase": "Lossless 6.4-10.6x MLA upcycling — but only with a larger same-tokenizer teacher, no long-context eval"
-        },
-        {
-          "node_id": "hf:deepseek-ai/deepseek-ocr",
-          "phrase": "Counter-datapoint: DeepSeek ships MLA DISABLED at ~570M active (kv_lora_rank=null, plain MHA)"
-        },
-        {
-          "node_id": "arxiv:2512.24618",
-          "phrase": "Dense-MLA production at 1.96B; own 1B ablation has MLA beating GQA on ppl and MC across the board"
-        }
-      ]
-    },
-    "mla-upcycling-at-1b-under-a-bespoke-toke": {
+    "mla-upcycling-bespoke-tokenizer": {
       "summary": "The question — can a ≤1B GQA model be upcycled to MLA when it uses a bespoke Kazakh tokenizer that no larger teacher shares — resolves into a three-tier frontier. Teacher-free conversion is CONFIRMED at sub-1B: MHA2MLA (arxiv:2502.14837) converts SmolLM-135M/360M via joint-SVD init + partial-RoPE on only 2.25B FT tokens (0.375% of pretrain), tokenizer-irrelevant because no teacher is involved, but it is LOSSY — 3.2x KV cut costs -1.2/-1.7pp and 8x costs -3.3/-4.6pp, with smaller models degrading more at equal d_kv. Lossless deep compression (6.4-10.6x) is published only via distillation from a 3-8x-larger SAME-tokenizer teacher (X-EcoMLA arxiv:2503.11132), which cannot exist for the lab; its only tokenizer-safe option is ~1.9x lossless self-distillation. The decisive open gap: zero published work combines cross-tokenizer KD (ALM arxiv:2503.20083 and peers) with MLA upcycling, so a Sherkala-8B→bespoke-Kazakh-SLM MLA conversion is unclaimed. Contested/caveats: X-EcoMLA's internal config-to-ratio mapping is self-conflicting (uncertain), Zebra-Llama shows deep hybrid compression still drops MMLU -8.2pp even with an 8B teacher (uncertain), and 2026 teacher-free advances (CARE) bottom out at 4B with no sub-1B evidence.",
       "highlights": [
         {
@@ -2370,7 +2312,7 @@
         }
       ]
     },
-    "mla-vs-gqa-pretraining-cost-and-converge": {
+    "mla-vs-gqa-convergence-cost": {
       "summary": "The frontier question is whether MLA beats GQA enough to justify it when pretraining a sub-1B model from scratch. Three independent from-scratch head-to-heads now exist — TPA/T6 (353M/772M, FineWeb-Edu ~49B tok), the Dao-group GLA paper (183M-1.47B, 25-50B tok), and latent-MHA-for-SLMs (30-202M, ~3.3B tok TinyStories). Established: MLA quality sits within roughly ±1pp of GQA across 350M-1.5B — never the DeepSeek-V2 large-scale win, never catastrophic; the Dao group shows MLA (kv_lora_rank=4·d_h + rope 32) matching or beating GQA-4 while caching LESS (876M: MLA 11.363 vs GQA-4 11.340 ppl; MLA best at 433M), and their GLA-2 variant beats both. Contested: TPA claims MLA \"trains more slowly, higher validation loss,\" but this is figure-only (no numeric table) and its own downstream tables show parity/better, so the convergence-penalty is weak evidence — and its GQA arm cached only 256 elem vs MLA's 544. Open: zero published wall-clock or training-memory MLA-vs-GQA numbers at sub-1B, zero long-context (RULER/LongBench) evidence for from-scratch sub-1B MLA, and production adoption is zero (SmolLM3, Qwen3-0.6B both shipped GQA-4). Escape hatch: MHA2MLA converts an existing GQA model to MLA with ~0.4% of pretraining data (-1.2/-1.7pp at -69% KV), decoupling the choice from the from-scratch run.",
       "highlights": [
         {
@@ -2748,7 +2690,7 @@
       "summary": "The audit resolves how the lab's 32.8% KazMMLU baseline and the Sherkala \"ceiling\" relate, and the answer is: they are NOT directly comparable. CONFIRMED and pinned in code — the lab protocol is the Kazakh-only 12-subject test split (9,870 questions), 3-shot (the dev split holds exactly 3 exemplars, so num_fewshot=5 hard-errors), next-token letter-logit argmax, fp16, giving Qwen3-0.6B-Base = 0.328. The subset matches Sherkala's, but the 41.4/51.6 figures diverge on three axes: shots (0 vs 3), scoring (normalized full-string log-likelihood vs letter-logit), and base-vs-chat. A load-bearing KB CONFLICT is flagged: the 41.4 was mislabeled \"5-shot avg\" when the paper text says 0-shot. Two quantitative facts make cross-protocol mixing indefensible — shot count alone moves scores ~11pp (Qwen-2.5-7B-Instruct 47.8→58.9, 0→3-shot), larger than the whole 32.8→36 target delta, and instruction tuning costs -10.2pp (Sherkala base 51.6 vs chat 41.4), meaning the honest base-to-base ceiling reference is 51.6, not 41.4. Open question: the only clean comparison is base-to-base through the same runner, so any QymyzLM claim must be re-measured under the pinned protocol rather than cited against Sherkala's published numbers.",
       "highlights": [
         {
-          "node_id": "title:home altairzhambyl projects slms qymyzlm evallab results 2026 04 30  kazmmlu kk  qwen qwen3 0 6b base json home altairzhambyl projects slms qymyzlm evallab src kazeval run kazmmlu py home altairzhambyl projects slms qymyzlm evallab src kazeval lm eval tasks kazmmlu kaz  kazmmlu kaz template yaml",
+          "node_id": "title:evallab kazmmlu kk qwen3 0 6b base measurement 2026 04 30",
           "phrase": "Canonical protocol pinned in code: 9,870-Q kk split, 3-shot (dev=3 hard max), letter-logit, Qwen3-0.6B=0.328"
         },
         {
@@ -2768,22 +2710,20 @@
         "name": "QymyzLM — Generative SLM (≤600M active)",
         "topics": [
           "architecture-fork",
-          "attention-kv-sub1b-attention-kv-architec",
+          "attention-kv-architecture-sub-1b",
           "continual-pt-lowres-qlora-vs-full-cpt-re",
           "data-efficiency-10b-kazakh-10b-token-pre",
           "deepseek-tech",
           "does-the-engram-conditional-memory-modul",
           "gla-2-gta-arxiv-2505-21487-zadouri-strau",
-          "hybrid-efficiency-efficient-attention-se",
+          "hybrid-efficient-attention-architectures",
           "inference-tts",
           "kazakh-morphological-segmentation-qualit",
           "kazakh-tokenizer-fertility-vs-byte-premi",
           "kv-cache-architecture",
-          "mla-at-sub-1b",
           "mla-at-sub-1b-scale",
-          "mla-sub1b",
-          "mla-upcycling-at-1b-under-a-bespoke-toke",
-          "mla-vs-gqa-pretraining-cost-and-converge",
+          "mla-upcycling-bespoke-tokenizer",
+          "mla-vs-gqa-convergence-cost",
           "post-hoc-attachment-of-engram-style-cond",
           "qymyzlm-architecture-fork",
           "residual-stream-stability-qymyzlm-design",

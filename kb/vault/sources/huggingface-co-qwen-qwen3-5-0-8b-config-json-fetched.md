@@ -5,23 +5,23 @@ title: "huggingface.co/Qwen/Qwen3.5-0.8B config.json (fetched directly)"
 doi: null
 hf_repo: "Qwen/Qwen3.5-0.8B"
 year: null
-topics: ["mla-sub1b"]
+topics: ["mla-at-sub-1b-scale"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
 aliases: ["hf:qwen/qwen3.5-0.8b"]
-tags: ["source", "topic/mla-sub1b"]
+tags: ["source", "topic/mla-at-sub-1b-scale"]
 ---
 # huggingface.co/Qwen/Qwen3.5-0.8B config.json (fetched directly)
 
-**Topics:** [[mla-sub1b]]
+**Topics:** [[mla-at-sub-1b-scale]]
 
 ## Source URLs
 - huggingface.co/Qwen/Qwen3.5-0.8B config.json (fetched directly)
 
 ## Findings
 
-> [!note] CLAIM — mla-sub1b
+> [!note] CLAIM — mla-at-sub-1b-scale
 > Resolves KB [UNVERIFIED] on Qwen3.5 sub-1B: Qwen/Qwen3.5-0.8B config.json shows NO MLA — it is a hybrid: 24 layers, hidden_size=1024, layer pattern 3 linear-attention (Gated DeltaNet: 16 lin K/V heads, dim 128, conv kernel 4, output gate) : 1 full attention (8 Q heads / 2 KV heads GQA), vocab 248,320, ctx 262,144, partial_rotary_factor 0.25, no MoE in the 0.8B. So the newest frontier sub-1B (Mar 2026) chose hybrid-linear + GQA-2 over MLA for long context.
 >
 > **Numbers:** 759M-class, 24L, d=1024, GDN:full = 3:1, full-attn GQA 8Q:2KV, vocab 248,320, ctx 262,144

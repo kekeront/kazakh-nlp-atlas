@@ -41,9 +41,9 @@ The sub-1B frontier is converged on a handful of architectural facts: DEPTH beat
 - [[sebastian-raschka-mla-gallery|Sebastian Raschka MLA gallery]] — MLA (DeepSeek multi-head latent attention) compresses the KV cache far more than GQA while preserving per-head expressiv…
 
 ## Related topics
-- [[hybrid-efficiency-efficient-attention-se]] — 3 shared nodes
+- [[hybrid-efficient-attention-architectures]] — 3 shared nodes
 - [[training-recipes]] — 3 shared nodes
-- [[attention-kv-sub1b-attention-kv-architec]] — 2 shared nodes
+- [[attention-kv-architecture-sub-1b]] — 2 shared nodes
 - [[kazakh-turkic-nlp]] — 2 shared nodes
 - [[small-lm-training-recipes-qymyzlm-design]] — 2 shared nodes
 

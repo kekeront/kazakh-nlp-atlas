@@ -30,7 +30,7 @@ tags: ["source", "topic/kaggle-t4x2-compute-vram-budget-for-the"]
 > **Source:** Lab measurement (peak VRAM) + standard Adam state arithmetic (2+2+4+4+4 bytes/param mixed-precision); bitsandbytes 8-bit Adam · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
-- [[empirical-tmp-claude-1000-home-altairzhambyl-projects-slms|Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98…]] — Muon's single momentum buffer confirms the ~50% optimizer-VRAM saving vs the AdamW 2+2+4+4+4 arithmetic in that node
+- [[empirical-muon-ns-py-code-read-of-raw-githubusercontent-com|Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJ…]] — Muon's single momentum buffer confirms the ~50% optimizer-VRAM saving vs the AdamW 2+2+4+4+4 arithmetic in that node
 - [[lora-learns-less-and-forgets-less|LoRA Learns Less and Forgets Less]] — VRAM says QLoRA has no rationale at 0.6B so full-FT dominates; LoRA-Learns-Less confirms LoRA underperforms full-FT
 - [[continual-learning-via-sparse-memory-finetuning|Continual Learning via Sparse Memory Finetuning]] — VRAM rules out QLoRA as the PEFT; sparse-memory finetuning is the competing low-forgetting alternative to full-FT
 

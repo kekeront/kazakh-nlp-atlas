@@ -28,7 +28,7 @@ The frontier question is whether ONE model ≤600M active params can carry both 
 - [[onegen-efficient-one-pass-unified-generation-and-retrieval-for-llms|OneGen: Efficient One-Pass Unified Generation and Retrieval for LLMs]] (2024) — joint-generative-embedding-head-on-one-6
 
 ## Sources & findings (1)
-- [[grep-of-home-altairzhambyl-projects-slms-qymyzlm-evallab|grep of /home/altairzhambyl/projects/SLMs/qymyzlm/evallab (2026-07-04)]] — PROTOCOL-NAME CONFLICT with the mission brief: the phrase 'TopK-PercPos protocol' appears NOWHERE in the evallab repo (g…
+- [[grep-of-evallab-2026-07-04|grep of evallab (2026-07-04)]] — PROTOCOL-NAME CONFLICT with the mission brief: the phrase 'TopK-PercPos protocol' appears NOWHERE in the evallab repo (g…
 
 ## Related topics
 - [[decoder-to-embedder]] — 4 shared nodes

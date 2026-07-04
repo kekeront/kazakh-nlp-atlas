@@ -6,17 +6,17 @@ arxiv_id: "2405.04434"
 doi: null
 hf_repo: null
 year: 2024
-topics: ["deepseek-tech", "hybrid-efficiency-efficient-attention-se", "kazakh-turkic-nlp", "novelty-check"]
+topics: ["deepseek-tech", "hybrid-efficient-attention-architectures", "kazakh-turkic-nlp", "novelty-check"]
 claims: 6
 uncertain_claims: 2
 verdicts: []
 aliases: ["DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model", "arXiv:2405.04434", "arxiv:2405.04434"]
-tags: ["paper", "topic/deepseek-tech", "topic/hybrid-efficiency-efficient-attention-se", "topic/kazakh-turkic-nlp", "topic/novelty-check"]
+tags: ["paper", "topic/deepseek-tech", "topic/hybrid-efficient-attention-architectures", "topic/kazakh-turkic-nlp", "topic/novelty-check"]
 ---
 # DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model
 
 [arXiv](https://arxiv.org/abs/2405.04434)
-**Topics:** [[deepseek-tech]], [[hybrid-efficiency-efficient-attention-se]], [[kazakh-turkic-nlp]], [[novelty-check]]
+**Topics:** [[deepseek-tech]], [[hybrid-efficient-attention-architectures]], [[kazakh-turkic-nlp]], [[novelty-check]]
 
 > [!abstract]
 > We present DeepSeek-V2, a strong Mixture-of-Experts (MoE) language model characterized by economical training and efficient inference. It comprises 236B total parameters, of which 21B are activated for each token, and supports a context length of 128K tokens. DeepSeek-V2 adopts innovative architectures including Multi-head Latent Attention (MLA) and DeepSeekMoE. MLA guarantees efficient inference …
@@ -39,7 +39,7 @@ tags: ["paper", "topic/deepseek-tech", "topic/hybrid-efficiency-efficient-attent
 
 **Cited KB notes:** [[deepseek-v3-technical-report]]
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > MLA vs GQA at the KV-cache level: DeepSeek's ablations show MLA matches/beats MHA perplexity while GQA loses ~0.5 and MQA ~1.5 perplexity; MLA stores ~70KB/token vs 192-328KB/token for GQA models (2.7-4.7x smaller cache) by compressing all K/V into one low-rank latent instead of sharing heads.
 >
 > **Numbers:** MLA cache ~70KB/tok vs GQA 192-328KB/tok (2.7-4.7x); GQA +0.5 / MQA +1.5 perplexity vs MHA

@@ -33,6 +33,6 @@ tags: ["source", "topic/embeddings-retrieval"]
 - [[kazparc-kazakh-parallel-corpus-for-machine-translation|KazParC: Kazakh Parallel Corpus for Machine Translation]] — source-of: issai/kazparc is the HF release of the KazParC Kazakh parallel corpus paper
 - [[kazqad-kazakh-open-domain-question-answering-dataset|KazQAD: Kazakh Open-Domain Question Answering Dataset]] — source-of: issai/kazqad-retrieval is the HF release of the KazQAD paper's ~815k-passage open-domain QA corpus
 - [[huggingface-co-datasets-issai-ragbench-kazakh|huggingface.co/datasets/issai/RAGBench_Kazakh]] — sibling ISSAI Kazakh retrieval/RAG feedstock dataset from the same lab lineage
-- [[grep-of-home-altairzhambyl-projects-slms-qymyzlm-evallab|grep of /home/altairzhambyl/projects/SLMs/qymyzlm/evallab (2026-07-04)]] — The pinned protocol reads issai/kazqad-retrieval @ a3999685; this dataset-API source is the provenance for the 825k-passage full corpus
+- [[grep-of-evallab-2026-07-04|grep of evallab (2026-07-04)]] — The pinned protocol reads issai/kazqad-retrieval @ a3999685; this dataset-API source is the provenance for the 825k-passage full corpus
 
 [[Home]]

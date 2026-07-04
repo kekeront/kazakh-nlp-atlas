@@ -6,17 +6,17 @@ arxiv_id: "2503.19786"
 doi: null
 hf_repo: "unsloth/gemma-3-270m-it"
 year: 2025
-topics: ["sota-slm", "hybrid-efficiency-efficient-attention-se", "training-recipes", "slm-architecture", "attention-kv-sub1b-attention-kv-architec"]
+topics: ["sota-slm", "hybrid-efficient-attention-architectures", "training-recipes", "slm-architecture", "attention-kv-architecture-sub-1b"]
 claims: 6
 uncertain_claims: 1
 verdicts: []
 aliases: ["Gemma 3 Technical Report", "arXiv:2503.19786", "arxiv:2503.19786"]
-tags: ["paper", "topic/sota-slm", "topic/hybrid-efficiency-efficient-attention-se", "topic/training-recipes", "topic/slm-architecture", "topic/attention-kv-sub1b-attention-kv-architec"]
+tags: ["paper", "topic/sota-slm", "topic/hybrid-efficient-attention-architectures", "topic/training-recipes", "topic/slm-architecture", "topic/attention-kv-architecture-sub-1b"]
 ---
 # Gemma 3 Technical Report
 
 [arXiv](https://arxiv.org/abs/2503.19786)
-**Topics:** [[sota-slm]], [[hybrid-efficiency-efficient-attention-se]], [[training-recipes]], [[slm-architecture]], [[attention-kv-sub1b-attention-kv-architec]]
+**Topics:** [[sota-slm]], [[hybrid-efficient-attention-architectures]], [[training-recipes]], [[slm-architecture]], [[attention-kv-architecture-sub-1b]]
 
 > [!abstract]
 > We introduce Gemma 3, a multimodal addition to the Gemma family of lightweight open models, ranging in scale from 1 to 27 billion parameters. This version introduces vision understanding abilities, a wider coverage of languages and longer context - at least 128K tokens. We also change the architecture of the model to reduce the KV-cache memory that tends to explode with long context. This is achie …
@@ -30,14 +30,14 @@ tags: ["paper", "topic/sota-slm", "topic/hybrid-efficiency-efficient-attention-s
 > **Relevance:** Cautionary datapoint: a 256K multilingual vocab starves the transformer of capacity and yields near-random Kazakh knowledge. Argues AGAINST a giant multilingual vocab for a from-scratch Kazakh SLM — a compact low-fertility vocab (~50K) keeps params in the network.
 > **Source:** Google Developers Blog (Introducing Gemma 3 270M); apxml.com/models/gemma-3-270m; arXiv 2503.19786 · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > Gemma 3 interleaves 5 local sliding-window attention layers per 1 global layer (5:1); local window = 1024 tokens; RoPE base is 10K on local layers and 1M on global layers. This cuts KV-cache overhead from ~60% (global-only) to <15% at 32K context with 'minimal impact on perplexity' vs a 1:1 ratio, and shrinking the window further barely moves perplexity.
 >
 > **Numbers:** 5:1 ratio; sliding window=1024 tok; RoPE local=10K, global=1M; KV overhead 60%->~15% at 32K; Gemma3-1B: 698M non-embedding params, 32K context, 256K vocab
 > **Relevance:** Highest-leverage, lowest-risk change for a dense 500M Kazakh backbone: near-free KV savings that make an 8GB-GPU/CPU deployment viable at long context (KazQAD reading comprehension) without hurting quality. Directly upgrades the current GQA-2 dense design.
 > **Source:** arXiv:2503.19786 (Gemma 3 Technical Report), Figures 3-5 · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > Gemma 3 QAT: finetuning ~5000 steps with targets from the non-quantized BF16 checkpoint (per-channel or per-block int4) reduces the perplexity increase from int4 quantization by 54% and keeps Elo within a few points of BF16. VRAM for weights collapses roughly 4x.
 >
 > **Numbers:** Gemma3-1B: 2GB (BF16) -> 0.5GB (int4); 4B: 8GB -> 2.6GB; 27B: 54GB -> 14.1GB; -54% perplexity degradation via QAT; ~5000 QAT steps
@@ -58,7 +58,7 @@ tags: ["paper", "topic/sota-slm", "topic/hybrid-efficiency-efficient-attention-s
 > **Relevance:** Provenance hygiene: measured-by-lab numbers must never masquerade as paper numbers.
 > **Source:** qymyzlm README baseline table (measured April 2026); correction of mis-sourced claim in node for arXiv 2503.19786 · **Sweep:** `2026-07-eval-provenance`
 
-> [!warning] UNCERTAIN — attention-kv-sub1b-attention-kv-architec
+> [!warning] UNCERTAIN — attention-kv-architecture-sub-1b
 > [transferable-untested] Gemma3-270M's exact sub-300M sliding-window recipe is now pinned from config.json: 18 layers, hidden 640, 4 Q / 1 KV head (MQA), head_dim 256, 15 sliding-window layers (window=512) + 3 full-attention layers at positions {6,12,18} (5:1), rope_theta=1e6 on global / rope_local_base_freq=1e4 on local layers, ctx 32768, vocab 262144. Derived KV math: SWA cache is constant ~7.5 MiB total (2×256×15×512 elem fp16); global layers add 3 KiB/token → @32K total ≈108 MB vs Qwen3-0.6B's ~3.75 GB (~35x smaller) — the strongest existing template for long-context-capable attention at ≤300M.
 >
 > **Numbers:** 18L, d640, 4Q/1KV, head_dim 256, window 512, 15:3 local:global, theta 1e6/1e4, vocab 262144; KV ≈108 MB@32K vs 3.75 GB (Qwen3-0.6B)

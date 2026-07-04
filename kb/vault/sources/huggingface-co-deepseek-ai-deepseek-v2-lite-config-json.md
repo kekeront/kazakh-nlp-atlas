@@ -5,23 +5,23 @@ title: "huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched direc�
 doi: null
 hf_repo: "deepseek-ai/DeepSeek-V2-Lite"
 year: null
-topics: ["mla-sub1b", "mla-at-sub-1b-scale"]
+topics: ["mla-at-sub-1b-scale"]
 claims: 2
 uncertain_claims: 0
 verdicts: []
 aliases: ["hf:deepseek-ai/deepseek-v2-lite"]
-tags: ["source", "topic/mla-sub1b", "topic/mla-at-sub-1b-scale"]
+tags: ["source", "topic/mla-at-sub-1b-scale"]
 ---
 # huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched direc…
 
-**Topics:** [[mla-sub1b]], [[mla-at-sub-1b-scale]]
+**Topics:** [[mla-at-sub-1b-scale]]
 
 ## Source URLs
 - huggingface.co/deepseek-ai/DeepSeek-V2-Lite config.json (fetched directly)
 
 ## Findings
 
-> [!note] CLAIM — mla-sub1b
+> [!note] CLAIM — mla-at-sub-1b-scale
 > Smallest official DeepSeek MLA config (DeepSeek-V2-Lite, 15.7B total / 2.4B active, d_model=2048, 27 layers, 16 heads) drops query compression: kv_lora_rank=512, q_lora_rank=null, qk_rope_head_dim=64, qk_nope_head_dim=128, v_head_dim=128, vocab 102,400. Consistent with GLA-paper small models (q uncompressed): q compression is a large-scale param-saving trick, not needed sub-2B.
 >
 > **Numbers:** d=2048/27L/16h; r_kv=512, r_q=null, rope 64, nope 128, v 128

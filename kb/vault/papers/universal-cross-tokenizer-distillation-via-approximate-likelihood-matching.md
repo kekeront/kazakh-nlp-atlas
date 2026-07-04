@@ -6,24 +6,24 @@ arxiv_id: "2503.20083"
 doi: null
 hf_repo: null
 year: 2025
-topics: ["mla-upcycling-at-1b-under-a-bespoke-toke"]
+topics: ["mla-upcycling-bespoke-tokenizer"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
 aliases: ["Universal Cross-Tokenizer Distillation via Approximate Likelihood Matching", "arXiv:2503.20083", "arxiv:2503.20083"]
-tags: ["paper", "topic/mla-upcycling-at-1b-under-a-bespoke-toke"]
+tags: ["paper", "topic/mla-upcycling-bespoke-tokenizer"]
 ---
 # Universal Cross-Tokenizer Distillation via Approximate Likelihood Matching
 
 [arXiv](https://arxiv.org/abs/2503.20083)
-**Topics:** [[mla-upcycling-at-1b-under-a-bespoke-toke]]
+**Topics:** [[mla-upcycling-bespoke-tokenizer]]
 
 > [!abstract]
 > Distillation has shown remarkable success in transferring knowledge from a Large Language Model (LLM) teacher to a student LLM. However, current distillation methods require similar tokenizers between the teacher and the student, restricting their applicability to only a small subset of teacher-student pairs. In this work, we develop a principled cross-tokenizer distillation method to solve this c …
 
 ## Claims
 
-> [!note] CLAIM — mla-upcycling-at-1b-under-a-bespoke-toke
+> [!note] CLAIM — mla-upcycling-bespoke-tokenizer
 > No published work combines cross-tokenizer distillation with MLA upcycling. Cross-tokenizer KD is now its own maturing subfield — ALM/Approximate Likelihood Matching (arXiv:2503.20083), byte-level-interface distillation BLD (arXiv:2604.07466), BPE-recursive likelihood scoring (arXiv:2512.14954), on-policy cross-family distillation (arXiv:2606.09456) — but multiple targeted searches (English formulations, MLA/GQA2MLA/upcycling x cross-tokenizer/vocabulary) return zero papers applying any of these to attention-architecture conversion. Sherkala-8B-as-teacher for MLA upcycling of a bespoke-tokenizer Kazakh SLM would be an unclaimed combination.
 >
 > **Numbers:** 0 hits for the intersection; 4+ active cross-tokenizer KD methods exist independently

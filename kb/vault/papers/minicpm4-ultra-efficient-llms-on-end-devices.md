@@ -6,24 +6,24 @@ arxiv_id: "2506.07900"
 doi: null
 hf_repo: null
 year: 2025
-topics: ["hybrid-efficiency-efficient-attention-se"]
+topics: ["hybrid-efficient-attention-architectures"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
 aliases: ["MiniCPM4: Ultra-Efficient LLMs on End Devices", "arXiv:2506.07900", "arxiv:2506.07900"]
-tags: ["paper", "topic/hybrid-efficiency-efficient-attention-se"]
+tags: ["paper", "topic/hybrid-efficient-attention-architectures"]
 ---
 # MiniCPM4: Ultra-Efficient LLMs on End Devices
 
 [arXiv](https://arxiv.org/abs/2506.07900)
-**Topics:** [[hybrid-efficiency-efficient-attention-se]]
+**Topics:** [[hybrid-efficient-attention-architectures]]
 
 > [!abstract]
 > This paper introduces MiniCPM4, a highly efficient large language model (LLM) designed explicitly for end-side devices. We achieve this efficiency through systematic innovation in four key dimensions: model architecture, training data, training algorithms, and inference systems. Specifically, in terms of model architecture, we propose InfLLM v2, a trainable sparse attention mechanism that accelera …
 
 ## Claims
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > MiniCPM4-0.5B pairs an edge-tuned transformer with InfLLM-v2 trainable sparse attention (each token attends to <5% of tokens at 128K), reaching up to 7x decode speedup on edge GPUs vs Qwen3-8B with perfect needle retrieval at 128K - a proven sub-600M edge-efficiency reference point.
 >
 > **Numbers:** <5% tokens attended @128K; up to 7x edge-GPU decode speedup vs Qwen3-8B; 0.5B params

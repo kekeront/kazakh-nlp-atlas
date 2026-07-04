@@ -6,24 +6,24 @@ arxiv_id: "2507.06607"
 doi: null
 hf_repo: "blog/gemma4"
 year: 2025
-topics: ["mla-sub1b"]
+topics: ["mla-at-sub-1b-scale"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
 aliases: ["Decoder-Hybrid-Decoder Architecture for Efficient Reasoning with Long Generation", "arXiv:2507.06607", "arxiv:2507.06607"]
-tags: ["paper", "topic/mla-sub1b"]
+tags: ["paper", "topic/mla-at-sub-1b-scale"]
 ---
 # Decoder-Hybrid-Decoder Architecture for Efficient Reasoning with Long Generation
 
 [arXiv](https://arxiv.org/abs/2507.06607)
-**Topics:** [[mla-sub1b]]
+**Topics:** [[mla-at-sub-1b-scale]]
 
 > [!abstract]
 > Recent advances in language modeling have demonstrated the effectiveness of State Space Models (SSMs) for efficient sequence modeling. While hybrid architectures such as Samba and the decoder-decoder architecture, YOCO, have shown promising performance gains over Transformers, prior works have not investigated the efficiency potential of representation sharing between SSM layers. In this paper, we …
 
 ## Claims
 
-> [!note] CLAIM — mla-sub1b
+> [!note] CLAIM — mla-at-sub-1b-scale
 > Cross-layer KV sharing is shipped in production on-device models: Gemma 3n (E2B/E4B) uses num_kv_shared_layers=15 — the last 15 layers compute NO KV projections and reuse the KV of the last non-shared local/global layer of the same attention type (on top of Gemma-3-style 4-local(SWA):1-global pattern, 32K ctx). Per HF blog, Gemma 4 edge models retain shared KV cache + PLE. Phi-4-mini-flash-reasoning (3.8B, SambaY decoder-hybrid-decoder) applies the YOCO principle: a single full-attention layer's KV cache is shared by the whole cross-decoder via Gated Memory Units.
 >
 > **Numbers:** Gemma 3n: 15 trailing layers share KV, 4:1 local:global SWA, 32K ctx; Phi-4-mini-flash: 1 global-attention KV cache for entire cross-decoder, 3.8B params

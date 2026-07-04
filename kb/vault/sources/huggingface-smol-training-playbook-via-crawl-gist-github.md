@@ -5,16 +5,16 @@ title: "HuggingFace Smol Training Playbook (via crawl: gist.github.com/uncleco�
 doi: null
 hf_repo: null
 year: null
-topics: ["mla-vs-gqa-pretraining-cost-and-converge"]
+topics: ["mla-vs-gqa-convergence-cost"]
 claims: 1
 uncertain_claims: 1
 verdicts: []
 aliases: ["title:huggingface smol training playbook via crawl gist github com unclecode e5da5fb6a1d37022b089e243e0d9e00e adoption absence from july 2026 searches"]
-tags: ["source", "topic/mla-vs-gqa-pretraining-cost-and-converge"]
+tags: ["source", "topic/mla-vs-gqa-convergence-cost"]
 ---
 # HuggingFace Smol Training Playbook (via crawl: gist.github.com/uncleco…
 
-**Topics:** [[mla-vs-gqa-pretraining-cost-and-converge]]
+**Topics:** [[mla-vs-gqa-convergence-cost]]
 
 ## Source URLs
 - HuggingFace Smol Training Playbook (via crawl: gist.github.com/unclecode/e5da5fb6a1d37022b089e243e0d9e00e)
@@ -22,7 +22,7 @@ tags: ["source", "topic/mla-vs-gqa-pretraining-cost-and-converge"]
 
 ## Findings
 
-> [!warning] UNCERTAIN — mla-vs-gqa-pretraining-cost-and-converge
+> [!warning] UNCERTAIN — mla-vs-gqa-convergence-cost
 > Production adoption at sub-1B remains zero as of mid-2026: SmolLM3 (3B, 11T tokens) explicitly did not ablate MLA because 'it wasn't implemented in nanotron at the time of the ablations' and shipped GQA-4 after 1B-scale/45B-token ablations; Qwen3-0.6B uses GQA (KB-verified). No dense <1B released model with MLA was found (EG-MLA at 1B is research-only, per KB). Combined with KB's llama.cpp finding (MLA GGUF needs ik_llama.cpp fork), MLA at sub-1B is a research-proven but production-unshipped choice.
 >
 > **Numbers:** SmolLM3 ablation baseline: 1B params (Llama3.2-1B arch), 45B tokens, GQA-4 chosen; MLA arm: absent

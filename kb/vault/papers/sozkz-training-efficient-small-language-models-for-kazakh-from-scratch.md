@@ -6,17 +6,17 @@ arxiv_id: "2603.20854"
 doi: null
 hf_repo: null
 year: 2026
-topics: ["tokenizer-morphology", "kazakh-turkic-nlp", "inference-tts", "novelty-check", "kazakh-morphological-segmentation-qualit", "architecture-fork", "parameter-counting-convention-and-iso-si", "kazakh-tokenizer-fertility-vs-byte-premi", "embed-sota", "attention-kv-sub1b-attention-kv-architec", "residual-stream-stability-qymyzlm-design", "data-efficiency-10b-kazakh-10b-token-pre"]
+topics: ["tokenizer-morphology", "kazakh-turkic-nlp", "inference-tts", "novelty-check", "kazakh-morphological-segmentation-qualit", "architecture-fork", "parameter-counting-convention-and-iso-si", "kazakh-tokenizer-fertility-vs-byte-premi", "embed-sota", "attention-kv-architecture-sub-1b", "residual-stream-stability-qymyzlm-design", "data-efficiency-10b-kazakh-10b-token-pre"]
 claims: 15
 uncertain_claims: 2
 verdicts: []
 aliases: ["SozKZ: Training Efficient Small Language Models for Kazakh from Scratch", "arXiv:2603.20854", "arxiv:2603.20854"]
-tags: ["paper", "topic/tokenizer-morphology", "topic/kazakh-turkic-nlp", "topic/inference-tts", "topic/novelty-check", "topic/kazakh-morphological-segmentation-qualit", "topic/architecture-fork", "topic/parameter-counting-convention-and-iso-si", "topic/kazakh-tokenizer-fertility-vs-byte-premi", "topic/embed-sota", "topic/attention-kv-sub1b-attention-kv-architec", "topic/residual-stream-stability-qymyzlm-design", "topic/data-efficiency-10b-kazakh-10b-token-pre"]
+tags: ["paper", "topic/tokenizer-morphology", "topic/kazakh-turkic-nlp", "topic/inference-tts", "topic/novelty-check", "topic/kazakh-morphological-segmentation-qualit", "topic/architecture-fork", "topic/parameter-counting-convention-and-iso-si", "topic/kazakh-tokenizer-fertility-vs-byte-premi", "topic/embed-sota", "topic/attention-kv-architecture-sub-1b", "topic/residual-stream-stability-qymyzlm-design", "topic/data-efficiency-10b-kazakh-10b-token-pre"]
 ---
 # SozKZ: Training Efficient Small Language Models for Kazakh from Scratch
 
 [arXiv](https://arxiv.org/abs/2603.20854)
-**Topics:** [[tokenizer-morphology]], [[kazakh-turkic-nlp]], [[inference-tts]], [[novelty-check]], [[kazakh-morphological-segmentation-qualit]], [[architecture-fork]], [[parameter-counting-convention-and-iso-si]], [[kazakh-tokenizer-fertility-vs-byte-premi]], [[embed-sota]], [[attention-kv-sub1b-attention-kv-architec]], [[residual-stream-stability-qymyzlm-design]], [[data-efficiency-10b-kazakh-10b-token-pre]]
+**Topics:** [[tokenizer-morphology]], [[kazakh-turkic-nlp]], [[inference-tts]], [[novelty-check]], [[kazakh-morphological-segmentation-qualit]], [[architecture-fork]], [[parameter-counting-convention-and-iso-si]], [[kazakh-tokenizer-fertility-vs-byte-premi]], [[embed-sota]], [[attention-kv-architecture-sub-1b]], [[residual-stream-stability-qymyzlm-design]], [[data-efficiency-10b-kazakh-10b-token-pre]]
 
 > [!abstract]
 > Kazakh, a Turkic language spoken by over 22 million people, remains underserved by existing multilingual language models, which allocate minimal capacity to low-resource languages and employ tokenizers ill-suited to agglutinative morphology. We present SozKZ, a family of Llama-architecture language models (50M-600M parameters) trained entirely from scratch on 9 billion tokens of Kazakh text with a …
@@ -52,9 +52,9 @@ tags: ["paper", "topic/tokenizer-morphology", "topic/kazakh-turkic-nlp", "topic/
 > **Source:** arXiv:2603.20854 (SozKZ) · **Sweep:** `slm-architecture-2026-07`
 
 > [!note] CLAIM — kazakh-morphological-segmentation-qualit
-> The direct baseline SozKZ (600M) already reaches KazMMLU ~30.3% with a plain ByteLevel BPE (50,257 vocab) and NO morphological segmentation, trained on 9B tokens from the identical noisy sources you target (CulturaX, HPLT 2.0, mC4, MADLAD-400, mOSCAR, Wikipedia; cleaned to 13.7M docs, 48.2% pass), claiming a 2-3x fertility advantage over multilingual tokenizers.
+> The direct baseline SozKZ (600M) already reaches ~30.3% on Kazakh cultural MC-QA (NOT KazMMLU -- the paper does not report KazMMLU) with a plain ByteLevel BPE (50,257 vocab) and NO morphological segmentation, trained on 9B tokens from the identical noisy sources you target (CulturaX, HPLT 2.0, mC4, MADLAD-400, mOSCAR, Wikipedia; cleaned to 13.7M docs, 48.2% pass), claiming a 2-3x fertility advantage over multilingual tokenizers.
 >
-> **Numbers:** SozKZ-600M 587M params, 9.0B tokens, BPE vocab 50,257, 2-3x fertility advantage, KazMMLU ~30.3%. Data cleaned to 13.7M docs (48.2% pass rate). No morphology used.
+> **Numbers:** SozKZ-600M 587M params, 9.0B tokens, BPE vocab 50,257, 2-3x fertility advantage, cultural MC-QA ~30.3% (not KazMMLU). Data cleaned to 13.7M docs (48.2% pass rate). No morphology used.
 > **Relevance:** Confirms that on the SAME noisy corpora, plain BPE already gets low fertility and ~30% KazMMLU without morphology. So the morphology angle must beat this on a morphology-specific metric under noise, not on fertility — and morpheme-conditioned memory must add value on top of, not instead of, a robust BPE fallback.
 > **Source:** arXiv 2603.20854 'SozKZ: Training Efficient Small Language Models for Kazakh from Scratch' (Mar 2026) · **Sweep:** `slm-architecture-2026-07`
 
@@ -101,7 +101,7 @@ tags: ["paper", "topic/tokenizer-morphology", "topic/kazakh-turkic-nlp", "topic/
 > **Relevance:** Novelty-positioning risk for the overall paper; the embedding gap strengthens deliverable (2) as the differentiator.
 > **Source:** https://arxiv.org/pdf/2603.20854; https://arxiv.org/html/2603.27859 (titles/abstracts surfaced in search; full contents not fetched — outside embed domain) · **Sweep:** `embeddings-2026-07`
 
-> [!note] CLAIM — attention-kv-sub1b-attention-kv-architec
+> [!note] CLAIM — attention-kv-architecture-sub-1b
 > [tested-on-Kazakh] The only from-scratch Kazakh SLM family, SozKZ (587M: 22 layers, hidden 1280, 20 attention heads, intermediate 4480, ctx 2048, vocab 50257, tied embeddings, LlamaForCausalLM with SwiGLU+RoPE+RMSNorm, bf16 mixed precision on 8×8 H100), uses completely vanilla attention — no GQA config, no QK-norm, no SWA, no MLA, 2K context only, and zero attention-related ablations. Combined with Sherkala-8B being stock Llama-3.1 attention (KB), NO non-vanilla attention mechanism of any kind has ever been ablated or even trained on Kazakh: the entire attention axis of this sweep is transferable-untested, which makes even a small-scale GQA-vs-MLA-vs-gated ablation on the lab's 9-10B-token corpus a first-on-Kazakh publishable result.
 >
 > **Numbers:** SozKZ-600M: 587M, 22L, d1280, 20 heads, ffn 4480, ctx 2048, vocab 50257, 9B tokens, 15:1 tok/param

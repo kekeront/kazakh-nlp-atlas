@@ -6,24 +6,24 @@ arxiv_id: "2511.18643"
 doi: null
 hf_repo: null
 year: 2025
-topics: ["hybrid-efficiency-efficient-attention-se"]
+topics: ["hybrid-efficient-attention-architectures"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
 aliases: ["Kitty: Accurate and Efficient 2-bit KV Cache Quantization with Dynamic Channel-wise Precision Boost", "arXiv:2511.18643", "arxiv:2511.18643"]
-tags: ["paper", "topic/hybrid-efficiency-efficient-attention-se"]
+tags: ["paper", "topic/hybrid-efficient-attention-architectures"]
 ---
 # Kitty: Accurate and Efficient 2-bit KV Cache Quantization with Dynamic Channel-wise Precision Boost
 
 [arXiv](https://arxiv.org/abs/2511.18643)
-**Topics:** [[hybrid-efficiency-efficient-attention-se]]
+**Topics:** [[hybrid-efficient-attention-architectures]]
 
 > [!abstract]
 > The KV cache is a dominant memory bottleneck for LLM inference. While 4-bit KV quantization preserves accuracy, 2-bit often degrades it, especially on long-context reasoning. We close this gap via an algorithm-system co-design for mixed-precision KV caching: Kitty. On the algorithm side, extensive experiments show that Dynamic Channel-wise Precision Boost -- which ranks Key-cache channels by sensi …
 
 ## Claims
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > KV-cache quantization: 4-bit KV is essentially lossless (KIVI: per-channel key + per-token value, tuning-free) giving ~2.6x peak memory cut and 2.35-3.47x throughput; but 2-bit KV degrades sharply (average drops of -10 to -15 points) unless a small fraction of sensitive key channels are kept at higher precision.
 >
 > **Numbers:** 4-bit KV ~lossless, 2.6x mem, 2.35-3.47x throughput; 2-bit KV: -10.15 to -15.23 avg accuracy; KIVI = 2-bit per-channel K / per-token V

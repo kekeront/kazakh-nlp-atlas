@@ -6,31 +6,31 @@ arxiv_id: "2506.09342"
 doi: null
 hf_repo: null
 year: 2025
-topics: ["hybrid-efficiency-efficient-attention-se", "mla-vs-gqa-pretraining-cost-and-converge", "mla-at-sub-1b-scale", "mla-at-sub-1b"]
+topics: ["hybrid-efficient-attention-architectures", "mla-vs-gqa-convergence-cost", "mla-at-sub-1b-scale"]
 claims: 4
 uncertain_claims: 2
 verdicts: []
 aliases: ["Latent Multi-Head Attention for Small Language Models", "arXiv:2506.09342", "arxiv:2506.09342"]
-tags: ["paper", "topic/hybrid-efficiency-efficient-attention-se", "topic/mla-vs-gqa-pretraining-cost-and-converge", "topic/mla-at-sub-1b-scale", "topic/mla-at-sub-1b"]
+tags: ["paper", "topic/hybrid-efficient-attention-architectures", "topic/mla-vs-gqa-convergence-cost", "topic/mla-at-sub-1b-scale"]
 ---
 # Latent Multi-Head Attention for Small Language Models
 
 [arXiv](https://arxiv.org/abs/2506.09342)
-**Topics:** [[hybrid-efficiency-efficient-attention-se]], [[mla-vs-gqa-pretraining-cost-and-converge]], [[mla-at-sub-1b-scale]], [[mla-at-sub-1b]]
+**Topics:** [[hybrid-efficient-attention-architectures]], [[mla-vs-gqa-convergence-cost]], [[mla-at-sub-1b-scale]]
 
 > [!abstract]
 > We present the first comprehensive study of latent multi-head attention (MLA) for small language models, revealing interesting efficiency-quality trade-offs. Training 30M-parameter GPT models on 100,000 synthetic stories, we benchmark three architectural variants: standard multi-head attention (MHA), MLA, and MLA with rotary positional embeddings (MLA+RoPE). Our key finding is that MLA+RoPE with h …
 
 ## Claims
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > MLA specifically studied at SMALL scale (30M-202M params): a decoupled MLA+RoPE with latent rank r=d/2 gives a 45% KV-cache reduction at only +0.3% validation loss and 1.4x decode speedup; r=d/4 gives ~87.5% reduction but +4.4% loss. MLA needs the decoupled-RoPE variant - without RoPE it underperforms by 3-5%. (Paper did not benchmark GQA directly.)
 >
 > **Numbers:** r=d/2: 45% KV cut, +0.3% loss, 1.4x speed; r=d/4: 87.5% cut, +4.4% loss; scale tested 30M-202.7M
 > **Relevance:** If MLA is adopted for the Kazakh model at d_model~1536, set kv_lora_rank ~= d/2 (~768) with a decoupled RoPE dim (~64). This is the only MLA-at-sub-600M data point; r=d/4 is too lossy for a knowledge model.
 > **Source:** arXiv:2506.09342 (Latent Multi-Head Attention for Small Language Models) · **Sweep:** `slm-architecture-2026-07`
 
-> [!warning] UNCERTAIN — mla-vs-gqa-pretraining-cost-and-converge
+> [!warning] UNCERTAIN — mla-vs-gqa-convergence-cost
 > Only datapoint below 25B tokens: the latent-MHA-for-SLMs paper trained 17.5M-202.7M models for ~3.3B tokens (50K steps x batch 128 x ctx 512, derived) on 100K synthetic TinyStories-style stories. Decoupled-RoPE MLA at r=d/2 converged to within +0.3% val loss of MHA (2.154 vs 2.147 at 9L-512d); r=d/4 degraded +4.4% (2.241); MLA WITHOUT decoupled RoPE degraded +2.2-3.2%. No GQA arm; no training-time numbers.
 >
 > **Numbers:** ~3.3B tokens (derived: 50000*128*512); val loss MHA 2.147, MLA+RoPE r=d/2 2.154 (+0.3%), r=d/4 2.241 (+4.4%), MLA no-RoPE r=d 2.216 (+3.2%)
@@ -46,7 +46,7 @@ tags: ["paper", "topic/hybrid-efficiency-efficient-attention-se", "topic/mla-vs-
 
 **Cited KB notes:** [[eg-mla-embedding-gated-multi-head-latent-attention-for-scalable-and-efficient]]
 
-> [!warning] UNCERTAIN — mla-at-sub-1b
+> [!warning] UNCERTAIN — mla-at-sub-1b-scale
 > The 30M-202M small-scale MLA paper (KB entry arXiv:2506.09342) also uses PER-HEAD latents, not DeepSeek shared rank: K_h = X W_h^(K↓) W_h^(K↑) with W_h^(K↓) ∈ R^{d×r} per head, r ∈ {d_k, d_k/2, d_k/4} where d_k=d/H (e.g. r=64/32/16 at d=512, H=8). Trained from scratch but only on ~TinyStories (~100K synthetic stories, 50K steps). r=d_k/2: val loss 2.154 vs 2.147 baseline (+0.3%), 0.0159 vs 0.0288 MB/token (45% cut); r=d_k/4: 2.241 (+4.4%), 0.0080 MB/token (=72% cut by arithmetic). KB CONFLICT: KB records '87.5% reduction' for r=d/4; the fetched MB/token values give 72% — both reported, do not average.
 >
 > **Numbers:** 17.5M-202.7M params, d∈{256,512,768,1024}, TinyStories ~50M tokens; +0.3% loss at total-equivalent latent d/2, +4.4% at d/4, +10.3% at d/8

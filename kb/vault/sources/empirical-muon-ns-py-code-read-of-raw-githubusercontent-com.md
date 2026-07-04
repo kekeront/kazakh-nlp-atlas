@@ -1,7 +1,7 @@
 ---
-kb_id: "title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py"
+kb_id: "title:empirical muon ns code read of raw githubusercontent com kellerjordan muon master muon py"
 type: "source"
-title: "Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98…"
+title: "Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJ…"
 doi: null
 hf_repo: null
 year: null
@@ -9,15 +9,15 @@ topics: ["hardware-gate"]
 claims: 1
 uncertain_claims: 0
 verdicts: []
-aliases: ["title:empirical tmp claude 1000 home altairzhambyl projects slms basic 98053e10 7c62 465c acd3 b6c763138a63 scratchpad muon ns py code read of raw githubusercontent com kellerjordan muon master muon py"]
+aliases: ["title:empirical muon ns code read of raw githubusercontent com kellerjordan muon master muon py"]
 tags: ["source", "topic/hardware-gate"]
 ---
-# Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98…
+# Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJ…
 
 **Topics:** [[hardware-gate]]
 
 ## Source URLs
-- Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/muon_ns.py + code read of raw.githubusercontent.com/KellerJordan/Muon/master/muon.py
+- Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJordan/Muon/master/muon.py
 
 ## Findings
 
@@ -26,7 +26,7 @@ tags: ["source", "topic/hardware-gate"]
 >
 > **Numbers:** NS5 on a 2048x5632 matrix (600M-class FFN weight), SM75: bf16 189.6 ms, fp32 120.4 ms, fp16 28.9 ms per matrix; orthogonalization quality identical — singular values of output in [0.673,1.137] (bf16), [0.682,1.135] (fp16), [0.682,1.134] (fp32), all finite
 > **Relevance:** Muon's ~2x data-efficiency claim (Moonlight, arXiv 2502.02982) is reachable on free T4 compute for the from-scratch v2 track, but ONLY with the fp16 patch; unpatched Muon would burn ~6.6x optimizer wall-clock in NS.
-> **Source:** Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98053e10-7c62-465c-acd3-b6c763138a63/scratchpad/muon_ns.py + code read of raw.githubusercontent.com/KellerJordan/Muon/master/muon.py · **Sweep:** `slm-arch-for-kazakh`
+> **Source:** Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJordan/Muon/master/muon.py · **Sweep:** `slm-arch-for-kazakh`
 
 ## Related
 - [[muon-is-scalable-for-llm-training|Muon is Scalable for LLM Training]] — Empirical SM75 6.6x bf16 trap in KellerJordan Muon; this paper argues Muon scales but is silent on Turing/fp16 NS5 path

@@ -6,17 +6,17 @@ arxiv_id: "2509.16686"
 doi: null
 hf_repo: null
 year: 2025
-topics: ["deepseek-tech", "mla-at-sub-1b"]
+topics: ["deepseek-tech", "mla-at-sub-1b-scale"]
 claims: 2
 uncertain_claims: 0
 verdicts: []
 aliases: ["EG-MLA: Embedding-Gated Multi-head Latent Attention for Scalable and Efficient LLMs", "arXiv:2509.16686", "arxiv:2509.16686"]
-tags: ["paper", "topic/deepseek-tech", "topic/mla-at-sub-1b"]
+tags: ["paper", "topic/deepseek-tech", "topic/mla-at-sub-1b-scale"]
 ---
 # EG-MLA: Embedding-Gated Multi-head Latent Attention for Scalable and Efficient LLMs
 
 [arXiv](https://arxiv.org/abs/2509.16686)
-**Topics:** [[deepseek-tech]], [[mla-at-sub-1b]]
+**Topics:** [[deepseek-tech]], [[mla-at-sub-1b-scale]]
 
 > [!abstract]
 > Reducing the key-value (KV) cache size is a crucial step toward enabling efficient inference in large language models (LLMs), especially under latency and memory constraints. While Multi-Head Attention (MHA) offers strong representational power, it incurs significant memory overhead. Recent work on Multi-head Latent Attention (MLA) mitigates this by compressing KV representations into a shared lat …
@@ -30,7 +30,7 @@ tags: ["paper", "topic/deepseek-tech", "topic/mla-at-sub-1b"]
 > **Relevance:** Green-lights MLA for the 500M Kazakh model but sets expectations: expect quality parity-to-small-gain, not a KazMMLU jump. Keep GQA-2 as the low-risk fallback. Budget time for the decoupled-RoPE + matrix-absorption implementation.
 > **Source:** arXiv:2509.16686 (EG-MLA), arXiv:2502.07864 (TransMLA), Raschka LLM gallery · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — mla-at-sub-1b
+> [!note] CLAIM — mla-at-sub-1b-scale
 > MINIMUM SHARED RANK PROVEN FROM SCRATCH BELOW 1B: kv_lora_rank=256 (plain DeepSeek-style MLA) at 120M params, and 64 with EG-MLA's token-embedding gating. EG-MLA trains from scratch on 50B ClimbMix tokens: MLA-Base (12L, d=768, shared kv_lora_rank=256 + decoupled rope 64, qk 64+64/v 64 head dims, cache 3.84K elem/token total = (256+64)×12 layers) scores 43.84 avg over PIQA/ARC-C/ARC-E/HellaSwag/WinoGrande/SIQA/MMLU; EG-MLA-kv64 (cache 1.54K elem = (64+64)×12) scores 44.33 (+0.49 over rank-256 MLA); EG-MLA-kv256 44.46. This is the only located from-scratch sub-1B run with a DeepSeek-style shared rank below 512.
 >
 > **Numbers:** 120M, 50B tokens, rank 256 = d/3 at d=768; kv64 variant needs extra gating-embedding table (154M params for emb256, offloadable); cache 3.84K→1.54K→0.96K elem/token for kv256/kv64/kv16

@@ -21,7 +21,7 @@ arXiv:2505.21487 (Tri Dao group) is a from-scratch head-to-head on FineWeb-Edu w
 
 ## Papers (2)
 - [[multi-head-low-rank-attention|Multi-Head Low-Rank Attention]] (2026) — gla-2-gta-arxiv-2505-21487-zadouri-strau
-- [[hardware-efficient-attention-for-fast-decoding|Hardware-Efficient Attention for Fast Decoding]] (2025) — mla-sub1b
+- [[hardware-efficient-attention-for-fast-decoding|Hardware-Efficient Attention for Fast Decoding]] (2025) — mla-at-sub-1b-scale
 
 ## Sources & findings (5)
 - [[github-search-api-over-vllm-project-vllm-ggml-org-llama-cpp|GitHub search API over vllm-project/vllm, ggml-org/llama.cpp, NVIDIA/T…]] — Zero adoption in any serving stack or released model as of 2026-07-03: vLLM has 0 code hits for grouped_latent/GroupedLa…

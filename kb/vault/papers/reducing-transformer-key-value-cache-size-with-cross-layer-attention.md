@@ -6,31 +6,31 @@ arxiv_id: "2405.12981"
 doi: null
 hf_repo: null
 year: 2024
-topics: ["hybrid-efficiency-efficient-attention-se", "mla-sub1b", "kv-cache-architecture"]
+topics: ["hybrid-efficient-attention-architectures", "mla-at-sub-1b-scale", "kv-cache-architecture"]
 claims: 5
 uncertain_claims: 1
 verdicts: []
 aliases: ["Reducing Transformer Key-Value Cache Size with Cross-Layer Attention", "arXiv:2405.12981", "arxiv:2405.12981"]
-tags: ["paper", "topic/hybrid-efficiency-efficient-attention-se", "topic/mla-sub1b", "topic/kv-cache-architecture"]
+tags: ["paper", "topic/hybrid-efficient-attention-architectures", "topic/mla-at-sub-1b-scale", "topic/kv-cache-architecture"]
 ---
 # Reducing Transformer Key-Value Cache Size with Cross-Layer Attention
 
 [arXiv](https://arxiv.org/abs/2405.12981)
-**Topics:** [[hybrid-efficiency-efficient-attention-se]], [[mla-sub1b]], [[kv-cache-architecture]]
+**Topics:** [[hybrid-efficient-attention-architectures]], [[mla-at-sub-1b-scale]], [[kv-cache-architecture]]
 
 > [!abstract]
 > Key-value (KV) caching plays an essential role in accelerating decoding for transformer-based autoregressive large language models (LLMs). However, the amount of memory required to store the KV cache can become prohibitive at long sequence lengths and large batch sizes. Since the invention of the transformer, two of the most effective interventions discovered for reducing the size of the KV cache …
 
 ## Claims
 
-> [!note] CLAIM — hybrid-efficiency-efficient-attention-se
+> [!note] CLAIM — hybrid-efficient-attention-architectures
 > Cross-Layer Attention (CLA) shares K/V across adjacent layers (only a subset of layers compute KV; others reuse the previous layer's), giving 2x KV reduction on top of MQA/GQA. At 1B scale H128-MQA-CLA2 costs only +0.04 validation perplexity; at 3B CLA2 actually beat the MQA baselines (9.34 vs 9.48-9.52 ppl).
 >
 > **Numbers:** CLA2 = share KV across 2 layers -> 2x KV cut; 1B: +0.04 ppl; 3B: 9.34 vs 9.52 ppl (better)
 > **Relevance:** Orthogonal to sliding-window and GQA - stacks multiplicatively for KV savings. A near-free way to halve KV again on the global-attention layers of the Kazakh model, validated at the closest scale (1B).
 > **Source:** arXiv:2405.12981 (Reducing Transformer KV-Cache Size with Cross-Layer Attention, NeurIPS 2024) · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — mla-sub1b
+> [!note] CLAIM — mla-at-sub-1b-scale
 > CLA (cross-layer KV sharing) exact 1B-scale numbers: models d_model=2048, 20 layers, head_dim 128, 16 Q heads. MQA baseline 10,240 B/token, val ppl 13.54; MQA-CLA2 (10 of 20 layers produce KV) 5,120 B/token, ppl 13.60 (+0.06); the iso-cache alternative H64-MQA (halved head dim) 5,120 B/token ppl 13.81 — CLA2 is Pareto-better by 0.21 ppl at equal cache. MHA reference 163,840 B/token, 13.15. Sharing factor sweep: CLA2 13.60, CLA3 13.77, CLA4 13.95 — only factor 2 is worth it. At 3B: H64-MQA-CLA2 12.99 vs H64-MQA 12.94 (+0.05 ppl) at half cache.
 >
 > **Numbers:** 1B: MQA 13.54@10240B -> CLA2 13.60@5120B; iso-cache H64-MQA 13.81; CLA3 13.77, CLA4 13.95; 3B: +0.05 ppl at 2x cut

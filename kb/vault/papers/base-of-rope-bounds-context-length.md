@@ -6,24 +6,24 @@ arxiv_id: "2405.14591"
 doi: null
 hf_repo: null
 year: 2024
-topics: ["attention-kv-sub1b-attention-kv-architec"]
+topics: ["attention-kv-architecture-sub-1b"]
 claims: 1
 uncertain_claims: 1
 verdicts: []
 aliases: ["Base of RoPE Bounds Context Length", "arXiv:2405.14591", "arxiv:2405.14591"]
-tags: ["paper", "topic/attention-kv-sub1b-attention-kv-architec"]
+tags: ["paper", "topic/attention-kv-architecture-sub-1b"]
 ---
 # Base of RoPE Bounds Context Length
 
 [arXiv](https://arxiv.org/abs/2405.14591)
-**Topics:** [[attention-kv-sub1b-attention-kv-architec]]
+**Topics:** [[attention-kv-architecture-sub-1b]]
 
 > [!abstract]
 > Position embedding is a core component of current Large Language Models (LLMs). Rotary position embedding (RoPE), a technique that encodes the position information with a rotation matrix, has been the de facto choice for position embedding in many LLMs, such as the Llama series. RoPE has been further utilized to extend long context capability, which is roughly based on adjusting the \textit{base} …
 
 ## Claims
 
-> [!warning] UNCERTAIN — attention-kv-sub1b-attention-kv-architec
+> [!warning] UNCERTAIN — attention-kv-architecture-sub-1b
 > [transferable-untested] RoPE base has an absolute lower bound per target context (NeurIPS 2024 'Base of RoPE Bounds Context Length'); below it the model gains only 'superficial' long-context ability. Reported bound table: 1K→4.3e3, 2K→1.6e4, 4K→2.7e4, 8K→8.4e4, 16K→3.1e5, 32K→6.4e5, 128K→7.8e6, 1M→5.1e8. For QymyzLM's realistic 4-8K native context, theta ≈1e5-5e5 satisfies the bound with margin; classic theta=1e4 is BELOW the 8K bound; Qwen3's 1e6 (32K) and Gemma3's 1e6-global/1e4-local(512-window) are both consistent with the theory. Exact table values taken from search-indexed paper text, not re-read in the primary PDF.
 >
 > **Numbers:** theta lower bounds: 4K→2.7e4, 8K→8.4e4, 16K→3.1e5, 32K→6.4e5

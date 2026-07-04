@@ -6,17 +6,17 @@ arxiv_id: "2505.09388"
 doi: null
 hf_repo: "Qwen/Qwen3-0.6B-Base"
 year: 2025
-topics: ["sota-slm", "training-recipes", "attention-kv-sub1b-attention-kv-architec", "residual-stream-stability-qymyzlm-design", "small-lm-training-recipes-qymyzlm-design"]
+topics: ["sota-slm", "training-recipes", "attention-kv-architecture-sub-1b", "residual-stream-stability-qymyzlm-design", "small-lm-training-recipes-qymyzlm-design"]
 claims: 6
 uncertain_claims: 0
 verdicts: []
 aliases: ["Qwen3 Technical Report", "arXiv:2505.09388", "arxiv:2505.09388"]
-tags: ["paper", "topic/sota-slm", "topic/training-recipes", "topic/attention-kv-sub1b-attention-kv-architec", "topic/residual-stream-stability-qymyzlm-design", "topic/small-lm-training-recipes-qymyzlm-design"]
+tags: ["paper", "topic/sota-slm", "topic/training-recipes", "topic/attention-kv-architecture-sub-1b", "topic/residual-stream-stability-qymyzlm-design", "topic/small-lm-training-recipes-qymyzlm-design"]
 ---
 # Qwen3 Technical Report
 
 [arXiv](https://arxiv.org/abs/2505.09388)
-**Topics:** [[sota-slm]], [[training-recipes]], [[attention-kv-sub1b-attention-kv-architec]], [[residual-stream-stability-qymyzlm-design]], [[small-lm-training-recipes-qymyzlm-design]]
+**Topics:** [[sota-slm]], [[training-recipes]], [[attention-kv-architecture-sub-1b]], [[residual-stream-stability-qymyzlm-design]], [[small-lm-training-recipes-qymyzlm-design]]
 
 > [!abstract]
 > In this work, we present Qwen3, the latest version of the Qwen model family. Qwen3 comprises a series of large language models (LLMs) designed to advance performance, efficiency, and multilingual capabilities. The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. A key innovation in Qwen3 is the integration …
@@ -37,7 +37,7 @@ tags: ["paper", "topic/sota-slm", "topic/training-recipes", "topic/attention-kv-
 > **Relevance:** Explains why beating Qwen3-0.6B on a ~$264 budget can't be won on raw token count — it must be won on Kazakh data density, tokenizer fertility (<2.0), and targeted architecture. The distillation-thinking pipeline is the template if adding a Kazakh reasoning mode.
 > **Source:** arXiv 2505.09388 Qwen3 Technical Report · **Sweep:** `slm-architecture-2026-07`
 
-> [!note] CLAIM — attention-kv-sub1b-attention-kv-architec
+> [!note] CLAIM — attention-kv-architecture-sub-1b
 > [tested-on-Kazakh, via lab baseline] Qwen3-0.6B-Base attention is FROZEN for the QLoRA-CPT track and its exact config is now pinned from HF config.json: 28 layers, hidden 1024, 16 Q / 8 KV heads (GQA-2:1), head_dim 128, QK-Norm, rope_theta=1,000,000, max_position_embeddings=32768, intermediate 3072, tied embeddings, torch_dtype bfloat16, config vocab_size=151936 (KB's 151,669 is the tokenizer's real token count; 151936 is the padded embedding rows — clarification, not a conflict). Derived KV math: 2×8×128×28 = 57,344 elem/token = 112 KiB/token fp16 → ~0.94 GB per sequence @8K, ~3.75 GB @32K (consistent with KB's Kinetics 3.5GB node). On a 16GB T4 with ~1.5GB fp16 weights this caps 3-shot eval batching and rules out long-context work in track 1.
 >
 > **Numbers:** 28L, d1024, 16Q/8KV, head_dim 128, theta=1e6, ctx 32768, vocab_size 151936; KV = 112 KiB/tok fp16; 0.94 GB@8K, 3.75 GB@32K per seq

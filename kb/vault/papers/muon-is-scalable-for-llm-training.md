@@ -33,6 +33,6 @@ tags: ["paper", "topic/small-lm-training-recipes-qymyzlm-design"]
 ## Related
 - [[predictable-scale-part-i-step-law-optimal-hyperparameter-scaling-law-in-large|Predictable Scale: Part I, Step Law -- Optimal Hyperparameter Scaling Law in Large Languag…]] — Both give sub-2B optimizer/LR scaling laws; Step-Law's AdamW HP transfer complements Muon's FLOPs-efficiency claim
 - [[defeating-the-training-inference-mismatch-via-fp16|Defeating the Training-Inference Mismatch via FP16]] — Muon's fp16 Newton-Schulz is unvalidated on T4; this node argues fp16 training is viable, testing that gap
-- [[empirical-tmp-claude-1000-home-altairzhambyl-projects-slms|Empirical: /tmp/claude-1000/-home-altairzhambyl-projects-SLMs-basic/98…]] — Empirical SM75 6.6x bf16 trap in KellerJordan Muon; this paper argues Muon scales but is silent on Turing/fp16 NS5 path
+- [[empirical-muon-ns-py-code-read-of-raw-githubusercontent-com|Empirical: muon_ns.py + code read of raw.githubusercontent.com/KellerJ…]] — Empirical SM75 6.6x bf16 trap in KellerJordan Muon; this paper argues Muon scales but is silent on Turing/fp16 NS5 path
 
 [[Home]]

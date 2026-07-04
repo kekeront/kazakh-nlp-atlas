@@ -19,7 +19,7 @@ The frontier here is cross-layer KV sharing on top of GQA/MQA — reusing K/V ac
 - [[huggingface-co-blog-gemma4-fetched-2026-07-03|huggingface.co/blog/gemma4 (fetched 2026-07-03)]] — Second Google generation shipping trailing KV sharing with zero published quality cost
 
 ## Papers (3)
-- [[reducing-transformer-key-value-cache-size-with-cross-layer-attention|Reducing Transformer Key-Value Cache Size with Cross-Layer Attention]] (2024) — hybrid-efficiency-efficient-attention-se
+- [[reducing-transformer-key-value-cache-size-with-cross-layer-attention|Reducing Transformer Key-Value Cache Size with Cross-Layer Attention]] (2024) — hybrid-efficient-attention-architectures
 - [[a-systematic-study-of-cross-layer-kv-sharing-for-efficient-llm-inference|A Systematic Study of Cross-Layer KV Sharing for Efficient LLM Inference]] (2024) — kv-cache-architecture
 - [[hymba-a-hybrid-head-architecture-for-small-language-models|Hymba: A Hybrid-head Architecture for Small Language Models]] (2024) — kv-cache-architecture
 
